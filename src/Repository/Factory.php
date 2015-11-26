@@ -2,7 +2,7 @@
 
 namespace AcademyHQ\API\Repository;
 
-use AcademyHQ\API\Credentials;
+use AcademyHQ\API\Common\Credentials;
 
 class Factory
 {
@@ -20,5 +20,10 @@ class Factory
 	public function get_enrolment_repository()
 	{
 		return new EnrolmentRepository($this->credentials);
+	}
+
+	public function get_license_repository()
+	{
+		return new LicenseRepository($this->credentials);
 	}
 }

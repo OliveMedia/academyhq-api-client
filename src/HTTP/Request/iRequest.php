@@ -1,6 +1,6 @@
 <?php
 
-namespace AcademyHQ\API\HTTP\Request
+namespace AcademyHQ\API\HTTP\Request;
 
 interface iRequest
 {

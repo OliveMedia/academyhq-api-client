@@ -41,5 +41,9 @@ class UrlTest extends PHPUnit_Framework_TestCase
 		$url = Url::fromNative('https://sandbox.hiho.olive.media:443');
 
 		$this->assertEquals($url->__toString(), 'https://sandbox.hiho.olive.media:443');
+
+		$url = Url::fromNative('https://www.academyhq.com:8080/admin/enrolments/view/1?member=abc&org=def#fragment');
+
+		$this->assertEquals($url->get_path()->toNative(), '/admin/enrolments/view/1');
 	}
 }

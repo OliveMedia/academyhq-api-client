@@ -1,6 +1,8 @@
 <?php
 
-namespace AcademyHQ\API\HTTP\Request
+namespace AcademyHQ\API\HTTP\Request;
+
+use AcademyHQ\API\HTTP\Request\Exception\RequestException;
 
 class Request implements iRequest
 {
@@ -25,14 +27,14 @@ class Request implements iRequest
  	{
  		try {
 
- 			if ( ! is_null($query_parameters)) {
-	            $query = $this->request->getQuery();
-	            foreach ($query_parameters as $key => $value) {
-	                $query[$key] = $value;
-	            }
-        	}
+            $query_parameters['app_id'] = $this->credentials->get_app_id();
+            $query = $this->request->getQuery();
+            foreach ($query_parameters as $key => $value) {
+                $query[$key] = $value;
+            }
 
-        	$this->request->setHeader('Authorization', 'accessToken');
+            $query['app_signature'] = $this->generate_app_signature($this->url, $this->credentials->get_secret_key(), $query_parameters);
+
         	$this->request->setHeader('Accept', 'application/json');
         	$response = $this->client->send($this->request);
 
@@ -40,7 +42,20 @@ class Request implements iRequest
         	
         } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 
-            throw $e;
+            return $e->getMessage();
+        } catch (RequestException $e) {
+
+            return $e->getMessage();
         }
  	}
+
+    private function generate_app_signature($url, $secret_key, $params)
+    {
+        $path = \parse_url($url, PHP_URL_PATH);
+
+        ksort($params);
+        $query_string = $path . '/?' . http_build_query($params, '', '&');
+
+        return hash_hmac("sha256", $query_string, $secret_key); 
+    }
  }
