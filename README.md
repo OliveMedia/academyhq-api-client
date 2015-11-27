@@ -4,6 +4,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 ## Installation (Using Composer)
 <pre>
  	include the following line in your composer.json file and do composer update
+
  	"olivemedia/academyhq-api-client": "dev-master"
 </pre>
 
@@ -11,7 +12,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ## Getting Repository
 <pre>
-  $credentials = new \AcademyHQ\API\Common\Credentials(
+  	$credentials = new \AcademyHQ\API\Common\Credentials(
 		new \AcademyHQ\API\ValueObjects\AppID('Your App ID'),
 		new \AcademyHQ\API\ValueObjects\SecretKey('Your Secret Key')
 	);
@@ -20,8 +21,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	
 	/*@return instance of \AcademyHQ\API\Repository\MemberRepository */
 	$member_repository = $factory->get_member_repository(); [Instance of \AcademyHQ\API\Repository\MemberRepository is required                                                           to perform any action related to member]
+	
+
 	/*@return instance of \AcademyHQ\API\Repository\EnrolmentRepository */
 	$enrolment_repository = $factory->get_member_repository(); [Instance of \AcademyHQ\API\Repository\EnrolmentRepository is required                                                     to perform any action related to enrolment]
+	
+
 	/*@return instance of \AcademyHQ\API\Repository\LicenseRepository */
 	$license_repository = $factory->get_member_repository(); [Instance of \AcademyHQ\API\Repository\LicenseRepository is required                                                   to perform any action related to license]	
 </pre>
@@ -30,7 +35,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 1> Creating Member 
 <pre>
- /*@return member_id */
+ 	/*@return member_id */
 	$member_id = $member_repository->create(
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
 		new \AcademyHQ\API\ValueObjects\Username("User Name"),
@@ -41,15 +46,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 2> Getting Member
 <pre>
-  /*@return member std object */
-  /* member std object will contain id, first_name, last_name, username, email of member*/
-  $member = $member_repository->get(new \AcademyHQ\API\ValueObjects\MemberID('your member id'));
+  	/*@return member std object */
+  	/* member std object will contain id, first_name, last_name, username, email of member*/
+  	$member = $member_repository->get(new \AcademyHQ\API\ValueObjects\MemberID('your member id'));
 </pre>
 
 ### 3> Deleting member
 <pre>
-  /*@return success message */
-  $response = $member_repository->delete(new \AcademyHQ\API\ValueObjects\MemberID('your member id'));
+  	/*@return success message */
+  	$response = $member_repository->delete(new \AcademyHQ\API\ValueObjects\MemberID('your member id'));
 </pre>
 
 ### 4> Updating Member
@@ -102,13 +107,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@ See Note Below regarding callback url*/ 
 	$launch_url = $enrolment_repository->get_launch_url(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'), \AcademyHQ\API\ValueObjects\HTTP\Url::fromNative('callback_url'));
 
-	/* the launch_url can launched in new window or iframe */
+	/* The launch_url can launched in new window or iframe */
+	<iframe src="{{{$launch_url}}}"></iframe>
 </pre>
 
 ### Information needed for callback url 
 <pre>
-	/* Below code in callback url will sync registration summary and provide you the recent enrolment status */
-	/* @Return enrolment std onbject that contain enrolment status */
+	/*Below code in callback url will sync registration summary and provide you the recent enrolment status */
+	/*@Return enrolment std onbject that contain enrolment status */
 	$enrolment = $enrolment_repository->sync_result(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
