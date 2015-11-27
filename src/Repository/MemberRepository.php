@@ -55,7 +55,7 @@ class MemberRepository
 	*/
 
 	public function save(
-		VO\ID $id,
+		VO\MemberID $id,
 		VO\Name $name,
 		VO\Username $username,
 		VO\Email $email
@@ -87,7 +87,7 @@ class MemberRepository
 	*/
 
 	public function change_password(
-		VO\ID $id,
+		VO\MemberID $id,
 		VO\Password $password
 	)
 	{
@@ -114,7 +114,7 @@ class MemberRepository
 	* @return std member object
 	*/
 
-	public function get(VO\ID $id)
+	public function get(VO\MemberID $id)
 	{
 
 		$member_id = $id->__toString();
@@ -135,7 +135,7 @@ class MemberRepository
 	* @return success message
 	*/
 
-	public function delete(VO\ID $id)
+	public function delete(VO\MemberID $id)
 	{
 		$member_id = $id->__toString();
 		$request = new Request(

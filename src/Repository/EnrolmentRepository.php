@@ -21,7 +21,7 @@ class EnrolmentRepository
 	* @return enrolment_id
 	*/
 
-	public function create(VO\ID $member_id, VO\ID $license_id)
+	public function create(VO\MemberID $member_id, VO\LicenseID $license_id)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -45,16 +45,27 @@ class EnrolmentRepository
 	* @return array of enrolment std objects
 	*/
 
-	public function get_all_for_member(VO\ID $member_id)
+	public function get_all_for_member(VO\MemberID $member_id)
 	{
+		$member_id = $member_id->__toString();
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_enrolments/'.$member_id.'/get'),
+			new VO\HTTP\Method('GET')
+		);
 
+		$response = $request->send();
+		$data = $response->get_data();
+
+		return $data->enrolments;
 	}
 
 	/**
 	* @return enrolment std object
 	*/
 
-	public function get(VO\ID $enrolment_id)
+	public function get(VO\EnrolmentID $enrolment_id)
 	{
 		$enrolment_id = $enrolment_id->__toString();
 		$request = new Request(
@@ -74,7 +85,7 @@ class EnrolmentRepository
 	* @return success message
 	*/
 
-	public function delete(VO\ID $enrolment_id)
+	public function delete(VO\EnrolmentID $enrolment_id)
 	{
 		$enrolment_id = $enrolment_id->__toString();
 		$request = new Request(
@@ -94,7 +105,7 @@ class EnrolmentRepository
 	* @return launch url
 	*/
 
-	public function get_launch_url(VO\ID $enrolment_id)
+	public function get_launch_url(VO\EnrolmentID $enrolment_id, VO\HTTP\Url $callback_url)
 	{
 		$enrolment_id = $enrolment_id->__toString();
 		$request = new Request(
@@ -104,9 +115,27 @@ class EnrolmentRepository
 			new VO\HTTP\Method('GET')
 		);
 
-		$response = $request->send();
+		$callback_url = $callback_url->__toString();
+
+		$response = $request->send(array('callback_url' => $callback_url));;
 		$data = $response->get_data();
 
 		return $data->launch_url;
+	}
+
+	public function sync_result(VO\EnrolmentID $enrolment_id)
+	{
+		$enrolment_id = $enrolment_id->__toString();
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/enrolment/'.$enrolment_id.'/callback'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$response = $request->send();
+		$data = $response->get_data();
+
+		return $data->enrolment;
 	}
 }

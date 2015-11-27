@@ -20,12 +20,17 @@ class IDTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($id->toNative(), '123');
 		$this->assertEquals($id->__toString(), '123');
+
+		$id = new ID(123);
+
+		$this->assertEquals($id->toNative(), 123);
+		$this->assertEquals($id->__toString(), '123');
 	}
 
 	public function test_assert_string_with_exception() 
 	{
 
 		$this->setExpectedException('AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException');
-		$id = new ID(1234);
+		$id = new ID('');
 	}
 }

@@ -91,7 +91,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 			new VO\Password($this->create_string())
 		);
 
-		$member = $member_repository->get(new VO\ID($member_id));
+		$member = $member_repository->get(new VO\MemberID($member_id));
 
 		$this->assertEquals($member->id, $member_id);
 		$this->assertEquals($member->first_name, 'Test Client');
@@ -104,7 +104,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 
 		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
-		$member = $member_repository->get(new VO\ID('1234abcd'));
+		$member = $member_repository->get(new VO\MemberID('1234abcd'));
 	}
 
 
@@ -119,7 +119,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 			new VO\Password($this->create_string())
 		);
 
-		$response = $member_repository->delete(new VO\ID($member_id));
+		$response = $member_repository->delete(new VO\MemberID($member_id));
 
 		$this->assertEquals($response, 'Member deleted successfully');
 	}
@@ -130,7 +130,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 
 		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
-		$response = $member_repository->delete(new VO\ID('1234abcd'));
+		$response = $member_repository->delete(new VO\MemberID('1234abcd'));
 	}
 
 	public function test_save_member()
@@ -145,7 +145,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 		);
 
 		$response = $member_repository->save(
-			new VO\ID($member_id),
+			new VO\MemberID($member_id),
 			VO\Name::fromNative('Updated Fname', 'Updated Lname'),
 			new VO\Username('updated'.$this->create_string()),
 			new VO\Email('updated'.$this->create_email())
@@ -153,7 +153,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($response, 'Member updated successfully');
 
-		$member = $member_repository->get(new VO\ID($member_id));
+		$member = $member_repository->get(new VO\MemberID($member_id));
 
 		$this->assertEquals($member->id, $member_id);
 		$this->assertEquals($member->first_name, 'Updated Fname');
@@ -174,7 +174,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
 		$response = $member_repository->save(
-			new VO\ID($member_id),
+			new VO\MemberID($member_id),
 			VO\Name::fromNative('Updated Fname', 'Updated Lname'),
 			new VO\Username('kguragai'),
 			new VO\Email('updated'.$this->create_email())
@@ -193,7 +193,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 		);
 
 		$response = $member_repository->change_password(
-			new VO\ID($member_id),
+			new VO\MemberID($member_id),
 			new VO\Password('drowssap')
 		);
 
@@ -207,7 +207,7 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
 		$response = $member_repository->change_password(
-			new VO\ID('1234abcd'),
+			new VO\MemberID('1234abcd'),
 			new VO\Password('drowssap')
 		);
 	}
