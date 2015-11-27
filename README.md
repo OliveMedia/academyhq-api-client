@@ -111,7 +111,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$launch_url = $enrolment_repository->get_launch_url(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'), \AcademyHQ\API\ValueObjects\HTTP\Url::fromNative('callback_url'));
 
 	/* The launch_url can launched in new window or iframe */
-	<iframe src="{{{$launch_url}}}"></iframe>
+	<!-- <iframe src="{{{$launch_url}}}"></iframe> -->
 </pre>
 
 ### Information needed for callback url 
