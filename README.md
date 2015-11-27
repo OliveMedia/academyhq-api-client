@@ -20,15 +20,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$factory = new \AcademyHQ\API\Repository\Factory($credentials);
 	
 	/*@return instance of \AcademyHQ\API\Repository\MemberRepository */
-	$member_repository = $factory->get_member_repository(); [Instance of \AcademyHQ\API\Repository\MemberRepository is required                                                           to perform any action related to member]
+	$member_repository = $factory->get_member_repository(); 
+	[Instance of \AcademyHQ\API\Repository\MemberRepository is required to perform any action related to member]
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\EnrolmentRepository */
-	$enrolment_repository = $factory->get_member_repository(); [Instance of \AcademyHQ\API\Repository\EnrolmentRepository is required                                                     to perform any action related to enrolment]
+	$enrolment_repository = $factory->get_member_repository(); 
+	[Instance of \AcademyHQ\API\Repository\EnrolmentRepository is required to perform any action related to enrolment]
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\LicenseRepository */
-	$license_repository = $factory->get_member_repository(); [Instance of \AcademyHQ\API\Repository\LicenseRepository is required                                                   to perform any action related to license]	
+	$license_repository = $factory->get_member_repository(); 
+	[Instance of \AcademyHQ\API\Repository\LicenseRepository is required to perform any action related to license]	
 </pre>
 
 ## Using Member Repository
