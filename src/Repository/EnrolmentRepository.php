@@ -10,7 +10,7 @@ use AcademyHQ\API\Common\Credentials;
 class EnrolmentRepository
 {
 
-	private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2';
+	private $base_url = 'https://api.academyhq.com/api/v2';
 
 	public function __construct(Credentials $credentials)
 	{
@@ -39,6 +39,25 @@ class EnrolmentRepository
 		$data = $response->get_data();
 
 		return $data->enrolment_id;
+	}
+
+	public function create_for_organisation(VO\MemberID $member_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/enrolment/create/organisation'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data->enrolment_ids;
 	}
 
 	/**
