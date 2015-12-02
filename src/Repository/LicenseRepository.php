@@ -10,7 +10,7 @@ use AcademyHQ\API\Common\Credentials;
 class LicenseRepository
 {
 
-	private $base_url = 'https://api.academyhq.com/api/v2';
+	private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2';
 
 	public function __construct(Credentials $credentials)
 	{
