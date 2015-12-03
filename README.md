@@ -25,12 +25,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\EnrolmentRepository */
-	$enrolment_repository = $factory->get_member_repository(); 
+	$enrolment_repository = $factory->get_enrolment_repository(); 
 	[Instance of \AcademyHQ\API\Repository\EnrolmentRepository is required to perform any action related to enrolment]
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\LicenseRepository */
-	$license_repository = $factory->get_member_repository(); 
+	$license_repository = $factory->get_license_repository(); 
 	[Instance of \AcademyHQ\API\Repository\LicenseRepository is required to perform any action related to license]	
 </pre>
 
