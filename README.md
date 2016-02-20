@@ -47,6 +47,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+	Alternatively you can provide ID as an extra parameter while creating member. Example shown below:
+<pre>
+	/*@return member_id */
+	$member_id = $member_repository->create(
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Username("User Name"),
+		new \AcademyHQ\API\ValueObjects\Email("email@email.com"),
+		new \AcademyHQ\API\ValueObjects\Password("password"),
+		new \AcademyHQ\API\ValueObjects\ID('CUST-JOHN-SMITH')
+	);
+</pre>
+
 ### 2> Getting Member
 <pre>
   	/*@return member std object */
@@ -91,19 +103,28 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 2> Getting Enrolment
+### 2> Creating one or more enrolments
+<pre>
+	/*@return array of enrolment_ids */
+	$enrolment_ids = $enrolment_repository->create_enrolments(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		\AcademyHQ\API\ValueObjects\LicenseIDArray::fromNative(array('license_id_1', 'license_id_2'))
+	);
+</pre>
+
+### 3> Getting Enrolment
 <pre>
 	/*@return Enrolment std object that contain the status of enrolment, registration and course name*/
 	$enrolment = $enrolment_repository->get(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
-### 3> Deleting Enrolment
+### 4> Deleting Enrolment
 <pre>
 	/*@return Success message*/
 	$enrolment = $enrolment_repository->delete(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
-### 4> Getting Launch URl 
+### 5> Getting Launch URl 
 <pre>
 	/*@Start or resume the enrolment and return the launch url*/
 	/*@Require Callback Url: Upon exit, the url in your application that the SCORM player will redirect to */
