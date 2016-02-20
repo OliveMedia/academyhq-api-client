@@ -2,11 +2,11 @@
 
 namespace AcademyHQ\API\ValueObjects\HTTP;
 
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 use AcademyHQ\API\ValueObjects\Exception\MethodNotAllowedException;
 
-class Method extends String
+class Method extends StringVO
 {
 	private $allowed_methods = array('POST', 'PUT', 'GET', 'DELETE');
 

@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use \Mockery as m;
 use AcademyHQ\API\ValueObjects\Name;
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 
 class NameTest extends PHPUnit_Framework_TestCase
@@ -12,7 +12,7 @@ class NameTest extends PHPUnit_Framework_TestCase
 	public function setup() 
 	{
 
-		$this->name = new Name(new String('First_Name'), new String('Last_Name'));
+		$this->name = new Name(new StringVO('First_Name'), new StringVO('Last_Name'));
 	}
 	public function tearDown() 
 	{

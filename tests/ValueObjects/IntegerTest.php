@@ -6,7 +6,7 @@ use \Mockery as m;
 use AcademyHQ\API\ValueObjects\Integer;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 
-class EmailTest extends PHPUnit_Framework_TestCase
+class IntegerTest extends PHPUnit_Framework_TestCase
 {
 	public function tearDown()
 	{

@@ -3,10 +3,10 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use \Mockery as m;
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 
-class StringTest extends PHPUnit_Framework_TestCase
+class StringVOTest extends PHPUnit_Framework_TestCase
 {
 	public function tearDown() 
 	{
@@ -16,7 +16,7 @@ class StringTest extends PHPUnit_Framework_TestCase
 	public function test_assert_string() 
 	{
 
-		$string = new String('Api Client');
+		$string = new StringVO('Api Client');
 
 		$this->assertEquals($string->toNative(), 'Api Client');
 		$this->assertEquals($string->__toString(), 'Api Client');
@@ -26,12 +26,12 @@ class StringTest extends PHPUnit_Framework_TestCase
 	{
 
 		$this->setExpectedException('AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException');
-		$string = new String(1234);
+		$string = new StringVO(1234);
 	}
 
 	public function test_is_empty()
 	{
-		$string = new String('');
+		$string = new StringVO('');
 
 		$this->assertTrue($string->isEmpty());
 	}

@@ -2,7 +2,7 @@
 
 namespace AcademyHQ\API\ValueObjects\HTTP;
 
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 use AcademyHQ\API\ValueObjects\Integer;
 use AcademyHQ\API\ValueObjects\HTTP\Host;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
@@ -23,26 +23,26 @@ class Url
         $path       = \parse_url($url_string, PHP_URL_PATH);
 
         return new self(
-        	new String($scheme ? $scheme : ''), 
-        	new String($user ? $user : ''), 
-        	new String($pass ? $pass : ''), 
+        	new StringVO($scheme ? $scheme : ''), 
+        	new StringVO($user ? $user : ''), 
+        	new StringVO($pass ? $pass : ''), 
         	new Host($host ? $host : ''), 
         	new Integer($port ? $port : null), 
-        	new String($path ? $path : ''), 
-        	new String($query_string ? '?'.$query_string : ''), 
-        	new String($fragment ? '#'.$fragment : '')
+        	new StringVO($path ? $path : ''), 
+        	new StringVO($query_string ? '?'.$query_string : ''), 
+        	new StringVO($fragment ? '#'.$fragment : '')
         );
 	}
 
 	public function __construct(
-		String $scheme,
-		String $user,
-		String $pass,
+		StringVO $scheme,
+		StringVO $user,
+		StringVO $pass,
 		Host $host,
 		Integer $port,
-		String $path,
-		String $query_string,
-		String $fragment
+		StringVO $path,
+		StringVO $query_string,
+		StringVO $fragment
 	)
 	{
 		$this->scheme = $scheme;

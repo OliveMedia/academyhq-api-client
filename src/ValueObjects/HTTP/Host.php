@@ -3,11 +3,11 @@
 namespace AcademyHQ\API\ValueObjects\HTTP;
 
 use Zend\Validator\Hostname;
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 
 
-class Host extends String
+class Host extends StringVO
 {
     /**
      * Returns a Hostname
