@@ -25,12 +25,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\EnrolmentRepository */
-	$enrolment_repository = $factory->get_member_repository(); 
+	$enrolment_repository = $factory->get_enrolment_repository(); 
 	[Instance of \AcademyHQ\API\Repository\EnrolmentRepository is required to perform any action related to enrolment]
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\LicenseRepository */
-	$license_repository = $factory->get_member_repository(); 
+	$license_repository = $factory->get_license_repository(); 
 	[Instance of \AcademyHQ\API\Repository\LicenseRepository is required to perform any action related to license]	
 </pre>
 
@@ -109,22 +109,28 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$enrolment_ids = $enrolment_repository->create_enrolments(
 		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
 		\AcademyHQ\API\ValueObjects\LicenseIDArray::fromNative(array('license_id_1', 'license_id_2'))
+
+### 3> Creating enrolments for all available licenses in organisation
+<pre>
+	/*@return enrolment_ids / array of enrolment id */
+	$enrolment_ids = $enrolment_repository->create_for_organisation(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id')
 	);
 </pre>
 
-### 3> Getting Enrolment
+### 4> Getting Enrolment
 <pre>
 	/*@return Enrolment std object that contain the status of enrolment, registration and course name*/
 	$enrolment = $enrolment_repository->get(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
-### 4> Deleting Enrolment
+### 5> Deleting Enrolment
 <pre>
 	/*@return Success message*/
 	$enrolment = $enrolment_repository->delete(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
-### 5> Getting Launch URl 
+### 6> Getting Launch URl 
 <pre>
 	/*@Start or resume the enrolment and return the launch url*/
 	/*@Require Callback Url: Upon exit, the url in your application that the SCORM player will redirect to */
