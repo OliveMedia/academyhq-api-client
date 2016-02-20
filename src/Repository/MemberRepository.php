@@ -25,7 +25,8 @@ class MemberRepository
 		VO\Name $name,
 		VO\Username $username,
 		VO\Email $email,
-		VO\Password $password
+		VO\Password $password,
+		VO\PublicID $pub_id = null
 	)
 	{
 		$request = new Request(
@@ -41,7 +42,8 @@ class MemberRepository
 			'username' => $username->__toString(),
 			'email' => $email->__toString(),
 			'password' => $password->__toString(),
-			'password_confirmation' => $password->__toString()
+			'password_confirmation' => $password->__toString(),
+			'pub_id' => isset($pub_id) ? $pub_id->__toString() : null
 		);
 
 		$response = $request->send($request_parameters);

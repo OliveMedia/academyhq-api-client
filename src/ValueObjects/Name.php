@@ -2,7 +2,7 @@
 
 namespace AcademyHQ\API\ValueObjects;
 
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 
 class Name
 {
@@ -15,8 +15,8 @@ class Name
     {
         $args = func_get_args();
 
-        $firstName  = new String($args[0]);
-        $lastName   = new String($args[1]);
+        $firstName  = new StringVO($args[0]);
+        $lastName   = new StringVO($args[1]);
 
         return new self($firstName, $lastName);
     }
@@ -28,7 +28,7 @@ class Name
      * @param String $middle_name
      * @param String $last_name
      */
-    public function __construct(String $first_name, String $last_name)
+    public function __construct(StringVO $first_name, StringVO $last_name)
     {
         $this->first_name  = $first_name;
         $this->last_name   = $last_name;

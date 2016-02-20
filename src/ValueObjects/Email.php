@@ -2,10 +2,10 @@
 
 namespace AcademyHQ\API\ValueObjects;
 
-use AcademyHQ\API\ValueObjects\String;
+use AcademyHQ\API\ValueObjects\StringVO;
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 
-class Email extends String
+class Email extends StringVO
 {
     /**
      * Returns an EmailAddress object given a PHP native string as parameter.

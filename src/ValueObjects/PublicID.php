@@ -2,4 +2,4 @@
 
 namespace AcademyHQ\API\ValueObjects;
 
-class Password extends StringVO {}
+class PublicID extends StringVO {}

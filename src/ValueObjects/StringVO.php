@@ -4,7 +4,7 @@ namespace AcademyHQ\API\ValueObjects;
 
 use AcademyHQ\API\ValueObjects\Exception\InvalidValueObjectsArgumentException;
 
-class String
+class StringVO
 {
     protected $value;
 

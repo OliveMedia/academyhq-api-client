@@ -2,4 +2,4 @@
 
 namespace AcademyHQ\API\ValueObjects;
 
-class SecretKey extends String {}
+class SecretKey extends StringVO {}
