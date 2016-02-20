@@ -108,7 +108,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@return array of enrolment_ids */
 	$enrolment_ids = $enrolment_repository->create_enrolments(
 		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
-		\AcademyHQ\API\ValueObjects\LicenseIDArray::fromNative(array('license_id_1', 'license_id_2'))
+		\AcademyHQ\API\ValueObjects\LicenseIDArray::fromNative(array('license_id_1', 'license_id_2')),
+		new \AcademyHQ\API\ValueObjects\SendEmail(true/false)
+	);
 
 ### 3> Creating enrolments for all available licenses in organisation
 <pre>
