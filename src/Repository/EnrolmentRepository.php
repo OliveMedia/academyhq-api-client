@@ -21,7 +21,7 @@ class EnrolmentRepository
 	* @return enrolment_id
 	*/
 
-	public function create(VO\MemberID $member_id, VO\LicenseID $license_id)
+	public function create(VO\MemberID $member_id, VO\LicenseID $license_id, VO\Flag $send_email = null)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -34,6 +34,10 @@ class EnrolmentRepository
 			'member_id' => $member_id->__toString(),
 			'license_id' => $license_id->__toString()
 		);
+
+		if($send_email) {
+			$request_parameters['send_email'] = $send_email->__toBool();
+		}
 
 		$response = $request->send($request_parameters);
 		$data = $response->get_data();
@@ -60,7 +64,7 @@ class EnrolmentRepository
 		return $data->enrolment_ids;
 	}
 
-	public function create_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array) {
+	public function create_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array, VO\Flag $send_email = null) {
 
 		$request = new Request(
 			new GuzzleClient,
@@ -77,6 +81,10 @@ class EnrolmentRepository
 				'member_id' => $member_id->__toString(),
 				'license_id' => $license_id
 			);
+
+			if($send_email) {
+				$request_parameters['send_email'] = $send_email->__toBool();
+			}
 
 			$response = $request->send($request_parameters);
 			$data = $response->get_data();

@@ -87,6 +87,28 @@ class EnrolmentRepositoryTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(count($enrolment_ids), 3);
 	}
 
+	public function test_create_enrolments_send_email() {
+
+		$member_repository = $this->member_repository();
+
+		$member_id = $member_repository->create(
+			VO\Name::fromNative($this->create_string(), $this->create_string()),
+			new VO\Username($this->create_string()),
+			new VO\Email($this->create_email()),
+			new VO\Password($this->create_string())
+		);
+
+		$enrolment_repository = $this->enrolment_repository();
+
+		$enrolment_ids = $enrolment_repository->create_enrolments(
+			new VO\MemberID($member_id),
+			VO\LicenseIDArray::fromNative(array('6', '7', '8')),
+			new VO\SendEmail(1)
+		);
+
+		$this->assertEquals(count($enrolment_ids), 3);
+	}
+
 	public function test_create_enrolment()
 	{
 		$member_repository = $this->member_repository();
@@ -102,7 +124,29 @@ class EnrolmentRepositoryTest extends PHPUnit_Framework_TestCase
 
 		$enrolment_id = $enrolment_repository->create(
 			new VO\MemberID($member_id),
-			new VO\LicenseID('610')
+			new VO\LicenseID('6'),
+			new VO\SendEmail(1)
+		);
+
+		$this->assertNotNull($enrolment_id);
+	}
+
+	public function test_create_enrolment_send_email()
+	{
+		$member_repository = $this->member_repository();
+
+		$member_id = $member_repository->create(
+			VO\Name::fromNative($this->create_string(), $this->create_string()),
+			new VO\Username($this->create_string()),
+			new VO\Email($this->create_email()),
+			new VO\Password($this->create_string())
+		);
+
+		$enrolment_repository = $this->enrolment_repository();
+
+		$enrolment_id = $enrolment_repository->create(
+			new VO\MemberID($member_id),
+			new VO\LicenseID('6')
 		);
 
 		$this->assertNotNull($enrolment_id);
