@@ -66,6 +66,27 @@ class EnrolmentRepositoryTest extends PHPUnit_Framework_TestCase
 		return $member_repository;
 	}
 
+	public function test_create_enrolments() {
+
+		$member_repository = $this->member_repository();
+
+		$member_id = $member_repository->create(
+			VO\Name::fromNative($this->create_string(), $this->create_string()),
+			new VO\Username($this->create_string()),
+			new VO\Email($this->create_email()),
+			new VO\Password($this->create_string())
+		);
+
+		$enrolment_repository = $this->enrolment_repository();
+
+		$enrolment_ids = $enrolment_repository->create_enrolments(
+			new VO\MemberID($member_id),
+			VO\LicenseIDArray::fromNative(array('6', '7', '8'))
+		);
+
+		$this->assertEquals(count($enrolment_ids), 3);
+	}
+
 	public function test_create_enrolment()
 	{
 		$member_repository = $this->member_repository();
@@ -128,116 +149,116 @@ class EnrolmentRepositoryTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(count($enrolment_ids), 5);
 	}
 
-	// public function test_get_launch_url()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
-	// 	$launch_url = $enrolment_repository->get_launch_url(new VO\EnrolmentID('4708'), VO\HTTP\Url::fromNative('https://www.youtube.com/watch?v=CHQ4Sr1JzBo'));
+	public function test_get_launch_url()
+	{
+		$enrolment_repository = $this->enrolment_repository();
+		$launch_url = $enrolment_repository->get_launch_url(new VO\EnrolmentID('4708'), VO\HTTP\Url::fromNative('https://www.youtube.com/watch?v=CHQ4Sr1JzBo'));
 
-	// 	$this->assertNotNull($launch_url);
-	// }
+		$this->assertNotNull($launch_url);
+	}
 
-	// public function test_get_launch_url_exception()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
-	// 	$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
-	// 	$launch_url = $enrolment_repository->get_launch_url(new VO\EnrolmentID('1234'), VO\HTTP\Url::fromNative('https://www.youtube.com/watch?v=CHQ4Sr1JzBo'));
-	// }
+	public function test_get_launch_url_exception()
+	{
+		$enrolment_repository = $this->enrolment_repository();
+		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
+		$launch_url = $enrolment_repository->get_launch_url(new VO\EnrolmentID('1234'), VO\HTTP\Url::fromNative('https://www.youtube.com/watch?v=CHQ4Sr1JzBo'));
+	}
 
-	// public function test_get()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
-	// 	$enrolment = $enrolment_repository->get(new VO\EnrolmentID('4668'));
+	public function test_get()
+	{
+		$enrolment_repository = $this->enrolment_repository();
+		$enrolment = $enrolment_repository->get(new VO\EnrolmentID('4668'));
 
-	// 	$this->assertEquals($enrolment->course, 'Barcode 1');
-	// 	$this->assertEquals($enrolment->registrations[0]->is_successful, 1);
-	// }
+		$this->assertEquals($enrolment->course, 'Barcode 1');
+		$this->assertEquals($enrolment->registrations[0]->is_successful, 1);
+	}
 
-	// public function test_get_exception()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
+	public function test_get_exception()
+	{
+		$enrolment_repository = $this->enrolment_repository();
 
-	// 	$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
+		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
-	// 	$enrolment = $enrolment_repository->get(new VO\EnrolmentID('1234'));
-	// }
+		$enrolment = $enrolment_repository->get(new VO\EnrolmentID('1234'));
+	}
 
-	// public function test_delete()
-	// {
-	// 	$member_repository = $this->member_repository();
+	public function test_delete()
+	{
+		$member_repository = $this->member_repository();
 
-	// 	$member_id = $member_repository->create(
-	// 		VO\Name::fromNative($this->create_string(), $this->create_string()),
-	// 		new VO\Username($this->create_string()),
-	// 		new VO\Email($this->create_email()),
-	// 		new VO\Password($this->create_string())
-	// 	);
+		$member_id = $member_repository->create(
+			VO\Name::fromNative($this->create_string(), $this->create_string()),
+			new VO\Username($this->create_string()),
+			new VO\Email($this->create_email()),
+			new VO\Password($this->create_string())
+		);
 
-	// 	$enrolment_repository = $this->enrolment_repository();
+		$enrolment_repository = $this->enrolment_repository();
 
-	// 	$enrolment_id = $enrolment_repository->create(
-	// 		new VO\MemberID($member_id),
-	// 		new VO\LicenseID('610')
-	// 	);
+		$enrolment_id = $enrolment_repository->create(
+			new VO\MemberID($member_id),
+			new VO\LicenseID('610')
+		);
 
-	// 	$response = $enrolment_repository->delete(new VO\EnrolmentID($enrolment_id));
+		$response = $enrolment_repository->delete(new VO\EnrolmentID($enrolment_id));
 
-	// 	$this->assertEquals($response, 'Enrolment deleted successfully');
-	// }
+		$this->assertEquals($response, 'Enrolment deleted successfully');
+	}
 
-	// public function test_delete_exception()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
+	public function test_delete_exception()
+	{
+		$enrolment_repository = $this->enrolment_repository();
 
-	// 	$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
+		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
-	// 	$response = $enrolment_repository->delete(new VO\EnrolmentID('1234'));
-	// }
+		$response = $enrolment_repository->delete(new VO\EnrolmentID('1234'));
+	}
 
-	// public function test_get_all_member_enrolments()
-	// {
-	// 	$member_repository = $this->member_repository();
+	public function test_get_all_member_enrolments()
+	{
+		$member_repository = $this->member_repository();
 
-	// 	$member_id = $member_repository->create(
-	// 		VO\Name::fromNative($this->create_string(), $this->create_string()),
-	// 		new VO\Username($this->create_string()),
-	// 		new VO\Email($this->create_email()),
-	// 		new VO\Password($this->create_string())
-	// 	);
+		$member_id = $member_repository->create(
+			VO\Name::fromNative($this->create_string(), $this->create_string()),
+			new VO\Username($this->create_string()),
+			new VO\Email($this->create_email()),
+			new VO\Password($this->create_string())
+		);
 
-	// 	$enrolment_repository = $this->enrolment_repository();
+		$enrolment_repository = $this->enrolment_repository();
 
-	// 	$enrolment_id = $enrolment_repository->create(
-	// 		new VO\MemberID($member_id),
-	// 		new VO\LicenseID('610')
-	// 	);
+		$enrolment_id = $enrolment_repository->create(
+			new VO\MemberID($member_id),
+			new VO\LicenseID('610')
+		);
 
-	// 	$enrolments = $enrolment_repository->get_all_for_member(new VO\MemberID($member_id));
+		$enrolments = $enrolment_repository->get_all_for_member(new VO\MemberID($member_id));
 
-	// 	$this->assertEquals($enrolments[0]->course, 'Barcode 1');
-	// }
+		$this->assertEquals($enrolments[0]->course, 'Barcode 1');
+	}
 
-	// public function test_get_all_member_enrolments_exception()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
+	public function test_get_all_member_enrolments_exception()
+	{
+		$enrolment_repository = $this->enrolment_repository();
 
-	// 	$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
+		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
 
-	// 	$response = $enrolment_repository->get_all_for_member(new VO\MemberID('1234'));
-	// }
+		$response = $enrolment_repository->get_all_for_member(new VO\MemberID('1234'));
+	}
 
-	// public function test_sync_result()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
-	// 	$enrolment = $enrolment_repository->sync_result(new VO\EnrolmentID('4708'));
+	public function test_sync_result()
+	{
+		$enrolment_repository = $this->enrolment_repository();
+		$enrolment = $enrolment_repository->sync_result(new VO\EnrolmentID('4708'));
 
-	// 	$this->assertEquals($enrolment->is_successful, 1);
-	// 	$this->assertNull($enrolment->next_registration);
-	// }
+		$this->assertEquals($enrolment->is_successful, 1);
+		$this->assertNull($enrolment->next_registration);
+	}
 
-	// public function test_sync_result_exception()
-	// {
-	// 	$enrolment_repository = $this->enrolment_repository();
-	// 	$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
-	// 	$enrolment = $enrolment_repository->sync_result(new VO\EnrolmentID('4647'));
-	// }
+	public function test_sync_result_exception()
+	{
+		$enrolment_repository = $this->enrolment_repository();
+		$this->setExpectedException('AcademyHQ\API\HTTP\Response\Exception\ResponseException');
+		$enrolment = $enrolment_repository->sync_result(new VO\EnrolmentID('4647'));
+	}
 }

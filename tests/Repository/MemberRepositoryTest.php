@@ -66,6 +66,21 @@ class MemberRepositoryTest extends PHPUnit_Framework_TestCase
 		$this->assertNotNull($member_id);
 	}
 
+	public function test_create_member_with_public_id()
+	{
+		$member_repository = $this->member_repository();
+
+		$member_id = $member_repository->create(
+			VO\Name::fromNative($this->create_string(), $this->create_string()),
+			new VO\Username($this->create_string()),
+			new VO\Email($this->create_email()),
+			new VO\Password($this->create_string()),
+			new VO\ID('ABC-JOHN')
+		);
+
+		$this->assertNotNull($member_id);
+	}
+
 	public function test_create_member_exception()
 	{
 		$member_repository = $this->member_repository();

@@ -60,6 +60,33 @@ class EnrolmentRepository
 		return $data->enrolment_ids;
 	}
 
+	public function create_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/enrolment/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$license_ids = $license_id_array->__toArray();
+		$enrolment_ids = array();
+
+		foreach($license_ids as $license_id) {
+			$request_parameters = array(
+				'member_id' => $member_id->__toString(),
+				'license_id' => $license_id
+			);
+
+			$response = $request->send($request_parameters);
+			$data = $response->get_data();
+
+			$enrolment_ids[] = $data->enrolment_id;
+		}
+	
+		return $enrolment_ids;
+	}
+
 	/**
 	* @return array of enrolment std objects
 	*/
