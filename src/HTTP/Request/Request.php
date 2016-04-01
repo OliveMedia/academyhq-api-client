@@ -55,7 +55,7 @@ class Request implements iRequest
 
         ksort($params);
         $query_string = $path . '/?' . http_build_query($params, '', '&');
-
-        return hash_hmac("sha256", $query_string, $secret_key); 
+        
+        return hash_hmac("sha256", $query_string, $secret_key);
     }
  }

@@ -21,8 +21,8 @@ class LicenseRepositoryTest extends PHPUnit_Framework_TestCase
 	private function license_repository()
 	{
 		$credentials = new Credentials(
-			new AppID('0PM6J17JBYZ7T7JJ3X82'),
-			new SecretKey('uV3F3YluFpal1cknvbcGwgjvx4QpvB+leU8dUj2m')
+			new AppID('abcdef'),
+			new SecretKey('abcdef')
 		);
 
 		$factory = new Factory($credentials);
