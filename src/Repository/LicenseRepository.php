@@ -4,7 +4,7 @@ namespace AcademyHQ\API\Repository;
 
 use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
-use Guzzle\Service\Client as GuzzleClient;
+use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 
 class LicenseRepository

@@ -6,7 +6,7 @@ interface iRequest
 {
 
  	public function __construct(
- 		\Guzzle\Service\Client $client,
+ 		\Guzzle\Http\Client $client,
  		\AcademyHQ\API\Common\Credentials $credentials,
  		\AcademyHQ\API\ValueObjects\Http\Url $url,
  		\AcademyHQ\API\ValueObjects\Http\Method $method
