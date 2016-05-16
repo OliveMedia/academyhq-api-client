@@ -208,4 +208,20 @@ class EnrolmentRepository
 
 		return $data->certificate;
 	}
+
+	public function download_certificate(VO\MemberCertificateID $member_certificate_id) {
+
+		$member_certificate_id = $member_certificate_id->__toString();
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/certificate/'.$member_certificate_id.'/download'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$response = $request->send();
+		$data = $response->get_data();
+
+		return $data->certificate_url;
+	}
 }
