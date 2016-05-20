@@ -209,7 +209,7 @@ class EnrolmentRepository
 		return $data->certificate;
 	}
 
-	public function download_certificate(VO\MemberCertificateID $member_certificate_id) {
+	public function get_certificate_url(VO\MemberCertificateID $member_certificate_id) {
 
 		$member_certificate_id = $member_certificate_id->__toString();
 		$request = new Request(

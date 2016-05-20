@@ -26,4 +26,9 @@ class Factory
 	{
 		return new LicenseRepository($this->credentials);
 	}
+
+	public function get_course_repository()
+	{
+		return new CourseRepository($this->credentials);
+	}
 }

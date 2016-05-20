@@ -32,6 +32,11 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@return instance of \AcademyHQ\API\Repository\LicenseRepository */
 	$license_repository = $factory->get_license_repository(); 
 	[Instance of \AcademyHQ\API\Repository\LicenseRepository is required to perform any action related to license]	
+	
+
+	/*@return instance of \AcademyHQ\API\Repository\CourseRepository */
+	$license_repository = $factory->get_course_repository(); 
+	[Instance of \AcademyHQ\API\Repository\CourseRepository is required to perform any action related to course]	
 </pre>
 
 ## Using Member Repository
@@ -112,6 +117,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\SendEmail(true/false)
 	);
 
+</pre>
+
 ### 3> Creating enrolments for all available licenses in organisation
 <pre>
 	/*@return enrolment_ids / array of enrolment id */
@@ -143,10 +150,45 @@ Client Library that allow third party to access AcademyHQ APIs.
 	<!-- <iframe src="{{{$launch_url}}}"></iframe> -->
 </pre>
 
+### 7> Getting certificate
+<pre>
+	/*@ returns Certificate std object that has id, course, member, certificate, enrolment_succeeded_at and expire_at*/ 
+	$certificate = $enrolment->get_certificate(new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+</pre>
+
+### 8> Getting certificate url
+<pre>
+	/*@ returns url of certificate*/ 
+	$certificate = $enrolment->get_certificate_url(new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+</pre>
+
 ### Information needed for callback url 
 <pre>
 	/*Below code in callback url will sync registration summary and provide you the recent enrolment status */
-	/*@Return enrolment std onbject that contain enrolment status */
+	/*@Return enrolment std object that contain enrolment status */
 	$enrolment = $enrolment_repository->sync_result(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
+## Using License Repository
+
+### 1> Getting Licenses
+<pre>
+ 	/*@returns array of License std object */
+ 	/* License std object contains id, created_at, updated_at, course_id, name, descripton_message, completion_message, duration, typical_time, is_active and is_deleted  */
+	$licenses = $license_repository->get_all();
+</pre>
+
+## Using Course Repository
+
+### 1> Getting Courses
+<pre>
+ 	/*@returns array of Course std object */
+ 	/* Course std object contains id, pub_id, name, certificate_name, module_count and image_url  */
+	$courses = $course_repository->get_all();
+</pre>
+
+### 2> Getting Course
+<pre>
+ 	/*@returns Course std object that contains id, pub_id, name, certificate_name, module_count, image_url, price and enrolment_count  */
+	$courses = $course_repository->get_all();
+</pre>
