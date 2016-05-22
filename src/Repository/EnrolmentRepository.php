@@ -95,6 +95,31 @@ class EnrolmentRepository
 		return $enrolment_ids;
 	}
 
+	public function create_offline_enrolment(VO\MemberID $member_id, VO\CourseId $course_id, VO\StringVO $file, VO\Flag $send_email = null)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/enrolment/offline/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'license_id' => $license_id->__toString(),
+			'file' => $file->__toString()
+		);
+
+		if($send_email) {
+			$request_parameters['send_email'] = $send_email->__toBool();
+		}
+
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data->enrolment_id;
+	}
+
 	/**
 	* @return array of enrolment std objects
 	*/

@@ -91,7 +91,9 @@ class Request implements iRequest
 
             foreach ($query_parameters as $key => $value) {
 
-                $multipart[$key] = $value;
+                if($key != 'file'){
+                    $multipart[$key] = $value;
+                }
             }
 
             $multipart['app_id'] = $this->credentials->get_app_id();
@@ -103,6 +105,8 @@ class Request implements iRequest
             );
 
             $request = $this->client->post($this->url, $headers, $multipart);
+
+            $request->addPostFile('file',$query_parameters['file']);
 
             $response = $request->send();
 
