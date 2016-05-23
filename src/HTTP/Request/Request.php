@@ -106,7 +106,9 @@ class Request implements iRequest
 
             $request = $this->client->post($this->url, $headers, $multipart);
 
-            $request->addPostFile('file',$query_parameters['file']);
+            if(array_key_exists('file', $query_parameters)){
+                $request->addPostFile('file',$query_parameters['file']);
+            }
 
             $response = $request->send();
 
