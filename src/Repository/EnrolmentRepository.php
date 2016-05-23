@@ -95,7 +95,7 @@ class EnrolmentRepository
 		return $enrolment_ids;
 	}
 
-	public function create_offline_enrolment(VO\MemberID $member_id, VO\CourseId $course_id, VO\StringVO $file, VO\Flag $send_email = null)
+	public function create_offline_enrolment(VO\MemberID $member_id, VO\CourseId $course_id, VO\StringVO $file_name, VO\Integer $hrs, VO\Integer $mins, VO\Integer $sec, VO\StringVO $issued_at, VO\StringVO $expire_at, VO\Flag $send_email = null)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -106,8 +106,13 @@ class EnrolmentRepository
 
 		$request_parameters = array(
 			'member_id' => $member_id->__toString(),
-			'license_id' => $license_id->__toString(),
-			'file' => $file->__toString()
+			'course_id' => $course_id->__toString(),
+			'file' => $file_name->__toString(),
+			'hrs' => $hrs->__toInteger(),
+			'mins' => $mins->__toInteger(),
+			'sec' => $sec->__toInteger(),
+			'expire_at' => $expire_at->__toString(),
+			'issued_at' => $issued_at->__toString()
 		);
 
 		if($send_email) {
