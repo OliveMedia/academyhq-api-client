@@ -31,4 +31,9 @@ class Factory
 	{
 		return new CourseRepository($this->credentials);
 	}
+
+	public function get_purchase_repository()
+	{
+		return new PurchaseRepository($this->credentials);
+	}
 }
