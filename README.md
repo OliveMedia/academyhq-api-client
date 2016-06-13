@@ -169,6 +169,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$enrolment = $enrolment_repository->sync_result(new \AcademyHQ\API\ValueObjects\EnrolmentID('enrolment_id'));
 </pre>
 
+### 9> Creating Offline Enrolment
+<pre>
+	/*@return enrolment_id */
+	$enrolment_id = $enrolment_repository->create_offline_enrolment(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID('course_id'),
+		new \AcademyHQ\API\ValueObjects\StringVO('file_name'),
+		new \AcademyHQ\API\ValueObjects\Integer(hrs),
+		new \AcademyHQ\API\ValueObjects\Integer(min),
+		new \AcademyHQ\API\ValueObjects\Integer(secs),
+		new \AcademyHQ\API\ValueObjects\StringVO('issued_at'),
+		new \AcademyHQ\API\ValueObjects\StringVO('expire_at'),
+	);
+</pre>
+
+
 ## Using License Repository
 
 ### 1> Getting Licenses
@@ -191,4 +207,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
  	/*@returns Course std object that contains id, pub_id, name, certificate_name, module_count, image_url, price and enrolment_count  */
 	$courses = $course_repository->get_all();
+</pre>
+
+## Using Purchase Repository
+
+### 1> Getting launch url
+<pre>
+ 	/*@returns url of AcademyHQ Purchase Portal*/
+	$launch_url = $purchase_repository->get_launch_url(
+		new \AcademyHQ\API\ValueObjects\LicenseID('license_id'),
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id')),
+		new \AcademyHQ\API\ValueObjects\StringVO('callback_url')
+	);
 </pre>
