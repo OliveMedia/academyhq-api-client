@@ -26,7 +26,7 @@ class PurchaseRepository {
 		);
 
 		$request_parameters = array(
-			'license_id'   => $license_id_array->__toArray(),
+			'license_ids'   => $license_id_array->__toArray(),
 			'member_id'    => $member_id->__toString(),
 			'callback_url' => $callback_url->__toString()
 		);
