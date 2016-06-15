@@ -35,8 +35,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	
 
 	/*@return instance of \AcademyHQ\API\Repository\CourseRepository */
-	$license_repository = $factory->get_course_repository(); 
-	[Instance of \AcademyHQ\API\Repository\CourseRepository is required to perform any action related to course]	
+	$course_repository = $factory->get_course_repository(); 
+	[Instance of \AcademyHQ\API\Repository\CourseRepository is required to perform any action related to course]
+
+	*@return instance of \AcademyHQ\API\Repository\PurchaseRepository */
+	$purchase_repository = $factory->get_purchase_repository(); 
+	[Instance of \AcademyHQ\API\Repository\PurchaseRepository is required to perform any action related to purchase]	
 </pre>
 
 ## Using Member Repository
@@ -206,7 +210,17 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 2> Getting Course
 <pre>
  	/*@returns Course std object that contains id, pub_id, name, certificate_name, module_count, image_url, price and enrolment_count  */
-	$courses = $course_repository->get_all();
+	$course = $course_repository->get(
+		new \AcademyHQ\API\ValueObjects\CourseID('course_id')
+	);
+</pre>
+
+### 3> Getting Course by pub ID
+<pre>
+ 	/*@returns Course std object that contains id, pub_id, name, certificate_name, module_count, image_url, price and enrolment_count  */
+	$courses = $course_repository->get_by_pub_id(
+		new \AcademyHQ\API\ValueObjects\ID('id')
+	);
 </pre>
 
 ## Using Purchase Repository
