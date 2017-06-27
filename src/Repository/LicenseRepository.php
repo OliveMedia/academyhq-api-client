@@ -17,6 +17,19 @@ class LicenseRepository
 		$this->credentials = $credentials;
 	}
 
+	/**
+	* @return request object
+	*/
+	private function make_request_object($url, $verb){
+		$request = new Request(
+				new GuzzleClient,
+				$this->credentials,
+				VO\HTTP\Url::fromNative($this->base_url.$url),
+				new VO\HTTP\Method($verb)
+			);
+		return $request;
+	}
+
 	public function get_all()
 	{
 		$request = new Request(
@@ -31,5 +44,25 @@ class LicenseRepository
 		$data = $response->get_data();
 		
 		return $data->licenses;
+	}
+
+
+	/**
+	* @return license objects
+	*/
+	public function fetch_all_organisation_licenses(){
+		$request = $this->make_request_object('/organisation/all_license', 'GET');
+		$response = $request->send();
+		$data = $response->get_data();
+		return $data;
+	}
+	/**
+	* @return license objects
+	*/
+	public function fetch_sub_organisation_licenses($id){
+		$request = $this->make_request_object('/organisation/sub_organisation_licenses/'.$id, 'GET');
+		$response= $request->send();
+		$data = $response->get_data();
+		return $data;
 	}
 }

@@ -18,6 +18,20 @@ class EnrolmentRepository
 	}
 
 	/**
+	* @return request object
+	*/
+	private function make_request_object($url, $verb){
+		$request = new Request(
+				new GuzzleClient,
+				$this->credentials,
+				VO\HTTP\Url::fromNative($this->base_url.$url),
+				new VO\HTTP\Method($verb)
+			);
+		return $request;
+	}
+
+
+	/**
 	* @return enrolment_id
 	*/
 
@@ -254,4 +268,21 @@ class EnrolmentRepository
 
 		return $data->certificate_url;
 	}
+	public function fetch_all_organisation_enrollment(){
+		$request = $this->make_request_object('/organisation/all_enrollments', 'GET');
+		$response = $request->send();
+		$data = $response->get_data();
+		return $data; //return $data->enrollments;
+	}
+
+	/**
+	* @return std enrollment object
+	*/
+	public function fetch_sub_organisation_enrollment($id){
+		$request = $this->make_request_object("/organisation/sub_organisation_enrollments/".$id, "GET");
+		$response = $request->send();
+		$data = $response->get_data();
+		return $data;
+	}
+
 }

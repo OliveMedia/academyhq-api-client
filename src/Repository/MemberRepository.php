@@ -18,6 +18,19 @@ class MemberRepository
 	}
 
 	/**
+	* @return request object
+	*/
+	private function make_request_object($url, $verb){
+		$request = new Request(
+				new GuzzleClient,
+				$this->credentials,
+				VO\HTTP\Url::fromNative($this->base_url.$url),
+				new VO\HTTP\Method($verb)
+			);
+		return $request;
+	}
+
+	/**
 	* @return member_id
 	*/
 	
@@ -155,5 +168,26 @@ class MemberRepository
 
 		$data = $response->get_data();
 		return $data->message;
+	}
+
+	
+	/**
+	* @return  member objects
+	*/
+	public function fetch_all_organisation_members(){
+		$request = $this->make_request_object('/organisation/all_members', 'GET');
+		$response = $request->send();
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	* @return  member object
+	*/
+	public function fetch_sub_organisation_member($id){
+		$request = $this->make_request_object('/organisation/sub_organisation_members/'.$id, 'GET');
+		$response = $request->send();
+		$data = $response->get_data();
+		return $data;
 	}
 }
