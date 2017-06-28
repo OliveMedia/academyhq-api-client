@@ -36,4 +36,7 @@ class Factory
 	{
 		return new PurchaseRepository($this->credentials);
 	}
+	public function get_organisation_repository(){
+		return new OrganisationRepository($this->credentials);
+	}
 }
