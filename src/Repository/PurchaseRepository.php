@@ -16,6 +16,19 @@ class PurchaseRepository {
 		$this->credentials = $credentials;
 	}
 
+	/**
+* @return request object
+*/
+	private function make_request_object($url, $verb){
+		$request = new Request(
+				new GuzzleClient,
+				$this->credentials,
+				VO\HTTP\Url::fromNative($this->base_url.$url),
+				new VO\HTTP\Method($verb)
+			);
+		return $request;
+	}
+
 	public function get_launch_url(VO\LicenseIDArray $license_id_array,VO\MemberID $member_id,VO\StringVO $callback_url) {
 
 		$request = new Request(
@@ -34,7 +47,18 @@ class PurchaseRepository {
 		$response = $request->send($request_parameters);
 
 		$data = $response->get_data();
-		
+
 		return $data->launch_url;
+	}
+
+	public function purchase_data(VO\LicenseID $license_id, VO\Email $email){
+		$request = $this->make_request_object('/purchase/purchase_link', 'POST');
+		$request_parameters = array(
+			'license_id' => $license_id->__toString(),
+			'email_id' => $email->__toString()
+		);
+		$response = $request->send($request_parameters); 
+		$data = $response->get_data();
+		return $data;
 	}
 }
