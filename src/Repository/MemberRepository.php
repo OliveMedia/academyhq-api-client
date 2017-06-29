@@ -33,7 +33,7 @@ class MemberRepository
 	/**
 	* @return member_id
 	*/
-	
+
 	public function create(
 		VO\Name $name,
 		VO\Username $username,
@@ -170,7 +170,29 @@ class MemberRepository
 		return $data->message;
 	}
 
-	
+	/**
+		* @return std member object
+		*/
+		public function fetch_member_by_email(VO\Email $email){
+			$member_email = urlencode($email->__toString());
+			$request = $this->make_request_object('/member_email/'.$member_email.'/get', 'GET');
+			$response = $request->send();
+			$data = $response->get_data();
+			return $data;
+		}
+
+		/**
+		* @return std member object
+		*/
+		public function fetch_member_by_username(VO\Username $username){
+			$member_username = $username->__toString();
+			$request = $this->make_request_object('/member_username/'.$member_username.'/get', 'GET');
+			$response = $request->send();
+			$data = $response->get_data();
+			return $data;
+		}
+
+
 	/**
 	* @return  member objects
 	*/
