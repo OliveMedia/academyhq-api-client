@@ -16,8 +16,21 @@ class AssessorRepository {
 		$this->credentials = $credentials;
 	}
 
-	public function test() {
+	public function test(VO\Token $token) {
 
-		
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/test'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => 'ZjdhMzBiZWI1MjllYjU0Zg==');
+
+		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		print_r($data);
 	}
 }
