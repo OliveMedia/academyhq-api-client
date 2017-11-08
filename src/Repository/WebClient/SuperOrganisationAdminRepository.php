@@ -21,7 +21,7 @@ class SuperOrganisationAdminRepository {
 		VO\Address $address,
 		VO\Latitude $latitude,
 		VO\Longitude $longitude,
-		VO\Id $pub_id,
+		VO\ID $pub_id,
 		VO\Name $name
 
 	) {
@@ -33,7 +33,7 @@ class SuperOrganisationAdminRepository {
 			new VO\HTTP\Method('POST')
 		);
 
-		$header_parameters = array('Authorization' => 'ZjdhMzBiZWI1MjllYjU0Zg==');
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
 			'address' => $address->__toString(),
@@ -51,5 +51,93 @@ class SuperOrganisationAdminRepository {
 		return $data->etb_id;
 	}
 
-	
+	public function create_etb_admin(
+		VO\ID $pub_id = null,
+		VO\Name $name,
+		VO\Username $username,
+		VO\Email $email,
+		VO\Password $password = null,
+		VO\Password $password_confirmation = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'super_organisation/etb/admin/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'name' => $name->get_fist_name()->__toString(),
+			'username' => $username->__toString(),
+			'email' => $email->__toString(),
+			
+		);
+
+		if($pub_id) {
+			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+
+		if($password) {
+			$request_parameters['password'] = $password->__toString();
+		}
+
+		if($password_confirmation) {
+			$request_parameters['password_confirmation'] = $password_confirmation->__toString();
+		}
+
+		$response = $request->send($header_parameters, $request_parameters);
+
+		$data = $response->get_data();
+
+		return $data->member_id;
+	}
+
+	public function create_etb_authorizing_officer(
+		VO\ID $pub_id = null,
+		VO\Name $name,
+		VO\Username $username,
+		VO\Email $email,
+		VO\Password $password = null,
+		VO\Password $password_confirmation = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'super_organisation/etb/authorising/officer/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'name' => $name->get_fist_name()->__toString(),
+			'username' => $username->__toString(),
+			'email' => $email->__toString(),
+			
+		);
+
+		if($pub_id) {
+			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+
+		if($password) {
+			$request_parameters['password'] = $password->__toString();
+		}
+
+		if($password_confirmation) {
+			$request_parameters['password_confirmation'] = $password_confirmation->__toString();
+		}
+
+		$response = $request->send($header_parameters, $request_parameters);
+
+		$data = $response->get_data();
+
+		return $data->member_id;
+	}
+
+
 }
