@@ -82,9 +82,6 @@ class Request implements iRequest
         	
         } catch (\Guzzle\Http\Exception\ClientErrorResponseException $e) {
 
-            echo $e->getMessage();
-            exit();
-
             return $e->getMessage();
         } catch (RequestException $e) {
 

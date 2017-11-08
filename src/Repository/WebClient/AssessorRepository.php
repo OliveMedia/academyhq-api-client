@@ -25,12 +25,12 @@ class AssessorRepository {
 			new VO\HTTP\Method('GET')
 		);
 
-		$header_parameters = array('Authorization' => 'ZjdhMzBiZWI1MjllYjU0Zg==');
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
-		print_r($data);
+		return $data->message;
 	}
 }
