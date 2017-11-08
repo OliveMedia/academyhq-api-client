@@ -7,7 +7,7 @@ use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 
-class OrganisationAdminRepository {
+class SuperOrganisationAdminRepository {
 
 	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
 

@@ -19,5 +19,5 @@ interface iRequest
      * @return \AcademyHQ\API\HTTP\Response\Response
      */
 
- 	public function send(array $query_parameters = null);
+ 	public function send(array $query_parameters = null, array $header_parameters = null);
 }

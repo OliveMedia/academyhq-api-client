@@ -29,8 +29,8 @@ class AuthRepository {
 		);
 
 		$request_parameters = array(
-			'username' => $username->__toEncodedString();
-			'password' => $password->__toEncodedString();
+			'username' => $username->__toEncodedString(),
+			'password' => $password->__toEncodedString()
 		);
 
 		$response = $request->send($request_parameters);

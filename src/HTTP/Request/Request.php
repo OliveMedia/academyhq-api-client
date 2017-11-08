@@ -21,22 +21,22 @@ class Request implements iRequest
  		$this->client = $client;
  	}
 
-    public function send(array $query_parameters = null) {
+    public function send(array $query_parameters = null, array $header_parameters = null) {
 
         $request_method = strtolower($this->method);
 
         switch ($request_method) {
             case 'post':
-                $response = $this->send_post_request($query_parameters);
+                $response = $this->send_post_request($query_parameters, $header_parameters);
                 break;
             case 'put':
-                $response = $this->send_put_request($query_parameters);
+                $response = $this->send_put_request($query_parameters, $header_parameters);
                 break;
             case 'get':
-                $response = $this->send_get_request($query_parameters);
+                $response = $this->send_get_request($query_parameters, $header_parameters);
                 break;
             case 'delete':
-                $response = $this->send_delete_request($query_parameters);
+                $response = $this->send_delete_request($query_parameters, $header_parameters);
                 break;
             default:
                 die("Http method ".$request_method." not allowed"); 
@@ -46,7 +46,7 @@ class Request implements iRequest
         return $response;
     }
 
- 	public function send_get_request(array $query_parameters = null) 
+ 	public function send_get_request(array $query_parameters = null, array $header_parameters = null) 
  	{
  		try {
 
@@ -66,6 +66,12 @@ class Request implements iRequest
                 'Accept' => 'application/json'
             );
 
+            if($header_parameters) {
+                foreach($header_parameters as $key => $value) {
+                    $headers[$key] = $value;
+                }
+            }
+
             $request_url = $this->url. '/?' . http_build_query($query, '', '&');
 
             $request = $this->client->get($request_url, $headers);
@@ -83,7 +89,7 @@ class Request implements iRequest
         }
  	}
 
-    public function send_post_request(array $query_parameters = null) {
+    public function send_post_request(array $query_parameters = null, array $header_parameters = null) {
 
         try {
 
@@ -104,6 +110,12 @@ class Request implements iRequest
                 'Accept' => 'application/json'
             );
 
+            if($header_parameters) {
+                foreach($header_parameters as $key => $value) {
+                    $headers[$key] = $value;
+                }
+            }
+
             $request = $this->client->post($this->url, $headers, $multipart);
 
             if(array_key_exists('file', $query_parameters)){
@@ -123,7 +135,7 @@ class Request implements iRequest
         }
     }
 
-    public function send_put_request(array $query_parameters = null) {
+    public function send_put_request(array $query_parameters = null, array $header_parameters = null) {
         
         try {
 
@@ -142,6 +154,12 @@ class Request implements iRequest
                 'Accept' => 'application/json'
             );
 
+            if($header_parameters) {
+                foreach($header_parameters as $key => $value) {
+                    $headers[$key] = $value;
+                }
+            }
+
             $request = $this->client->put($this->url, $headers, $multipart);
 
             $response = $request->send();
@@ -157,7 +175,7 @@ class Request implements iRequest
         }
     }
 
-    public function send_delete_request(array $query_parameters = null) {
+    public function send_delete_request(array $query_parameters = null, array $header_parameters = null) {
         
         try {
 
@@ -176,6 +194,12 @@ class Request implements iRequest
             $headers = array(
                 'Accept' => 'application/json'
             );
+
+            if($header_parameters) {
+                foreach($header_parameters as $key => $value) {
+                    $headers[$key] = $value;
+                }
+            }
 
             $request = $this->client->delete($this->url, $headers, $query);
 
