@@ -22,7 +22,7 @@ class SuperOrganisationAdminRepository {
 		VO\Latitude $latitude,
 		VO\Longitude $longitude,
 		VO\ID $pub_id,
-		VO\Name $name
+		VO\StringVO $name
 
 	) {
 
@@ -40,7 +40,7 @@ class SuperOrganisationAdminRepository {
 			'latitude' => $latitude->__toString(),
 			'longitude' => $longitude->__toString(),
 			'pub_id' => $pub_id->__toString(),
-			'name' => $name->get_fist_name()->__toString()
+			'name' => $name->__toString()
 			
 		);
 
@@ -70,7 +70,8 @@ class SuperOrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'name' => $name->get_fist_name()->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
 			'username' => $username->__toString(),
 			'email' => $email->__toString(),
 			
@@ -114,7 +115,8 @@ class SuperOrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'name' => $name->get_fist_name()->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
 			'username' => $username->__toString(),
 			'email' => $email->__toString(),
 			

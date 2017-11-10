@@ -60,4 +60,36 @@ class EmployerRepository {
 		return $data->member_id;
 
 	}
+
+	public function create_sub_organisation(
+		VO\Integer $number_of_employees,
+		VO\StringVO $name,
+		VO\WebAddress $web_address,
+		VO\Email $email_address,
+		VO\PhoneNumber $phone_number,
+		VO\Address $address,
+		VO\FaxNumber $fax_number
+	){
+	$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/sub_organisation/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'number_of_employees' => $number_of_employees->__toString(),
+			'name' => $name->__toString(),
+			'web_address' => $username->__toString(),
+			'email_address' => $email->__toString(),
+			'address' => $address->__toString(),
+			'fax_number' => $fax_number->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data->organisation_id;
+	}
 }
