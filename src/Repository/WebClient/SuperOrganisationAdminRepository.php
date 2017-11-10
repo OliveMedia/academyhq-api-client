@@ -9,7 +9,7 @@ use AcademyHQ\API\Common\Credentials;
 
 class SuperOrganisationAdminRepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	private $base_url = 'https://api.academyhq.com/api/v2/web/client/';
 
 	public function __construct(Credentials $credentials)
 	{
@@ -44,7 +44,7 @@ class SuperOrganisationAdminRepository {
 			
 		);
 
-		$response = $request->send($header_parameters, $request_parameters);
+		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -52,10 +52,11 @@ class SuperOrganisationAdminRepository {
 	}
 
 	public function create_etb_admin(
-		VO\ID $pub_id = null,
+		VO\Token $token,
 		VO\Name $name,
 		VO\Username $username,
 		VO\Email $email,
+		VO\ID $pub_id = null,
 		VO\Password $password = null,
 		VO\Password $password_confirmation = null
 	){
@@ -89,7 +90,7 @@ class SuperOrganisationAdminRepository {
 			$request_parameters['password_confirmation'] = $password_confirmation->__toString();
 		}
 
-		$response = $request->send($header_parameters, $request_parameters);
+		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -97,10 +98,11 @@ class SuperOrganisationAdminRepository {
 	}
 
 	public function create_etb_authorizing_officer(
-		VO\ID $pub_id = null,
+		VO\Token $token,
 		VO\Name $name,
 		VO\Username $username,
 		VO\Email $email,
+		VO\ID $pub_id = null,
 		VO\Password $password = null,
 		VO\Password $password_confirmation = null
 	){
@@ -134,7 +136,7 @@ class SuperOrganisationAdminRepository {
 			$request_parameters['password_confirmation'] = $password_confirmation->__toString();
 		}
 
-		$response = $request->send($header_parameters, $request_parameters);
+		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 

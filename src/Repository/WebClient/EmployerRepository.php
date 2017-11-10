@@ -78,10 +78,10 @@ class EmployerRepository {
 		);
 
 		$request_parameters = array(
-			'number_of_employees' => $number_of_employees->__toString(),
+			'number_of_employees' => $number_of_employees->__toInteger(),
 			'name' => $name->__toString(),
-			'web_address' => $username->__toString(),
-			'email_address' => $email->__toString(),
+			'web_address' => $web_address->__toString(),
+			'email_address' => $email_address->__toString(),
 			'address' => $address->__toString(),
 			'fax_number' => $fax_number->__toString()
 		);
