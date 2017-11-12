@@ -198,6 +198,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$licenses = $license_repository->get_all();
 </pre>
 
+### 2> Creating Licenses
+<pre>
+ 	/*@returns id of created liecnse */
+	$login = $auth_repository->login(
+		new \AcademyHQ\API\ValueObjects\ID('organisation_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID('course_id')))
+	);
+</pre>
+
 ## Using Course Repository
 
 ### 1> Getting Courses
