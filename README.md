@@ -234,3 +234,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('callback_url')
 	);
 </pre>
+
+## Using Auth Repository
+
+### 1> Loign
+<pre>
+ 	/*@returns token after sucessfull login*/
+	$login = $auth_repository->login(
+		new \AcademyHQ\API\ValueObjects\Username('username'),
+		new \AcademyHQ\API\ValueObjects\Password('password')))
+	);
+</pre>
