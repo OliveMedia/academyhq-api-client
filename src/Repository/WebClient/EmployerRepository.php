@@ -17,7 +17,6 @@ class EmployerRepository {
 	}
 
 	public function create_sub_organisation_admin(
-		VO\ID $id,
 		VO\Name $name,
 		VO\Username $username,
 		VO\Email $email,

@@ -248,9 +248,72 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 1> Loign
 <pre>
- 	/*@returns token after sucessfull login*/
+ 	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
 	$login = $auth_repository->login(
 		new \AcademyHQ\API\ValueObjects\Username('username'),
 		new \AcademyHQ\API\ValueObjects\Password('password')))
 	);
 </pre>
+
+## Using Employer Repository
+
+### 1> Create Sub Organisation Admin
+<pre>
+ 	/*@returns member_id created sub organisation admin*/
+	$sub_organisation_admin = $employer_repository->create_sub_organisation_admin(
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Username("User Name"),
+		new \AcademyHQ\API\ValueObjects\Email("email@email.com")
+	);
+</pre>
+
+### 2> Create Sub Organisation
+<pre>
+ 	/*@returns organisation_id of created sub organisation*/
+	$sub_organisation = $employer_repository->create_sub_organisation(
+		new \AcademyHQ\API\ValueObjects\Integer(1),
+		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation"),
+		new \AcademyHQ\API\ValueObjects\WebAddress("http://example.com"),
+		new \AcademyHQ\API\ValueObjects\Email("email@email.com"),
+		new \AcademyHQ\API\ValueObjects\Address("address"),
+		new \AcademyHQ\API\ValueObjects\FaxNumber("+123456"),
+	);
+</pre>
+
+## Using Super Organisation Admin Repository
+
+### 1> Create Education Training Board
+<pre>
+	/*@returns etb_id of created education training board and token is generated using auth repository */
+	$etb = $super_organisation_admin_repository->create_etb(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		new \AcademyHQ\API\ValueObjects\Address("address"),
+		new \AcademyHQ\API\ValueObjects\Latitude("12.0123"),
+		new \AcademyHQ\API\ValueObjects\Longitude("18.0123"),
+		new \AcademyHQ\API\ValueObjects\ID("A123"),
+		new \AcademyHQ\API\ValueObjects\StringVO("ETB Name"),
+	);
+</pre>
+
+### 2> Create Education Training Board Admin
+<pre>
+	/*@returns member_id of created education training board admin*/
+	$etb_admin = $super_organisation_admin_repository->create_etb_admin(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Username("User Name"),
+		new \AcademyHQ\API\ValueObjects\Email("email@email.com")
+	);
+</pre>
+
+### 3> Create Education Training Board Authorising Officer
+<pre>
+	/*@returns member_id of created education training board authorising officer*/
+	$etb_ao = $super_organisation_admin_repository->create_etb_authorizing_officer(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Username("User Name"),
+		new \AcademyHQ\API\ValueObjects\Email("email@email.com")
+	);
+</pre>
+
