@@ -25,7 +25,7 @@ class CourseIDArray {
         $this->course_ids  = $course_ids;
     }
 
-    public function get_licenses() {
+    public function get_courses() {
     	return $this->course_ids;
     }
 

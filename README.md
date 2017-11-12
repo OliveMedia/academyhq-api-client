@@ -188,6 +188,28 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 10> Creating bulk enrolments through license 
+<pre>
+	/*@return array of enrolment_ids */
+	$enrolment_ids = $enrolment_repository->create_bulK_enrolments(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		\AcademyHQ\API\ValueObjects\LicenseIDArray::fromNative(array('license_id_1', 'license_id_2')),
+		\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array())
+	);
+
+</pre>
+
+### 11> Creating bulk enrolments through course 
+<pre>
+	/*@return array of enrolment_ids */
+	$enrolment_ids = $enrolment_repository->create_bulK_enrolments(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		\AcademyHQ\API\ValueObjects\LicenseIDArray::fromNative(array()),
+		\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array('course_id_1', 'course_id_2'))
+	);
+
+</pre>
+
 
 ## Using License Repository
 

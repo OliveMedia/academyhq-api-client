@@ -254,4 +254,56 @@ class EnrolmentRepository
 
 		return $data->certificate_url;
 	}
+
+	public function create_bulK_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array = null, VO\CourseIDArray $course_id_array = null) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/bulk/enrolment/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$enrolment_ids = array();
+
+		$license_ids = $license_id_array->__toArray();
+
+		$course_ids = $course_id_array->__toArray();
+
+		if(isset($license_ids)) {
+
+			foreach ($license_ids as $license_id) {
+
+				$request_parameters = array(
+					'member_id' => $member_id->__toString(),
+					'licenses_ids' => $license_ids
+				);
+
+				$response = $request->send($request_parameters);
+
+				$data = $response->get_data();
+
+				$enrolment_ids[] = $data->enrolment_ids;
+			}
+		}
+
+		if(isset($course_ids)) {
+
+			foreach ($course_ids as $course_id) {
+
+				$request_parameters = array(
+					'member_id' => $member_id->__toString(),
+					'courses_ids' => $course_ids
+				);
+
+				$response = $request->send($request_parameters);
+
+				$data = $response->get_data();
+
+				$enrolment_ids[] = $data->enrolment_ids;
+			}
+		}
+	
+		return $enrolment_ids;
+	}
 }
