@@ -101,7 +101,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 6> Creating Members From Array Object
+### 6> Creating one or more  members from array object
 <pre>
 	/*@return members_ids */
 	$response = $member_repository->create_bulk_members_array(
@@ -113,7 +113,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 7> Creating Members From JSON Object
+### 7> Creating one or more members from JSON object
 <pre>
 	/*@return members_ids */
 	$response = $member_repository->create_bulk_members_json(
