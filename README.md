@@ -103,7 +103,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 5> Creating Members From Array Object
 <pre>
-	/*@return success message */
+	/*@return members_ids */
 	$response = $member_repository->create_bulk_members_array(
 		\AcademyHQ\API\ValueObjects\FirstNameArray::fromNative(array('first_name_1', 'first_name_2')),
 		\AcademyHQ\API\ValueObjects\LastNameArray::fromNative(array('last_name_1', 'last_name_2')),
@@ -115,7 +115,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 5> Creating Members From JSON Object
 <pre>
-	/*@return success message */
+	/*@return members_ids */
 	$response = $member_repository->create_bulk_members_json(
 		\AcademyHQ\API\ValueObjects\FirstNameArray::fromNative(array('first_name_1', 'first_name_2')),
 		\AcademyHQ\API\ValueObjects\LastNameArray::fromNative(array('last_name_1', 'last_name_2')),
