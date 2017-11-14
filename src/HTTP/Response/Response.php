@@ -31,6 +31,8 @@ class Response implements iResponse
 
  		$data = json_decode($json_data);
 
+ 		// print_r($data);exit();
+
  		if($data->status == 'Fail')
  		{
  			throw new ResponseException($data->errors);

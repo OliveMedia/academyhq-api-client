@@ -156,4 +156,110 @@ class MemberRepository
 		$data = $response->get_data();
 		return $data->message;
 	}
+
+	public function create_bulk_members_array (
+		VO\FirstNameArray $first_name_array,
+		VO\LastNameArray $last_name_array,
+		VO\UsernameArray $username_array,
+		VO\EmailArray $email_array,
+		VO\PasswordArray $password_array,
+		VO\PubIDArray $pub_id_array = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member/create/bulk/members'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$members = array();
+
+		$first_names = $first_name_array->__toArray();
+		$last_names = $last_name_array->__toArray();
+		$usernames = $username_array->__toArray();
+		$emails = $email_array->__toArray();
+		$passwords = $password_array->__toArray();
+
+		if($pub_id_array){
+			$pub_ids = $pub_id_array->__toArray();
+		}
+
+		for ($i=0; $i < count($first_names); $i++) { 
+
+			$members[$i]['first_name'] = $first_names[$i];
+			$members[$i]['last_name'] = $last_names[$i];
+			$members[$i]['username'] = $usernames[$i];
+			$members[$i]['email'] = $emails[$i];
+			$members[$i]['password'] = $passwords[$i];
+
+			if(isset($pub_ids[$i])) {
+				$members[$i]['pub_id'] = $pub_ids[$i];
+			}
+
+		}
+
+		$request_parameters = array(
+			'members' => $members
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data->members_ids;
+	}
+
+	public function create_bulk_members_json (
+		VO\FirstNameArray $first_name_array,
+		VO\LastNameArray $last_name_array,
+		VO\UsernameArray $username_array,
+		VO\EmailArray $email_array,
+		VO\PasswordArray $password_array,
+		VO\PubIDArray $pub_id_array = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member/create/bulk/members'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$members = array();
+
+		$first_names = $first_name_array->__toArray();
+		$last_names = $last_name_array->__toArray();
+		$usernames = $username_array->__toArray();
+		$emails = $email_array->__toArray();
+		$passwords = $password_array->__toArray();
+
+		if($pub_id_array){
+			$pub_ids = $pub_id_array->__toArray();
+		}
+
+		for ($i=0; $i < count($first_names); $i++) { 
+
+			$members[$i]['first_name'] = $first_names[$i];
+			$members[$i]['last_name'] = $last_names[$i];
+			$members[$i]['username'] = $usernames[$i];
+			$members[$i]['email'] = $emails[$i];
+			$members[$i]['password'] = $passwords[$i];
+
+			if(isset($pub_ids[$i])) {
+				$members[$i]['pub_id'] = $pub_ids[$i];
+			}
+
+		}
+
+		$request_parameters = array(
+			'members' => json_encode($members)
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data->members_ids;
+	}
 }
