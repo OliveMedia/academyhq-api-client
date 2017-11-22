@@ -363,3 +363,26 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+## Using Notification Repository
+
+### 1> Get Member Web Notifications
+<pre>
+	/*@return notifications std object */
+  	/* notification std object will contain id, crerated_at, updated_at, member_id, sender_id, notification_message, server_response, sent_at, next_send_at, is_set, is_opened, opened_at of notification*/
+  	$notification = $notification_repository->member_web_notifications(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your member id'));
+</pre>
+
+### 2> Get Sender Web Notifications
+<pre>
+	/*@return notifications std object */
+  	/* notification std object will contain id, crerated_at, updated_at, member_id, sender_id, notification_message, server_response, sent_at, next_send_at, is_set, is_opened, opened_at of notification*/
+  	$notification = $notification_repository->sender_web_notifications(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your sender id'));
+</pre>
+
+### 3> Get Web Notifications With Attachment(If any)
+<pre>
+	/*@return notifications std object */
+  	/* notification std object will contain id, crerated_at, updated_at, member_id, sender_id, notification_message, server_response, sent_at, next_send_at, is_set, is_opened, opened_at, attachemnt_document_key, attachament_document_url of notification*/
+  	$notification = $notification_repository->web_notification(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\NotificationID('your notification id'));
+</pre>
+

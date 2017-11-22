@@ -11,6 +11,7 @@ use AcademyHQ\API\Repository\WebClient\ETBAdminRepository;
 use AcademyHQ\API\Repository\WebClient\ETBAORepository;
 use AcademyHQ\API\Repository\WebClient\EmployerRepository;
 use AcademyHQ\API\Repository\WebClient\AssessorRepository;
+use AcademyHQ\API\Repository\WebClient\NotificationRepository;
 
 class Factory
 {
@@ -83,5 +84,12 @@ class Factory
 	public function get_employer_repository() {
 
 		return new EmployerRepository($this->credentials);
+	}
+
+	public function get_notification_repository() {
+
+		//return "hello";
+
+		return new NotificationRepository($this->credentials);
 	}
 }
