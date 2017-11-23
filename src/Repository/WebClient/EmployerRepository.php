@@ -67,7 +67,9 @@ class EmployerRepository {
 		VO\Email $email_address,
 		VO\PhoneNumber $phone_number,
 		VO\Address $address,
-		VO\FaxNumber $fax_number
+		VO\FaxNumber $fax_number,
+		VO\TaxNumber $tax_number =  null,
+		VO\CroNumber $cro_number = null
 	){
 	$request = new Request(
 			new GuzzleClient,
@@ -84,6 +86,15 @@ class EmployerRepository {
 			'address' => $address->__toString(),
 			'fax_number' => $fax_number->__toString()
 		);
+
+		if($tax_number) {
+			$request_parameters['tax_number'] = $tax_number->__toString();
+		}
+
+		if($cro_number) {
+			$request_parameters['cro_number'] = $cro_number->__toString();
+		}
+
 
 		$response = $request->send($request_parameters);
 

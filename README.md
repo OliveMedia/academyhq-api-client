@@ -323,6 +323,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Email("email@email.com"),
 		new \AcademyHQ\API\ValueObjects\Address("address"),
 		new \AcademyHQ\API\ValueObjects\FaxNumber("+123456"),
+		new \AcademyHQ\API\ValueObjects\TaxNumber("your_tax_number"),
+		new \AcademyHQ\API\ValueObjects\CroNumber("your_cro_number"),
 	);
 </pre>
 
