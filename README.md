@@ -426,3 +426,23 @@ Client Library that allow third party to access AcademyHQ APIs.
   	/* member_programs std object will contain id, program_name, program_id, member_name, member_id, program_course, program_documents, program_videos, program_audits of member_programs*/
   	$member_program_detail = $member_program_repository->member_program_detail(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberProgramID('your member id'));
 </pre>
+
+## Using Organisation Admin Repository
+
+### 1> Organisation Edit
+<pre>
+	/*@returns organisation_id of created sub organisation*/
+	$organisation = $organisation_admin_repository->edit_organisation(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		new \AcademyHQ\API\ValueObjects\Integer(1),
+		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation"),
+		new \AcademyHQ\API\ValueObjects\WebAddress("http://example.com"),
+		new \AcademyHQ\API\ValueObjects\Email("email@email.com"),
+		new \AcademyHQ\API\ValueObjects\Address("address"),
+		new \AcademyHQ\API\ValueObjects\FaxNumber("+123456"),
+		new \AcademyHQ\API\ValueObjects\TaxNumber("your_tax_number"),
+		new \AcademyHQ\API\ValueObjects\CroNumber("your_cro_number"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
+	);
+</pre>

@@ -61,13 +61,13 @@ class EmployerRepository {
 	}
 
 	public function create_sub_organisation(
-		VO\Integer $number_of_employees,
 		VO\StringVO $name,
-		VO\WebAddress $web_address,
-		VO\Email $email_address,
-		VO\PhoneNumber $phone_number,
-		VO\Address $address,
-		VO\FaxNumber $fax_number,
+		VO\Integer $number_of_employees = null,
+		VO\WebAddress $web_address = null ,
+		VO\Email $email_address = null,
+		VO\PhoneNumber $phone_number = null,
+		VO\Address $address = null,
+		VO\FaxNumber $fax_number = null,
 		VO\TaxNumber $tax_number =  null,
 		VO\CroNumber $cro_number = null,
 		VO\StringVO $latitude = null,
@@ -81,13 +81,28 @@ class EmployerRepository {
 		);
 
 		$request_parameters = array(
-			'number_of_employees' => $number_of_employees->__toInteger(),
 			'name' => $name->__toString(),
-			'web_address' => $web_address->__toString(),
-			'email_address' => $email_address->__toString(),
-			'address' => $address->__toString(),
-			'fax_number' => $fax_number->__toString()
 		);
+
+		if($number_of_employees) {
+			$request_parameters['number_of_employees'] = $number_of_employees->__toString();
+		}
+
+		if($web_address) {
+			$request_parameters['web_address'] = $web_address->__toString();
+		}
+
+		if($email_address) {
+			$request_parameters['email_address'] = $email_address->__toString();
+		}
+
+		if($address) {
+			$request_parameters['address'] = $address->__toString();
+		}
+		
+		if($fax_number) {
+			$request_parameters['fax_number'] = $fax_number->__toString();
+		}
 
 		if($tax_number) {
 			$request_parameters['tax_number'] = $tax_number->__toString();
