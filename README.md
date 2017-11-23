@@ -361,6 +361,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Longitude("18.0123"),
 		new \AcademyHQ\API\ValueObjects\ID("A123"),
 		new \AcademyHQ\API\ValueObjects\StringVO("ETB Name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("contact_person_name"),
+		new \AcademyHQ\API\ValueObjects\PhoneNumber("your_phone_number")		
 	);
 </pre>
 

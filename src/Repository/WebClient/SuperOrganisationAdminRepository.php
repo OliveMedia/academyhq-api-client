@@ -22,14 +22,16 @@ class SuperOrganisationAdminRepository {
 		VO\Latitude $latitude,
 		VO\Longitude $longitude,
 		VO\ID $pub_id,
-		VO\StringVO $name
+		VO\StringVO $name,
+		VO\StringVO $contact_person,
+		VO\PhoneNumber $contact_number
 
 	) {
 
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'super_organisation/etb/create'),
+			VO\HTTP\Url::fromNative($this->base_url.'/super_organisation/etb/create'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -40,7 +42,9 @@ class SuperOrganisationAdminRepository {
 			'latitude' => $latitude->__toString(),
 			'longitude' => $longitude->__toString(),
 			'pub_id' => $pub_id->__toString(),
-			'name' => $name->__toString()
+			'name' => $name->__toString(),
+			'contact_person' => $contact_person->__toString(),
+			'contact_number' => $contact_number->__toString()
 			
 		);
 
@@ -64,7 +68,7 @@ class SuperOrganisationAdminRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'super_organisation/etb/admin/create'),
+			VO\HTTP\Url::fromNative($this->base_url.'/super_organisation/etb/admin/create'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -110,7 +114,7 @@ class SuperOrganisationAdminRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'super_organisation/etb/authorising/officer/create'),
+			VO\HTTP\Url::fromNative($this->base_url.'/super_organisation/etb/authorising/officer/create'),
 			new VO\HTTP\Method('POST')
 		);
 
