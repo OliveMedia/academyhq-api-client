@@ -22,4 +22,9 @@ class Email extends StringVO
 
         $this->value = $filteredValue;
     }
+
+    public function __toEncodedString() {
+
+        return base64_encode($this->toNative());
+    }
 }
