@@ -334,6 +334,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\FaxNumber("+123456"),
 		new \AcademyHQ\API\ValueObjects\TaxNumber("your_tax_number"),
 		new \AcademyHQ\API\ValueObjects\CroNumber("your_cro_number"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
 	);
 </pre>
 

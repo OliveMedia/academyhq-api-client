@@ -9,7 +9,8 @@ use AcademyHQ\API\Common\Credentials;
 
 class EmployerRepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	//private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	private $base_url = 'https://sandbox.academyhq.olive.media/api/v2/web/client';
 
 	public function __construct(Credentials $credentials)
 	{
@@ -69,7 +70,9 @@ class EmployerRepository {
 		VO\Address $address,
 		VO\FaxNumber $fax_number,
 		VO\TaxNumber $tax_number =  null,
-		VO\CroNumber $cro_number = null
+		VO\CroNumber $cro_number = null,
+		VO\StringVO $latitude = null,
+		VO\StringVO $longitude = null
 	){
 	$request = new Request(
 			new GuzzleClient,
@@ -93,6 +96,14 @@ class EmployerRepository {
 
 		if($cro_number) {
 			$request_parameters['cro_number'] = $cro_number->__toString();
+		}
+
+		if($latitude) {
+			$request_parameters['latitude'] = $latitude->__toString();
+		}
+
+		if($longitude) {
+			$request_parameters['longitude'] = $longitude->__toString();
 		}
 
 
