@@ -463,13 +463,13 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$certificate = $learner->certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
 </pre>
 
-### 2> Download Certificate
+### 3> Download Certificate
 <pre>
 	/*@return certificate_url */
   	$certificate_url = $learner->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
 </pre>
 
-### 3> Fetch All Certicates
+### 4> Fetch All Certicates
 <pre>
 	/*@return certificates std object */
   	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificates*/
