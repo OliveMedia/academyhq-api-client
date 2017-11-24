@@ -411,6 +411,13 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$notification = $notification_repository->web_notification(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\NotificationID('your notification id'));
 </pre>
 
+### 4> Get Logged in Member Web Notifications
+<pre>
+	/*@return notifications std object */
+  	/* notification std object will contain id, crerated_at, updated_at, member_id, sender_id, notification_message, server_response, sent_at, next_send_at, is_set, is_opened, opened_at of notification*/
+  	$notifications = $notification_repository->member_web_notifications(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
 ## Using Member Program Repository
 
 ### 1> Fetch All Member Program
