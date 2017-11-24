@@ -301,7 +301,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 2> Loign From Email
+### 2> Login From Email
 <pre>
  	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
 	$login = $auth_repository->login(
@@ -411,7 +411,7 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$notification = $notification_repository->web_notification(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\NotificationID('your notification id'));
 </pre>
 
-## Using Member Program Rpository
+## Using Member Program Repository
 
 ### 1> Fetch All Member Program
 <pre>
