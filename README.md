@@ -454,6 +454,25 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 2> Organisation Edit
+<pre>
+	/*@returns member_id of created member*/
+	$member_base = $organisation_admin_repository->create_base_member(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_role"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_qualification"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_occupation"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_comment"),
+		new \AcademyHQ\API\ValueObjects\Email("your_email"),
+		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_member"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_contact_person"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_verifier"),
+		new \AcademyHQ\API\ValueObjects\Integer("1")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Documents

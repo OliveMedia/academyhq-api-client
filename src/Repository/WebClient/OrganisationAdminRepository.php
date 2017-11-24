@@ -86,4 +86,79 @@ class OrganisationAdminRepository {
 
 		return $data->organisation_id;
 	}
+
+	public function create_base_member(
+		VO\Token $token
+		VO\Name $name,
+		VO\StringVO $role = null,
+		VO\StringVO $qualification = null ,
+		VO\StringVO $occupation = null,
+		VO\StringVO $comment = null,
+		VO\Email $email = null,
+		VO\PublicID $pub_id = null,
+		VO\Integer $is_mentor =  null,
+		VO\Integer $is_contact_person = null,
+		VO\Integer $is_verifier = null,
+		VO\Integer $send_email_to_set_password = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/create/base/member'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'name' => $name->__toString(),
+		);
+
+		if($number_of_employees) {
+			$request_parameters['number_of_employees'] = $number_of_employees->__toString();
+		}
+
+		if($qualification) {
+			$request_parameters['qualification'] = $qualification->__toString();
+		}
+
+		if($occupation) {
+			$request_parameters['occupation'] = $occupation->__toString();
+		}
+
+		if($comment) {
+			$request_parameters['comment'] = $comment->__toString();
+		}
+		
+		if($email) {
+			$request_parameters['email'] = $email->__toString();
+		}
+
+		if($pub_id) {
+			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+
+		if($is_mentor) {
+			$request_parameters['is_mentor'] = $is_mentor->__toString();
+		}
+
+		if($is_contact_person) {
+			$request_parameters['is_contact_person'] = $is_contact_person->__toString();
+		}
+
+		if($is_verifier) {
+			$request_parameters['is_verifier'] = $is_verifier->__toString();
+		}
+
+		if($send_email_to_set_password) {
+			$request_parameters['send_email_to_set_password'] = $send_email_to_set_password->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data->organisation_id;
+	}
 }
