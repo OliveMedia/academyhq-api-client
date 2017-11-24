@@ -80,7 +80,7 @@ class OrganisationAdminRepository {
 			$request_parameters['longitude'] = $longitude->__toString();
 		}
 
-		$response = $request->send($request_parameters);
+		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 

@@ -446,3 +446,32 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
 	);
 </pre>
+
+## Using Learner Repository
+
+### 1> Fetch All Documents
+<pre>
+	/*@return member_documents_details std object */
+  	/* member_document_details std object will contain id, created_at, updated_at, is_deleted, is_active, is_expired, expires_at, document_key, document_id, document of member_documents_details*/
+  	$member_document_detials = $learner->member_documents(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
+### 2> Fetch Certificate
+<pre>
+	/*@return certificate std object */
+  	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificate*/
+  	$certificate = $learner->certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+</pre>
+
+### 2> Download Certificate
+<pre>
+	/*@return certificate_url */
+  	$certificate_url = $learner->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+</pre>
+
+### 1> Fetch All Certicates
+<pre>
+	/*@return certificates std object */
+  	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificates*/
+  	$certificates = $learner->certificates(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
