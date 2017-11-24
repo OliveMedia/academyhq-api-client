@@ -70,12 +70,12 @@ class NotificationRepository {
 		return $data->notification;
 	}
 
-	public function member_web_notifications(VO\Token $token) {
+	public function member_notifications(VO\Token $token) {
 
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/notification/meber/web/notifications'),
+			VO\HTTP\Url::fromNative($this->base_url.'/notification/meber/notifications'),
 			new VO\HTTP\Method('GET')
 		);
 
