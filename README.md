@@ -469,7 +469,7 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$certificate_url = $learner->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
 </pre>
 
-### 1> Fetch All Certicates
+### 3> Fetch All Certicates
 <pre>
 	/*@return certificates std object */
   	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificates*/
