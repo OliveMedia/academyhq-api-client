@@ -460,25 +460,51 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return member_documents_details std object */
   	/* member_document_details std object will contain id, created_at, updated_at, is_deleted, is_active, is_expired, expires_at, document_key, document_id, document of member_documents_details*/
-  	$member_document_detials = $learner->member_documents(new \AcademyHQ\API\ValueObjects\Token('your token'));
+  	$member_document_detials = $learner_repository->member_documents(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
 ### 2> Fetch Certificate
 <pre>
 	/*@return certificate std object */
   	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificate*/
-  	$certificate = $learner->certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+  	$certificate = $learner_repository->certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
 </pre>
 
 ### 3> Download Certificate
 <pre>
 	/*@return certificate_url */
-  	$certificate_url = $learner->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+  	$certificate_url = $learner_repository->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
 </pre>
 
 ### 4> Fetch All Certicates
 <pre>
 	/*@return certificates std object */
   	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificates*/
-  	$certificates = $learner->certificates(new \AcademyHQ\API\ValueObjects\Token('your token'));
+  	$certificates = $learner_repository->certificates(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
+### 5> Edit Profile
+<pre>
+	/*@return member_id of editied profile*/
+	$profile = $learner_repository->profile_update(
+		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id"),
+		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\Email("your_email"),
+		new \AcademyHQ\API\ValueObjects\PhoneNumber("your_mobile_number"),
+		new \AcademyHQ\API\ValueObjects\StringVO("yy-mm-dd"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_gender"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_country"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_state"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_city"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_street"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code")
+	);
+</pre>
+
+### 6> View Profile
+<pre>
+	/*@return member_profile_details std object */
+  	/* member_profile_details std object will contain id, pub_id, first_name, last_name, email, mobile_number, date_of_birth, gender, address of member_profile_details*/
+  	$member_profile_details = $learner_repository->get_profile(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
