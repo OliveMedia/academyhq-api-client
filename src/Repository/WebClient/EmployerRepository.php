@@ -17,6 +17,7 @@ class EmployerRepository {
 	}
 
 	public function create_sub_organisation_admin(
+		VO\ID $id,
 		VO\Name $name,
 		VO\Username $username,
 		VO\Email $email,
@@ -56,7 +57,7 @@ class EmployerRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_id;
+		return $data;
 
 	}
 
@@ -85,7 +86,7 @@ class EmployerRepository {
 		);
 
 		if($number_of_employees) {
-			$request_parameters['number_of_employees'] = $number_of_employees->__toString();
+			$request_parameters['number_of_employees'] = $number_of_employees->__toInteger();
 		}
 
 		if($web_address) {
@@ -125,7 +126,7 @@ class EmployerRepository {
 
 		$data = $response->get_data();
 
-		return $data->organisation_id;
+		return $data;
 	}
 
 	public function create_sub_organisation_inherit_domain(
@@ -150,6 +151,6 @@ class EmployerRepository {
 
 		$data = $response->get_data();
 
-		return $data->organisation_id;
+		return $data;
 	}
 }

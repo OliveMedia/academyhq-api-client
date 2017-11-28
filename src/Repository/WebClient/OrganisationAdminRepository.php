@@ -17,8 +17,8 @@ class OrganisationAdminRepository {
 	}
 
 	public function edit_organisation(
-		VO\Token $token
-		VO\StringVO $name,
+		VO\Token $token,
+		VO\StringVO $name = null,
 		VO\Integer $number_of_employees = null,
 		VO\WebAddress $web_address = null ,
 		VO\Email $email_address = null,
@@ -40,12 +40,12 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$request_parameters = array(
-			'name' => $name->__toString(),
-		);
+		if($name) {
+			$request_parameters['name'] = $name->__toString();
+		}
 
 		if($number_of_employees) {
-			$request_parameters['number_of_employees'] = $number_of_employees->__toString();
+			$request_parameters['number_of_employees'] = $number_of_employees->__toInteger();
 		}
 
 		if($web_address) {
@@ -54,6 +54,10 @@ class OrganisationAdminRepository {
 
 		if($email_address) {
 			$request_parameters['email_address'] = $email_address->__toString();
+		}
+
+		if($phone_number) {
+			$request_parameters['phone_number'] = $phone_number->__toString();
 		}
 
 		if($address) {
@@ -84,11 +88,11 @@ class OrganisationAdminRepository {
 
 		$data = $response->get_data();
 
-		return $data->organisation_id;
+		return $data;
 	}
 
 	public function create_base_member(
-		VO\Token $token
+		VO\Token $token,
 		VO\Name $name,
 		VO\StringVO $role = null,
 		VO\StringVO $qualification = null ,
@@ -115,8 +119,8 @@ class OrganisationAdminRepository {
 			'name' => $name->__toString(),
 		);
 
-		if($number_of_employees) {
-			$request_parameters['number_of_employees'] = $number_of_employees->__toString();
+		if($role) {
+			$request_parameters['role'] = $role->__toString();
 		}
 
 		if($qualification) {
@@ -140,25 +144,25 @@ class OrganisationAdminRepository {
 		}
 
 		if($is_mentor) {
-			$request_parameters['is_mentor'] = $is_mentor->__toString();
+			$request_parameters['is_mentor'] = $is_mentor->__toInteger();
 		}
 
 		if($is_contact_person) {
-			$request_parameters['is_contact_person'] = $is_contact_person->__toString();
+			$request_parameters['is_contact_person'] = $is_contact_person->__toInteger();
 		}
 
 		if($is_verifier) {
-			$request_parameters['is_verifier'] = $is_verifier->__toString();
+			$request_parameters['is_verifier'] = $is_verifier->__toInteger();
 		}
 
 		if($send_email_to_set_password) {
-			$request_parameters['send_email_to_set_password'] = $send_email_to_set_password->__toString();
+			$request_parameters['send_email_to_set_password'] = $send_email_to_set_password->__toInteger();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
-		return $data->organisation_id;
+		return $data;
 	}
 }

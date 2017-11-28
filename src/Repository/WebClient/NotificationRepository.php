@@ -9,7 +9,8 @@ use AcademyHQ\API\Common\Credentials;
 
 class NotificationRepository {
 	
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	// private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2/web/client';
 
 	public function __construct(Credentials $credentials)
 	{
@@ -27,9 +28,13 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
+		// print_r($header_parameters);exit();
+
 		$response = $request->send($header_parameters);
 
 		$data = $response->get_data();
+
+		print_r($data); exit();
 
 		return $data->notifications;
 	}

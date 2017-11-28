@@ -314,8 +314,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 1> Create Sub Organisation Admin
 <pre>
- 	/*@returns member_id created sub organisation admin*/
+ 	/*@returns member_details of created sub organisation admin*/
 	$sub_organisation_admin = $employer_repository->create_sub_organisation_admin(
+		new \AcademyHQ\API\ValueObjects\ID("sub_organisation_id")
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
 		new \AcademyHQ\API\ValueObjects\Username("User Name"),
 		new \AcademyHQ\API\ValueObjects\Email("email@email.com")
@@ -324,10 +325,10 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 2> Create Sub Organisation
 <pre>
- 	/*@returns organisation_id of created sub organisation*/
+ 	/*@returns organisation_details of created sub organisation*/
 	$sub_organisation = $employer_repository->create_sub_organisation(
-		new \AcademyHQ\API\ValueObjects\Integer(1),
 		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation"),
+		new \AcademyHQ\API\ValueObjects\Integer(1),
 		new \AcademyHQ\API\ValueObjects\WebAddress("http://example.com"),
 		new \AcademyHQ\API\ValueObjects\Email("email@email.com"),
 		new \AcademyHQ\API\ValueObjects\Address("address"),
@@ -341,7 +342,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 3> Create Sub Organisation Inherit Domain
 <pre>
- 	/*@returns organisation_id of created sub organisation*/
+ 	/*@returns organisation_details of created sub organisation*/
 	$sub_organisation = $employer_repository->create_sub_organisation_inherit_domain(
 		new \AcademyHQ\API\ValueObjects\PublicID('ABC123'),
 		new \AcademyHQ\API\ValueObjects\Integer(1),
@@ -353,7 +354,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 1> Create Education Training Board
 <pre>
-	/*@returns etb_id of created education training board and token is generated using auth repository */
+	/*@returns etb_details of created education training board and token is generated using auth repository */
 	$etb = $super_organisation_admin_repository->create_etb(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		new \AcademyHQ\API\ValueObjects\Address("address"),
@@ -368,7 +369,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 2> Create Education Training Board Admin
 <pre>
-	/*@returns member_id of created education training board admin*/
+	/*@returns member_details of created education training board admin*/
 	$etb_admin = $super_organisation_admin_repository->create_etb_admin(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
@@ -379,7 +380,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 3> Create Education Training Board Authorising Officer
 <pre>
-	/*@returns member_id of created education training board authorising officer*/
+	/*@returns member_details of created education training board authorising officer*/
 	$etb_ao = $super_organisation_admin_repository->create_etb_authorizing_officer(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
@@ -438,7 +439,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 1> Organisation Edit
 <pre>
-	/*@returns organisation_id of created sub organisation*/
+	/*@returns organisation_details of editied sub organisation*/
 	$organisation = $organisation_admin_repository->edit_organisation(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		new \AcademyHQ\API\ValueObjects\Integer(1),
@@ -454,9 +455,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 2> Organisation Edit
+### 2> Create Base Member
 <pre>
-	/*@returns member_id of created member*/
+	/*@returns member_details of created member*/
 	$member_base = $organisation_admin_repository->create_base_member(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),

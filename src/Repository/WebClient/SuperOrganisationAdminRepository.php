@@ -52,7 +52,7 @@ class SuperOrganisationAdminRepository {
 
 		$data = $response->get_data();
 
-		return $data->etb_id;
+		return $data;
 	}
 
 	public function create_etb_admin(
@@ -98,7 +98,7 @@ class SuperOrganisationAdminRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_id;
+		return $data;
 	}
 
 	public function create_etb_authorizing_officer(
@@ -144,7 +144,7 @@ class SuperOrganisationAdminRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_id;
+		return $data;
 	}
 
 
