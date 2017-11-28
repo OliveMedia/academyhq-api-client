@@ -9,8 +9,7 @@ use AcademyHQ\API\Common\Credentials;
 
 class NotificationRepository {
 	
-	// private $base_url = 'https://api.academyhq.com/api/v2/web/client';
-	private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2/web/client';
+	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
 
 	public function __construct(Credentials $credentials)
 	{
@@ -28,13 +27,9 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		// print_r($header_parameters);exit();
-
 		$response = $request->send($header_parameters);
 
 		$data = $response->get_data();
-
-		print_r($data); exit();
 
 		return $data->notifications;
 	}
@@ -80,7 +75,7 @@ class NotificationRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/notification/meber/notifications'),
+			VO\HTTP\Url::fromNative($this->base_url.'/notification/member/notifications'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -91,5 +86,42 @@ class NotificationRepository {
 		$data = $response->get_data();
 
 		return $data->notifications;
+	}
+
+	public function create_notification(
+		VO\Token $token,
+		VO\MemberIDArray $member_id_array,
+		VO\StringVO $notification_message,
+		VO\NotificationTypeArray $notification_type_array,
+		VO\AttachmentIDArray $attachment_id_array = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/notification/create/notification'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$member_ids = $member_id_array->__toArray();
+
+		$notification_types = $notification_type_array->__toArray();
+
+		$attachment_ids = $attachment_id_array->__toArray();
+
+		$request_parameters = array(
+			'members' => $member_ids,
+			'notification_message' => $notification_message->__toString(),
+			'notification_types' => $notification_types,
+			'attachments' => $attachment_ids
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
 	}
 }

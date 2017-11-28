@@ -419,6 +419,18 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$notifications = $notification_repository->member_notifications(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
+### 5> Notifications Create
+<pre>
+	/*@returns sucess message*/
+	$organisation = $organisation_admin_repository->edit_organisation(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		\AcademyHQ\API\ValueObjects\MemberIDArray::fromNative(array('member_id_1', 'member_id_2')),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_notification_message"),
+		\AcademyHQ\API\ValueObjects\NotificationTypeArray::fromNative(array('type_1', 'type_2')),
+		\AcademyHQ\API\ValueObjects\AttachmentIDArray::fromNative(array('attachment_id_1', 'attachment_id_2'))
+	);
+</pre>
+
 ## Using Member Program Repository
 
 ### 1> Fetch All Member Program
@@ -471,6 +483,32 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("is_contact_person"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_verifier"),
 		new \AcademyHQ\API\ValueObjects\Integer("1")
+	);
+</pre>
+
+### 3> Create Candidate
+<pre>
+	/*@returns member_details of created member*/
+	$member_base = $organisation_admin_repository->create_candidate(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_coccupation_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_pub_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_birth"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_gender"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_country_code"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_mobile_number"),
+		new \AcademyHQ\API\ValueObjects\Email("your_email"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_disability"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_disability_text"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_advice"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_advice_text"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_street"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_city"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_state"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_country"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_signature")
 	);
 </pre>
 

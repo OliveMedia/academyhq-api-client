@@ -165,4 +165,73 @@ class OrganisationAdminRepository {
 
 		return $data;
 	}
+
+	public function create_candidate(
+		VO\Token $token,
+		VO\Integer $occupation_id,
+		VO\PublicID $pub_id,
+		VO\StringVO $date_of_birth,
+		VO\Name $name,
+		VO\StringVO $gender,
+		VO\StringVO $country_code,
+		VO\StringVO $mobile_number,
+		VO\Email $email,
+		VO\Integer $disablility,
+		VO\Integer $advice,
+		VO\StringVO $street,
+		VO\StringVO $city,
+		VO\StringVO $state,
+		VO\StringVO $country,
+		VO\StringVO $postal_code,
+ 		VO\StringVO $signature_image = null,
+		VO\StringVO $disablility_text = null,
+		VO\StringVO $advice_text = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/create/base/member'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'occupation_id' => $occupation_id->__toInteger(),
+			'pub_id' => $pub_id->__toString(),
+			'date_of_birth' => $date_of_birth->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'gender' => $gender->__toString(),
+			'country_code' => $country_code->__toString(),
+			'mobile_number' => $mobile_number->__toString(),
+			'email' => $email->__toString(),
+			'disablility' => $disablility->__toInteger(),
+			'advice' => $advice->__toInteger(),
+			'street' => $street->__toString(),
+			'city' => $city->__toString(),
+			'state' => $state->__toString(),
+			'country' => $country->__toString(),
+			'postal_code' => $postal_code->__toString()
+		);
+
+		if($disablility == '1') {
+			$request_parameters['disablility_text'] = $disablility_text->__toString();
+		}
+
+		if($advice == '1') {
+			$request_parameters['advice_text'] = $advice_text->__toString();
+		}
+
+		if($signature_image) {
+			$request_parameters['signature_image'] = $signature_image->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
