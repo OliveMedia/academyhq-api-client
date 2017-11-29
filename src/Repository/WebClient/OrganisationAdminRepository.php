@@ -93,6 +93,7 @@ class OrganisationAdminRepository {
 
 	public function create_base_member(
 		VO\Token $token,
+		VO\Integer $organisation_id,
 		VO\Name $name,
 		VO\StringVO $role = null,
 		VO\StringVO $qualification = null ,
@@ -116,6 +117,7 @@ class OrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toInteger(),
 			'name' => $name->__toString(),
 		);
 
@@ -168,6 +170,7 @@ class OrganisationAdminRepository {
 
 	public function create_candidate(
 		VO\Token $token,
+		VO\Integer $organisation_id,
 		VO\Integer $occupation_id,
 		VO\PublicID $pub_id,
 		VO\StringVO $date_of_birth,
@@ -198,6 +201,7 @@ class OrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toInteger(),
 			'occupation_id' => $occupation_id->__toInteger(),
 			'pub_id' => $pub_id->__toString(),
 			'date_of_birth' => $date_of_birth->__toString(),

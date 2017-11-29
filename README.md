@@ -472,6 +472,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@returns member_details of created member*/
 	$member_base = $organisation_admin_repository->create_base_member(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_organisation_id"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_role"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_qualification"),
@@ -491,6 +492,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@returns member_details of created member*/
 	$member_base = $organisation_admin_repository->create_candidate(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_organisation_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_coccupation_id"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_pub_id"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_birth"),
