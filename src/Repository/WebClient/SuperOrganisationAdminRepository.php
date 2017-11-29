@@ -147,5 +147,46 @@ class SuperOrganisationAdminRepository {
 		return $data;
 	}
 
+	public function get_etb_admins(
+		VO\Token $token,
+		VO\EtbID $etb_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/super_organisation/get/etb/'.$etb_id.'/admins'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function get_etb_authorizing_officer(
+		VO\Token $token,
+		VO\EtbID $etb_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/super_organisation/get/etb/'.$etb_id.'/authorizing/officer'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 
 }

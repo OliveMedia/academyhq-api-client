@@ -389,6 +389,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 4> Get ETB Admins
+<pre>
+	*@return etb_admin_details std object */
+  	$etb_admin_details = $super_organisation_admin_repository->get_etb_admins(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EtbID('your_etb_id'));
+</pre>
+
+### 4> Get ETB Authorising Officer
+<pre>
+	*@return etb_authorizing_officer_details std object */
+  	$etb_authorizing_officer_details = $get_etb_authorizing_officer->get_etb_admins(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EtbID('your_etb_id'));
+</pre>
+
 ## Using Notification Repository
 
 ### 1> Get Member Web Notifications
@@ -512,6 +524,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_signature")
 	);
+</pre>
+
+### 4> Fetch All Unregistered Member
+<pre>
+	*@return unregistered member_details a/c to organisation  std object */
+  	$un_registered_member = $organisation_admin_repository->fetch_un_registered_member(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\OrganisationID('your_organisation_id'));
 </pre>
 
 ## Using Learner Repository
