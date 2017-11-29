@@ -63,4 +63,24 @@ class AuthRepository {
 
 		return $data->token;
 	}
+
+	public function logout(VO\Token $token) 
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/logout'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array();
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

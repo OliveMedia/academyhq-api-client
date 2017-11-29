@@ -304,9 +304,17 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 2> Login From Email
 <pre>
  	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
-	$login = $auth_repository->login(
+	$login = $auth_repository->login_from_email(
 		new \AcademyHQ\API\ValueObjects\Email('email_address'),
 		new \AcademyHQ\API\ValueObjects\Password('password')))
+	);
+</pre>
+
+### 3> Logout
+<pre>
+ 	/*@returns message after sucesful logout*/
+	$logout = $auth_repository->logout(
+		new \AcademyHQ\API\ValueObjects\Token('yoour_token'))
 	);
 </pre>
 
