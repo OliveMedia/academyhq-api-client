@@ -188,13 +188,19 @@ class OrganisationAdminRepository {
 		VO\StringVO $postal_code,
  		VO\StringVO $signature_image = null,
 		VO\StringVO $disablility_text = null,
-		VO\StringVO $advice_text = null
+		VO\StringVO $advice_text = null,
+		VO\Integer $eye_test_document_id = null,
+		VO\StringVO $eye_test_expiry = null,
+		VO\StringVO $eye_test_document_key = null,
+		VO\Integer $mimimum_educational_document_id = null,
+		VO\StringVO $minimum_educational_expiry = null,
+		VO\StringVO $minimum_educational_document_key = null
 	){
 
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/create/base/member'),
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/create/candidate'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -230,6 +236,16 @@ class OrganisationAdminRepository {
 
 		if($signature_image) {
 			$request_parameters['signature_image'] = $signature_image->__toString();
+		}
+
+		if($eye_test_document_id) {
+			$request_parameters['eye_test_expiry'] = $eye_test_expiry->__toString();
+			$request_parameters['eye_test_document_key'] = $eye_test_document_key->__toString();
+		}
+
+		if($mimimum_educational_document_id) {
+			$request_parameters['minimum_educational_expiry'] = $minimum_educational_expiry->__toString();
+			$request_parameters['minimum_educational_document_key'] = $minimum_educational_document_key->__toString();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
