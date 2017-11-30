@@ -28,7 +28,9 @@ class OrganisationAdminRepository {
 		VO\TaxNumber $tax_number =  null,
 		VO\CroNumber $cro_number = null,
 		VO\StringVO $latitude = null,
-		VO\StringVO $longitude = null
+		VO\StringVO $longitude = null,
+		VO\StringVO $trade_name = null,
+		VO\StringVO $date_of_commence = null
 	){
 
 		$request = new Request(
@@ -82,6 +84,14 @@ class OrganisationAdminRepository {
 
 		if($longitude) {
 			$request_parameters['longitude'] = $longitude->__toString();
+		}
+
+		if($trade_name) {
+			$request_parameters['trade_name'] = $trade_name->__toString();
+		}
+
+		if($date_of_commence) {
+			$request_parameters['date_of_commence'] = $date_of_commence->__toString();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);

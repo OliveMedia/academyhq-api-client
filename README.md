@@ -344,7 +344,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\TaxNumber("your_tax_number"),
 		new \AcademyHQ\API\ValueObjects\CroNumber("your_cro_number"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_trade_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_commence")
 	);
 </pre>
 
@@ -365,7 +367,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('your_organisation_name'),
 		new \AcademyHQ\API\ValueObjects\TaxNumber('your_tax_number'),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
-		new \AcademyHQ\API\ValueObjects\Email('your_email')
+		new \AcademyHQ\API\ValueObjects\Email('your_email'),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_trade_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_commence")
 	);
 </pre>
 
@@ -453,7 +457,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 5> Notifications Create
 <pre>
 	/*@returns sucess message*/
-	$organisation = $organisation_admin_repository->edit_organisation(
+	$organisation = $organisation_admin_repository->create_notification(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		\AcademyHQ\API\ValueObjects\MemberIDArray::fromNative(array('member_id_1', 'member_id_2')),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_notification_message"),
@@ -492,7 +496,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\TaxNumber("your_tax_number"),
 		new \AcademyHQ\API\ValueObjects\CroNumber("your_cro_number"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_trade_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_commence")
 	);
 </pre>
 
