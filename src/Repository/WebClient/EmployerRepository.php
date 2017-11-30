@@ -9,7 +9,8 @@ use AcademyHQ\API\Common\Credentials;
 
 class EmployerRepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	// private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2/web/client';
 
 	public function __construct(Credentials $credentials)
 	{
@@ -155,7 +156,6 @@ class EmployerRepository {
 	}
 
 	public function create_apprenticeship_organisation(
-		VO\PublicID $pub_id,
 		VO\StringVO $company_name,
 		VO\TaxNumber $tax_number,
 		VO\Name $name,
@@ -169,7 +169,6 @@ class EmployerRepository {
 		);
 
 		$request_parameters = array(
-			'pub_id' => $pub_id->__toString(),
 			'name' => $company_name->__toString(),
 			'tax_number' => $tax_number->__toString(),
 			'first_name' => $name->get_first_name()->__toString(),
