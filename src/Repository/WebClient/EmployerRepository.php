@@ -153,4 +153,35 @@ class EmployerRepository {
 
 		return $data;
 	}
+
+	public function create_apprenticeship_organisation(
+		VO\PublicID $pub_id,
+		VO\StringVO $company_name,
+		VO\TaxNumber $tax_number,
+		VO\Name $name,
+		VO\Email $email 
+	){
+	$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/create/apprenticeship/organisation'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'pub_id' => $pub_id->__toString(),
+			'name' => $company_name->__toString(),
+			'tax_number' => $tax_number->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString()
+		);
+
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

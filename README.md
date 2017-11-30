@@ -358,6 +358,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 4> Create Sub Organisation Apprenticeship
+<pre>
+ 	/*@returns organisation_details of created sub organisation*/
+	$sub_organisation = $employer_repository->create_apprenticeship_organisation(
+		new \AcademyHQ\API\ValueObjects\PublicID('your_pub_id'),
+		new \AcademyHQ\API\ValueObjects\StringVO('your_organisation_name'),
+		new \AcademyHQ\API\ValueObjects\TaxNumber('your_tax_number'),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Email('your_email')
+	);
+</pre>
+
 ## Using Super Organisation Admin Repository
 
 ### 1> Create Education Training Board
