@@ -468,14 +468,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 1> Fetch All Member Program
 <pre>
 	/*@return member_programs std object */
-  	/* member_programs std object will contain id, program_name, program_id, member_name, member_id of member_programs*/
   	$member_program = $member_program_repository->fetch_all_member_program(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your member id'));
 </pre>
 
 ### 2> Fetch All Member Program Detail
 <pre>
 	/*@return member_program_detail std object */
-  	/* member_programs std object will contain id, program_name, program_id, member_name, member_id, program_course, program_documents, program_videos, program_audits of member_programs*/
   	$member_program_detail = $member_program_repository->member_program_detail(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberProgramID('your member id'));
 </pre>
 

@@ -31,7 +31,7 @@ class MemberProgramRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_programs;
+		return $data;
 	}
 
 	public function member_program_detail(VO\Token $token, VO\MemberProgramID $member_program_id){
@@ -49,6 +49,6 @@ class MemberProgramRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_program_detail;
+		return $data;
 	}
 }
