@@ -373,6 +373,17 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 5> Complete Registration Fro Apprenticeship
+<pre>
+ 	/*@returns member_details of updated organisation admin*/
+	$registration = $employer_repository->registration_completion_for_admin(
+		new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Password('your_password'),
+		new \AcademyHQ\API\ValueObjects\Password("your_password_confirmation"),
+	);
+</pre>
+
 ## Using Super Organisation Admin Repository
 
 ### 1> Create Education Training Board
