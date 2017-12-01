@@ -229,4 +229,20 @@ class EmployerRepository {
 
 		return $data;
 	}
+
+	public function base_member(VO\MemberID $member_id) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/base/member/'.$member_id.'/get'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

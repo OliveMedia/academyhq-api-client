@@ -384,6 +384,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 6> Get Base Member
+<pre>
+ 	/*@returns base_member_details*/
+	$base_member_details = $employer_repository->base_member(
+		new \AcademyHQ\API\ValueObjects\MemberID('your_member_id')
+	);
+</pre>
+
 ## Using Super Organisation Admin Repository
 
 ### 1> Create Education Training Board
