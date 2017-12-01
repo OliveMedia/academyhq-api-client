@@ -10,7 +10,7 @@ use AcademyHQ\API\Common\Credentials;
 class OrganisationAdminRepository {
 
 	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
-
+	
 	public function __construct(Credentials $credentials)
 	{
 		$this->credentials = $credentials;
@@ -280,6 +280,67 @@ class OrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function create_apprenticeship(
+		VO\Token $token,
+		VO\Integer $employer,
+		VO\Integer $occupation,
+		VO\Integer $sector,
+		VO\Integer $main_activity,
+		VO\Integer $industry,
+		VO\Integer $number_of_qualified_person_in_occupation,
+		VO\Integer $verifier,
+		VO\Integer $contact_person,
+		VO\Integer $mentor,
+		VO\Integer $is_submitted = null,
+		VO\Integer $is_approved = null,
+		VO\Integer $is_declined = null,
+		VO\Integer $is_site_visited = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/apprenticeship/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'employer' => $employer->__toInteger(),
+			'occupation' => $occupation->__toInteger(),
+			'sector' => $sector->__toInteger(),
+			'main_activity' => $main_activity->__toInteger(),
+			'industry' => $industry->__toInteger(),
+			'number_of_qualified_person_in_occupation' => $number_of_qualified_person_in_occupation->__toInteger(),
+			'verifier' => $verifier->__toInteger(),
+			'contact_person' => $contact_person->__toInteger(),
+			'mentor' => $mentor->__toInteger()
+		);
+
+		if($is_submitted) {
+			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
+		}
+
+		if($is_approved) {
+			$request_parameters['is_approved'] = $is_approved->__toInteger();
+		}
+
+		if($is_declined) {
+			$request_parameters['is_declined'] = $is_declined->__toInteger();
+		}
+
+		if($is_site_visited) {
+			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
