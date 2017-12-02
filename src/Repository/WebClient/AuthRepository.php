@@ -37,7 +37,7 @@ class AuthRepository {
 
 		$data = $response->get_data();
 
-		return $data->token;
+		return $data;
 	}
 
 	public function login_from_email(
@@ -61,7 +61,7 @@ class AuthRepository {
 
 		$data = $response->get_data();
 
-		return $data->token;
+		return $data;
 	}
 
 	public function logout(VO\Token $token) 
