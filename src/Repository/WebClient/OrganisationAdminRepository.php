@@ -10,6 +10,7 @@ use AcademyHQ\API\Common\Credentials;
 class OrganisationAdminRepository {
 
 	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	// private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2/web/client';
 	
 	public function __construct(Credentials $credentials)
 	{
@@ -339,6 +340,33 @@ class OrganisationAdminRepository {
 		if($is_site_visited) {
 			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
 		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function create_organisation_etb(
+		VO\Token $token,
+		VO\Integer $organisation_id,
+		VO\Integer $etb_id
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/create/etb'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toInteger(),
+			'etb_id' => $etb_id->__toInteger()
+		);
 
 		$response = $request->send($request_parameters, $header_parameters);
 
