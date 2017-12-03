@@ -10,7 +10,6 @@ use AcademyHQ\API\Common\Credentials;
 class OrganisationAdminRepository {
 
 	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
-	// private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2/web/client';
 	
 	public function __construct(Credentials $credentials)
 	{
@@ -370,6 +369,42 @@ class OrganisationAdminRepository {
 
 		$response = $request->send($request_parameters, $header_parameters);
 
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function get_organisation_etb(VO\Token $token, VO\OrganisationID $organisation_id) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/'.$organisation_id.'/etb'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function get_organisation(VO\Token $token, VO\OrganisationID $organisation_id) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/'.$organisation_id.'/organisation'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+		
 		$data = $response->get_data();
 
 		return $data;

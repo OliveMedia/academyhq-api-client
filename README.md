@@ -476,7 +476,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 5> Notifications Create
 <pre>
 	/*@returns sucess message*/
-	$organisation = $organisation_admin_repository->create_notification(
+	$notfication = $notification_repository->create_notification(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		\AcademyHQ\API\ValueObjects\MemberIDArray::fromNative(array('member_id_1', 'member_id_2')),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_notification_message"),
@@ -577,6 +577,28 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	*@return unregistered member_details a/c to organisation  std object */
   	$un_registered_member = $organisation_admin_repository->fetch_un_registered_member(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\OrganisationID('your_organisation_id'));
+</pre>
+
+### 5> Create Etb Organisation
+<pre>
+	/*@return etb_organisagtion details of created etb organisation*/
+	$etb_organisation = $organisation_admin_repository->create_organisation_etb(
+		new \AcademyHQ\API\ValueObjects\Token("your_tokn"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_organisation_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_etb_id")
+	);
+</pre>
+
+### 6> Get Organisation Etb
+<pre>
+	*@return etb_organisations details of std object */
+  	$etb_organisation = $organisation_admin_repository->get_organisation_etb(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\OrganisationID('your_organisation_id'));
+</pre>
+
+### 7> Get Organisation
+<pre>
+	*@return organisations details of std object */
+  	$$organisation = $organisation_admin_repository->get_organisation(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\OrganisationID('your_organisation_id'));
 </pre>
 
 ## Using Learner Repository
