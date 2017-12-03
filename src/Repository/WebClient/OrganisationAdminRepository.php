@@ -196,15 +196,14 @@ class OrganisationAdminRepository {
 		VO\StringVO $state,
 		VO\StringVO $country,
 		VO\StringVO $postal_code,
- 		VO\StringVO $signature_image = null,
 		VO\StringVO $disablility_text = null,
 		VO\StringVO $advice_text = null,
 		VO\Integer $eye_test_document_id = null,
-		VO\StringVO $eye_test_expiry = null,
-		VO\StringVO $eye_test_document_key = null,
+		VO\StringVO $eyetestdataimage = null,
 		VO\Integer $mimimum_educational_document_id = null,
-		VO\StringVO $minimum_educational_expiry = null,
-		VO\StringVO $minimum_educational_document_key = null
+		VO\StringVO $minimumeducationaldataimage = null,
+		VO\Integer $singnature = null,
+		VO\StringVO $signaturedataimage = null
 	){
 
 		$request = new Request(
@@ -244,18 +243,19 @@ class OrganisationAdminRepository {
 			$request_parameters['advice_text'] = $advice_text->__toString();
 		}
 
-		if($signature_image) {
-			$request_parameters['signature_image'] = $signature_image->__toString();
-		}
-
 		if($eye_test_document_id) {
-			$request_parameters['eye_test_expiry'] = $eye_test_expiry->__toString();
-			$request_parameters['eye_test_document_key'] = $eye_test_document_key->__toString();
+			$request_parameters['eye_test_document_id'] = $eye_test_document_id->__toInteger();
+			$request_parameters['eyetestdataimage'] = $eye_test_expiry->__toString();
 		}
 
 		if($mimimum_educational_document_id) {
-			$request_parameters['minimum_educational_expiry'] = $minimum_educational_expiry->__toString();
-			$request_parameters['minimum_educational_document_key'] = $minimum_educational_document_key->__toString();
+			$request_parameters['mimimum_educational_document_id'] = $mimimum_educational_document_id->__toInteger();
+			$request_parameters['minimumeducationaldataimage'] = $minimumeducationaldataimage->__toString();
+		}
+
+		if($signature) {
+			$request_parameters['signature'] = $signature->__toInteger();
+			$request_parameters['signaturedataimage'] = $signaturedataimage->__toString();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);

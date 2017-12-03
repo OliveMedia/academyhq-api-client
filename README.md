@@ -564,13 +564,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("your_state"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_country"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_signature"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_eye_test_document_id"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_eye_test_expiry"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_eye_test_document_key"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_eye_test_data_image"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_mimimum_educational_document_id"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_minimum_educational_expiry"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_minimum_educational_document_key")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_minimum_educational_data_image"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_signature_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_signature_data_image")
 	);
 </pre>
 
