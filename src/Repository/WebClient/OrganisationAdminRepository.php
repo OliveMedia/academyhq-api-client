@@ -409,4 +409,104 @@ class OrganisationAdminRepository {
 
 		return $data;
 	}
+
+	public function list_apprenticeships(
+		VO\Token $token,
+		VO\Integer $current_page = null,
+		VO\Integer $occupation = null,
+		VO\Integer $industry = null,
+		VO\Integer $sector = null,
+		VO\Integer $main_activity = null,
+		VO\Integer $number_of_qualified_person_in_occupation = null,
+		VO\Integer $contact_person = null,
+		VO\Integer $verifier = null,
+		VO\Integer $mentor = null,
+		VO\Integer $is_submitted = null,
+		VO\Integer $is_approved = null,
+		VO\Integer $is_declined = null,
+		VO\Integer $is_site_visited = null,
+		VO\Integer $is_confirmed_as_occupation = null,
+		VO\StringVO $order_by_field = null,
+		VO\StringVO $order_by_direction = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/apprenticeships'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		if($current_page) {
+			$request_parameters['current_page'] = $current_page->__toInteger();
+		}
+
+		if($occupation) {
+			$request_parameters['occupation'] = $occupation->__toInteger();
+		}
+
+		if($industry) {
+			$request_parameters['industry'] = $industry->__toInteger();
+		}
+
+		if($sector) {
+			$request_parameters['sector'] = $sector->__toInteger();
+		}
+
+		if($main_activity) {
+			$request_parameters['main_activity'] = $main_activity->__toInteger();
+		}
+
+		if($number_of_qualified_person_in_occupation) {
+			$request_parameters['number_of_qualified_person_in_occupation'] = $number_of_qualified_person_in_occupation->__toInteger();
+		}
+
+		if($contact_person) {
+			$request_parameters['contact_person'] = $contact_person->__toInteger();
+		}
+
+		if($verifier) {
+			$request_parameters['verifier'] = $verifier->__toInteger();
+		}
+
+		if($mentor) {
+			$request_parameters['mentor'] = $mentor->__toInteger();
+		}
+
+		if($is_submitted) {
+			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
+		}
+
+		if($is_approved) {
+			$request_parameters['is_approved'] = $is_approved->__toInteger();
+		}
+
+		if($is_declined) {
+			$request_parameters['is_declined'] = $is_declined->__toInteger();
+		}
+
+		if($is_site_visited) {
+			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
+		}
+
+		if($is_confirmed_as_occupation) {
+			$request_parameters['is_confirmed_as_occupation'] = $is_confirmed_as_occupation->__toInteger();
+		}
+
+		if($order_by_field) {
+			$request_parameters['order_by_field'] = $order_by_field->__toString();
+		}
+
+		if($order_by_direction) {
+			$request_parameters['order_by_direction'] = $order_by_direction->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

@@ -601,6 +601,30 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$$organisation = $organisation_admin_repository->get_organisation(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\OrganisationID('your_organisation_id'));
 </pre>
 
+### 8> List Apprenticeships
+<pre>
+	/*@return apprenticeships_list std object*/
+	$etb_organisation = $organisation_admin_repository->list_apprenticeships(
+		new \AcademyHQ\API\ValueObjects\Token("your_tokn"),
+		new \AcademyHQ\API\ValueObjects\Integer("current_page"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_industry"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_sector"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_main_activity"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_number_of_qualified_person_in_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_contact_person"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_verifier"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_mentor"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_submitted"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_approved"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_declined"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_site_visited"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_confirmed_as_occupation"),
+		new \AcademyHQ\API\ValueObjects\StringVo("your_order_by_field"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_order_by_direction"),
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Documents
