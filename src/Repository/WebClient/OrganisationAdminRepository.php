@@ -537,4 +537,293 @@ class OrganisationAdminRepository {
 		return $data;
 
 	}
+
+	public function get_etb_admins(VO\Token $token, VO\EtbID $etb_id) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/etb/'.$etb_id.'/admins'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+		
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function get_etb_authorizing_officer(VO\Token $token, VO\EtbID $etb_id) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/etb/'.$etb_id.'/authorizing/officer'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+		
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function apprenticeship_details(VO\Token $token, VO\ApprenticeshipID $apprenticeship_id) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/apprenticeship/'.$apprenticeship.'/details'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+		
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function edit_apprenticeship(
+		VO\Token $token,
+		VO\ApprenticeshipID $apprenticeship_id
+		VO\Integer $occupation = null,
+		VO\Integer $industry = null,
+		VO\Integer $sector = null,
+		VO\Integer $main_activity = null,
+		VO\Integer $number_of_qualified_person_in_occupation = null,
+		VO\Integer $contact_person = null,
+		VO\Integer $verifier = null,
+		VO\Integer $mentor = null,
+		VO\Integer $is_submitted = null,
+		VO\Integer $is_approved = null,
+		VO\Integer $is_declined = null,
+		VO\Integer $is_site_visited = null,
+		VO\Integer $is_confirmed_as_occupation = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/apprenticeship/'.$apprenticeship_id.'/edit'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		if($current_page) {
+			$request_parameters['current_page'] = $current_page->__toInteger();
+		}
+
+		if($occupation) {
+			$request_parameters['occupation'] = $occupation->__toInteger();
+		}
+
+		if($industry) {
+			$request_parameters['industry'] = $industry->__toInteger();
+		}
+
+		if($sector) {
+			$request_parameters['sector'] = $sector->__toInteger();
+		}
+
+		if($main_activity) {
+			$request_parameters['main_activity'] = $main_activity->__toInteger();
+		}
+
+		if($number_of_qualified_person_in_occupation) {
+			$request_parameters['number_of_qualified_person_in_occupation'] = $number_of_qualified_person_in_occupation->__toInteger();
+		}
+
+		if($contact_person) {
+			$request_parameters['contact_person'] = $contact_person->__toInteger();
+		}
+
+		if($verifier) {
+			$request_parameters['verifier'] = $verifier->__toInteger();
+		}
+
+		if($mentor) {
+			$request_parameters['mentor'] = $mentor->__toInteger();
+		}
+
+		if($is_submitted) {
+			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
+		}
+
+		if($is_approved) {
+			$request_parameters['is_approved'] = $is_approved->__toInteger();
+		}
+
+		if($is_declined) {
+			$request_parameters['is_declined'] = $is_declined->__toInteger();
+		}
+
+		if($is_site_visited) {
+			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
+		}
+
+		if($is_confirmed_as_occupation) {
+			$request_parameters['is_confirmed_as_occupation'] = $is_confirmed_as_occupation->__toInteger();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function list_occupations(vo\Token $token)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/occupations'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function occupation_details(vo\Token $token, VO\Integer $occupation_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/occupation/'.$occupation_id.'/details'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function list_industries(vo\Token $token)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/industries'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function industry_details(vo\Token $token, VO\Integer $industry_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/industry/'.$industry_id.'/details'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function list_sectors(vo\Token $token)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/sectors'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function sector_details(vo\Token $token, VO\Integer $sector_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/sector/'.$sector_id.'/details'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function list_main_activities(vo\Token $token)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/main_activities'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function main_activity_details(vo\Token $token, VO\Integer $main_activity_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/main_activity/'.$main_activity_id.'/details'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

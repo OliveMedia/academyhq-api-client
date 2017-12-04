@@ -583,7 +583,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return etb_organisagtion details of created etb organisation*/
 	$etb_organisation = $organisation_admin_repository->create_organisation_etb(
-		new \AcademyHQ\API\ValueObjects\Token("your_tokn"),
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_organisation_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_etb_id")
 	);
@@ -605,7 +605,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return apprenticeships_list std object*/
 	$etb_organisation = $organisation_admin_repository->list_apprenticeships(
-		new \AcademyHQ\API\ValueObjects\Token("your_tokn"),
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("current_page"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_occupation"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_industry"),
@@ -629,15 +629,110 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return nearest_etb std object*/
 	$nearest_etb = $organisation_admin_repository->get_nearest_etb(
-		new \AcademyHQ\API\ValueObjects\Token("your_tokn"),
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
 	);
 </pre>
 
+### 10> Get ETB Admins
+<pre>
+	/*@return etb_admins std object*/
+	$etb_admins = $organisation_admin_repository->get_etb_admins(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\EtbID("your_etb_id")
+	);
+</pre>
+
+### 11> Get ETB Authorizing Officers
+<pre>
+	/*@return etb_authorizing_officers std object*/
+	$etb_authorizing_officers = $organisation_admin_repository->get_etb_authorizing_officer(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\EtbID("your_etb_id")
+	);
+</pre>
+
+### 12> Apprenticeship Details
+<pre>
+	/*@return etb_authorizing_officers std object*/
+	$apprenticeship_details = $organisation_admin_repository->apprenticeship_details(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id")
+	);
+</pre>
+
+### 13> Get All Occupations
+<pre>
+	/*@return occuppations std object*/
+	$occuppations = $organisation_admin_repository->list_occupations(
+		new \AcademyHQ\API\ValueObjects\Token("your_token")
+	);
+</pre>
+
+### 14> Occupation Details
+<pre>
+	/*@return occupation_details std object*/
+	$occupation_details = $organisation_admin_repository->occupation_details(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_occupation_id")
+	);
+</pre>
+
+### 15> Get All Industries
+<pre>
+	/*@return industry std object*/
+	$industry = $organisation_admin_repository->list_industries(
+		new \AcademyHQ\API\ValueObjects\Token("your_token")
+	);
+</pre>
+
+### 16> Industry Details
+<pre>
+	/*@return industry_details std object*/
+	$industry_details = $organisation_admin_repository->industry_details(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_industry_id")
+	);
+</pre>
+
+### 17> Get All Sectors
+<pre>
+	/*@return sectors std object*/
+	$sectors = $organisation_admin_repository->list_sectors(
+		new \AcademyHQ\API\ValueObjects\Token("your_token")
+	);
+</pre>
+
+### 18> Sector Details
+<pre>
+	/*@return sector_details std object*/
+	$sector_details = $organisation_admin_repository->sector_details(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_sector_id")
+	);
+</pre>
+
+### 19> Get All Main Activities
+<pre>
+	/*@return main_activities std object*/
+	$main_activities = $organisation_admin_repository->list_main_activities(
+		new \AcademyHQ\API\ValueObjects\Token("your_token")
+	);
+</pre>
+
+### 20> Main Activity Details
+<pre>
+	/*@return main_activity_details std object*/
+	$main_activity_details = $organisation_admin_repository->main_activity_details(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_main_activity_id")
+	);
+</pre>
+
 ## Using Learner Repository
 
-### 1> Fetch All Documents
+### 1> Fetch All Membr Documents
 <pre>
 	/*@return member_documents_details std object */
   	/* member_document_details std object will contain id, created_at, updated_at, is_deleted, is_active, is_expired, expires_at, document_key, document_id, document of member_documents_details*/
@@ -684,7 +779,7 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_profile_details = $learner_repository->get_profile(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
-### 6> Fetch All Menmber Documents
+### 6> Fetch Member Document Details
 <pre>
 	/*@return member_documents_details std object */
   	/* member_document_details std object of member_documents_details*/
