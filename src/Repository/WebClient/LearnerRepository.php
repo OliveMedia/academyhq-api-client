@@ -27,7 +27,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -45,7 +45,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -63,7 +63,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -81,7 +81,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -99,7 +99,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -117,14 +117,14 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
 		return $data;
 	}
 
-	public function downlaod_certificate(VO\Token $token, VO\MemberCertificateID $member_certificate_id)
+	public function download_certificate(VO\Token $token, VO\MemberCertificateID $member_certificate_id)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -135,7 +135,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -230,7 +230,7 @@ class LearnerRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 

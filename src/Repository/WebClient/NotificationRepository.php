@@ -27,7 +27,7 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -45,7 +45,7 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -63,7 +63,7 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -81,7 +81,7 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 

@@ -847,5 +847,5 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return certifiacte_url std object */
   	/* document_details std object of documents_details*/
-  	$certifiacte_url = $learner_repository->downlaod_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('your_member_certificate_id'));
+  	$certifiacte_url = $learner_repository->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('your_member_certificate_id'));
 </pre>

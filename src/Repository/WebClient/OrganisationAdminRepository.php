@@ -279,7 +279,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -385,7 +385,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -403,7 +403,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 		
 		$data = $response->get_data();
 
@@ -549,7 +549,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 		
 		$data = $response->get_data();
 
@@ -567,7 +567,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(null,$header_parameters);
 		
 		$data = $response->get_data();
 
@@ -585,7 +585,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($header_parameters);
+		$response = $request->send(nill,$header_parameters);
 		
 		$data = $response->get_data();
 
@@ -693,7 +693,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
@@ -711,7 +711,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -729,7 +729,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -747,7 +747,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -765,7 +765,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -783,7 +783,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -801,7 +801,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
@@ -819,7 +819,7 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+		$response = $request->send(null, $header_parameters);
 
 		$data = $response->get_data();
 
