@@ -625,6 +625,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 9> Get Nearest ETB
+<pre>
+	/*@return nearest_etb std object*/
+	$nearest_etb = $organisation_admin_repository->get_nearest_etb(
+		new \AcademyHQ\API\ValueObjects\Token("your_tokn"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Documents

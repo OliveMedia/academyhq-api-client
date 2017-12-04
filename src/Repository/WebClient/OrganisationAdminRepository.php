@@ -509,4 +509,32 @@ class OrganisationAdminRepository {
 
 		return $data;
 	}
+
+	public function get_nearest_etb(
+		VO\Token $token,
+		VO\StringVO $latitude,
+		VO\StringVO $longitude
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/nearest/etb'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'latitude' => $latitude->__toString(),
+			'longitude' => $longitude->__toString()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
 }
