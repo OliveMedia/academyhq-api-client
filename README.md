@@ -751,7 +751,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 21> Edit Apprenticeship
+### 22> Edit Apprenticeship
 <pre>
 	/*@return apprenticeship_details of updated apprenticeship*/
 	$apprenticeship_details = $organisation_admin_repository->edit_apprenticeship(
