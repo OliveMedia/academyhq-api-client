@@ -843,7 +843,7 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$document_detials = $learner_repository->required_document_list(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
-### 8> Download Certificate
+### 9> Download Certificate
 <pre>
 	/*@return certifiacte_url std object */
   	/* document_details std object of documents_details*/
