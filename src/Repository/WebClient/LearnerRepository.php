@@ -31,15 +31,15 @@ class LearnerRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_documents_details;
+		return $data;
 	}
 
-	public function certificate(VO\Token $token, VO\MemberCertificateId $member_certificate_id)
+	public function member_document_details(VO\Token $token, VO\MemberDocuementID $member_document_id)
 	{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/learner/certificate/'.$member_certificate_id.'/get'),
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/member/document/'.$member_document_id.'/details'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -49,15 +49,15 @@ class LearnerRepository {
 
 		$data = $response->get_data();
 
-		return $data->certificate;
+		return $data;
 	}
 
-	public function download_certificate(VO\Token $token, VO\MemberCertificateId $member_certificate_id)
+	public function documents_list(VO\Token $token)
 	{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/learner/certificate/'.$member_certificate_id.'/download'),
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/organisation/documents/list'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -67,7 +67,43 @@ class LearnerRepository {
 
 		$data = $response->get_data();
 
-		return $data->certificate_url;
+		return $data;
+	}
+	
+	public function required_document_list(VO\Token $token)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/organisation/required/documents/list'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function member_enrolment_certificate(VO\Token $token, VO\EnrolmentID $enrolment_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/ennrolment/'.$enrolment_id.'/certificate/get'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
 	}
 
 	public function certificates(VO\Token $token)
@@ -85,7 +121,7 @@ class LearnerRepository {
 
 		$data = $response->get_data();
 
-		return $data->certificates;
+		return $data;
 	}
 
 	public function profile_update(

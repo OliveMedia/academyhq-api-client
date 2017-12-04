@@ -610,27 +610,21 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_document_detials = $learner_repository->member_documents(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
-### 2> Fetch Certificate
+### 2> Fetch Member Enrolment Certificate
 <pre>
-	/*@return certificate std object */
-  	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificate*/
-  	$certificate = $learner_repository->certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
+	/*@return member_enrolment_certificate std object */
+  	$member_enrolment_certificate = $learner_repository->member_enrolment_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EnrolmentID('your_enrolment_id'));
 </pre>
 
-### 3> Download Certificate
-<pre>
-	/*@return certificate_url */
-  	$certificate_url = $learner_repository->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('member_certificate_id'));
-</pre>
-
-### 4> Fetch All Certicates
+### 3> Fetch All Certicates
 <pre>
 	/*@return certificates std object */
   	/* certificate std object will contain id, course, member, certificate, enrolment_succeeded_at, expire_at of certificates*/
   	$certificates = $learner_repository->certificates(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
-### 5> Edit Profile
+
+### 4> Edit Profile
 <pre>
 	/*@return member_id of editied profile*/
 	$profile = $learner_repository->profile_update(
@@ -649,9 +643,30 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 6> View Profile
+### 5> View Profile
 <pre>
 	/*@return member_profile_details std object */
   	/* member_profile_details std object will contain id, pub_id, first_name, last_name, email, mobile_number, date_of_birth, gender, address of member_profile_details*/
   	$member_profile_details = $learner_repository->get_profile(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
+### 6> Fetch All Menmber Documents
+<pre>
+	/*@return member_documents_details std object */
+  	/* member_document_details std object of member_documents_details*/
+  	$member_document_detials = $learner_repository->member_document_details(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberDocuementID('your_member_document_id'));
+</pre>
+
+### 7> Fetch All Documents
+<pre>
+	/*@return documents_details std object */
+  	/* document_details std object of documents_details*/
+  	$document_detials = $learner_repository->documents_list(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
+### 8> Fetch All Required Documents
+<pre>
+	/*@return documents_details std object */
+  	/* document_details std object of documents_details*/
+  	$document_detials = $learner_repository->required_document_list(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
