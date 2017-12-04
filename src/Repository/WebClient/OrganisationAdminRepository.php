@@ -594,7 +594,7 @@ class OrganisationAdminRepository {
 
 	public function edit_apprenticeship(
 		VO\Token $token,
-		VO\ApprenticeshipID $apprenticeship_id
+		VO\ApprenticeshipID $apprenticeship_id,
 		VO\Integer $occupation = null,
 		VO\Integer $industry = null,
 		VO\Integer $sector = null,
