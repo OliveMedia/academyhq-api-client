@@ -124,6 +124,24 @@ class LearnerRepository {
 		return $data;
 	}
 
+	public function downlaod_certificate(VO\Token $token, VO\MemberCertificateID $member_certificate_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/certificate/'.$member_certificate_id.'/download'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function profile_update(
 		VO\Token $token,
 		VO\PublicID $pub_id = null,
