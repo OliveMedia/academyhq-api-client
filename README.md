@@ -730,6 +730,49 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 21> Create Apprenticeship
+<pre>
+	/*@return apprenticeship_details of created apprenticeship*/
+	$apprenticeship_details = $organisation_admin_repository->create_apprenticeship(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_employer"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_sector"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_main_activity"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_industry"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_number_of_qualified_person_in_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_contact_person"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_verifier"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_mentor"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_submitted"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_approved"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_declined"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_site_visited")
+	);
+</pre>
+
+### 21> Edit Apprenticeship
+<pre>
+	/*@return apprenticeship_details of updated apprenticeship*/
+	$apprenticeship_details = $organisation_admin_repository->edit_apprenticeship(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ApprenticeshipID("your_apprenticeship_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_sector"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_main_activity"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_industry"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_number_of_qualified_person_in_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_contact_person"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_verifier"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_mentor"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_submitted"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_approved"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_declined"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_site_visited"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_confirmed_as_occupation")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Membr Documents
