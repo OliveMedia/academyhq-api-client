@@ -292,7 +292,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ## Using Auth Repository
 
-### 1> Loign
+### 1> Login
 <pre>
  	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
 	$login = $auth_repository->login(
