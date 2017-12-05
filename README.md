@@ -800,7 +800,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return member_id of editied profile*/
 	$profile = $learner_repository->profile_update(
-		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id"),
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
 		new \AcademyHQ\API\ValueObjects\Email("your_email"),
@@ -848,4 +848,30 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@return certifiacte_url std object */
   	/* document_details std object of documents_details*/
   	$certifiacte_url = $learner_repository->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('your_member_certificate_id'));
+</pre>
+
+## Using ETBAO Repository
+
+### 1> Create Site Visit
+<pre>
+	/*@return site_visit std object */
+  	$site_visit = $etbao_repository->create_site_visit(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_employer_id"),
+		new \AcademyHQ\API\ValueObjects\EtbID("your_etb_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_booked_at")
+	);
+</pre>
+
+### 2> Edit Site Visit
+<pre>
+	/*@return site_visit of updated site_visit std object */
+  	$site_visit = $etbao_repository->create_site_visit(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_site_visit_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_booked_at")
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_visited"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_site_visited_at")
+	);
 </pre>
