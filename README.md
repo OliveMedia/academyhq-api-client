@@ -770,7 +770,11 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("your_is_approved"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_is_declined"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_is_site_visited"),
-		new \AcademyHQ\API\ValueObjects\Integer("your_is_confirmed_as_occupation")
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_confirmed_as_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_appealed_to_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_approved_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_rejected_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_site_visit_booked")
 	);
 </pre>
 

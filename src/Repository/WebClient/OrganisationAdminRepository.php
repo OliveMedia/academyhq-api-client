@@ -612,7 +612,11 @@ class OrganisationAdminRepository {
 		VO\Integer $is_approved = null,
 		VO\Integer $is_declined = null,
 		VO\Integer $is_site_visited = null,
-		VO\Integer $is_confirmed_as_occupation = null
+		VO\Integer $is_confirmed_as_occupation = null,
+		VO\Integer $is_appealed_to_solas_admin = null,
+		VO\Integer $is_approved_by_solas_admin = null,
+		VO\Integer $is_rejected_by_solas_admin = null,
+		VO\Integer $is_site_visit_booked = null,
 	){
 
 		$request = new Request(
@@ -678,6 +682,22 @@ class OrganisationAdminRepository {
 
 		if($is_confirmed_as_occupation) {
 			$request_parameters['is_confirmed_as_occupation'] = $is_confirmed_as_occupation->__toInteger();
+		}
+
+		if($is_appealed_to_solas_admin) {
+			$request_parameters['is_appealed_to_solas_admin'] = $is_appealed_to_solas_admin->__toInteger();
+		}
+
+		if($is_approved_by_solas_admin) {
+			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toInteger();
+		}
+
+		if($is_rejected_by_solas_admin) {
+			$request_parameters['is_rejected_by_solas_admin'] = $is_rejected_by_solas_admin->__toInteger();
+		}
+
+		if($is_site_visit_booked) {
+			$request_parameters['is_site_visit_booked'] = $is_site_visit_booked->__toInteger();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
