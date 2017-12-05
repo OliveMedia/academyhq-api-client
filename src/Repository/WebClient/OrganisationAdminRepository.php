@@ -288,15 +288,15 @@ class OrganisationAdminRepository {
 
 	public function create_apprenticeship(
 		VO\Token $token,
-		VO\Integer $employer,
-		VO\Integer $occupation,
-		VO\Integer $sector,
-		VO\Integer $main_activity,
-		VO\Integer $industry,
+		VO\Integer $employer_id,
+		VO\Integer $occupation_id,
+		VO\Integer $sector_id,
+		VO\Integer $main_activity_id,
+		VO\Integer $industry_id,
 		VO\Integer $number_of_qualified_person_in_occupation,
-		VO\Integer $verifier,
-		VO\Integer $contact_person,
-		VO\Integer $mentor,
+		VO\Integer $verifier_id,
+		VO\Integer $contact_person_id,
+		VO\Integer $mentor_id,
 		VO\Integer $is_submitted = null,
 		VO\Integer $is_approved = null,
 		VO\Integer $is_declined = null,
@@ -313,15 +313,15 @@ class OrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'employer' => $employer->__toInteger(),
-			'occupation' => $occupation->__toInteger(),
-			'sector' => $sector->__toInteger(),
-			'main_activity' => $main_activity->__toInteger(),
-			'industry' => $industry->__toInteger(),
+			'employer_id' => $employer_id->__toInteger(),
+			'occupation_id' => $occupation_id->__toInteger(),
+			'sector_id' => $sector_id->__toInteger(),
+			'main_activity_id' => $main_activity_id->__toInteger(),
+			'industry_id' => $industry_id->__toInteger(),
 			'number_of_qualified_person_in_occupation' => $number_of_qualified_person_in_occupation->__toInteger(),
-			'verifier' => $verifier->__toInteger(),
-			'contact_person' => $contact_person->__toInteger(),
-			'mentor' => $mentor->__toInteger()
+			'verifier_id' => $verifier_id->__toInteger(),
+			'contact_person_id' => $contact_person_id->__toInteger(),
+			'mentor_id' => $mentor_id->__toInteger()
 		);
 
 		if($is_submitted) {
@@ -412,15 +412,16 @@ class OrganisationAdminRepository {
 
 	public function list_apprenticeships(
 		VO\Token $token,
+		VO\Integer $employer_id,
 		VO\Integer $current_page = null,
-		VO\Integer $occupation = null,
-		VO\Integer $industry = null,
-		VO\Integer $sector = null,
-		VO\Integer $main_activity = null,
+		VO\Integer $occupation_id = null,
+		VO\Integer $industry_id = null,
+		VO\Integer $sector_id = null,
+		VO\Integer $main_activity_id = null,
 		VO\Integer $number_of_qualified_person_in_occupation = null,
-		VO\Integer $contact_person = null,
-		VO\Integer $verifier = null,
-		VO\Integer $mentor = null,
+		VO\Integer $contact_person_id = null,
+		VO\Integer $verifier_id = null,
+		VO\Integer $mentor_id = null,
 		VO\Integer $is_submitted = null,
 		VO\Integer $is_approved = null,
 		VO\Integer $is_declined = null,
@@ -439,40 +440,44 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
+		$request_parameters = array(
+			'employer_id' => $employer_id->__toInteger()
+		);
+
 		if($current_page) {
 			$request_parameters['current_page'] = $current_page->__toInteger();
 		}
 
-		if($occupation) {
-			$request_parameters['occupation'] = $occupation->__toInteger();
+		if($occupation_id) {
+			$request_parameters['occupation_id'] = $occupation_id->__toInteger();
 		}
 
-		if($industry) {
-			$request_parameters['industry'] = $industry->__toInteger();
+		if($industry_id) {
+			$request_parameters['industry_id'] = $industry_id->__toInteger();
 		}
 
-		if($sector) {
-			$request_parameters['sector'] = $sector->__toInteger();
+		if($sector_id) {
+			$request_parameters['sector_id'] = $sector_id->__toInteger();
 		}
 
-		if($main_activity) {
-			$request_parameters['main_activity'] = $main_activity->__toInteger();
+		if($main_activity_id) {
+			$request_parameters['main_activity_id'] = $main_activity_id->__toInteger();
 		}
 
 		if($number_of_qualified_person_in_occupation) {
 			$request_parameters['number_of_qualified_person_in_occupation'] = $number_of_qualified_person_in_occupation->__toInteger();
 		}
 
-		if($contact_person) {
-			$request_parameters['contact_person'] = $contact_person->__toInteger();
+		if($contact_person_id) {
+			$request_parameters['contact_person_id'] = $contact_person_id->__toInteger();
 		}
 
-		if($verifier) {
-			$request_parameters['verifier'] = $verifier->__toInteger();
+		if($verifier_id) {
+			$request_parameters['verifier_id'] = $verifier_id->__toInteger();
 		}
 
-		if($mentor) {
-			$request_parameters['mentor'] = $mentor->__toInteger();
+		if($mentor_id) {
+			$request_parameters['mentor_id'] = $mentor_id->__toInteger();
 		}
 
 		if($is_submitted) {
@@ -595,14 +600,14 @@ class OrganisationAdminRepository {
 	public function edit_apprenticeship(
 		VO\Token $token,
 		VO\ApprenticeshipID $apprenticeship_id,
-		VO\Integer $occupation = null,
-		VO\Integer $industry = null,
-		VO\Integer $sector = null,
-		VO\Integer $main_activity = null,
+		VO\Integer $occupation_id = null,
+		VO\Integer $industry_id = null,
+		VO\Integer $sector_id = null,
+		VO\Integer $main_activity_id = null,
 		VO\Integer $number_of_qualified_person_in_occupation = null,
-		VO\Integer $contact_person = null,
-		VO\Integer $verifier = null,
-		VO\Integer $mentor = null,
+		VO\Integer $contact_person_id = null,
+		VO\Integer $verifier_id = null,
+		VO\Integer $mentor_id = null,
 		VO\Integer $is_submitted = null,
 		VO\Integer $is_approved = null,
 		VO\Integer $is_declined = null,
@@ -623,36 +628,36 @@ class OrganisationAdminRepository {
 			$request_parameters['current_page'] = $current_page->__toInteger();
 		}
 
-		if($occupation) {
-			$request_parameters['occupation'] = $occupation->__toInteger();
+		if($occupation_id) {
+			$request_parameters['occupation_id'] = $occupation_id->__toInteger();
 		}
 
-		if($industry) {
-			$request_parameters['industry'] = $industry->__toInteger();
+		if($industry_id) {
+			$request_parameters['industry_id'] = $industry_id->__toInteger();
 		}
 
-		if($sector) {
-			$request_parameters['sector'] = $sector->__toInteger();
+		if($sector_id) {
+			$request_parameters['sector_id'] = $sector_id->__toInteger();
 		}
 
-		if($main_activity) {
-			$request_parameters['main_activity'] = $main_activity->__toInteger();
+		if($main_activity_id) {
+			$request_parameters['main_activity_id'] = $main_activity_id->__toInteger();
 		}
 
 		if($number_of_qualified_person_in_occupation) {
 			$request_parameters['number_of_qualified_person_in_occupation'] = $number_of_qualified_person_in_occupation->__toInteger();
 		}
 
-		if($contact_person) {
-			$request_parameters['contact_person'] = $contact_person->__toInteger();
+		if($contact_person_id) {
+			$request_parameters['contact_person_id'] = $contact_person_id->__toInteger();
 		}
 
-		if($verifier) {
-			$request_parameters['verifier'] = $verifier->__toInteger();
+		if($verifier_id) {
+			$request_parameters['verifier_id'] = $verifier_id->__toInteger();
 		}
 
-		if($mentor) {
-			$request_parameters['mentor'] = $mentor->__toInteger();
+		if($mentor_id) {
+			$request_parameters['mentor_id'] = $mentor_id->__toInteger();
 		}
 
 		if($is_submitted) {
