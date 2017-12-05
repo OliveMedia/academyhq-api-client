@@ -18,6 +18,7 @@ class OrganisationAdminRepository {
 
 	public function edit_organisation(
 		VO\Token $token,
+		VO\OrganisationID $organisation_id,
 		VO\StringVO $name = null,
 		VO\Integer $number_of_employees = null,
 		VO\WebAddress $web_address = null ,
@@ -41,6 +42,10 @@ class OrganisationAdminRepository {
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toInteger()
+		);
 
 		if($name) {
 			$request_parameters['name'] = $name->__toString();
