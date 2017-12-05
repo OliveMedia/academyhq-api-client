@@ -18,7 +18,7 @@ class OrganisationAdminRepository {
 
 	public function edit_organisation(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id,
+		VO\Integer $organisation_id,
 		VO\StringVO $name = null,
 		VO\Integer $number_of_employees = null,
 		VO\WebAddress $web_address = null ,
@@ -621,7 +621,7 @@ class OrganisationAdminRepository {
 		VO\Integer $is_appealed_to_solas_admin = null,
 		VO\Integer $is_approved_by_solas_admin = null,
 		VO\Integer $is_rejected_by_solas_admin = null,
-		VO\Integer $is_site_visit_booked = null,
+		VO\Integer $is_site_visit_booked = null
 	){
 
 		$request = new Request(

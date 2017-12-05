@@ -506,7 +506,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@returns organisation_details of editied sub organisation*/
 	$organisation = $organisation_admin_repository->edit_organisation(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
-		new \AcademyHQ\API\ValueObjects\OrganisationID('your_organisation_id'),
+		new \AcademyHQ\API\ValueObjects\Integer('your_organisation_id'),
 		new \AcademyHQ\API\ValueObjects\Integer(1),
 		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation"),
 		new \AcademyHQ\API\ValueObjects\WebAddress("http://example.com"),
