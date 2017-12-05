@@ -875,3 +875,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("your_site_visited_at")
 	);
 </pre>
+
+## Using ETB Admin Repository
+
+### 1> Assign AO To Apprenticeship Application
+<pre>
+	/*@return updated apprenticeship_details std object */
+  	$apprenticeship = $etbadmin_repository->assign_ao_to_apprenticeship_application(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ApprenticeshipID("your_apprenticeship_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_employer_id")
+	);
+</pre>
