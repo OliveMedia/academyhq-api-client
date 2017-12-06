@@ -51,4 +51,40 @@ class MemberProgramRepository {
 
 		return $data;
 	}
+
+	public function member_journey_list(VO\Token $token, VO\MemberID $member_id, VO\OccupationID $occupation_id){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/member/'.$member_id.'/occupation/'.$occupation_id.'/journey/list'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function phase_details(VO\Token $token, VO\MemberID $member_id, VO\ProgramID $program_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/member/'.$member_id.'/phase/'.$program_id.'/details'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

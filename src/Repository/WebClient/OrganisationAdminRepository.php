@@ -718,7 +718,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/occupations'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -736,7 +736,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/occupation/'.$occupation_id.'/details'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -754,7 +754,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/industries'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -772,7 +772,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/industry/'.$industry_id.'/details'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -790,7 +790,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/sectors'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -808,7 +808,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/sector/'.$sector_id.'/details'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -826,7 +826,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/main_activities'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -844,7 +844,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/main_activity/'.$main_activity_id.'/details'),
-			new VO\HTTP\Method('PUT')
+			new VO\HTTP\Method('GET')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
