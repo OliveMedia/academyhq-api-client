@@ -785,6 +785,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 23> Get Member IDs
+<pre>
+	/*@return member_ids std object*/
+	$member_ids = $organisation_admin_repository->get_member_ids(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("your_organisation_id")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Membr Documents

@@ -133,7 +133,8 @@ class OrganisationAdminRepository {
 
 		$request_parameters = array(
 			'organisation_id' => $organisation_id->__toInteger(),
-			'name' => $name->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString()
 		);
 
 		if($role) {
@@ -844,6 +845,24 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/main_activity/'.$main_activity_id.'/details'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function get_member_ids(vo\Token $token, VO\OrganisationID $organisation_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/org/'.$organisation_id.'/member/ids'),
 			new VO\HTTP\Method('GET')
 		);
 
