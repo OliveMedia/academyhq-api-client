@@ -908,3 +908,31 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("your_employer_id")
 	);
 </pre>
+
+### 2> Get My ETB Authorising Officer
+<pre>
+	*@return etb_authorizing_officer_details std object */
+  	$etb_authorizing_officer_details = $etbadmin_repository->get_etb_admins(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
+### 2> Get My ETB
+<pre>
+	*@return my_etb std object */
+  	$my_etb = $etbadmin_repository->get_my_etb(new \AcademyHQ\API\ValueObjects\Token('your token'));
+</pre>
+
+### 2> Fetch All Apprenticeships
+<pre>
+	*@return apprenticeships std object */
+  	$apprenticeships = $etbadmin_repository->fetch_all_apprenticeships(
+  	new \AcademyHQ\API\ValueObjects\Token('your token'),
+  	new \AcademyHQ\API\ValueObjects\Integer("is_new_apprenticeships_application"),
+  	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_approved"),
+  	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_rejected"),
+  	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_booked"),
+  	new \AcademyHQ\API\ValueObjects\Integer("current_page"),
+  	new \AcademyHQ\API\ValueObjects\Integer("set_per_page"),
+  	new \AcademyHQ\API\ValueObjects\StringVO("order_by_field"),
+  	new \AcademyHQ\API\ValueObjects\StringVO("order_by_direction")
+  	);
+</pre>
