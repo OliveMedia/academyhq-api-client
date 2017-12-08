@@ -9,8 +9,7 @@ use AcademyHQ\API\Common\Credentials;
 
 class MemberProgramRepository {
 
-	// private $base_url = 'https://api.academyhq.com/api/v2/web/client';
-	private $base_url = 'https://api.sandbox.academyhq.olive.media/api/v2/web/client';
+	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
 	
 	public function __construct(Credentials $credentials)
 	{

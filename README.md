@@ -505,6 +505,12 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_journey = $member_program_repository->member_journey_list(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'), new \AcademyHQ\API\ValueObjects\OccupationID('your_occupation_id'));
 </pre>
 
+### 4> Fetch Phase Details
+<pre>
+	/*@return phase_details std object */
+  	$phase_details = $member_program_repository->phase_details(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'), new \AcademyHQ\API\ValueObjects\ProgramID('your_program_id'));
+</pre>
+
 ## Using Organisation Admin Repository
 
 ### 1> Organisation Edit
