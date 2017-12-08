@@ -109,8 +109,6 @@ class NotificationRepository {
 
 		$notification_types = $notification_type_array->__toArray();
 
-		$attachment_ids = $attachment_id_array->__toArray();
-
 		$request_parameters = array(
 			'members' => $member_ids,
 			'notification_message' => $notification_message->__toString(),
