@@ -932,6 +932,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	*@return apprenticeships std object */
   	$apprenticeships = $etbadmin_repository->fetch_all_apprenticeships(
   	new \AcademyHQ\API\ValueObjects\Token('your token'),
+  	new \AcademyHQ\API\ValueObjects\Integer("employer_id"),
   	new \AcademyHQ\API\ValueObjects\Integer("is_new_apprenticeships_application"),
   	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_approved"),
   	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_rejected"),

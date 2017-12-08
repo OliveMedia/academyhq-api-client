@@ -60,6 +60,7 @@ class ETBAdminRepository {
 
     public function fetch_all_apprenticeships(
         VO\Token $token,
+        VO\Integer $employer_id = null,
         VO\Integer $is_new_apprenticeships_application = null,
         VO\Integer $is_site_visit_approved = null,
         VO\Integer $is_site_visit_rejected = null,
@@ -80,6 +81,9 @@ class ETBAdminRepository {
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array();
+
+        if (!is_null($employer_id))
+            $request_parameters['employer_id'] = $employer_id->__toInteger();
 
         if (!is_null($is_new_apprenticeships_application))
             $request_parameters['is_new_apprenticeships_application'] = $is_new_apprenticeships_application->__toInteger();
