@@ -66,8 +66,8 @@ class ETBAdminRepository {
         VO\Integer $is_site_visit_booked = null,
         VO\Integer $current_page = null,
         VO\Integer $set_per_page = null,
-        VO\Integer $order_by_field = null,
-        VO\Integer $order_by_direction = null
+        VO\StringVO $order_by_field = null,
+        VO\StringVO $order_by_direction = null
     ){
 
         $request = new Request(
@@ -100,10 +100,10 @@ class ETBAdminRepository {
             $request_parameters['set_per_page'] = $set_per_page->__toInteger();
 
         if (!is_null($order_by_field))
-            $request_parameters['order_by_field'] = $order_by_field->__toInteger();
+            $request_parameters['order_by_field'] = $order_by_field->__toString();
 
         if (!is_null($order_by_direction))
-            $request_parameters['order_by_direction']  = $order_by_direction->__toInteger();
+            $request_parameters['order_by_direction']  = $order_by_direction->__toString();
 
         $response = $request->send($request_parameters, $header_parameters);
 
