@@ -87,4 +87,79 @@ class MemberProgramRepository {
 
 		return $data;
 	}
+
+	public function create_program_evidence(
+		VO\Token $token,
+		VO\ProgramID $program_id,
+		VO\MemberID $member_id,
+		VO\OccupationID $occupation_id,
+		VO\Integer $program_unit_id,
+		VO\Address $address,
+		VO\Latitude $latitude,
+		VO\Longitude $longitude,
+		VO\StringVO $evidence_image
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/create/program/evidence'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'program_id' => $program_id->__toString(),
+			'member_id' => $member_id->__toString(),
+			'occupation_id' => $occupation_id->__toString(),
+			'program_unit_id' => $program_unit_id->__toInteger(),
+			'address' => $address->__toString(),
+			'latitude' => $latitude->__toString(),
+			'longitude' => $longitude->__toString(),
+			'evidence_image' => $evidence_image->__toString()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function program_evidence(VO\Token $token, VO\ID $program_evidence_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/get/program/evidence/'.$program_evidence_id),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function fetch_member_journey(VO\Token $token, VO\MemberID $member_id){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/fetch/member/'.$member_id.'/journey'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

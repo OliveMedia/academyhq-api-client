@@ -511,6 +511,34 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$phase_details = $member_program_repository->phase_details(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'), new \AcademyHQ\API\ValueObjects\ProgramID('your_program_id'));
 </pre>
 
+### 5> Create Program Evidence
+<pre>
+	/*@returns program_evidence of created program_evidence/
+	$program_evidence = $member_program_repository->edit_organisation(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		new \AcademyHQ\API\ValueObjects\ProgramID('your_program_id'),
+		new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'),
+		new \AcademyHQ\API\ValueObjects\OccupationID("your_occupation_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_program_unit_id"),
+		new \AcademyHQ\API\ValueObjects\Address("address"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_evidence_image")
+	);
+</pre>
+
+### 6> Fetch Program Evidence
+<pre>
+	/*@return program_evidence_details std object */
+  	$program_evidence_details = $member_program_repository->program_evidence(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\ID('your_program_evidence_id'));
+</pre>
+
+### 7> Fetch Member Journey
+<pre>
+	/*@return member_journey_details std object */
+  	$member_journey_details = $member_program_repository->fetch_member_journey(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'));
+</pre>
+
 ## Using Organisation Admin Repository
 
 ### 1> Organisation Edit
