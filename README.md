@@ -508,7 +508,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 4> Fetch Phase Details
 <pre>
 	/*@return phase_details std object */
-  	$phase_details = $member_program_repository->phase_details(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'), new \AcademyHQ\API\ValueObjects\ProgramID('your_program_id'));
+  	$phase_details = $member_program_repository->phase_details(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'), new \AcademyHQ\API\ValueObjects\ID('your_member_program_id'));
 </pre>
 
 ### 5> Create Program Evidence

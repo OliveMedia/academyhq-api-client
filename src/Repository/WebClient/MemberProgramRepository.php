@@ -70,12 +70,12 @@ class MemberProgramRepository {
 		return $data;
 	}
 
-	public function phase_details(VO\Token $token, VO\MemberID $member_id, VO\ProgramID $program_id)
+	public function phase_details(VO\Token $token, VO\ID $member_program_id)
 	{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/member_program/member/'.$member_id.'/phase/'.$program_id.'/details'),
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/member/phase/'.$member_program_id.'/details'),
 			new VO\HTTP\Method('GET')
 		);
 
