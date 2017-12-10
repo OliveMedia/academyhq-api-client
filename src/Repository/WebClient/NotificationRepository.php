@@ -112,9 +112,13 @@ class NotificationRepository {
 		$request_parameters = array(
 			'members' => $member_ids,
 			'notification_message' => $notification_message->__toString(),
-			'notification_types' => $notification_types,
-			'attachments' => $attachment_ids
+			'notification_types' => $notification_types
 		);
+
+		if($attachment_id_array) {
+			$attachment_ids = $attachment_id_array->__toArray();
+			$request_parameters['attachments'] = $attachment_ids;
+		}
 
 		$response = $request->send($request_parameters, $header_parameters);
 
