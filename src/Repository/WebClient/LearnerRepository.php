@@ -236,4 +236,40 @@ class LearnerRepository {
 
 		return $data->member_profile_details;
 	}
+
+	public function enrolment_launch_url(VO\EnrolmentID $enrolment_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/enrolment/'.$enrolment_id.'/launch/url'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data->member_profile_details;
+	}
+
+	public function enrolment_callback(VO\EnrolmentID $enrolment_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/enrolment/'.$enrolment_id.'/callback'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data->member_profile_details;
+	}
 }

@@ -905,6 +905,18 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$certifiacte_url = $learner_repository->download_certificate(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberCertificateID('your_member_certificate_id'));
 </pre>
 
+### 10> Enrolment Launch URL
+<pre>
+	/*@return enrolment std object */
+  	$enrolment = $learner_repository->enrolment_launch_url(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EnrolmentID('your_enrolment_id'));
+</pre>
+
+### 10> Enrolment Callback
+<pre>
+	/*@return enrolment std object */
+  	$enrolment = $learner_repository->enrolment_callback(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EnrolmentID('your_enrolment_id'));
+</pre>
+
 ## Using ETBAO Repository
 
 ### 1> Create Site Visit
