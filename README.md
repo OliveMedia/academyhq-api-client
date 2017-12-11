@@ -514,7 +514,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 5> Create Program Evidence
 <pre>
 	/*@returns program_evidence of created program_evidence/
-	$program_evidence = $member_program_repository->edit_organisation(
+	$program_evidence = $member_program_repository->create_program_evidence(
 		new \AcademyHQ\API\ValueObjects\Token("token"),
 		new \AcademyHQ\API\ValueObjects\ProgramID('your_program_id'),
 		new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'),
@@ -558,7 +558,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("your_latitude"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_longitude"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_trade_name"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_commence")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_commence"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_organisation_logo")
 	);
 </pre>
 

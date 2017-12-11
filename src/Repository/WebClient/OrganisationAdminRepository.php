@@ -31,7 +31,8 @@ class OrganisationAdminRepository {
 		VO\StringVO $latitude = null,
 		VO\StringVO $longitude = null,
 		VO\StringVO $trade_name = null,
-		VO\StringVO $date_of_commence = null
+		VO\StringVO $date_of_commence = null,
+		VO\StringVO $logo = null
 	){
 
 		$request = new Request(
@@ -97,6 +98,10 @@ class OrganisationAdminRepository {
 
 		if($date_of_commence) {
 			$request_parameters['date_of_commence'] = $date_of_commence->__toString();
+		}
+
+		if($logo) {
+			$request_parameters['logo'] = $logo->__toString();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
