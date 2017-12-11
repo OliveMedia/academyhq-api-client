@@ -208,7 +208,7 @@ class OrganisationAdminRepository {
 		VO\StringVO $eyetestdataimage = null,
 		VO\Integer $mimimum_educational_document_id = null,
 		VO\StringVO $minimumeducationaldataimage = null,
-		VO\Integer $singnature = null,
+		VO\Integer $signature = null,
 		VO\StringVO $signaturedataimage = null
 	){
 
@@ -251,7 +251,7 @@ class OrganisationAdminRepository {
 
 		if($eye_test_document_id) {
 			$request_parameters['eye_test_document_id'] = $eye_test_document_id->__toInteger();
-			$request_parameters['eyetestdataimage'] = $eye_test_expiry->__toString();
+			$request_parameters['eyetestdataimage'] = $eyetestdataimage->__toString();
 		}
 
 		if($mimimum_educational_document_id) {
