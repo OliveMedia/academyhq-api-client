@@ -935,12 +935,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 2> Edit Site Visit
 <pre>
 	/*@return site_visit of updated site_visit std object */
-  	$site_visit = $etbao_repository->create_site_visit(
+  	$site_visit = $etbao_repository->edit_site_visit(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_site_visit_id"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_booked_at")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_booked_at"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_is_visited"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_site_visited_at")
+	);
+</pre>
+
+### 3> Create Apprenticeship Checklist
+<pre>
+	/*@return apprentice_checklist std object */
+  	$apprentice_checklist = $etbao_repository->create_apprenticeship_checklist(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\StringVO("json_of_checklist_questions"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id")
 	);
 </pre>
 

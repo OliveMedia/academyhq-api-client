@@ -77,4 +77,31 @@ class ETBAORepository {
 
 		return $data;
 	}
+
+	public function create_apprenticeship_checklist(
+		VO\Token $token,
+		VO\StringVO $checklist_questions,
+		VO\Integer $apprenticeship_id
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/etb/authorising_officer/create/apprenticeship/checklist'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'checklist_questions' => $checklist_questions->__toString(),
+			'apprenticeship_id' => $apprenticeship_id->__toInteger()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
