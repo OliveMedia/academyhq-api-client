@@ -876,6 +876,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 23> Get Site Visit
+<pre>
+	/*@return site_visits std object*/
+	$site_visits = $organisation_admin_repository->get_site_visits(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("your_organisation_id")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Membr Documents
