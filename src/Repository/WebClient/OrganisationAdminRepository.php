@@ -192,7 +192,7 @@ class OrganisationAdminRepository {
 	public function create_candidate(
 		VO\Token $token,
 		VO\Integer $organisation_id,
-		VO\Integer $occupation_id,
+		VO\Integer $apprenticeship_id,
 		VO\PublicID $pub_id,
 		VO\StringVO $date_of_birth,
 		VO\Name $name,
@@ -214,7 +214,8 @@ class OrganisationAdminRepository {
 		VO\Integer $mimimum_educational_document_id = null,
 		VO\StringVO $minimumeducationaldataimage = null,
 		VO\Integer $signature = null,
-		VO\StringVO $signaturedataimage = null
+		VO\StringVO $signaturedataimage = null,
+		VO\StringVO $image = null
 	){
 
 		$request = new Request(
@@ -228,7 +229,7 @@ class OrganisationAdminRepository {
 
 		$request_parameters = array(
 			'organisation_id' => $organisation_id->__toInteger(),
-			'occupation_id' => $occupation_id->__toInteger(),
+			'apprenticeship_id' => $apprenticeship_id->__toInteger(),
 			'pub_id' => $pub_id->__toString(),
 			'date_of_birth' => $date_of_birth->__toString(),
 			'first_name' => $name->get_first_name()->__toString(),
@@ -268,6 +269,165 @@ class OrganisationAdminRepository {
 			$request_parameters['signature'] = $signature->__toInteger();
 			$request_parameters['signaturedataimage'] = $signaturedataimage->__toString();
 		}
+
+		if($image) {
+			$request_parameters['image'] = $image->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function edit_candidate(
+		VO\Token $token,
+		VO\Integer $member_id,
+		VO\Integer $apprenticeship_id = null,
+		VO\PublicID $pub_id = null,
+		VO\StringVO $date_of_birth = null,
+		VO\Name $name = null,
+		VO\StringVO $gender = null,
+		VO\StringVO $country_code = null,
+		VO\StringVO $mobile_number = null,
+		VO\Email $email = null,
+		VO\Integer $is_approved_by_etb_ao = null,
+		VO\Integer $is_approved_by_solas_admin = null,
+		VO\StringVO $street = null,
+		VO\StringVO $city = null,
+		VO\StringVO $state = null,
+		VO\StringVO $country = null,
+		VO\StringVO $postal_code = null,
+		VO\Integer $eye_test_document_id = null,
+		VO\StringVO $eyetestdataimage = null,
+		VO\Integer $mimimum_educational_document_id = null,
+		VO\StringVO $minimumeducationaldataimage = null,
+		VO\Integer $signature = null,
+		VO\StringVO $signaturedataimage = null,
+		VO\StringVO $image = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/edit/candidate'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'member_id' => $organisation_id->__toInteger()
+		);
+
+		if($apprenticeship_id) {
+			$request_parameters['apprenticeship_id'] = $apprenticeship_id->__toInteger();
+		}
+
+		if($pub_id) {
+			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+
+		if($date_of_birth) {
+			$request_parameters['date_of_birth'] = $date_of_birth->__toString();
+		}
+
+		if($name) {
+			$request_parameters['first_name'] = $name->get_first_name()->__toString();
+			$request_parameters['last_name'] = $name->get_last_name()->__toString();
+		}
+
+		if($gender) {
+			$request_parameters['gender'] = $gender->__toString();
+		}
+
+		if($country_code) {
+			$request_parameters['country_code'] = $country_code->__toString();
+		}
+
+		if($email) {
+			$request_parameters['email'] = $email->__toString();
+		}
+
+		if($is_approved_by_etb_ao) {
+			$request_parameters['is_approved_by_etb_ao'] = $is_approved_by_etb_ao->__toInteger();
+		}
+
+		if($is_approved_by_solas_admin) {
+			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toString();
+		}
+
+		if($street) {
+			$request_parameters['street'] = $street->__toString();
+		}
+
+		if($city) {
+			$request_parameters['city'] = $city->__toString();
+		}
+
+		if($state) {
+			$request_parameters['state'] = $state->__toString();
+		}
+
+		if($country) {
+			$request_parameters['country'] = $country->__toString();
+		}
+
+		if($postal_code) {
+			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		if($eye_test_document_id) {
+			$request_parameters['eye_test_document_id'] = $eye_test_document_id->__toInteger();
+			$request_parameters['eyetestdataimage'] = $eyetestdataimage->__toString();
+		}
+
+		if($mimimum_educational_document_id) {
+			$request_parameters['mimimum_educational_document_id'] = $mimimum_educational_document_id->__toInteger();
+			$request_parameters['minimumeducationaldataimage'] = $minimumeducationaldataimage->__toString();
+		}
+
+		if($signature) {
+			$request_parameters['signature'] = $signature->__toInteger();
+			$request_parameters['signaturedataimage'] = $signaturedataimage->__toString();
+		}
+
+		if($image) {
+			$request_parameters['image'] = $image->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function get_candidates(
+		VO\Token $token,
+		VO\Integer $employer_id,
+		VO\Integer $is_declined = null,
+		VO\Integer $is_approved_by_etb_ao = null,
+		VO\Integer $is_approved_by_solas_admin = null,
+		VO\Integer $ato_id = null,
+		VO\StringVO $order_by_field = null,
+		VO\StringVO $order_by_direction = null,
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/candidates'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toInteger(),
+			'etb_id' => $etb_id->__toInteger()
+		);
 
 		$response = $request->send($request_parameters, $header_parameters);
 

@@ -589,7 +589,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$member_base = $organisation_admin_repository->create_candidate(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_organisation_id"),
-		new \AcademyHQ\API\ValueObjects\Integer("your_coccupation_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_pub_id"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_birth"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
@@ -611,7 +611,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("your_mimimum_educational_document_id"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_minimum_educational_data_image"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_signature_id"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_signature_data_image")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_signature_data_image"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_image")
 	);
 </pre>
 
@@ -826,6 +827,52 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$member_ids = $organisation_admin_repository->get_member_ids(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\OrganisationID("your_organisation_id")
+	);
+</pre>
+
+### 24> Edit Candatidate
+<pre>
+	/*@returns member_details of updated candidate*/
+	$member_base = $organisation_admin_repository->edit_candidate(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_organisation_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_pub_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_date_of_birth"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_gender"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_country_code"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_mobile_number"),
+		new \AcademyHQ\API\ValueObjects\Email("your_email"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_etb_ao"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_street"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_city"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_state"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_country"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_eye_test_document_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_eye_test_data_image"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_mimimum_educational_document_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_minimum_educational_data_image"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_signature_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_signature_data_image"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_image")
+	);
+</pre>
+
+### 25> Get Candidates
+<pre>
+	/*@returns member_details std object*/
+	$member_base = $organisation_admin_repository->get_candidates(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("employer_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_declined"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_etb_ao"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\Integer("ato_id"),
+		new \AcademyHQ\API\ValueObjects\StringVO("order_by_field"),
+		new \AcademyHQ\API\ValueObjects\StringVO("order_by_direction")
 	);
 </pre>
 
