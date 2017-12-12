@@ -412,7 +412,7 @@ class OrganisationAdminRepository {
 		VO\Integer $is_approved_by_solas_admin = null,
 		VO\Integer $ato_id = null,
 		VO\StringVO $order_by_field = null,
-		VO\StringVO $order_by_direction = null,
+		VO\StringVO $order_by_direction = null
 	){
 
 		$request = new Request(

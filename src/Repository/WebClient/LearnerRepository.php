@@ -273,7 +273,7 @@ class LearnerRepository {
 		return $data->member_profile_details;
 	}
 
-	public function get_member(VToken $token VO\MemberID $member_id)
+	public function get_member(VO\Token $token, VO\MemberID $member_id)
 	{
 		$request = new Request(
 			new GuzzleClient,
