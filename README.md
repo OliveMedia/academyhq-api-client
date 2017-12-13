@@ -910,7 +910,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@returns member_details std object*/
 	$email = $organisation_admin_repository->send_email_to_set_password(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
-		new \AcademyHQ\API\ValueObjects\MemberID("your_member_id")
+		new \AcademyHQ\API\ValueObjects\Integer("your_member_id")
 	);
 </pre>
 

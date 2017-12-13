@@ -1101,13 +1101,13 @@ class OrganisationAdminRepository {
 
 	public function send_email_to_set_password(
 		VO\Token $token,
-		VO\MemberID $member_id
+		VO\Integer $member_id
 	){
 
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/email/to/set/password'),
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/candiate/registration'),
 			new VO\HTTP\Method('POST')
 		);
 
