@@ -1099,4 +1099,29 @@ class OrganisationAdminRepository {
 		return $data;
 	}
 
+	public function send_email_to_set_password(
+		VO\Token $token,
+		VO\MemberID $member_id
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/email/to/set/password'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toInteger()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

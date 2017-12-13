@@ -245,4 +245,32 @@ class EmployerRepository {
 
 		return $data;
 	}
+
+	public function registration_completion_for_candidate(
+		VO\MemberID $member_id,
+		VO\Name $name,
+		VO\Password $password,
+		VO\Password $password_confirmation
+	){
+	$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/candidate/registration/completion'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'password' => $password->__toString(),
+			'password_confirmation' => $password_confirmation->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
