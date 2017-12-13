@@ -141,12 +141,11 @@ class ETBAORepository {
     public function fetch_all_apprenticeships(
         VO\Token $token,
         VO\Integer $employer_id = null,
-        VO\Integer $is_new_apprenticeships_application = null,
-        VO\Integer $is_site_visit_approved = null,
-        VO\Integer $is_site_visit_rejected = null,
-        VO\Integer $is_site_visit_booked = null,
-        VO\Integer $current_page = null,
+        VO\Integer $has_passed = null,
+        VO\Integer $is_booked = null,
+        VO\StringVO $query = null,
         VO\Integer $set_per_page = null,
+        VO\Integer $page = null,
         VO\StringVO $order_by_field = null,
         VO\StringVO $order_by_direction = null
     ){
@@ -165,23 +164,20 @@ class ETBAORepository {
         if (!is_null($employer_id))
             $request_parameters['employer_id'] = $employer_id->__toInteger();
 
-        if (!is_null($is_new_apprenticeships_application))
-            $request_parameters['is_new_apprenticeships_application'] = $is_new_apprenticeships_application->__toInteger();
+        if (!is_null($has_passed))
+            $request_parameters['has_passed'] = $has_passed->__toInteger();
 
-        if (!is_null($is_site_visit_approved))
-            $request_parameters['is_site_visit_approved']  = $is_site_visit_approved->__toInteger();
+        if (!is_null($is_booked))
+            $request_parameters['is_booked']  = $is_booked->__toInteger();
 
-        if (!is_null($is_site_visit_rejected))
-            $request_parameters['is_site_visit_rejected'] = $is_site_visit_rejected->__toInteger();
-
-        if (!is_null($is_site_visit_booked))
-            $request_parameters['is_site_visit_booked'] = $is_site_visit_booked->__toInteger();
-
-        if(!is_null($current_page))
-            $request_parameters['current_page'] = $current_page->__toInteger();
+        if (!is_null($query))
+            $request_parameters['query'] = $query->__toString();
 
         if (!is_null($set_per_page))
             $request_parameters['set_per_page'] = $set_per_page->__toInteger();
+
+        if(!is_null($page))
+            $request_parameters['page'] = $page->__toInteger();
 
         if (!is_null($order_by_field))
             $request_parameters['order_by_field'] = $order_by_field->__toString();

@@ -1047,12 +1047,11 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$apprenticeships = $etbao_repository->fetch_all_apprenticeships(
   	new \AcademyHQ\API\ValueObjects\Token('your token'),
   	new \AcademyHQ\API\ValueObjects\Integer("employer_id"),
-  	new \AcademyHQ\API\ValueObjects\Integer("is_new_apprenticeships_application"),
-  	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_approved"),
-  	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_rejected"),
-  	new \AcademyHQ\API\ValueObjects\Integer("is_site_visit_booked"),
-  	new \AcademyHQ\API\ValueObjects\Integer("current_page"),
+  	new \AcademyHQ\API\ValueObjects\Integer("has_passed"),
+  	new \AcademyHQ\API\ValueObjects\Integer("is_booked"),
+  	new \AcademyHQ\API\ValueObjects\StringVO("query"),
   	new \AcademyHQ\API\ValueObjects\Integer("set_per_page"),
+  	new \AcademyHQ\API\ValueObjects\Integer("page"),
   	new \AcademyHQ\API\ValueObjects\StringVO("order_by_field"),
   	new \AcademyHQ\API\ValueObjects\StringVO("order_by_direction")
   	);
