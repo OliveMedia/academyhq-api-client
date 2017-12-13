@@ -885,6 +885,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 24> Get Apprenticeship Checklist
+<pre>
+	/*@return apprenticeship_checklist std object*/
+	$apprenticeship_checklist = $organisation_admin_repository->apprenticeship_checklist(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("your_aprrenticeship_id")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Membr Documents
@@ -1013,6 +1022,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\StringVO("json_of_checklist_questions"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id")
+	);
+</pre>
+
+### 4> Get Apprenticeship Checklist
+<pre>
+	/*@return apprenticeship_checklist std object*/
+	$apprenticeship_checklist = $etbao_repository->apprenticeship_checklist(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("your_aprrenticeship_id")
 	);
 </pre>
 
