@@ -127,7 +127,7 @@ class ETBAORepository {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url."/etb/admin/get/details"),
+            VO\HTTP\Url::fromNative($this->base_url."/etb/authorising_officer/get/details"),
             new VO\HTTP\Method('GET')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -153,7 +153,7 @@ class ETBAORepository {
         $request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/etb/admin/fetch/apprenticeships'),
+			VO\HTTP\Url::fromNative($this->base_url.'/etb/authorising_officer/fetch/apprenticeships'),
 			new VO\HTTP\Method('POST')
 		);
 
