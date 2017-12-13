@@ -932,7 +932,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("your_state"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_city"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_street"),
-		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code")
+		new \AcademyHQ\API\ValueObjects\StringVO("your_postal_code"),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_image")
 	);
 </pre>
 

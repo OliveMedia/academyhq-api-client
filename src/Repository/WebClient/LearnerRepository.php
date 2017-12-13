@@ -154,7 +154,8 @@ class LearnerRepository {
 		VO\StringVO $state = null,
 		VO\StringVO $city = null,
 		VO\StringVO $street = null,
-		VO\StringVO $postal_code = null
+		VO\StringVO $postal_code = null,
+		VO\StringVO $image = null
 	)
 	{
 		$request = new Request(
@@ -209,6 +210,10 @@ class LearnerRepository {
 
 		if($postal_code) {
 			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		if($image) {
+			$request_parameters['image'] = $image->__toString();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
