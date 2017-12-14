@@ -257,7 +257,7 @@ class LearnerRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_profile_details;
+		return $data->launch_url;
 	}
 
 	public function enrolment_callback(VO\Token $token, VO\EnrolmentID $enrolment_id)
@@ -275,7 +275,7 @@ class LearnerRepository {
 
 		$data = $response->get_data();
 
-		return $data->member_profile_details;
+		return $data->enrolment;
 	}
 
 	public function get_member(VO\Token $token, VO\MemberID $member_id)
