@@ -242,7 +242,7 @@ class LearnerRepository {
 		return $data->member_profile_details;
 	}
 
-	public function enrolment_launch_url(VO\Token $token, VO\EnrolmentID $enrolment_id)
+	public function enrolment_launch_url(VO\Token $token, VO\EnrolmentID $enrolment_id, VO\HTTP\Url $callback_url)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -251,9 +251,11 @@ class LearnerRepository {
 			new VO\HTTP\Method('GET')
 		);
 
+		$callback_url = $callback_url->__toString();
+
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send(null,$header_parameters);
+		$response = $request->send(array('callback_url' => $callback_url),$header_parameters);
 
 		$data = $response->get_data();
 
