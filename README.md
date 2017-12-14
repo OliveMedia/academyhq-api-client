@@ -1076,6 +1076,20 @@ Client Library that allow third party to access AcademyHQ APIs.
   	);
 </pre>
 
+### 6> Get Candidates
+<pre>
+	/*@returns member_details std object*/
+	$member_details = $etbao_repository->get_candidates(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("employer_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_declined"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_etb_ao"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\StringVO("order_by_field"),
+		new \AcademyHQ\API\ValueObjects\StringVO("order_by_direction")
+	);
+</pre>
+
 ## Using ETB Admin Repository
 
 ### 1> Assign AO To Apprenticeship Application

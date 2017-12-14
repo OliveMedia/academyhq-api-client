@@ -190,4 +190,56 @@ class ETBAORepository {
         return $data;
 
     }
+
+    public function get_candidates(
+		VO\Token $token,
+		VO\Integer $employer_id = null,
+		VO\Integer $is_declined = null,
+		VO\Integer $is_approved_by_etb_ao = null,
+		VO\Integer $is_approved_by_solas_admin = null,
+		VO\StringVO $order_by_field = null,
+		VO\StringVO $order_by_direction = null
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/etb/authorising_officer/get/candidates'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters  = array();
+
+		if($employer_id) {
+			$request_parameters['employer_id'] = $employer_id->__toInteger();
+		}
+
+		if($is_declined) {
+			$request_parameters['is_declined'] = $is_declined->__toInteger();
+		}
+
+		if($is_approved_by_etb_ao) {
+			$request_parameters['is_approved_by_etb_ao'] = $is_approved_by_etb_ao->__toInteger();
+		}
+
+		if($is_approved_by_solas_admin) {
+			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toInteger();
+		}
+
+		if($order_by_field) {
+			$request_parameters['order_by_field'] = $order_by_field->__toString();
+		}
+
+		if($order_by_direction) {
+			$request_parameters['order_by_direction'] = $order_by_direction->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
