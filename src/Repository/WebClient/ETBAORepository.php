@@ -9,7 +9,7 @@ use AcademyHQ\API\Common\Credentials;
 
 class ETBAORepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	private $base_url = 'https://api.academyhq.com/api/v2/web/client';	
 
 	public function __construct(Credentials $credentials)
 	{
@@ -66,6 +66,33 @@ class ETBAORepository {
 			'site_visit_id' => $site_visit_id->__toInteger(),
 			'booked_at' => $booked_at->__toString(),
 			'is_visited' => $is_visited->__toInteger(),
+			'site_visited_at' => $site_visited_at->__toString()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function site_visit(
+		VO\Token $token,
+		VO\Integer $apprenticeship_id,
+		VO\StringVO $site_visited_at
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/etb/authorising_officer/site/visit'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'apprenticeship_id' => $apprenticeship_id->__toInteger(),
 			'site_visited_at' => $site_visited_at->__toString()
 		);
 
@@ -140,7 +167,9 @@ class ETBAORepository {
         VO\Token $token,
         VO\Integer $employer_id = null,
         VO\Integer $has_passed = null,
+        VO\Integer $has_failed = null,
         VO\Integer $is_booked = null,
+        VO\Integer $is_not_booked = null,
         VO\StringVO $query = null,
         VO\Integer $set_per_page = null,
         VO\Integer $page = null,
@@ -167,6 +196,12 @@ class ETBAORepository {
 
         if (!is_null($is_booked))
             $request_parameters['is_booked']  = $is_booked->__toInteger();
+
+        if (!is_null($is_not_booked))
+            $request_parameters['is_not_booked']  = $is_not_booked->__toInteger();
+
+        if (!is_null($has_failed))
+            $request_parameters['has_failed']  = $has_failed->__toInteger();
 
         if (!is_null($query))
             $request_parameters['query'] = $query->__toString();
