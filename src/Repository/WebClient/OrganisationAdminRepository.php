@@ -606,7 +606,7 @@ class OrganisationAdminRepository {
 
 	public function list_apprenticeships(
 		VO\Token $token,
-		VO\Integer $employer_id,
+		VO\Integer $employer_id = null,
 		VO\Integer $current_page = null,
 		VO\Integer $occupation_id = null,
 		VO\Integer $industry_id = null,
@@ -634,9 +634,11 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$request_parameters = array(
-			'employer_id' => $employer_id->__toInteger()
-		);
+		$request_parameters = array();
+
+		if($employer_id) {
+			$request_parameters['employer_id'] = $employer_id->__toInteger();
+		}
 
 		if($current_page) {
 			$request_parameters['current_page'] = $current_page->__toInteger();
