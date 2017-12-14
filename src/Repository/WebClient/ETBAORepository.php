@@ -19,7 +19,6 @@ class ETBAORepository {
 	public function create_site_visit(
 		VO\Token $token,
 		VO\Integer $employer_id,
-		VO\EtbID $etb_id,
 		VO\ApprenticeshipID $apprenticeship_id,
 		VO\StringVO $booked_at
 	){
@@ -35,7 +34,6 @@ class ETBAORepository {
 
 		$request_parameters = array(
 			'employer_id' => $employer_id->__toInteger(),
-			'etb_id' => $etb_id->__toString(),
 			'apprenticeship_id' => $apprenticeship_id->__toString(),
 			'booked_at' => $booked_at->__toString()
 		);

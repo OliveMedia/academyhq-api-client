@@ -1018,7 +1018,6 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$site_visit = $etbao_repository->create_site_visit(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_employer_id"),
-		new \AcademyHQ\API\ValueObjects\EtbID("your_etb_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_apprenticeship_id"),
 		new \AcademyHQ\API\ValueObjects\StringVO("your_booked_at")
 	);
