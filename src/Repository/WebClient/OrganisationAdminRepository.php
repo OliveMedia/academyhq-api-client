@@ -134,7 +134,10 @@ class OrganisationAdminRepository {
 			new VO\HTTP\Method('POST')
 		);
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString(),
+			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+		);
 
 		$request_parameters = array(
 			'organisation_id' => $organisation_id->__toInteger(),
@@ -504,7 +507,10 @@ class OrganisationAdminRepository {
 			new VO\HTTP\Method('POST')
 		);
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString(),
+			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+		);
 
 		$request_parameters = array(
 			'employer_id' => $employer_id->__toInteger(),
@@ -1113,7 +1119,10 @@ class OrganisationAdminRepository {
 			new VO\HTTP\Method('POST')
 		);
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString(),
+			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+		);
 
 		$request_parameters = array(
 			'member_id' => $member_id->__toInteger()

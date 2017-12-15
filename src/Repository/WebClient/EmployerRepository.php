@@ -179,6 +179,10 @@ class EmployerRepository {
 			new VO\HTTP\Method('POST')
 		);
 
+		$header_parameters = array(
+			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+		);
+
 		$request_parameters = array(
 			'name' => $company_name->__toString(),
 			'tax_number' => $tax_number->__toString(),
@@ -195,7 +199,7 @@ class EmployerRepository {
 			$request_parameters['date_of_commence'] = $date_of_commence->__toString();
 		}
 
-		$response = $request->send($request_parameters);
+		$response = $request->send($request_parameters,$header_parameters);
 
 		$data = $response->get_data();
 

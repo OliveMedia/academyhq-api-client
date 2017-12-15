@@ -25,7 +25,10 @@ class NotificationRepository {
 			new VO\HTTP\Method('GET')
 		);
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString(),
+			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+		);
 
 		$response = $request->send(null,$header_parameters);
 
