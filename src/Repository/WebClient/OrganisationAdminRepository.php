@@ -830,10 +830,6 @@ class OrganisationAdminRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		if($current_page) {
-			$request_parameters['current_page'] = $current_page->__toInteger();
-		}
-
 		if($occupation_id) {
 			$request_parameters['occupation_id'] = $occupation_id->__toInteger();
 		}
