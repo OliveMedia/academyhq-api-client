@@ -135,8 +135,7 @@ class OrganisationAdminRepository {
 		);
 
 		$header_parameters = array(
-			'Authorization' => $token->__toEncodedString(),
-			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+			'Authorization' => $token->__toEncodedString()
 		);
 
 		$request_parameters = array(
@@ -508,8 +507,7 @@ class OrganisationAdminRepository {
 		);
 
 		$header_parameters = array(
-			'Authorization' => $token->__toEncodedString(),
-			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+			'Authorization' => $token->__toEncodedString()
 		);
 
 		$request_parameters = array(
@@ -1120,8 +1118,7 @@ class OrganisationAdminRepository {
 		);
 
 		$header_parameters = array(
-			'Authorization' => $token->__toEncodedString(),
-			'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+			'Authorization' => $token->__toEncodedString()
 		);
 
 		$request_parameters = array(

@@ -107,7 +107,8 @@ class Request implements iRequest
             $multipart['app_signature'] = $this->generate_app_signature($this->url, $this->credentials->get_secret_key(), $multipart);
 
             $headers = array(
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
+                'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
             );
 
             if($header_parameters) {
