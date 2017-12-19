@@ -872,7 +872,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 25> Get Candidates
+### 26> Get Candidates
 <pre>
 	/*@returns member_details std object*/
 	$member_base = $organisation_admin_repository->get_candidates(
@@ -887,7 +887,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 23> Get Site Visit
+### 27> Get Site Visit
 <pre>
 	/*@return site_visits std object*/
 	$site_visits = $organisation_admin_repository->get_site_visits(
@@ -896,7 +896,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 24> Get Apprenticeship Checklist
+### 28> Get Apprenticeship Checklist
 <pre>
 	/*@return apprenticeship_checklist std object*/
 	$apprenticeship_checklist = $organisation_admin_repository->apprenticeship_checklist(
@@ -905,12 +905,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 25> Send Email To Set Password
+### 29> Send Email To Set Password
 <pre>
 	/*@returns member_details std object*/
 	$email = $organisation_admin_repository->send_email_to_set_password(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_member_id")
+	);
+</pre>
+
+### 30> Get Assessors Or Verifiers
+<pre>
+	/*@return assessors_or_verifiers std object*/
+	$assessors_or_verifiers = $organisation_admin_repository->get_assessor_or_verifier(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("your_organisation_id")
 	);
 </pre>
 

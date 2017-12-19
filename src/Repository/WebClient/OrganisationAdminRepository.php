@@ -1132,4 +1132,22 @@ class OrganisationAdminRepository {
 		return $data;
 	}
 
+	public function get_assessor_or_verifier(vo\Token $token, VO\OrganisationID $organisation_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/org/'.$organisation_id.'/assessor/or/verifier'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
