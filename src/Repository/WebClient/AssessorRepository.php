@@ -114,4 +114,44 @@ class AssessorRepository {
 
 		return $data;
 	}
+
+	public function member_audit_launch(VO\Token $token, VO\ID $member_audit_form_id, VO\HTTP\Url $callback_url)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/audit'.$member_audit_form_id.'/launch'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$callback_url = $callback_url->__toString();
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(array('callback_url' => $callback_url),$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data->launch_url;
+	}
+
+	public function member_audit_view(VO\Token $token, VO\ID $member_audit_form_id, VO\HTTP\Url $callback_url)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/audit'.$member_audit_form_id.'/view'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$callback_url = $callback_url->__toString();
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(array('callback_url' => $callback_url),$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data->launch_url;
+	}
 }

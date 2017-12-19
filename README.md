@@ -1200,3 +1200,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\ID("your_member_program_id")
 	);
 </pre>
+
+### 4> Get Member Audit Form Launch Url
+<pre>
+	/*@return launch_url std object */
+  	$launch_url = $assessor_repository->member_audit_launch(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("your_member_audit_form_id")
+	);
+</pre>
+
+### 4> Get Member Audit Form View
+<pre>
+	/*@return member_audit_from std object */
+  	$member_audit_from = $assessor_repository->member_audit_view(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("your_member_audit_form_id")
+	);
+</pre>
