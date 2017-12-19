@@ -448,7 +448,7 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$etb_admin_details = $super_organisation_admin_repository->get_etb_admins(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EtbID('your_etb_id'));
 </pre>
 
-### 5> Get Candidates
+### 5> Get ETB Authorizing Officer
 <pre>
 	*@return etb_authorizing_officer_details std object */
   	$etb_authorizing_officer_details = $super_organisation_admin_repository->get_etb_authorizing_officer(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\EtbID('your_etb_id'));
