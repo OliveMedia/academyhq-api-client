@@ -277,4 +277,65 @@ class ETBAORepository {
 
 		return $data;
 	}
+
+	public function create_apprenticeship_document(
+		VO\Token $token,
+		VO\ID $apprenticeship_id,
+		VO\Integer $is_declined = null,
+		VO\Integer $is_approved = null,
+		VO\Integer $is_approved_by_solas_admin = null,
+		VO\Integer $is_rejected_by_solas_admin = null,
+		VO\StringVO $document = null,
+		VO\StringVO $type = null,
+		VO\StringVO $extension = null
+
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/etb/authorising_officer/create/apprenticeship/document'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'apprenticeship_id' => $apprenticeship_id->__toInteger()
+		);
+
+		if($is_declined) {
+			$request_parameters['is_declined'] = $is_declined->__toInteger();
+		}
+
+		if($is_approved) {
+			$request_parameters['is_approved'] = $is_approved->__toInteger();
+		}
+
+		if($is_approved_by_solas_admin) {
+			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toInteger();
+		}
+
+		if($is_rejected_by_solas_admin) {
+			$request_parameters['is_rejected_by_solas_admin'] = $is_rejected_by_solas_admin->__toInteger();
+		}
+
+		if($document) {
+			$request_parameters['document'] = $document->__toString();
+		}
+
+		if($type) {
+			$request_parameters['type'] = $type->__toString();
+		}
+
+		if($extension) {
+			$request_parameters['extension'] = $extension->__toInteger();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

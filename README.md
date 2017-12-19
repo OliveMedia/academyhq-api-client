@@ -1113,6 +1113,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 7> Create Apprenticeship Document
+<pre>
+	/*@returns apprenticeship_document std object*/
+	$apprenticeship_document = $etbao_repository->create_apprenticeship_document(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("apprenticeship_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_declined"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_rejected_by_solas_admin"),
+		new \AcademyHQ\API\ValueObjects\StringVO("type"),
+		new \AcademyHQ\API\ValueObjects\StringVO("document"),
+		new \AcademyHQ\API\ValueObjects\StringVO("extension")
+	);
+</pre>
+
 ## Using ETB Admin Repository
 
 ### 1> Assign AO To Apprenticeship Application
