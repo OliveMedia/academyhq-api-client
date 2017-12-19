@@ -91,4 +91,27 @@ class AssessorRepository {
 
 		return $data;
 	}
+
+	public function member_audits(
+		VO\Token $token,
+		VO\ID $member_program_id
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/phase/'.$member_program_id.'/audits'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString()
+		);
+
+		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

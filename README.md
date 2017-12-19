@@ -1191,3 +1191,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\ID("is_completed")
 	);
 </pre>
+
+### 3> Get Member Audits
+<pre>
+	/*@return member_audit_forms std object */
+  	$member_audit_forms = $assessor_repository->member_audits(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("your_member_program_id")
+	);
+</pre>
