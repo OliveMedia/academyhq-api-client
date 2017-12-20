@@ -1144,8 +1144,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@returns apprentice_document std object*/
 	$apprenticeship_document = $etbao_repository->create_apprentice_document(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
-		new \AcademyHQ\API\ValueObjects\ID("member_id"),
-		new \AcademyHQ\API\ValueObjects\ID("apprenticeship_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("member_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("apprenticeship_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_declined"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_etb_ao"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_solas_admin"),

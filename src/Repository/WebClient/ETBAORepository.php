@@ -341,8 +341,8 @@ class ETBAORepository {
 
 	public function create_apprentice_document(
 		VO\Token $token,
-		VO\ID $member_id,
-		VO\ID $apprenticeship_id,
+		VO\Integer $member_id,
+		VO\Integer $apprenticeship_id,
 		VO\Integer $is_declined = null,
 		VO\Integer $is_approved_by_etb_ao = null,
 		VO\Integer $is_approved_by_solas_admin = null,
