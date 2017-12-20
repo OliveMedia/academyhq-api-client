@@ -480,11 +480,10 @@ class OrganisationAdminRepository {
 		VO\Integer $main_activity_id,
 		VO\Integer $industry_id,
 		VO\Integer $number_of_qualified_person_in_occupation,
-		VO\Integer $verifier_id,
 		VO\Integer $contact_person_id,
-		VO\Integer $mentor_id,
-		VO\Integer $is_submitted = null,
-		VO\Integer $is_site_visited = null
+		VO\Integer $verifier_id = null,
+		VO\Integer $mentor_id = null,
+		VO\Integer $is_submitted = null
 	){
 
 		$request = new Request(
@@ -510,12 +509,16 @@ class OrganisationAdminRepository {
 			'mentor_id' => $mentor_id->__toInteger()
 		);
 
-		if($is_submitted) {
-			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
+		if($verifier_id) {
+			$request_parameters['verifier_id'] = $verifier_id->__toInteger();
 		}
 
-		if($is_site_visited) {
-			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
+		if($mentor_id) {
+			$request_parameters['mentor_id'] = $mentor_id->__toInteger();
+		}
+
+		if($is_submitted) {
+			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);

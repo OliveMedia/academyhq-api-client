@@ -816,8 +816,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("your_contact_person_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_verifier_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_mentor_id"),
-		new \AcademyHQ\API\ValueObjects\Integer("your_is_submitted"),
-		new \AcademyHQ\API\ValueObjects\Integer("your_is_site_visited")
+		new \AcademyHQ\API\ValueObjects\Integer("your_is_submitted")
 	);
 </pre>
 
