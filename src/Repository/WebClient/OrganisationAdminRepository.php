@@ -1173,4 +1173,41 @@ class OrganisationAdminRepository {
 		return $data;
 	}
 
+	public function apprenticeship_documents(vo\Token $token, VO\Integer $apprenticeship_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/apprenticeship/'.$apprenticeship_id.'/documents'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+
+	public function apprentice_documents(vo\Token $token, VO\Integer $apprentice_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/apprentice/'.$apprenticeship_id.'/documents'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

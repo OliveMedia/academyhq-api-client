@@ -947,6 +947,24 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 32> Get Apprenticeship Documents
+<pre>
+	/*@return apprenticeship_documents std object of updated memeber*/
+	$apprenticeship_documents = $organisation_admin_repository->apprenticeship_documents(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("apprenticeship_id")
+	);
+</pre>
+
+### 33> Get Apprentice Documents
+<pre>
+	/*@return apprentice_documents std object of updated memeber*/
+	$apprentice_documents = $organisation_admin_repository->apprentice_documents(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("apprentice_id")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Membr Documents
