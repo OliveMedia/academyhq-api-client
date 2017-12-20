@@ -484,8 +484,6 @@ class OrganisationAdminRepository {
 		VO\Integer $contact_person_id,
 		VO\Integer $mentor_id,
 		VO\Integer $is_submitted = null,
-		VO\Integer $is_approved = null,
-		VO\Integer $is_declined = null,
 		VO\Integer $is_site_visited = null
 	){
 
@@ -514,14 +512,6 @@ class OrganisationAdminRepository {
 
 		if($is_submitted) {
 			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
-		}
-
-		if($is_approved) {
-			$request_parameters['is_approved'] = $is_approved->__toInteger();
-		}
-
-		if($is_declined) {
-			$request_parameters['is_declined'] = $is_declined->__toInteger();
 		}
 
 		if($is_site_visited) {
