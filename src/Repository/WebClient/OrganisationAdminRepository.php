@@ -1149,7 +1149,7 @@ class OrganisationAdminRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/org/'.$organisation_id.'/assessor/or/verifier'),
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/update/member'),
 			new VO\HTTP\Method('PUT')
 		);
 
