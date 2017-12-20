@@ -294,8 +294,6 @@ class OrganisationAdminRepository {
 		VO\StringVO $country_code = null,
 		VO\StringVO $mobile_number = null,
 		VO\Email $email = null,
-		VO\Integer $is_approved_by_etb_ao = null,
-		VO\Integer $is_approved_by_solas_admin = null,
 		VO\StringVO $street = null,
 		VO\StringVO $city = null,
 		VO\StringVO $state = null,
@@ -350,14 +348,6 @@ class OrganisationAdminRepository {
 
 		if($email) {
 			$request_parameters['email'] = $email->__toString();
-		}
-
-		if($is_approved_by_etb_ao) {
-			$request_parameters['is_approved_by_etb_ao'] = $is_approved_by_etb_ao->__toInteger();
-		}
-
-		if($is_approved_by_solas_admin) {
-			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toString();
 		}
 
 		if($street) {
@@ -624,6 +614,9 @@ class OrganisationAdminRepository {
 		VO\Integer $is_approved = null,
 		VO\Integer $is_declined = null,
 		VO\Integer $is_site_visited = null,
+		VO\Integer $is_appealed_to_solas_admin = null,
+		VO\Integer $is_approved_by_solas_admin = null,
+		VO\Integer $is_rejected_by_solas_admin = null,
 		VO\Integer $is_confirmed_as_occupation = null,
 		VO\StringVO $order_by_field = null,
 		VO\StringVO $order_by_direction = null
@@ -694,6 +687,18 @@ class OrganisationAdminRepository {
 
 		if($is_site_visited) {
 			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
+		}
+
+		if($is_appealed_to_solas_admin) {
+			$request_parameters['is_appealed_to_solas_admin'] = $is_appealed_to_solas_admin->__toInteger();
+		}
+
+		if($is_approved_by_solas_admin) {
+			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toInteger();
+		}
+
+		if($is_rejected_by_solas_admin) {
+			$request_parameters['is_rejected_by_solas_admin'] = $is_rejected_by_solas_admin->__toInteger();
 		}
 
 		if($is_confirmed_as_occupation) {
