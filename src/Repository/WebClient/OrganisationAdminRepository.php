@@ -1141,7 +1141,7 @@ class OrganisationAdminRepository {
 		return $data;
 	}
 
-	public function update_member(vo\Token $token, VO\ID $member_id, VO\Integer $is_mentor = null, VO\Integer $is_verifier, VO\StringVO $mobile_number)
+	public function update_member(vo\Token $token, VO\ID $member_id, VO\Integer $is_mentor = null, VO\Integer $is_verifier, VO\Integer $is_contact_person = null, VO\StringVO $mobile_number)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -1160,6 +1160,10 @@ class OrganisationAdminRepository {
 
 		if($is_verifier) {
 			$request_parameters['is_verifier'] = $is_verifier->__toInteger();
+		}
+
+		if($is_contact_person) {
+			$request_parameters['is_contact_person'] = $is_contact_person->__toInteger();
 		}
 
 		if($mobile_number) {
