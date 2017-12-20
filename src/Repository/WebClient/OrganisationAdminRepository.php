@@ -858,39 +858,39 @@ class OrganisationAdminRepository {
 			$request_parameters['mentor_id'] = $mentor_id->__toInteger();
 		}
 
-		if($is_submitted) {
+		if(!is_null($is_submitted)) {
 			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
 		}
 
-		if($is_approved) {
+		if(!is_null($is_approved)) {
 			$request_parameters['is_approved'] = $is_approved->__toInteger();
 		}
 
-		if($is_declined) {
+		if(!is_null($is_declined)) {
 			$request_parameters['is_declined'] = $is_declined->__toInteger();
 		}
 
-		if($is_site_visited) {
+		if(!is_null($is_site_visited)) {
 			$request_parameters['is_site_visited'] = $is_site_visited->__toInteger();
 		}
 
-		if($is_confirmed_as_occupation) {
+		if(!is_null($is_confirmed_as_occupation)) {
 			$request_parameters['is_confirmed_as_occupation'] = $is_confirmed_as_occupation->__toInteger();
 		}
 
-		if($is_appealed_to_solas_admin) {
+		if(!is_null($is_appealed_to_solas_admin)) {
 			$request_parameters['is_appealed_to_solas_admin'] = $is_appealed_to_solas_admin->__toInteger();
 		}
 
-		if($is_approved_by_solas_admin) {
+		if(!is_null($is_approved_by_solas_admin)) {
 			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toInteger();
 		}
 
-		if($is_rejected_by_solas_admin) {
+		if(!is_null($is_rejected_by_solas_admin)) {
 			$request_parameters['is_rejected_by_solas_admin'] = $is_rejected_by_solas_admin->__toInteger();
 		}
 
-		if($is_site_visit_booked) {
+		if(!is_null($is_site_visit_booked)) {
 			$request_parameters['is_site_visit_booked'] = $is_site_visit_booked->__toInteger();
 		}
 
