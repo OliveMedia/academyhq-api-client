@@ -30,6 +30,10 @@ class Response implements iResponse
  		$json_data = $this->response->getBody();
 
  		$data = json_decode($json_data);
+
+ 		if(!isset($data->status)) {
+ 			throw new ResponseException('There has been problem with your request');
+ 		}
  		
  		if($data->status == 'Fail')
  		{
