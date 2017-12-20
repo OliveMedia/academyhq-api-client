@@ -937,7 +937,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 32> Update Member
+### 31> Update Member
 <pre>
 	/*@return member_detaisl std object of updated memeber*/
 	$member_detaisl = $organisation_admin_repository->update_member(
