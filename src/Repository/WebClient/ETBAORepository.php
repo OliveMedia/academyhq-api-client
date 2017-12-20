@@ -251,15 +251,15 @@ class ETBAORepository {
 			$request_parameters['employer_id'] = $employer_id->__toInteger();
 		}
 
-		if($is_declined) {
+		if(!is_null($is_declined)) {
 			$request_parameters['is_declined'] = $is_declined->__toInteger();
 		}
 
-		if($is_approved_by_etb_ao) {
+		if(!is_null($is_approved_by_etb_ao)) {
 			$request_parameters['is_approved_by_etb_ao'] = $is_approved_by_etb_ao->__toInteger();
 		}
 
-		if($is_approved_by_solas_admin) {
+		if(!is_null($is_approved_by_solas_admin)) {
 			$request_parameters['is_approved_by_solas_admin'] = $is_approved_by_solas_admin->__toInteger();
 		}
 
