@@ -280,7 +280,7 @@ class ETBAORepository {
 
 	public function create_apprenticeship_document(
 		VO\Token $token,
-		VO\ID $apprenticeship_id,
+		VO\Integer $apprenticeship_id,
 		VO\Integer $is_declined = null,
 		VO\Integer $is_approved = null,
 		VO\Integer $is_approved_by_solas_admin = null,
