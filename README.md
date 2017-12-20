@@ -1129,7 +1129,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 7> Create Apprentice Document
+### 8> Create Apprentice Document
 <pre>
 	/*@returns apprentice_document std object*/
 	$apprenticeship_document = $etbao_repository->create_apprentice_document(
