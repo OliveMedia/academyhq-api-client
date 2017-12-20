@@ -937,6 +937,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 32> Update Member
+<pre>
+	/*@return member_detaisl std object of updated memeber*/
+	$member_detaisl = $organisation_admin_repository->update_member(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\ID("member_id"),
+		new \AcademyHQ\API\ValueObjects\ID("is_mentor"),
+		new \AcademyHQ\API\ValueObjects\ID("is_verifier"),
+		new \AcademyHQ\API\ValueObjects\StringVO("mobile_number")
+	);
+</pre>
+
 ## Using Learner Repository
 
 ### 1> Fetch All Membr Documents

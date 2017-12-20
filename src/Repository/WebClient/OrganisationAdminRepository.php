@@ -1151,4 +1151,36 @@ class OrganisationAdminRepository {
 		return $data;
 	}
 
+	public function update_member(vo\Token $token, VO\ID $member_id, VO\Integer $is_mentor = null, VO\Integer $is_verifier, VO\StringVO $mobile_number)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/org/'.$organisation_id.'/assessor/or/verifier'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array();
+
+		if($is_mentor) {
+			$request_parameters['is_mentor'] = $is_mentor->__toInteger();
+		}
+
+		if($is_verifier) {
+			$request_parameters['is_verifier'] = $is_verifier->__toInteger();
+		}
+
+		if($mobile_number) {
+			$request_parameters['mobile_number'] = $mobile_number->__toString();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
