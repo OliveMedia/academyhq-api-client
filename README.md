@@ -1221,8 +1221,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@return updated program_evidence std object */
   	$program_evidence = $assessor_repository->edit_program_evidence(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
-		new \AcademyHQ\API\ValueObjects\ID("your_program_evidence_id"),
-		new \AcademyHQ\API\ValueObjects\ID("is_approved_by_assessor")
+		new \AcademyHQ\API\ValueObjects\Integer("your_program_evidence_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_assessor")
 	);
 </pre>
 
@@ -1231,8 +1231,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@return updated member_program std object */
   	$member_program = $assessor_repository->edit_member_program(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
-		new \AcademyHQ\API\ValueObjects\ID("your_member_program_id"),
-		new \AcademyHQ\API\ValueObjects\ID("is_completed")
+		new \AcademyHQ\API\ValueObjects\Integer("your_member_program_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_completed")
 	);
 </pre>
 

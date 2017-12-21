@@ -36,15 +36,15 @@ class AssessorRepository {
 
 	public function edit_program_evidence(
 		VO\Token $token,
-		VO\ID $program_evidence_id,
-		VO\ID $is_approved_by_assessor
+		VO\Integer $program_evidence_id,
+		VO\Integer $is_approved_by_assessor
 	){
 
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/assessor/edit/program/evidence'),
-			new VO\HTTP\Method('POST')
+			new VO\HTTP\Method('PUT')
 		);
 
 		$header_parameters = array(
@@ -65,15 +65,15 @@ class AssessorRepository {
 
 	public function edit_member_program(
 		VO\Token $token,
-		VO\ID $member_program_id,
-		VO\ID $is_completed
+		VO\Integer $member_program_id,
+		VO\Integer $is_completed
 	){
 
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/assessor/edit/member/program'),
-			new VO\HTTP\Method('POST')
+			new VO\HTTP\Method('PUT')
 		);
 
 		$header_parameters = array(
