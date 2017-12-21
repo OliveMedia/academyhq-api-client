@@ -564,6 +564,18 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_journey_details = $member_program_repository->fetch_member_journey(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'));
 </pre>
 
+
+### 8> Put Member Phase Code
+<pre>
+	/*@return member_details std object od updated member */
+  	$member_details = $member_program_repository->update_member_phase_code(
+  		new \AcademyHQ\API\ValueObjects\Token('your token'), 
+  		new \AcademyHQ\API\ValueObjects\Integer('your_member_id'),
+  		new \AcademyHQ\API\ValueObjects\StringVO('your_member_phase_code')
+  	);
+</pre>
+
+
 ## Using Organisation Admin Repository
 
 ### 1> Organisation Edit

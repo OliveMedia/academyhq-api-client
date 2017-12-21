@@ -162,4 +162,27 @@ class MemberProgramRepository {
 
 		return $data;
 	}
+
+	public function update_member_phase_code(VO\Token $token, VO\Integer $member_id, VO\StringVO $phase_code){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/member_program/update/member/phase/code'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toInteger(),
+			'phase_code' => $phase_code->__toString()
+		);
+
+		$response = $request->send($request_parameters,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
