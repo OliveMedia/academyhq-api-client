@@ -1202,7 +1202,7 @@ class OrganisationAdminRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/apprentice/'.$apprenticeship_id.'/documents'),
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/get/apprentice/'.$apprenticeship_id->__toInteger().'/documents'),
 			new VO\HTTP\Method('GET')
 		);
 
