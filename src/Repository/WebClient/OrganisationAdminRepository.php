@@ -503,21 +503,19 @@ class OrganisationAdminRepository {
 			'sector_id' => $sector_id->__toInteger(),
 			'main_activity_id' => $main_activity_id->__toInteger(),
 			'industry_id' => $industry_id->__toInteger(),
-			'number_of_qualified_person_in_occupation' => $number_of_qualified_person_in_occupation->__toInteger(),
-			'verifier_id' => $verifier_id->__toInteger(),
-			'contact_person_id' => $contact_person_id->__toInteger(),
-			'mentor_id' => $mentor_id->__toInteger()
+			'number_of_qualified_person_in_occupation' => $number_of_qualified_person_in_occupation->__toInteger(), 
+			'contact_person_id' => $contact_person_id->__toInteger()
 		);
 
-		if($verifier_id) {
+		if(!is_null($verifier_id)) {
 			$request_parameters['verifier_id'] = $verifier_id->__toInteger();
 		}
 
-		if($mentor_id) {
+		if(!is_null($mentor_id)) {
 			$request_parameters['mentor_id'] = $mentor_id->__toInteger();
 		}
 
-		if($is_submitted) {
+		if(!is_null($is_submitted)) {
 			$request_parameters['is_submitted'] = $is_submitted->__toInteger();
 		}
 
