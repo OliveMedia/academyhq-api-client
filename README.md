@@ -510,6 +510,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 6> Update Notification
+<pre>
+	/*@returns sucess message*/
+	$notfication = $notification_repository->update_notification(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_notification_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("unseen")
+	);
+</pre>
+
 ## Using Member Program Repository
 
 ### 1> Fetch All Member Program

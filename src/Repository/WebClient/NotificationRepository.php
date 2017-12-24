@@ -128,4 +128,36 @@ class NotificationRepository {
 
 		return $data;
 	}
+
+	public function update_notification(
+		VO\Token $token,
+		VO\Integer $id,
+		VO\Integer $unseen = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/notification/seen'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$notification_types = $notification_type_array->__toArray();
+
+		$request_parameters = array(
+			'id' => $id->__toInteger()
+		);
+
+		if(!is_null($unseen)) {
+			$request_parameters['unseen'] = $unseen->__toInteger();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
