@@ -1083,6 +1083,16 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_details = $learner_repository->get_member(new \AcademyHQ\API\ValueObjects\Token('your token'), new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'));
 </pre>
 
+### 12> Get Learner Document
+<pre>
+	/*@return document_details std object */
+  	$document_details = $learner_repository->learner_document(
+  		new \AcademyHQ\API\ValueObjects\Token('your token'), 
+  		new \AcademyHQ\API\ValueObjects\ID('your_member_id'),
+  		new \AcademyHQ\API\ValueObjects\StringVO('your_document_name')
+  	);
+</pre>
+
 ## Using ETBAO Repository
 
 ### 1> Create Site Visit

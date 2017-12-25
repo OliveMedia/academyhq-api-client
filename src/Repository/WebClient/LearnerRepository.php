@@ -297,4 +297,27 @@ class LearnerRepository {
 
 		return $data->member_profile_details;
 	}
+
+	public function learner_document(VO\Token $token, VO\ID $member_id, VO\StringVO $document_name)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/learner/document'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toInteger(),
+			'document_name' => $document_name->__toString()
+		);
+
+		$response = $request->send($request_parameters,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
