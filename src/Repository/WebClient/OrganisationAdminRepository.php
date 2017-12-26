@@ -208,7 +208,7 @@ class OrganisationAdminRepository {
 		VO\StringVO $city,
 		VO\StringVO $state,
 		VO\StringVO $country,
-		VO\StringVO $postal_code,
+		VO\StringVO $postal_code = null,
 		VO\StringVO $disablility_text = null,
 		VO\StringVO $advice_text = null,
 		VO\Integer $eye_test_document_id = null,
@@ -245,9 +245,12 @@ class OrganisationAdminRepository {
 			'street' => $street->__toString(),
 			'city' => $city->__toString(),
 			'state' => $state->__toString(),
-			'country' => $country->__toString(),
-			'postal_code' => $postal_code->__toString()
+			'country' => $country->__toString()
 		);
+
+		if($postal_code) {
+			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
 
 		if($disablility == '1') {
 			$request_parameters['disablility_text'] = $disablility_text->__toString();
