@@ -253,7 +253,7 @@ class OrganisationAdminRepository {
 		}
 
 		if($disablility) {
-			$request_parameters['disablility_text'] = $disablility_text->__toString();
+			$request_parameters['disability_text'] = $disablility_text->__toString();
 		}
 
 		if($advice) {
