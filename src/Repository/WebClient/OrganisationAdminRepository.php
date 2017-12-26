@@ -240,7 +240,7 @@ class OrganisationAdminRepository {
 			'country_code' => $country_code->__toString(),
 			'mobile_number' => $mobile_number->__toString(),
 			'email' => $email->__toString(),
-			'disablility' => $disablility->__toInteger(),
+			'disability' => $disablility->__toInteger(),
 			'advice' => $advice->__toInteger(),
 			'street' => $street->__toString(),
 			'city' => $city->__toString(),
