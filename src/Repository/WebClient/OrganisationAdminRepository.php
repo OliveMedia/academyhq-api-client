@@ -252,11 +252,11 @@ class OrganisationAdminRepository {
 			$request_parameters['postal_code'] = $postal_code->__toString();
 		}
 
-		if($disablility == '1') {
+		if($disablility) {
 			$request_parameters['disablility_text'] = $disablility_text->__toString();
 		}
 
-		if($advice == '1') {
+		if($advice) {
 			$request_parameters['advice_text'] = $advice_text->__toString();
 		}
 
