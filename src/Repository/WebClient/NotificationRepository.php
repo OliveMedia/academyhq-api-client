@@ -144,8 +144,6 @@ class NotificationRepository {
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$notification_types = $notification_type_array->__toArray();
-
 		$request_parameters = array(
 			'id' => $id->__toInteger()
 		);
