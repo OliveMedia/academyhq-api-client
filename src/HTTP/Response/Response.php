@@ -29,9 +29,13 @@ class Response implements iResponse
  	{
  		$json_data = $this->response->getBody();
 
- 		$data = json_decode($json_data);
-
  		if(!isset($data->status)) {
+
+ 			$file = getcwd();
+			$date = new \DateTime();
+
+			error_log(print_r(date_format($date, 'Y-m-d H:i:s')."\n".$json_data."\n ---\n", TRUE), 3, getcwd().'/src/HTTP/log/error.log');
+
  			throw new ResponseException('There has been problem with your request');
  		}
  		

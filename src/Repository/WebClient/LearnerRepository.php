@@ -298,7 +298,7 @@ class LearnerRepository {
 		return $data->member_profile_details;
 	}
 
-	public function learner_document(VO\Token $token, VO\ID $member_id, VO\StringVO $document_name)
+	public function learner_document(VO\Token $token, VO\Integer $member_id, VO\StringVO $document_name)
 	{
 		$request = new Request(
 			new GuzzleClient,
