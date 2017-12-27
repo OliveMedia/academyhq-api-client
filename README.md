@@ -965,7 +965,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("is_mentor"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_verifier"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_contact_person"),
-		new \AcademyHQ\API\ValueObjects\StringVO("mobile_number")
+		new \AcademyHQ\API\ValueObjects\StringVO("mobile_number"),
+		new \AcademyHQ\API\ValueObjects\StringVO("country_code")
 	);
 </pre>
 
@@ -984,6 +985,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$apprentice_documents = $organisation_admin_repository->apprentice_documents(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("apprentice_id")
+	);
+</pre>
+
+### 34> Get All Occupations, Industries, Sectors And Main Activities
+<pre>
+	/*@return data std object*/
+	$data = $organisation_admin_repository->list_occupations_main_activities_industries_sectors(
+		new \AcademyHQ\API\ValueObjects\Token("your_token")
 	);
 </pre>
 

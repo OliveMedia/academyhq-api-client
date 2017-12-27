@@ -1145,7 +1145,7 @@ class OrganisationAdminRepository {
 		return $data;
 	}
 
-	public function update_member(vo\Token $token, VO\Integer $member_id, VO\Integer $is_mentor = null, VO\Integer $is_verifier = null , VO\Integer $is_contact_person = null, VO\StringVO $mobile_number)
+	public function update_member(vo\Token $token, VO\Integer $member_id, VO\Integer $is_mentor = null, VO\Integer $is_verifier = null , VO\Integer $is_contact_person = null, VO\StringVO $mobile_number = null, VO\StringVO $country_code = null)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -1172,6 +1172,10 @@ class OrganisationAdminRepository {
 
 		if($mobile_number) {
 			$request_parameters['mobile_number'] = $mobile_number->__toString();
+		}
+
+		if($country_code) {
+			$request_parameters['country_code'] = $country_code->__toString();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -1212,6 +1216,24 @@ class OrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$response = $request->send(null, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function list_occupations_main_activities_industries_sectors(vo\Token $token)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/list/occupations/sectors/industries/main_activities'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send(null,$header_parameters);
 
 		$data = $response->get_data();
 
