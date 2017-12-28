@@ -87,7 +87,7 @@ class NotificationRepository {
 
 		$data = $response->get_data();
 
-		return $data->notifications;
+		return $data;
 	}
 
 	public function create_notification(
