@@ -319,7 +319,7 @@ class OrganisationAdminRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/edit/candidate'),
-			new VO\HTTP\Method('POST')
+			new VO\HTTP\Method('PUT')
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
