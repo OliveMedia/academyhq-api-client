@@ -302,6 +302,10 @@ class OrganisationAdminRepository {
 		VO\StringVO $state = null,
 		VO\StringVO $country = null,
 		VO\StringVO $postal_code = null,
+		VO\Integer $disability = null,
+		VO\StringVO $disability_text = null,
+		VO\Integer $advice = null,
+		VO\Integer $advice_text = null,
 		VO\Integer $eye_test_document_id = null,
 		VO\StringVO $eyetestdataimage = null,
 		VO\Integer $mimimum_educational_document_id = null,
@@ -371,6 +375,22 @@ class OrganisationAdminRepository {
 
 		if($postal_code) {
 			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		if($disability) {
+			$request_parameters['disability'] = $disability->__toInteger();
+		}
+
+		if($disability_text) {
+			$request_parameters['disability_text'] = $disability_text->__toString();
+		}
+
+		if($advice) {
+			$request_parameters['advice'] = $advice->__toInteger();
+		}
+
+		if($advice_text) {
+			$request_parameters['advice_text'] = $advice_text->__toString();
 		}
 
 		if($eye_test_document_id) {
