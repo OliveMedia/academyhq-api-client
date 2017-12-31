@@ -321,7 +321,7 @@ class OrganisationAdminRepository {
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'member_id' => $organisation_id->__toInteger()
+			'member_id' => $member_id->__toInteger()
 		);
 
 		if($apprenticeship_id) {
