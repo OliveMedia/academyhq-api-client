@@ -581,7 +581,8 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_details = $member_program_repository->update_member_phase_code(
   		new \AcademyHQ\API\ValueObjects\Token('your token'), 
   		new \AcademyHQ\API\ValueObjects\Integer('your_member_id'),
-  		new \AcademyHQ\API\ValueObjects\StringVO('your_member_phase_code')
+  		new \AcademyHQ\API\ValueObjects\StringVO('your_member_phase_code'),
+  		new \AcademyHQ\API\ValueObjects\Integer('your_apprenticeship_id')
   	);
 </pre>
 

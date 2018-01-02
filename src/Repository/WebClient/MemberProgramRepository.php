@@ -163,7 +163,7 @@ class MemberProgramRepository {
 		return $data;
 	}
 
-	public function update_member_phase_code(VO\Token $token, VO\Integer $member_id, VO\StringVO $phase_code){
+	public function update_member_phase_code(VO\Token $token, VO\Integer $member_id, VO\StringVO $phase_code, VO\Integer $apprenticeship_id){
 
 		$request = new Request(
 			new GuzzleClient,
@@ -176,7 +176,8 @@ class MemberProgramRepository {
 
 		$request_parameters = array(
 			'member_id' => $member_id->__toInteger(),
-			'phase_code' => $phase_code->__toString()
+			'phase_code' => $phase_code->__toString(),
+			'apprenticeship_id' => $apprenticeship_id->__toInteger()
 		);
 
 		$response = $request->send($request_parameters,$header_parameters);
