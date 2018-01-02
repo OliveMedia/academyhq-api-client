@@ -120,7 +120,7 @@ class AssessorRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/audit'.$member_audit_form_id.'/launch'),
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/audit/'.$member_audit_form_id.'/launch'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -140,7 +140,7 @@ class AssessorRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/audit'.$member_audit_form_id.'/view'),
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/get/member/audit/'.$member_audit_form_id.'/view'),
 			new VO\HTTP\Method('GET')
 		);
 
