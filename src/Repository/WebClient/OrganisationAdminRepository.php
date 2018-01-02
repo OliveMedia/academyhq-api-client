@@ -803,7 +803,7 @@ class OrganisationAdminRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/apprenticeship/'.$apprenticeship.'/details'),
+			VO\HTTP\Url::fromNative($this->base_url.'/organisation/admin/apprenticeship/'.$apprenticeship_id.'/details'),
 			new VO\HTTP\Method('GET')
 		);
 
