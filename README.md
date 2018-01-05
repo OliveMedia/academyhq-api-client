@@ -1268,7 +1268,8 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$program_evidence = $assessor_repository->edit_program_evidence(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_program_evidence_id"),
-		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_assessor")
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_assessor"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_rejected_by_assessor")
 	);
 </pre>
 

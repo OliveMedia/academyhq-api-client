@@ -37,7 +37,8 @@ class AssessorRepository {
 	public function edit_program_evidence(
 		VO\Token $token,
 		VO\Integer $program_evidence_id,
-		VO\Integer $is_approved_by_assessor
+		VO\Integer $is_approved_by_assessor,
+		VO\Integer $is_rejected_by_assessor
 	){
 
 		$request = new Request(
@@ -53,7 +54,8 @@ class AssessorRepository {
 
 		$request_parameters = array(
 			'program_evidence_id' => $program_evidence_id->__toInteger(),
-			'is_approved_by_assessor' => $is_approved_by_assessor->__toInteger()
+			'is_approved_by_assessor' => $is_approved_by_assessor->__toInteger(),
+			'is_rejected_by_assessor' => $is_rejected_by_assessor->__toInteger()
 		);
 
 		$response = $request->send($request_parameters, $header_parameters);
