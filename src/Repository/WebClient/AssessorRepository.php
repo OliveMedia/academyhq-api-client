@@ -154,6 +154,6 @@ class AssessorRepository {
 
 		$data = $response->get_data();
 
-		return $data->launch_url;
+		return $data->view_url;
 	}
 }
