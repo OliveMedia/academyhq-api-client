@@ -1309,3 +1309,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\ID("your_member_audit_form_id")
 	);
 </pre>
+
+### 5> Edit Member Audit Form
+<pre>
+	/*@return updated member_audit_from std object */
+  	$member_audit_from = $assessor_repository->edit_member_audit(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_member_audit_form_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_assessed"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_verified"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved")
+	);
+</pre>
