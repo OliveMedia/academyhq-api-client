@@ -178,15 +178,15 @@ class AssessorRepository {
 		);
 
 		if(!is_null($is_assessed)){
-			$request_parameters['is_assessed'] = $is_assessed->__toInteger;
+			$request_parameters['is_assessed'] = $is_assessed->__toInteger();
 		}
 
 		if(!is_null($is_verified)){
-			$request_parameters['is_verified'] = $is_verified->__toInteger;
+			$request_parameters['is_verified'] = $is_verified->__toInteger();
 		}
 
 		if(!is_null($is_approved)){
-			$request_parameters['is_approved'] = $is_approved->__toInteger;
+			$request_parameters['is_approved'] = $is_approved->__toInteger();
 		}
 
 		$response = $request->send($request_parameters,$header_parameters);
