@@ -171,7 +171,7 @@ class AssessorRepository {
 			new VO\HTTP\Method('PUT')
 		);
 
-		$header_parameters array('Authorization' => $token->__toEncodedString());
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
 			'member_audit_form_id' => $member_audit_form_id->__toInteger(),
