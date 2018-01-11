@@ -257,7 +257,7 @@ class OrganisationAdminRepository {
 			$request_parameters['education_level'] = $education_level->__toString();
 		}
 
-		if(!is_null($disability_text)) {
+		if(!is_null($disablility_text)) {
 			$request_parameters['disability_text'] = $disablility_text->__toString();
 		}
 
