@@ -208,6 +208,7 @@ class OrganisationAdminRepository {
 		VO\StringVO $city,
 		VO\StringVO $state,
 		VO\StringVO $country,
+		VO\StringVO $education_level,
 		VO\StringVO $postal_code = null,
 		VO\StringVO $disablility_text = null,
 		VO\StringVO $advice_text = null,
@@ -250,6 +251,10 @@ class OrganisationAdminRepository {
 
 		if($postal_code) {
 			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		if($education_level) {
+			$request_parameters['education_level'] = $education_level->__toString();
 		}
 
 		if($disablility == '1') {
@@ -302,6 +307,7 @@ class OrganisationAdminRepository {
 		VO\StringVO $state = null,
 		VO\StringVO $country = null,
 		VO\StringVO $postal_code = null,
+		VO\StringVO $education_level = null,
 		VO\Integer $disability = null,
 		VO\StringVO $disability_text = null,
 		VO\Integer $advice = null,
@@ -375,6 +381,10 @@ class OrganisationAdminRepository {
 
 		if($postal_code) {
 			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		if($education_level) {
+			$request_parameters['education_level'] = $education_level->__toString();
 		}
 
 		if($disability) {
