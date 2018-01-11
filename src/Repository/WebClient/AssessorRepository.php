@@ -37,7 +37,8 @@ class AssessorRepository {
 	public function edit_program_evidence(
 		VO\Token $token,
 		VO\Integer $program_evidence_id,
-		VO\Integer $is_approved_by_assessor
+		VO\Integer $is_approved_by_assessor,
+		VO\Integer $is_rejected_by_assessor
 	){
 
 		$request = new Request(
@@ -53,7 +54,8 @@ class AssessorRepository {
 
 		$request_parameters = array(
 			'program_evidence_id' => $program_evidence_id->__toInteger(),
-			'is_approved_by_assessor' => $is_approved_by_assessor->__toInteger()
+			'is_approved_by_assessor' => $is_approved_by_assessor->__toInteger(),
+			'is_rejected_by_assessor' => $is_rejected_by_assessor->__toInteger()
 		);
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -152,6 +154,45 @@ class AssessorRepository {
 
 		$data = $response->get_data();
 
-		return $data->launch_url;
+		return $data->view_url;
+	}
+	
+	public function edit_member_audit(
+		VO\Token $token,
+		VO\Integer $member_audit_form_id,
+		VO\Integer $is_assessed=null,
+		VO\Integer $is_verified=null,
+		VO\Integer $is_approved=null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/edit/member/audit'),
+			new VO\HTTP\Method('PUT')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'member_audit_form_id' => $member_audit_form_id->__toInteger(),
+		);
+
+		if(!is_null($is_assessed)){
+			$request_parameters['is_assessed'] = $is_assessed->__toInteger();
+		}
+
+		if(!is_null($is_verified)){
+			$request_parameters['is_verified'] = $is_verified->__toInteger();
+		}
+
+		if(!is_null($is_approved)){
+			$request_parameters['is_approved'] = $is_approved->__toInteger();
+		}
+
+		$response = $request->send($request_parameters,$header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
 	}
 }

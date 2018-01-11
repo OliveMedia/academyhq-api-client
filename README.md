@@ -1268,7 +1268,8 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$program_evidence = $assessor_repository->edit_program_evidence(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_program_evidence_id"),
-		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_assessor")
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved_by_assessor"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_rejected_by_assessor")
 	);
 </pre>
 
@@ -1306,5 +1307,17 @@ Client Library that allow third party to access AcademyHQ APIs.
   	$member_audit_from = $assessor_repository->member_audit_view(
 		new \AcademyHQ\API\ValueObjects\Token("your_token"),
 		new \AcademyHQ\API\ValueObjects\ID("your_member_audit_form_id")
+	);
+</pre>
+
+### 5> Edit Member Audit Form
+<pre>
+	/*@return updated member_audit_from std object */
+  	$member_audit_from = $assessor_repository->edit_member_audit(
+		new \AcademyHQ\API\ValueObjects\Token("your_token"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_member_audit_form_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_assessed"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_verified"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_approved")
 	);
 </pre>

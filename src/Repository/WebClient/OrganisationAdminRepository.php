@@ -311,7 +311,7 @@ class OrganisationAdminRepository {
 		VO\Integer $disability = null,
 		VO\StringVO $disability_text = null,
 		VO\Integer $advice = null,
-		VO\Integer $advice_text = null,
+		VO\StringVO $advice_text = null,
 		VO\Integer $eye_test_document_id = null,
 		VO\StringVO $eyetestdataimage = null,
 		VO\Integer $mimimum_educational_document_id = null,
