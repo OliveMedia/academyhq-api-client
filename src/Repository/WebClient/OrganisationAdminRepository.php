@@ -257,11 +257,11 @@ class OrganisationAdminRepository {
 			$request_parameters['education_level'] = $education_level->__toString();
 		}
 
-		if($disablility == '1') {
+		if(!is_null($disability_text)) {
 			$request_parameters['disability_text'] = $disablility_text->__toString();
 		}
 
-		if($advice == '1') {
+		if(!is_null($advice_text)) {
 			$request_parameters['advice_text'] = $advice_text->__toString();
 		}
 
