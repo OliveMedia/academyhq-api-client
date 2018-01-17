@@ -359,6 +359,10 @@ class OrganisationAdminRepository {
 			$request_parameters['country_code'] = $country_code->__toString();
 		}
 
+		if($mobile_number) {
+			$request_parameters['mobile_number'] = $mobile_number->__toString();
+		}
+
 		if($email) {
 			$request_parameters['email'] = $email->__toString();
 		}
