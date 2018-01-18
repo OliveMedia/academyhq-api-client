@@ -77,7 +77,7 @@ class NotificationRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/notification/member/notifications'),
+			VO\HTTP\Url::fromNative($this->base_url.'/notification/member/notifications/webapp'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -138,7 +138,7 @@ class NotificationRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/notification/seen'),
+			VO\HTTP\Url::fromNative($this->base_url.'/notification/seen/webapp'),
 			new VO\HTTP\Method('POST')
 		);
 
