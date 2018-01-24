@@ -494,7 +494,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 4> Get Logged in Member Web Notifications
 <pre>
 	/*@return notifications std object */
-  	/* notification std object will contain id, crerated_at, updated_at, member_id, sender_id, notification_message, server_response, sent_at, next_send_at, is_set, is_opened, opened_at of notification*/
+  	/* notification std object will contain id, created_at, updated_at, member_id, sender_id, notification_message, server_response, sent_at, next_send_at, is_set, is_opened, opened_at of notification*/
   	$notifications = $notification_repository->member_notifications(new \AcademyHQ\API\ValueObjects\Token('your token'));
 </pre>
 
@@ -510,7 +510,19 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 6> Update Notification
+### 6> Notifications Create With Sender
+<pre>
+	/*@returns sucess message*/
+	$notfication = $notification_repository->create_notification(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		\AcademyHQ\API\ValueObjects\MemberIDArray::fromNative(array('member_id_1', 'member_id_2')),
+		new \AcademyHQ\API\ValueObjects\StringVO("your_notification_message"),
+		\AcademyHQ\API\ValueObjects\NotificationTypeArray::fromNative(array('type_1', 'type_2')),new \AcademyHQ\API\ValueObjects\MemberID('your_sender_id'),		
+		\AcademyHQ\API\ValueObjects\AttachmentIDArray::fromNative(array('attachment_id_1', 'attachment_id_2'))
+	);
+</pre>
+
+### 7> Update Notification
 <pre>
 	/*@returns sucess message*/
 	$notfication = $notification_repository->update_notification(
@@ -836,6 +848,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("your_main_activity_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_industry_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_number_of_qualified_person_in_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_expected_number_of_apprentices_within_12_months"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_contact_person_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_verifier_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_mentor_id"),
@@ -854,6 +867,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("your_main_activity_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_industry_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_number_of_qualified_person_in_occupation"),
+		new \AcademyHQ\API\ValueObjects\Integer("your_expected_number_of_apprentices_within_12_months"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_contact_person"_id),
 		new \AcademyHQ\API\ValueObjects\Integer("your_verifier_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("your_mentor_id"),

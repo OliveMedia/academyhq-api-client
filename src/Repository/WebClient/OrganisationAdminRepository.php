@@ -517,6 +517,7 @@ class OrganisationAdminRepository {
 		VO\Integer $main_activity_id,
 		VO\Integer $industry_id,
 		VO\Integer $number_of_qualified_person_in_occupation,
+		VO\Integer $expected_number_of_apprentices,
 		VO\Integer $contact_person_id,
 		VO\Integer $verifier_id = null,
 		VO\Integer $mentor_id = null,
@@ -541,6 +542,7 @@ class OrganisationAdminRepository {
 			'main_activity_id' => $main_activity_id->__toInteger(),
 			'industry_id' => $industry_id->__toInteger(),
 			'number_of_qualified_person_in_occupation' => $number_of_qualified_person_in_occupation->__toInteger(), 
+			'expected_number_of_apprentices' => $expected_number_of_apprentices->__toInteger(), 
 			'contact_person_id' => $contact_person_id->__toInteger()
 		);
 
@@ -838,6 +840,7 @@ class OrganisationAdminRepository {
 		VO\Integer $sector_id = null,
 		VO\Integer $main_activity_id = null,
 		VO\Integer $number_of_qualified_person_in_occupation = null,
+		VO\Integer $expected_number_of_apprentices = null,
 		VO\Integer $contact_person_id = null,
 		VO\Integer $verifier_id = null,
 		VO\Integer $mentor_id = null,
@@ -879,6 +882,10 @@ class OrganisationAdminRepository {
 
 		if($number_of_qualified_person_in_occupation) {
 			$request_parameters['number_of_qualified_person_in_occupation'] = $number_of_qualified_person_in_occupation->__toInteger();
+		}
+
+		if($expected_number_of_apprentices) {
+			$request_parameters['expected_number_of_apprentices'] = $expected_number_of_apprentices->__toInteger();
 		}
 
 		if($contact_person_id) {
