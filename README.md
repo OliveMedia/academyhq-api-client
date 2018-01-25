@@ -414,6 +414,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 9> Sub Organisation Create Inherit Domain
+<pre>
+ 	/*@returns organisation_details of created sub organisation*/
+	$sub_organisation = $employer_repository->sub_org_create_inherit_domain(
+		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
+	);
+</pre>
+
 ## Using Super Organisation Admin Repository
 
 ### 1> Create Education Training Board

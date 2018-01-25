@@ -158,7 +158,7 @@ class NotificationRepository {
 		);
 
 		if($sender_id){
-			$request_parameters['sender_id'] = $sender_id->__toInteger();
+			$request_parameters['sender_id'] = $sender_id->__toString();
 		}
 
 		if($attachment_id_array) {
