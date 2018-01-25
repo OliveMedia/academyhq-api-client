@@ -354,8 +354,6 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
  	/*@returns organisation_details of created sub organisation*/
 	$sub_organisation = $employer_repository->create_sub_organisation_inherit_domain(
-		new \AcademyHQ\API\ValueObjects\PublicID('ABC123'),
-		new \AcademyHQ\API\ValueObjects\Integer(1),
 		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
 	);
 </pre>
@@ -399,7 +397,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\MemberID('your_member_id'),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
 		new \AcademyHQ\API\ValueObjects\Password('your_password'),
-		new \AcademyHQ\API\ValueObjects\Password("your_password_confirmation"),
+		new \AcademyHQ\API\ValueObjects\Password("your_password_confirmation")
+	);
+</pre>
+
+### 8> Sub Organisation Admin Create
+<pre>
+ 	/*@returns member_details of created sub organisation admin*/
+	$sub_organisation_admin = $employer_repository->create_sub_org_admin(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID("purchased_course_id"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Email('your_email'),
 	);
 </pre>
 

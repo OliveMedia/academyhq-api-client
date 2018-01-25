@@ -140,8 +140,6 @@ class EmployerRepository {
 	}
 
 	public function create_sub_organisation_inherit_domain(
-		VO\PublicID $pub_id,
-		VO\Integer $number_of_employees,
 		VO\StringVO $name
 	){
 	$request = new Request(
@@ -152,8 +150,6 @@ class EmployerRepository {
 		);
 
 		$request_parameters = array(
-			'pub_id' => $pub_id->__toString(),
-			'number_of_employees' => $number_of_employees->__toInteger(),
 			'name' => $name->__toString()
 		);
 
@@ -272,5 +268,35 @@ class EmployerRepository {
 		$data = $response->get_data();
 
 		return $data;
+	}
+
+	public function create_sub_org_admin(
+		VO\OrganisationID $organisation_id,
+		VO\CourseID $course_id,
+		VO\Name $name,
+		VO\Email $email
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/create/sub_org/admin'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toInteger(),
+			'course_id' => $course_id->__toInteger()
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString(),
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
 	}
 }
