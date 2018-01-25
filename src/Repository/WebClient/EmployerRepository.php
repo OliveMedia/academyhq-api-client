@@ -290,10 +290,10 @@ class EmployerRepository {
 
 		$request_parameters = array(
 			'organisation_id' => $organisation_id->__toInteger(),
-			'course_id' => $course_id->__toInteger()
+			'course_id' => $course_id->__toInteger(),
 			'first_name' => $name->get_first_name()->__toString(),
 			'last_name' => $name->get_last_name()->__toString(),
-			'email' => $email->__toString(),
+			'email' => $email->__toString()
 		);
 
 		$response = $request->send($request_parameters);
