@@ -354,6 +354,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
  	/*@returns organisation_details of created sub organisation*/
 	$sub_organisation = $employer_repository->create_sub_organisation_inherit_domain(
+		new \AcademyHQ\API\ValueObjects\PublicID('ABC123'),
+		new \AcademyHQ\API\ValueObjects\Integer(1),
 		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
 	);
 </pre>

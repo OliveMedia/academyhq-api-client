@@ -140,6 +140,8 @@ class EmployerRepository {
 	}
 
 	public function create_sub_organisation_inherit_domain(
+		VO\PublicID $pub_id,
+		VO\Integer $number_of_employees,
 		VO\StringVO $name
 	){
 	$request = new Request(
@@ -150,6 +152,8 @@ class EmployerRepository {
 		);
 
 		$request_parameters = array(
+			'pub_id' => $pub_id->__toString(),
+			'number_of_employees' => $number_of_employees->__toInteger(),
 			'name' => $name->__toString()
 		);
 
