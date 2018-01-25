@@ -199,7 +199,7 @@ class OrganisationAdminRepository {
 		VO\StringVO $date_of_birth,
 		VO\Name $name,
 		VO\StringVO $gender,
-		VO\StringVO $country_code,
+		VO\StringVO $country_code=null,
 		VO\StringVO $mobile_number,
 		VO\Email $email,
 		VO\Integer $disablility,
@@ -238,7 +238,6 @@ class OrganisationAdminRepository {
 			'first_name' => $name->get_first_name()->__toString(),
 			'last_name' => $name->get_last_name()->__toString(),
 			'gender' => $gender->__toString(),
-			'country_code' => $country_code->__toString(),
 			'mobile_number' => $mobile_number->__toString(),
 			'email' => $email->__toString(),
 			'disability' => $disablility->__toInteger(),
@@ -248,6 +247,10 @@ class OrganisationAdminRepository {
 			'state' => $state->__toString(),
 			'country' => $country->__toString()
 		);
+
+		if($country_code){
+			$request_parameters['country_code'] = $country_code->__toString();
+		}
 
 		if($postal_code) {
 			$request_parameters['postal_code'] = $postal_code->__toString();
