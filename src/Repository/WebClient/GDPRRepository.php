@@ -22,7 +22,7 @@ class GDPRRepository {
 	$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/sub_organisation/create/inherit/domain'),
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/sub_org/inherit/domain'),
 			new VO\HTTP\Method('POST')
 		);
 
