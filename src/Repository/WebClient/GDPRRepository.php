@@ -96,22 +96,23 @@ class GDPRRepository {
 
 	}
 
-	public function register_member(
-		VO\MemberID $member_id,
-		VO\Password $password,
-		VO\Password $password_confirmation
+	public function create_member(
+		VO\OrganisationID $organisation_id,
+		VO\Name $name,
+		VO\Email $email
 	){
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/register/member'),
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/member'),
 			new VO\HTTP\Method('POST')
 		);
 
 		$request_parameters = array(
-			'member_id' => $member_id->__toString(),
-			'password' => $password->__toString(),
-			'password_confirmation' => $password_confirmation->__toString()
+			'organisation_id' => $organisation_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString()
 		);
 
 		$response = $request->send($request_parameters);
@@ -119,6 +120,29 @@ class GDPRRepository {
 		$data = $response->get_data();
 
 		return $data;
-
 	}
+
+	public function create_enrolment(
+		VO\MemberID $member_id,
+		VO\licenseID $license_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/enrolment'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'license_id' => $license_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

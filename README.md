@@ -1368,12 +1368,11 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 4> Register Member
+### 4> Create Member
 <pre>
- 	/*@returns license_details of created license*/
-	$member_details = $GDPR_repository->register_member(
+	/*@return enrolment details of created enrolment*/
+	$enrolment_details = $GDPR_repository->create_enrolment(
 		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
-		new \AcademyHQ\API\ValueObjects\Password('password'),
-		new \AcademyHQ\API\ValueObjects\Password('password_confirmation')
+		new \AcademyHQ\API\ValueObjects\LicenseID('license_id') 
 	);
 </pre>
