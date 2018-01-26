@@ -39,7 +39,6 @@ class GDPRRepository {
 
 	public function create_sub_org_admin(
 		VO\OrganisationID $organisation_id,
-		VO\CourseID $course_id,
 		VO\Name $name,
 		VO\Email $email
 	){
@@ -53,7 +52,6 @@ class GDPRRepository {
 
 		$request_parameters = array(
 			'organisation_id' => $organisation_id->__toString(),
-			'course_id' => $course_id->__toString(),
 			'first_name' => $name->get_first_name()->__toString(),
 			'last_name' => $name->get_last_name()->__toString(),
 			'email' => $email->__toString()
@@ -88,6 +86,32 @@ class GDPRRepository {
 			'admin_id' => $admin_id->__toString(),
 			'number_of_license' => $number_of_license->__toInteger(),
 			'price' => $price->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
+	public function register_member(
+		VO\MemberID $member_id,
+		VO\Password $password,
+		VO\Password $password_confirmation
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/register/member'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'password' => $password->__toString(),
+			'password_confirmation' => $password_confirmation->__toString()
 		);
 
 		$response = $request->send($request_parameters);

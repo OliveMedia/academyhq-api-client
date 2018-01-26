@@ -403,37 +403,6 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 8> Sub Organisation Admin Create
-<pre>
- 	/*@returns member_details of created sub organisation admin*/
-	$sub_organisation_admin = $employer_repository->create_sub_org_admin(
-		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
-		new \AcademyHQ\API\ValueObjects\CourseID("purchased_course_id"),
-		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
-		new \AcademyHQ\API\ValueObjects\Email('your_email')
-	);
-</pre>
-
-### 9> Sub Organisation Create Inherit Domain
-<pre>
- 	/*@returns organisation_details of created sub organisation*/
-	$sub_organisation = $employer_repository->sub_org_create_inherit_domain(
-		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
-	);
-</pre>
-
-### 10> Create License
-<pre>
- 	/*@returns license_details of created license*/
-	$sub_organisation_admin = $employer_repository->create_sub_org_admin(
-		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
-		new \AcademyHQ\API\ValueObjects\CourseID("course_id"),
-		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
-		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
-		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license')
-	);
-</pre>
-
 ## Using Super Organisation Admin Repository
 
 ### 1> Create Education Training Board
@@ -1364,5 +1333,47 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("is_assessed"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_verified"),
 		new \AcademyHQ\API\ValueObjects\Integer("is_approved")
+	);
+</pre>
+
+## Using GDPR Repository
+
+### 1> Sub Organisation Create Inherit Domain
+<pre>
+ 	/*@returns organisation_details of created sub organisation*/
+	$sub_organisation = $GDPR_repository->sub_org_create_inherit_domain(
+		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
+	);
+</pre>
+
+### 2> Sub Organisation Admin Create
+<pre>
+ 	/*@returns member_details of created sub organisation admin*/
+	$sub_organisation_admin = $GDPR_repository->create_sub_org_admin(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Email('your_email')
+	);
+</pre>
+
+### 3> Create License
+<pre>
+ 	/*@returns license_details of created license*/
+	$license_details = $GDPR_repository->create_license(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID("course_id"),
+		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
+		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license')
+	);
+</pre>
+
+### 4> Register Member
+<pre>
+ 	/*@returns license_details of created license*/
+	$member_details = $GDPR_repository->register_member(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\Password('password'),
+		new \AcademyHQ\API\ValueObjects\Password('password_confirmation')
 	);
 </pre>
