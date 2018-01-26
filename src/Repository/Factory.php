@@ -13,6 +13,7 @@ use AcademyHQ\API\Repository\WebClient\EmployerRepository;
 use AcademyHQ\API\Repository\WebClient\AssessorRepository;
 use AcademyHQ\API\Repository\WebClient\NotificationRepository;
 use AcademyHQ\API\Repository\WebClient\MemberProgramRepository;
+use AcademyHQ\API\Repository\WebClient\GDPRRepository;
 
 class Factory
 {
@@ -95,5 +96,10 @@ class Factory
 	public function get_member_program_repository() {
 
 		return new MemberProgramRepository($this->credentials);
+	}
+
+	public function get_gdpr_repository() {
+
+		return new GDPRRepository($this->credentials);
 	}
 }
