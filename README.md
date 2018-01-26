@@ -410,7 +410,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
 		new \AcademyHQ\API\ValueObjects\CourseID("purchased_course_id"),
 		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
-		new \AcademyHQ\API\ValueObjects\Email('your_email'),
+		new \AcademyHQ\API\ValueObjects\Email('your_email')
 	);
 </pre>
 
@@ -419,6 +419,18 @@ Client Library that allow third party to access AcademyHQ APIs.
  	/*@returns organisation_details of created sub organisation*/
 	$sub_organisation = $employer_repository->sub_org_create_inherit_domain(
 		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
+	);
+</pre>
+
+### 10> Create License
+<pre>
+ 	/*@returns license_details of created license*/
+	$sub_organisation_admin = $employer_repository->create_sub_org_admin(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID("course_id"),
+		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
+		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license')
 	);
 </pre>
 

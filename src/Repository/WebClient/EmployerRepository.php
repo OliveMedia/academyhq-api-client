@@ -324,4 +324,35 @@ class EmployerRepository {
 		return $data;
 
 	}
+
+	public function create_license(
+		VO\OrganisationID $organisation_id,
+		VO\CourseID $course_id,
+		VO\MemberID $admin_id,
+		VO\Integer $number_of_license,
+		VO\StringVO $price
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/create/license'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'course_id' => $course_id->__toString(),
+			'admin_id' => $admin_id->__toString(),
+			'number_of_license' => $number_of_license->__toInteger(),
+			'price' => $price->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
 }
