@@ -145,4 +145,20 @@ class GDPRRepository {
 		return $data;
 	}
 
+	public function check_license(VO\LicenseID $id){
+		$license_id = $id->__toString();
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/is/license/'.$license_id.'/available'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data; 
+	}
+
 }

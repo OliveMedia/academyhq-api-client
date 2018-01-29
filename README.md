@@ -1376,3 +1376,11 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\LicenseID('license_id') 
 	);
 </pre>
+
+### 5> Check License
+<pre>
+	/*@return true or false accroding to availability of license*/
+	$is_available = $GDPR_repository->check_license(
+		new \AcademyHQ\API\ValueObjects\LicenseID('license_id') 
+	);
+</pre>
