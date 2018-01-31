@@ -70,7 +70,8 @@ class GDPRRepository {
 		VO\CourseID $course_id,
 		VO\MemberID $admin_id,
 		VO\Integer $number_of_license,
-		VO\StringVO $price
+		VO\StringVO $price,
+		VO\StringVO $currency
 	){
 
 		$request = new Request(
@@ -85,7 +86,8 @@ class GDPRRepository {
 			'course_id' => $course_id->__toString(),
 			'admin_id' => $admin_id->__toString(),
 			'number_of_license' => $number_of_license->__toInteger(),
-			'price' => $price->__toString()
+			'price' => $price->__toString(),
+			'currency' => $currency->__toString()
 		);
 
 		$response = $request->send($request_parameters);
