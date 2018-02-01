@@ -165,7 +165,7 @@ class GDPRRepository {
 
 	public function rollback(
 		VO\MemberID $member_id,
-		VO\OrganisationID $license_id
+		VO\OrganisationID $organisation_id
 	){
 		$request = new Request(
 			new GuzzleClient,
