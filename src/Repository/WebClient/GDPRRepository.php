@@ -163,4 +163,27 @@ class GDPRRepository {
 		return $data; 
 	}
 
+	public function rollback(
+		VO\MemberID $member_id,
+		VO\OrganisationID $license_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/rollback'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'organisation_id' => $organisation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

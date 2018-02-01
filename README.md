@@ -1385,3 +1385,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\LicenseID('license_id') 
 	);
 </pre>
+
+### 4> Rollback
+<pre>
+	/*@return success message*/
+	$rollback_message = $GDPR_repository->rollback(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\OrganisationID('organisation_id') 
+	);
+</pre>
