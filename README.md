@@ -1371,14 +1371,24 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 ### 4> Create Member
 <pre>
-	/*@return enrolment details of created enrolment*/
-	$enrolment_details = $GDPR_repository->create_enrolment(
-		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
-		new \AcademyHQ\API\ValueObjects\LicenseID('license_id') 
+	/*@return member details of created member*/
+	$member_details = $GDPR_repository->create_enrolment(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('organisation_id'),
+		new \AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"), 
+		new \AcademyHQ\API\ValueObjects\Email('email')
 	);
 </pre>
 
-### 5> Check License
+### 5> Create Enrolment
+<pre>
+	/*@return enrolment details of created enrolment*/
+	$enrolment_details = $GDPR_repository->create_enrolment(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID('course_id') 
+	);
+</pre>
+
+### 6> Check License
 <pre>
 	/*@return true or false accroding to availability of license*/
 	$is_available = $GDPR_repository->check_license(
@@ -1386,7 +1396,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 4> Rollback
+### 7> Rollback
 <pre>
 	/*@return success message*/
 	$rollback_message = $GDPR_repository->rollback(

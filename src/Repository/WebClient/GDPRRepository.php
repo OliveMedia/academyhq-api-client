@@ -126,7 +126,7 @@ class GDPRRepository {
 
 	public function create_enrolment(
 		VO\MemberID $member_id,
-		VO\LicenseID $license_id
+		VO\CourseID $course_id
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -137,7 +137,7 @@ class GDPRRepository {
 
 		$request_parameters = array(
 			'member_id' => $member_id->__toString(),
-			'license_id' => $license_id->__toString()
+			'course_id' => $course_id->__toString()
 		);
 
 		$response = $request->send($request_parameters);
