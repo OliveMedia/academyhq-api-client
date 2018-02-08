@@ -186,4 +186,29 @@ class GDPRRepository {
 		return $data;
 	}
 
+	public function vat_validate(
+		VO\StringVO $country_code,
+		VO\StringVO $vat_number
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/validate/vat_number'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'country_code' => $country_code->__toString(),
+			'vat_number' => $vat_number->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
 }

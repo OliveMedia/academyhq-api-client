@@ -1404,3 +1404,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\OrganisationID('organisation_id') 
 	);
 </pre>
+
+### 8> VAt Validate
+<pre>
+	/*@return true or false according to vat validation*/
+	$validation = $GDPR_repository->rollback(
+		new \AcademyHQ\API\ValueObjects\StringVO('country_code'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_number') 
+	);
+</pre>
