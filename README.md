@@ -1365,7 +1365,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
 		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
 		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license'),
-		new \AcademyHQ\API\ValueObjects\StringVO('currency')
+		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_number')
 	);
 </pre>
 
