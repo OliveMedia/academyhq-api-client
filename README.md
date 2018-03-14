@@ -1415,3 +1415,26 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_number') 
 	);
 </pre>
+
+### 9> Partner Organisation Create With APIS
+<pre>
+ 	/*@returns organisation_details of created sub organisation*/
+	$sub_organisation = $GDPR_repository->create_partner_with_apis(
+		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
+	);
+</pre>
+
+### 3> Create License New
+<pre>
+ 	/*@returns license_details of created license*/
+	$license_details = $GDPR_repository->create_license_new(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID("course_id"),
+		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
+		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_number')
+	);
+</pre>
