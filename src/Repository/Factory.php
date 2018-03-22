@@ -14,6 +14,7 @@ use AcademyHQ\API\Repository\WebClient\AssessorRepository;
 use AcademyHQ\API\Repository\WebClient\NotificationRepository;
 use AcademyHQ\API\Repository\WebClient\MemberProgramRepository;
 use AcademyHQ\API\Repository\WebClient\GDPRRepository;
+use AcademyHQ\API\Repository\ConnectedRMS\CrmsRepository;
 
 class Factory
 {
@@ -101,5 +102,10 @@ class Factory
 	public function get_gdpr_repository() {
 
 		return new GDPRRepository($this->credentials);
+	}
+
+	public function get_crms_repository() {
+
+		return new CrmsRepository($this->credentials);
 	}
 }
