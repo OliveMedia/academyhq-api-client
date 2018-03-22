@@ -1424,7 +1424,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 3> Create License New
+### 10> Create License New
 <pre>
  	/*@returns license_details of created license*/
 	$license_details = $GDPR_repository->create_license_new(
@@ -1436,5 +1436,47 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_number')
+	);
+</pre>
+
+## Using Crms Repository
+
+### 1> Create Organisation(Client) To Academyhq
+<pre>
+	/*@return created client_details std object */
+  	$client_details = $crms_repository->create_client(
+		new \AcademyHQ\API\ValueObjects\StringVO("Organisation name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("domain name")
+	);
+</pre>
+
+## Using Course Api Repository
+
+### 1> Fetch All Public Courses
+<pre>
+	/*@return all public courses details std object */
+  	$course_details = $course_api_repository->get_courses(
+		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),
+		new \AcademyHQ\API\ValueObjects\Integer("page_number")
+	);
+</pre>
+
+### 2> Fetch All Organisation Licenses
+<pre>
+	/*@return all licenses with course details std object */
+  	$license_details = $course_api_repository->get_licenses(
+		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),
+		new \AcademyHQ\API\ValueObjects\Integer("page_number")
+	);
+</pre>
+
+## Using Member Api Repository
+
+### 1> Fetch All Organisation Licenses
+<pre>
+	/*@return all members details std object */
+  	$member_details = $course_api_repository->get_members(
+		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),
+		new \AcademyHQ\API\ValueObjects\Integer("page_number")
 	);
 </pre>

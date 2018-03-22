@@ -15,6 +15,8 @@ use AcademyHQ\API\Repository\WebClient\NotificationRepository;
 use AcademyHQ\API\Repository\WebClient\MemberProgramRepository;
 use AcademyHQ\API\Repository\WebClient\GDPRRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CrmsRepository;
+use AcademyHQ\API\Repository\ConnectedRMS\CourseApiRepository;
+use AcademyHQ\API\Repository\ConnectedRMS\MemberApiRepository;
 
 class Factory
 {
@@ -107,5 +109,15 @@ class Factory
 	public function get_crms_repository() {
 
 		return new CrmsRepository($this->credentials);
+	}
+
+	public function get_course_api_repository() {
+
+		return new CourseApiRepository($this->credentials);
+	}
+
+	public function get_member_api_repository() {
+
+		return new MemberApiRepository($this->credentials);
 	}
 }
