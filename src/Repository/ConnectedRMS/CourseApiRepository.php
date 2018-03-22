@@ -16,23 +16,6 @@ class CourseApiRepository {
 		$this->credentials = $credentials;
 	}
 
-	public function get_courses(
-		VO\StringVO $search,
-		VO\Integer $current_page
-	){
-		$request = new Request(
-			new GuzzleClient,
-			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/courses/get/'.$search->__toString().'/'.$current_page->__toInteger()),
-			new VO\HTTP\Method('GET')
-		);
-
-		$response = $request->send();
-		$data = $response->get_data();
-
-		return $data;
-	}
-
 	public function get_licenses(
 		VO\StringVO $search,
 		VO\Integer $current_page

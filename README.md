@@ -1439,6 +1439,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+
 ## Using Crms Repository
 
 ### 1> Create Organisation(Client) To Academyhq
@@ -1450,18 +1451,29 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-## Using Course Api Repository
-
-### 1> Fetch All Public Courses
+### 2> Fetch All Public Courses
 <pre>
 	/*@return all public courses details std object */
-  	$course_details = $course_api_repository->get_courses(
+  	$course_details = $crms_repository->get_courses(
 		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),
 		new \AcademyHQ\API\ValueObjects\Integer("page_number")
 	);
 </pre>
 
-### 2> Fetch All Organisation Licenses
+### 3> Create Course
+<pre>
+	/*@return created standard course details std object */
+  	$client_details = $crms_repository->create_course(
+		new \AcademyHQ\API\ValueObjects\StringVO("course name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("course description"),
+		new \AcademyHQ\API\ValueObjects\StringVO("image_url")
+	);
+</pre>
+
+
+## Using Course Api Repository
+
+### 1> Fetch All Organisation Licenses
 <pre>
 	/*@return all licenses with course details std object */
   	$license_details = $course_api_repository->get_licenses(
@@ -1469,6 +1481,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\Integer("page_number")
 	);
 </pre>
+
 
 ## Using Member Api Repository
 
