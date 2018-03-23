@@ -17,17 +17,25 @@ class MemberApiRepository {
 	}
 
 	public function get_members(
-		VO\StringVO $search,
+		VO\StringVO $search=null,
 		VO\Integer $current_page
 	){
+
+
+		$request_parameters = array(
+			'search' => $search ? $search->__toString() : '',
+			'current_page' => $current_page->__toInteger()
+		);
+
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/members/get/'.$search->__toString().'/'.$current_page->__toInteger()),
-			new VO\HTTP\Method('GET')
+			VO\HTTP\Url::fromNative($this->base_url.'/members/get/'),
+			new VO\HTTP\Method('POST')
 		);
 
-		$response = $request->send();
+		$response = $request->send($request_parameters);
+		
 		$data = $response->get_data();
 
 		return $data;

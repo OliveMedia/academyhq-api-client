@@ -20,7 +20,7 @@ class CrmsRepository {
 		VO\StringVO $name,
 		VO\StringVO $domain
 	){
-	$request = new Request(
+		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/create/client'),
@@ -40,17 +40,24 @@ class CrmsRepository {
 	}
 
 	public function get_courses(
-		VO\StringVO $search,
+		VO\StringVO $search=null,
 		VO\Integer $current_page
 	){
+
+		$request_parameters = array(
+			'search' => $search ? $search->__toString() : '',
+			'current_page' => $current_page->__toInteger()
+		);
+
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/courses/get/'.$search->__toString().'/'.$current_page->__toInteger()),
-			new VO\HTTP\Method('GET')
+			VO\HTTP\Url::fromNative($this->base_url.'/courses/get/'),
+			new VO\HTTP\Method('POST')
 		);
 
-		$response = $request->send();
+		$response = $request->send($request_parameters);
+
 		$data = $response->get_data();
 
 		return $data;
@@ -70,8 +77,11 @@ class CrmsRepository {
 
 		$request_parameters = array(
 			'name' => $name->__toString(),
-			'domain' => $domain->__toString()
+			'description' => $description->__toString(),
+			'image_url' => $image_url ? $image_url->__toString() : '',
 		);
+
+		$response = $request->send($request_parameters);
 
 		$data = $response->get_data();
 
