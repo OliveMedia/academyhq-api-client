@@ -1470,6 +1470,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 4> Find License
+<pre>
+	/*@return return license_details std object */
+  	$license_details = $crms_repository->find_license(
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id"),
+		new \AcademyHQ\API\ValueObjects\CourseID("course_id")
+	);
+</pre>
+
 
 ## Using Course Api Repository
 

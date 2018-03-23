@@ -20,18 +20,16 @@ class MemberApiRepository {
 		VO\StringVO $search=null,
 		VO\Integer $current_page
 	){
-
-
-		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger()
-		);
-
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/members/get/'),
+			VO\HTTP\Url::fromNative($this->base_url.'/members/get'),
 			new VO\HTTP\Method('POST')
+		);
+		
+		$request_parameters = array(
+			'search' => $search ? $search->__toString() : '',
+			'current_page' => $current_page->__toInteger()
 		);
 
 		$response = $request->send($request_parameters);

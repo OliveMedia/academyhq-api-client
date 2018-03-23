@@ -44,16 +44,16 @@ class CrmsRepository {
 		VO\Integer $current_page
 	){
 
-		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger()
-		);
-
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/courses/get/'),
+			VO\HTTP\Url::fromNative($this->base_url.'/courses/get'),
 			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'search' => $search ? $search->__toString() : '',
+			'current_page' => $current_page->__toInteger()
 		);
 
 		$response = $request->send($request_parameters);
@@ -72,13 +72,36 @@ class CrmsRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/create/course'),
-			new VO\HTTP\Method('GET')
+			new VO\HTTP\Method('POST')
 		);
 
 		$request_parameters = array(
 			'name' => $name->__toString(),
 			'description' => $description->__toString(),
 			'image_url' => $image_url ? $image_url->__toString() : '',
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function find_license(
+		VO\OrganisationID $organisation_id,
+		VO\CourseID $course_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/find/license'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'course_id' => $course_id->__toString()
 		);
 
 		$response = $request->send($request_parameters);
