@@ -6,15 +6,20 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class CrmsRepository {
-
-	private $base_url = 'https://api.academyhq.com/api/v2/crms';
+class CrmsRepository extends BaseRepository{
 
 	public function __construct(Credentials $credentials)
 	{
 		$this->credentials = $credentials;
+
 	}
+	
+	private function get_url(){
+		return $this->base_url.'/crms';
+	}
+
 
 	public function create_client(
 		VO\StringVO $name,
@@ -23,7 +28,7 @@ class CrmsRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/create/client'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/client'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -47,7 +52,7 @@ class CrmsRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/courses/get'),
+			VO\HTTP\Url::fromNative($this->get_url().'/courses/get'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -71,7 +76,7 @@ class CrmsRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/create/course'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/course'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -95,15 +100,13 @@ class CrmsRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/find/license'),
+			VO\HTTP\Url::fromNative($this->get_url().'/find/license'),
 			new VO\HTTP\Method('post')
 		);
-
 		$request_parameters = array(
 			'organisation_id' => $organisation_id->__toString(),
 			'course_id' => $course_id->__toString()
 		);
-
 		$response = $request->send($request_parameters);
 
 		$data = $response->get_data();

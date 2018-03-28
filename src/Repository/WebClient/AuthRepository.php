@@ -6,10 +6,14 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class AuthRepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+class AuthRepository extends BaseRepository{
+
+	private function get_url(){		
+		return $this->base_url.'/web/client';
+	}
 
 	public function __construct(Credentials $credentials)
 	{
@@ -24,7 +28,7 @@ class AuthRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/auth/login'),
+			VO\HTTP\Url::fromNative($this->get_url().'/auth/login'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -48,7 +52,7 @@ class AuthRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/auth/login/from/email'),
+			VO\HTTP\Url::fromNative($this->get_url().'/auth/login/from/email'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -69,7 +73,7 @@ class AuthRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/auth/logout'),
+			VO\HTTP\Url::fromNative($this->get_url().'/auth/logout'),
 			new VO\HTTP\Method('POST')
 		);
 

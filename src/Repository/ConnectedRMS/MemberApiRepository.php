@@ -6,14 +6,18 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class MemberApiRepository {
-
-	private $base_url = 'https://api.academyhq.com/api/v2/crms';
+class MemberApiRepository extends BaseRepository{
 
 	public function __construct(Credentials $credentials)
 	{
 		$this->credentials = $credentials;
+
+	}
+
+	private function get_url(){
+		return $this->base_url.'/crms';
 	}
 
 	public function get_members(
@@ -23,7 +27,7 @@ class MemberApiRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/members/get'),
+			VO\HTTP\Url::fromNative($this->get_url().'/members/get'),
 			new VO\HTTP\Method('POST')
 		);
 		

@@ -6,10 +6,13 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class GDPRRepository {
+class GDPRRepository extends BaseRepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+	private function get_url(){		
+		return $this->base_url.'/web/client/gdpr';
+	}
 
 	public function __construct(Credentials $credentials)
 	{
@@ -22,7 +25,7 @@ class GDPRRepository {
 	$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/sub_org/inherit/domain'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/sub_org/inherit/domain'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -43,7 +46,7 @@ class GDPRRepository {
 	$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/partner'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/partner'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -67,7 +70,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/sub_org/admin'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/sub_org/admin'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -100,7 +103,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/license'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/license'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -137,7 +140,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/newlicense'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/newlicense'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -168,7 +171,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/member'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/member'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -193,7 +196,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/enrolment'),
+			VO\HTTP\Url::fromNative($this->get_url().'/create/enrolment'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -214,7 +217,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/is/license/'.$license_id.'/available'),
+			VO\HTTP\Url::fromNative($this->get_url().'/is/license/'.$license_id.'/available'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -232,7 +235,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/rollback'),
+			VO\HTTP\Url::fromNative($this->get_url().'/rollback'),
 			new VO\HTTP\Method('POST')
 		);
 
@@ -256,7 +259,7 @@ class GDPRRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/validate/vat_number'),
+			VO\HTTP\Url::fromNative($this->get_url().'/validate/vat_number'),
 			new VO\HTTP\Method('POST')
 		);
 

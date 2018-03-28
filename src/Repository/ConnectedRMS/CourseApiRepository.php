@@ -6,14 +6,17 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class CourseApiRepository {
-
-	private $base_url = 'https://api.academyhq.com/api/v2/crms';
+class CourseApiRepository extends BaseRepository {
 
 	public function __construct(Credentials $credentials)
 	{
 		$this->credentials = $credentials;
+	}
+
+	private function get_url(){
+		return $this->base_url.'/crms';
 	}
 
 	public function get_licenses(
@@ -24,7 +27,7 @@ class CourseApiRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/licenses/get'),
+			VO\HTTP\Url::fromNative($this->get_url().'/licenses/get'),
 			new VO\HTTP\Method('POST')
 		);
 
