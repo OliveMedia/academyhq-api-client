@@ -40,6 +40,30 @@ class AuthRepository {
 		return $data;
 	}
 
+	public function login_to_academy(
+		VO\Username $username,
+		VO\Password $password
+	) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/login/academy'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'username' => $username->__toEncodedString(),
+			'password' => $password->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function login_from_email(
 		VO\Email $email,
 		VO\Password $password
