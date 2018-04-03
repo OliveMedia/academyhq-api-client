@@ -1479,6 +1479,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 4> Find Organisation Package
+<pre>
+	/*@return return org_package_details std object */
+  	$org_package_details = $crms_repository->find_license(
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id"),
+		new \AcademyHQ\API\ValueObjects\ID("package_id")
+	);
+</pre>
+
 
 ## Using Course Api Repository
 

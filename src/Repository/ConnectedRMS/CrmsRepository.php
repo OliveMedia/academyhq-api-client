@@ -113,5 +113,25 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function find_org_package(
+		VO\OrganisationID $organisation_id,
+		VO\ID $package_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/find/org_package'),
+			new VO\HTTP\Method('post')
+		);
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'package_id' => $package_id->__toString()
+		);
+		$response = $request->send($request_parameters);
+			$data = $response->get_data();
+
+		return $data;
+	}
 	
 }
