@@ -234,6 +234,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 
 </pre>
 
+### 11> Package Enrollments 
+<pre>
+	/*@return array of success message */
+	$success_message = $enrolment_repository->create_package_enrolment(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\ID('package_id')
+	);
+
+</pre>
+
 
 ## Using License Repository
 

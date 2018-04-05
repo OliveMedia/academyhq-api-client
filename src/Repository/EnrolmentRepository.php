@@ -6,11 +6,12 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class EnrolmentRepository
+class EnrolmentRepository extends BaseRepository
 {
 
-	private $base_url = 'https://api.academyhq.com/api/v2';
+	/*private $base_url = 'https://api.academyhq.com/api/v2';*/
 
 	public function __construct(Credentials $credentials)
 	{
@@ -305,5 +306,26 @@ class EnrolmentRepository
 		}
 	
 		return $enrolment_ids;
+	}
+
+	public function create_package_enrolment(VO\MemberID $member_id, VO\ID $package_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/package/enrolment/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'package_id' => $package_id->__toString()
+		);
+
+
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data;
 	}
 }
