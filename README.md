@@ -1498,13 +1498,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+
 ### 5> Fetch All Organisations with api if exists
 <pre>
-	/*@return all members details std object */
-  	$member_details = $crms_repository->get_organisations(
+	/*@return all organisation details std object */
+  	$organisation_details = $crms_repository->get_organisations(
 		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),
 		new \AcademyHQ\API\ValueObjects\Integer("page_number"))
 	);
+</pre>
+
+### 6> Fetch All Course packages
+<pre>
+	/*@return all Course packages details std object */
+  	$package_details = $crms_repository->get_packages();
+
 </pre>
 
 

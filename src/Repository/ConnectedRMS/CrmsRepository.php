@@ -157,5 +157,29 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function get_packages(
+		// VO\StringVO $search=null,
+		// VO\Integer $current_page
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/packages/get'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			// 'search' => $search ? $search->__toString() : '',
+			// 'current_page' => $current_page->__toInteger()
+		);
+
+		// $response = $request->send($request_parameters);
+		$response = $request->send(array());
+		$data = $response->get_data();
+
+		return $data;
+	}
 	
 }
