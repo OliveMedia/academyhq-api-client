@@ -182,4 +182,31 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 	
+	public function create_org_admin(
+		VO\OrganisationID $organisation_id,
+		VO\Name $name,
+		VO\Email $email
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/org/admin'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString()
+		);
+
+		// dd($request);
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data;
+
+	}
 }
