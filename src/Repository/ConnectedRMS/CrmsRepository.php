@@ -209,4 +209,24 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 
 	}
+
+	public function get_all_courses(){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/courses/get'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'fetch_all' => true
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }

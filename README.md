@@ -1525,6 +1525,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 8> Fetch All Courses
+<pre>
+	/*@return all standard courses std object*/
+	$course_details = $crms_repository->get_courses();
+</pre>
+
 
 ## Using Course Api Repository
 
