@@ -87,4 +87,24 @@ class AuthRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function login_to_academy(
+		VO\Username $username,
+		VO\Password $password
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/auth/login/academy'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'username' => $username->__toEncodedString(),
+			'password' => $password->__toEncodedString()
+		);
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+		return $data;
+	}
 }
