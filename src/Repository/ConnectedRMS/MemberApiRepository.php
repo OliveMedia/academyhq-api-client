@@ -43,4 +43,50 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function check_course_enrollment(
+		VO\MemberID $member_id,
+		VO\CourseID $course_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/course/enrollment/check'),
+			new VO\HTTP\Method('POST')
+		);
+		
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'course_id' => $course_id->__toInteger()
+		);
+
+		$response = $request->send($request_parameters);
+		
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function check_package_enrollment(
+		VO\MemberID $member_id,
+		VO\ID $package_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/package/enrollment/check'),
+			new VO\HTTP\Method('POST')
+		);
+		
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'package_id' => $package_id->__toInteger()
+		);
+
+		$response = $request->send($request_parameters);
+		
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
