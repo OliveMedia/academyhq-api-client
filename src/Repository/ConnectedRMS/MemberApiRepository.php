@@ -56,7 +56,7 @@ class MemberApiRepository extends BaseRepository{
 		
 		$request_parameters = array(
 			'member_id' => $member_id->__toString(),
-			'course_id' => $course_id->__toInteger()
+			'course_id' => $course_id->__toString()
 		);
 
 		$response = $request->send($request_parameters);
@@ -79,7 +79,7 @@ class MemberApiRepository extends BaseRepository{
 		
 		$request_parameters = array(
 			'member_id' => $member_id->__toString(),
-			'package_id' => $package_id->__toInteger()
+			'package_id' => $package_id->__toString()
 		);
 
 		$response = $request->send($request_parameters);
