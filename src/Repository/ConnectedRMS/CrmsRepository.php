@@ -229,4 +229,23 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function fetch_organisation_api(VO\OrganisationID $organisation_id){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/fetch/org/api'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
