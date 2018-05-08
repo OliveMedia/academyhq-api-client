@@ -36,6 +36,9 @@ class MemberApiRepository extends BaseRepository{
 			'current_page' => $current_page->__toInteger()
 		);
 
+		if($fetch_all)
+			$request_parameters['fetch_all'] = true;
+
 		$response = $request->send($request_parameters);
 		
 		$data = $response->get_data();
