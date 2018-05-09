@@ -1543,6 +1543,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 2> Fetch All Organisation Profiles
+<pre>
+	/*@return all profiles with course details std object */
+  	$profile_details = $course_api_repository->fetch_all_profiles();
+</pre>
+
 
 ## Using Member Api Repository
 

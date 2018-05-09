@@ -42,5 +42,26 @@ class CourseApiRepository extends BaseRepository {
 
 		return $data;
 	}
+	
+	public function fetch_all_profiles()
+	{
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/profiles/get'),
+			new VO\HTTP\Method('POST')
+		);
+
+
+		$request_parameters = array();
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
 
 }
