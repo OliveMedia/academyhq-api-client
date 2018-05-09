@@ -22,7 +22,8 @@ class MemberApiRepository extends BaseRepository{
 
 	public function get_members(
 		VO\StringVO $search=null,
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		$fetch_all=null
 	){
 		$request = new Request(
 			new GuzzleClient,
