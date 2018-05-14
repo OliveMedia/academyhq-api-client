@@ -93,4 +93,29 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	
+	public function create_enrolment(VO\MemberID $member_id, VO\CourseID $course_id, VO\Flag $send_email = null)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/enrolment/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'course_id' => $course_id->__toString()
+		);
+
+		if($send_email) {
+			$request_parameters['send_email'] = $send_email->__toBool();
+		}
+
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data->enrolment_id;
+	}
+
 }

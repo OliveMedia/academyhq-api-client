@@ -1570,12 +1570,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 2> Check Member Enrollments for Package
+### 3> Check Member Enrollments for Package
 <pre>
 	/*@return true or false for member enrolled in package or not */
   	$enrolment_exist = $course_api_repository->check_course_enrollment(
 		new \AcademyHQ\API\ValueObjects\MemberID("member_id"),
 		new \AcademyHQ\API\ValueObjects\ID("package_id")
+	);
+</pre>
+
+### 3> Create Member Enrollments for Course
+<pre>
+	/*@return true or false for member enrolled in package or not */
+  	$enrolment_exist = $course_api_repository->create_enrolment(
+		new \AcademyHQ\API\ValueObjects\MemberID("member_id"),
+		new \AcademyHQ\API\ValueObjects\ID("course_id")
 	);
 </pre>
 
