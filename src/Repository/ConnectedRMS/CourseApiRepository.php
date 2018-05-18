@@ -36,6 +36,9 @@ class CourseApiRepository extends BaseRepository {
 			'current_page' => $current_page->__toInteger()
 		);
 
+		if($fetch_all)
+			$request_parameters['fetch_all'] = true;
+
 		$response = $request->send($request_parameters);
 
 		$data = $response->get_data();
@@ -55,6 +58,30 @@ class CourseApiRepository extends BaseRepository {
 
 
 		$request_parameters = array();
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
+	public function fetch_all_modules(VO\CourseID $course_id,VO\StringVO $callback_url)
+	{
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/course/modules/get'),
+			new VO\HTTP\Method('POST')
+		);
+
+
+		$request_parameters = array(
+			'course_id' => $course_id->__toString(),
+			'callback_url' => $callback_url->__toString()
+		);
 
 		$response = $request->send($request_parameters);
 
