@@ -21,7 +21,8 @@ class CourseApiRepository extends BaseRepository {
 
 	public function get_licenses(
 		VO\StringVO $search=null,
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		$fetch_all=null
 	){
 
 		$request = new Request(
