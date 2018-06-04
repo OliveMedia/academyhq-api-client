@@ -210,7 +210,11 @@ class CrmsRepository extends BaseRepository{
 
 	}
 
-	public function get_all_courses(){
+	public function get_all_courses(
+		VO\Integer $current_page=null,
+		VO\Integer $per_page=null
+
+	){
 
 		$request = new Request(
 			new GuzzleClient,
@@ -220,7 +224,8 @@ class CrmsRepository extends BaseRepository{
 		);
 
 		$request_parameters = array(
-			'fetch_all' => true
+			'current_page' => $current_page->__toInteger(),
+			'per_page' => $per_page->__toInteger()
 		);
 
 		$response = $request->send($request_parameters);
