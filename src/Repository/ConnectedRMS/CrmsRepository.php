@@ -253,4 +253,27 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function rollback(
+		VO\MemberID $member_id=null,
+		VO\OrganisationID $organisation_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/rollback/member/org'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id ? $member_id->__toString() : '',
+			'organisation_id' => $organisation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
