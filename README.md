@@ -1606,4 +1606,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 3> Create Member 
+<pre>
+	/*@returns member_details of created member*/
+	$member = $member_api_repository->create_member(
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\Username("username"),
+		new \AcademyHQ\API\ValueObjects\Password("password"),
+		new \AcademyHQ\API\ValueObjects\Password("password_confirm"),
+		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id")
+</pre>
+
 

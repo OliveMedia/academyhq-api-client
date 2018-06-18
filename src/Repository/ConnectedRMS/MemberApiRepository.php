@@ -118,4 +118,38 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function create_member(
+		VO\Name $name,
+		VO\Username $username,
+		VO\Password $password,
+		VO\Password $password_confirm,
+		VO\PublicID $pub_id = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'username' => $username->__toString(),
+			'password' => $password->__toString(),
+			'password_confirm' => $password_confirm->__toString()
+		);
+
+		if($pub_id) {
+			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
