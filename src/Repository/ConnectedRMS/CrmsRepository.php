@@ -276,4 +276,38 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	
+	public function update_organisation_subscription(
+		VO\OrganisationID $organisation_id,
+		VO\ID $subscription_id = null,
+		VO\CourseIDArray $subscription_courses,
+		VO\CourseIDArray $subscription_bundles,
+		VO\Integer $max_enrolments,
+		VO\Integer $max_licenses,
+		VO\Integer $max_members
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/update/organisation_subscription'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'subscription_id' => $subscription_id ? $subscription_id->__toString() : '',
+			'organisation_id' => $organisation_id->__toString(),
+			'subscription_courses' => $subscription_courses->__toArray(),
+			'subscription_bundles' => $subscription_bundles->__toArray(),
+			'max_enrolments' => $max_enrolments->__toInteger(),
+			'max_licenses' => $max_licenses->__toInteger(),
+			'max_members' => $max_members->__toInteger()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
