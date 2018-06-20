@@ -92,4 +92,28 @@ class CourseApiRepository extends BaseRepository {
 
 	}
 
+	public function get_license_enrolled_members(
+		VO\CourseID $course_id=null,
+		VO\LicenseID $license_id=null,
+		VO\StringVO $search=null,
+		VO\Integer $page =null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/license/enrolled/members'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'course_id' => $course_id ? $course_id->__toString():'',
+			'license_id' => $license_id ? $license_id->__toString():'',
+			'search' => $search ? $search->__toString() : '',
+			'page' => $page ? $page->__toInteger() : ''
+		);
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+
 }

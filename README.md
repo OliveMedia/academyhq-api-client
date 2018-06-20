@@ -1578,7 +1578,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 3> Fetch All Modules
 <pre>
 	/*@return all profiles with course details std object */
-  	$modules = $course_api_repository->fetch_all_modules();
+  	$modules = $course_api_repository->fetch_all_modules(
+  		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),
+		new \AcademyHQ\API\ValueObjects\Integer("page_number")
+  	);
+</pre>
+
+### 4> Get License's Enrolled member
+<pre>
+	/*@return all enrolments with member details std object */
+  	$member_details = $course_api_repository->get_license_enrolled_members(
+  		new \AcademyHQ\API\ValueObjects\CourseID("course_id"),
+  		new \AcademyHQ\API\ValueObjects\LicenseID("license_id"),
+  		new \AcademyHQ\API\ValueObjects\StringVO("search parameter"),  		
+		new \AcademyHQ\API\ValueObjects\Integer("page_number")
+  	);
 </pre>
 
 
@@ -1611,12 +1625,32 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 3> Create Member Enrollments for Course
+### 4> Create Member Enrollments for Course
 <pre>
 	/*@return true or false for member enrolled in package or not */
   	$enrolment_exist = $course_api_repository->create_enrolment(
 		new \AcademyHQ\API\ValueObjects\MemberID("member_id"),
 		new \AcademyHQ\API\ValueObjects\ID("course_id")
+	);
+</pre>
+
+### 5> Create Member 
+<pre>
+	/*@returns member_details of created member*/
+	$member = $member_api_repository->create_member(
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\Username("username"),
+		new \AcademyHQ\API\ValueObjects\Password("password"),
+		new \AcademyHQ\API\ValueObjects\Password("password_confirm"),
+		new \AcademyHQ\API\ValueObjects\PublicID("your_pub_id")
+	);
+</pre>
+
+### 6> Get Member 
+<pre>
+	/*@returns member_details */
+	$member_details = $member_api_repository->get_member(
+		new \AcademyHQ\API\ValueObjects\MemberID("member_id")
 	);
 </pre>
 
