@@ -1489,7 +1489,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 4> Find Organisation Package
+### 5> Find Organisation Package
 <pre>
 	/*@return return org_package_details std object */
   	$org_package_details = $crms_repository->find_license(
@@ -1499,7 +1499,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 </pre>
 
 
-### 5> Fetch All Organisations with api if exists
+### 6> Fetch All Organisations with api if exists
 <pre>
 	/*@return all organisation details std object */
   	$organisation_details = $crms_repository->get_organisations(
@@ -1508,14 +1508,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 6> Fetch All Course packages
+### 7> Fetch All Course packages
 <pre>
 	/*@return all Course packages details std object */
   	$package_details = $crms_repository->get_packages();
 
 </pre>
 
-### 7> Create Organisation Admin
+### 8> Create Organisation Admin
 <pre>
 	/*@return all members details std object */
   	$member_details = $crms_repository->create_org_admin(
@@ -1525,7 +1525,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 8> Fetch All Courses
+### 9> Fetch All Courses
 <pre>
 	/*@return all standard courses std object*/
 	$course_details = $crms_repository->get_courses(
@@ -1534,7 +1534,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 8> RollBack created organisation and admin.
+### 10> RollBack created organisation and admin.
 <pre>
 	/*@return all standard courses std object*/
 	$rollback = $crms_repository->rollback(
@@ -1581,6 +1581,20 @@ Client Library that allow third party to access AcademyHQ APIs.
   	);
 </pre>
 
+### 5> Add Quantity of License
+<pre>
+ 	/*@returns license_details of added license*/
+	$license_details = $course_api_repository->add_license(
+		new \AcademyHQ\API\ValueObjects\LicenseID('license_id'),
+		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
+		new \AcademyHQ\API\ValueObjects\StringVO('full_name'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_number'),
+		new \AcademyHQ\API\ValueObjects\Email('email')
+	);
+</pre>
 
 ## Using Member Api Repository
 

@@ -115,5 +115,40 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function add_license(
+		VO\LicenseID $license_id,
+		VO\Integer $number_of_license,
+		VO\StringVO $price,
+		VO\StringVO $currency,
+		VO\StringVO $full_name,
+		VO\StringVO $vat_rate,
+		VO\StringVO $vat_number,
+		VO\Email $email
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/add/license'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'license_id' => $license_id->__toString(),
+			'full_name' => $full_name->__toString(),
+			'number_of_license' => $number_of_license->__toInteger(),
+			'price' => $price->__toString(),
+			'currency' => $currency->__toString(),
+			'vat_rate' => $vat_rate->__toString(),
+			'vat_number' => $vat_number->__toString(),
+			'email' => $email->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 
 }
