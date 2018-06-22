@@ -157,7 +157,7 @@ class MemberApiRepository extends BaseRepository{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->get_url().'get/member/'.$id->__toString().'/details'),
+			VO\HTTP\Url::fromNative($this->get_url().'/get/member/'.$id->__toString().'/details'),
 			new VO\HTTP\Method('GET')
 		);
 
