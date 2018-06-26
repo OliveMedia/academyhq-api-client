@@ -1586,6 +1586,7 @@ Client Library that allow third party to access AcademyHQ APIs.
  	/*@returns license_details of added license*/
 	$license_details = $course_api_repository->add_license(
 		new \AcademyHQ\API\ValueObjects\LicenseID('license_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID('course_id'),
 		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
 		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license'),
 		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
@@ -1593,6 +1594,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_number'),
 		new \AcademyHQ\API\ValueObjects\Email('email')
+	);
+</pre>
+
+### 6> Get License
+<pre>
+	/*@returns license_details of if license avaiable null if not*/
+	$license_details = $course_api_repository->license_get(
+		new \AcademyHQ\API\ValueObjects\CourseID('course_id')
 	);
 </pre>
 
