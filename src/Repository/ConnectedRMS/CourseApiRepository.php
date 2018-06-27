@@ -157,12 +157,12 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
-	public function license_get(VO\CourseID $course_id){
+	public function license_check(VO\CourseID $course_id){
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->get_url().'/get/license/'.$course_id->__toString()),
-			new VO\HTTP\Method('GEt')
+			VO\HTTP\Url::fromNative($this->get_url().'/check/license/'.$course_id->__toString()),
+			new VO\HTTP\Method('GET')
 		);
 		$response = $request->send();
 
