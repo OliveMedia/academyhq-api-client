@@ -115,5 +115,61 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function add_license(
+		VO\LicenseID $license_id=null,
+		VO\CourseID $course_id=null,
+		VO\Integer $number_of_license,
+		VO\StringVO $price,
+		VO\StringVO $currency,
+		VO\StringVO $full_name,
+		VO\StringVO $vat_rate,
+		VO\StringVO $vat_number,
+		VO\Email $email
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/add/license'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'full_name' => $full_name->__toString(),
+			'number_of_license' => $number_of_license->__toInteger(),
+			'price' => $price->__toString(),
+			'currency' => $currency->__toString(),
+			'vat_rate' => $vat_rate->__toString(),
+			'vat_number' => $vat_number->__toString(),
+			'email' => $email->__toString()
+		);
+		$license_id ? 
+			$request_parameters['license_id'] = $license_id->__toString():
+		null;
+		
+		$course_id ?
+			$request_parameters['course_id'] = $course_id->__toString():
+		null;
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function license_check(VO\CourseID $course_id){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/check/license/'.$course_id->__toString()),
+			new VO\HTTP\Method('GET')
+		);
+		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 
 }
