@@ -123,7 +123,9 @@ class MemberApiRepository extends BaseRepository{
 		VO\Username $username,
 		VO\Password $password,
 		VO\Password $password_confirm,
-		VO\PublicID $pub_id = null
+		VO\PublicID $pub_id = null,
+		VO\StringVO $email,
+		VO\Integer $is_admin = null
 	)
 	{
 		$request = new Request(
@@ -138,11 +140,15 @@ class MemberApiRepository extends BaseRepository{
 			'last_name' => $name->get_last_name()->__toString(),
 			'username' => $username->__toString(),
 			'password' => $password->__toString(),
-			'password_confirm' => $password_confirm->__toString()
+			'password_confirm' => $password_confirm->__toString(),
+			'email' => $email->__toString()
 		);
 
 		if($pub_id) {
 			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+		if($is_admin) {
+			$request_parameters['is_admin'] = $is_admin->__toInteger();
 		}
 
 		$response = $request->send($request_parameters);
@@ -151,6 +157,7 @@ class MemberApiRepository extends BaseRepository{
 
 		return $data;
 	}
+
 
 	public function member_get(VO\MemberID $id)
 	{
