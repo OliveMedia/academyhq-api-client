@@ -1543,6 +1543,20 @@ Client Library that allow third party to access AcademyHQ APIs.
 				);
 </pre>
 
+### 9> RollBack created organisation and admin.
+<pre>
+	/*@return all standard courses std object*/
+	$update_organisation_subscription = $crms_repository->update_organisation_subscription(
+						VO\OrganisationID $organisation_id,
+						VO\ID $subscription_id = null,
+						VO\CourseIDArray $subscription_courses,
+						VO\CourseIDArray $subscription_bundles,
+						VO\Integer $max_enrolments,
+						VO\Integer $max_licenses,
+						VO\Integer $max_members
+				);
+</pre>
+
 
 ## Using Course Api Repository
 
