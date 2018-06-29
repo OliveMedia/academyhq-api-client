@@ -199,5 +199,30 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function package_member_details(
+		VO\ID $package_id,
+		VO\Integer $current_page=null,
+		VO\StringVO $search=null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/package/members/details'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'package_id' => $package_id->__toString()
+		);
+
+		$current_page ? $request_parameters['current_page'] = $current_page->__toInteger():null;
+		$search ? $request_parameters['search'] = $search->__toString():null;
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 
 }

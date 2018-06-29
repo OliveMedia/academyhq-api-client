@@ -1620,6 +1620,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 9> Get Package Member details 
+<pre>
+	/*@returns enrolled_member_details of enrolled on package */
+	$enrolled_member_details = $course_api_repository->package_member_details(
+	new \AcademyHQ\API\ValueObjects\ID('package_id'),
+	new \AcademyHQ\API\ValueObjects\Integer('current_page'),
+	new \AcademyHQ\API\ValueObjects\StringVO('search'))
+	);
+</pre>
+
 ## Using Member Api Repository
 
 ### 1> Fetch All Organisation Licenses
