@@ -1449,6 +1449,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 11> Create License For Individual Along With Enrolment
+<pre>
+ 	/*@returns license_details of created license*/
+	$license_details = $GDPR_repository->create_license_for_individual(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('organisation_id'),
+		new \AcademyHQ\API\ValueObjects\CourseID("course_id"),
+		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
+		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_number')
+	);
+</pre>
+
 
 ## Using Crms Repository
 

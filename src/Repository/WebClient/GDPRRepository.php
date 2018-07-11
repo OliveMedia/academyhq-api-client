@@ -163,6 +163,43 @@ class GDPRRepository extends BaseRepository {
 
 	}
 
+	public function create_license_for_individual(
+		VO\OrganisationID $organisation_id,
+		VO\CourseID $course_id,
+		VO\MemberID $admin_id,
+		VO\Integer $number_of_license,
+		VO\StringVO $price,
+		VO\StringVO $currency,
+		VO\StringVO $vat_rate,
+		VO\StringVO $vat_number
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/license/for/individual'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'course_id' => $course_id->__toString(),
+			'admin_id' => $admin_id->__toString(),
+			'number_of_license' => $number_of_license->__toInteger(),
+			'price' => $price->__toString(),
+			'currency' => $currency->__toString(),
+			'vat_rate' => $vat_rate->__toString(),
+			'vat_number' => $vat_number->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
 	public function create_member(
 		VO\OrganisationID $organisation_id,
 		VO\Name $name,
