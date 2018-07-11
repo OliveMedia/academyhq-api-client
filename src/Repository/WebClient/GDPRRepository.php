@@ -123,6 +123,49 @@ class GDPRRepository {
 
 	}
 
+	public function create_licenses(
+		VO\OrganisationID $organisation_id,
+		VO\CourseIDArray $course_ids,
+		VO\MemberID $admin_id,
+		VO\Integer $number_of_license,
+		VO\StringVO $price,
+		VO\StringVO $unit_price,
+		VO\StringVO $discount,
+		VO\StringVO $currency,
+		VO\StringVO $vat_rate,
+		VO\StringVO $vat_number
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/create/licenses'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$course_ids = $course_ids->__toArray();
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'course_ids' => $course_ids,
+			'admin_id' => $admin_id->__toString(),
+			'number_of_license' => $number_of_license->__toInteger(),
+			'price' => $price->__toString(),
+			'unit_price' => $unit_price->__toString(),
+			'discount' => $discount->__toString(),
+			'currency' => $currency->__toString(),
+			'vat_rate' => $vat_rate->__toString(),
+			'vat_number' => $vat_number->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
 	public function create_license_new(
 		VO\OrganisationID $organisation_id,
 		VO\CourseID $course_id,
