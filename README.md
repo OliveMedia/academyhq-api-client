@@ -1572,6 +1572,17 @@ Client Library that allow third party to access AcademyHQ APIs.
 				);
 </pre>
 
+### 10> Create Member Admin or Learner
+<pre>
+	/*@return member id std object */
+  	$member_id = $crms_repository->create_org_admin(
+			new VO\OrganisationID("organisation_id"),
+			VO\Name::fromNative("First Name", "Last name"),
+			new VO\Email ("email"),
+			new VO\Integer('is_admin')
+	);
+</pre>
+
 
 ## Using Course Api Repository
 

@@ -341,4 +341,35 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function transfer_member(
+		VO\OrganisationID $organisation_id,
+		VO\Name $name,
+		VO\Email $email,
+		VO\Integer $is_admin
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/member'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString(),
+			'is_admin' => $is_admin->__toInteger()
+		);
+
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
+	
 }
