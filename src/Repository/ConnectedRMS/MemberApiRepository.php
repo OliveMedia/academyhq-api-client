@@ -175,4 +175,20 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function get_all_members_id()
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/get/all/members/id'),
+			new VO\HTTP\Method('GET')
+		);
+
+		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

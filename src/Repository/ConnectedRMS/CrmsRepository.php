@@ -371,5 +371,50 @@ class CrmsRepository extends BaseRepository{
 
 	}
 
-	
+	public function member_enrolment_to_course(
+		VO\CourseID $course_id,
+		VO\MemberID $member_id
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/member/course/enrolment'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'course_id' => $course_id->__toString(),
+			'member_id' => $member_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
+	public function member_enrolment_to_package(
+		VO\ID $package_id,
+		VO\MemberID $member_id
+	){
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/member/package/enrolment'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'package_id' => $package_id->__toString(),
+			'member_id' => $member_id->__toString()
+		);
+		
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
 }

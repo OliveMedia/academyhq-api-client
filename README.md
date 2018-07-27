@@ -1583,6 +1583,24 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 11> Create Member Enrolment to Course
+<pre>
+	/*@return response with status and message std object */
+  	$response = $crms_repository->member_enrolment_to_course(
+			VO\CourseID('course_id'),
+			VO\MemberID('member_id')
+	);
+</pre>
+
+### 12> Create Member Enrolment to Package
+<pre>
+	/*@return response with status and message std object */
+  	$response = $crms_repository->member_enrolment_to_course(
+			VO\ID('package_id'),
+			VO\MemberID('member_id')
+	);
+</pre>
+
 
 ## Using Course Api Repository
 
@@ -1726,6 +1744,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$member_details = $member_api_repository->get_member(
 		new \AcademyHQ\API\ValueObjects\MemberID("member_id")
 	);
+</pre>
+
+### 7> Get Id of Members 
+<pre>
+	/*@returns members_id */
+	$members_id = $member_api_repository->get_all_members_id();
 </pre>
 
 
