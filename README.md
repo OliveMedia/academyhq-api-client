@@ -1601,6 +1601,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 13> Get Id of Members 
+<pre>
+	/*@returns members_id */
+	$members_id = $member_api_repository->get_all_members_id(VO\OrganisationID $organisation_id);
+</pre>
+
 
 ## Using Course Api Repository
 
@@ -1745,11 +1751,4 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\MemberID("member_id")
 	);
 </pre>
-
-### 7> Get Id of Members 
-<pre>
-	/*@returns members_id */
-	$members_id = $member_api_repository->get_all_members_id();
-</pre>
-
 

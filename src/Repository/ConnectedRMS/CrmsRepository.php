@@ -417,4 +417,21 @@ class CrmsRepository extends BaseRepository{
 
 	}
 
+	public function get_all_members_id(VO\OrganisationID $org_id)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/get/all/members/id/'.$org_id->__toString()),
+			new VO\HTTP\Method('GET')
+		);
+
+		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+
 }
