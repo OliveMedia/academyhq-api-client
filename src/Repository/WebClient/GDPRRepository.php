@@ -330,7 +330,8 @@ class GDPRRepository {
 
 	public function vat_validate(
 		VO\StringVO $country_code,
-		VO\StringVO $vat_number
+		VO\StringVO $vat_number,
+		VO\StringVO $organisation_name
 	){
 
 		$request = new Request(
@@ -342,7 +343,8 @@ class GDPRRepository {
 
 		$request_parameters = array(
 			'country_code' => $country_code->__toString(),
-			'vat_number' => $vat_number->__toString()
+			'vat_number' => $vat_number->__toString(),
+			'organisation_name'=>$organisation_name->__toString()
 		);
 
 		$response = $request->send($request_parameters);
