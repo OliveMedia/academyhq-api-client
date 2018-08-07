@@ -17,6 +17,7 @@ use AcademyHQ\API\Repository\WebClient\GDPRRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CrmsRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CourseApiRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\MemberApiRepository;
+// use AcademyHQ\API\Repository\OMA as OMA;
 
 class Factory
 {
@@ -119,5 +120,13 @@ class Factory
 	public function get_member_api_repository() {
 
 		return new MemberApiRepository($this->credentials);
+	}
+
+
+	//implemented only for oma repositorirs ( meaning only classes extending the Base )
+	public function get_oma_repository($repo_name){
+		$className = '\AcademyHQ\API\Repository\OMA\\';
+		$className .= ucfirst($repo_name).'Repository';
+		return new $className($this->credentials);
 	}
 }
