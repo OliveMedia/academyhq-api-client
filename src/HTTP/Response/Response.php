@@ -32,7 +32,6 @@ class Response implements iResponse
  		$data=json_decode($json_data);
 
  		if(!isset($data->status)) {
-
  		// 	$file = getcwd();
 			// $date = new \DateTime();
 
