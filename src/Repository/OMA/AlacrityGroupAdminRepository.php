@@ -13,14 +13,7 @@ class AlacrityGroupAdminRepository extends BaseRepository {
 	public function __construct(Credentials $credentials){
 		parent::__construct();
 		$this->credentials = $credentials;
-	}
-
-	public function bravo (){
-		
-	}
-
-	public function fat(){
-		return 'lalala';
+		$this->base_url .= '/oma';
 	}
 
 	public function ListEmployer( VO\Token $token, VO\StringVO $search, VO\Integer $current_page){

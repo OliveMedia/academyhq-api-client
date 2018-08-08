@@ -6,14 +6,15 @@ use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\Repository\BaseRepository;
 
-class AuthRepository {
-
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
+class AuthRepository extends BaseRepository {
 
 	public function __construct(Credentials $credentials)
 	{
+		parent::__construct();
 		$this->credentials = $credentials;
+		$this->base_url .= '/web/client';
 	}
 
 	public function login(
