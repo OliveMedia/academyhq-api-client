@@ -17,7 +17,7 @@ class ConsultivaAdminRepository extends BaseRepository
         $this->base_url .= '/oma';
     }
 
-    public function createCunsultiva(
+    public function create_student(
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
         VO\OrganisationID $organisation_id,
@@ -28,21 +28,21 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\Email $email,
         VO\StringVO $image = null,
         VO\Integer $disability,
-        VO\StringVO $disability_text,
+        VO\StringVO $disability_text = null,
         VO\StringVO $street = null,
         VO\StringVO $city,
         VO\StringVO $state,
         VO\StringVO $country,
         VO\Integer $postal_code,
         VO\StringVO $employment = null,
-        VO\StringVO $further_notes,
+        VO\StringVO $further_notes = null,
         VO\StringVO $nationality,
         VO\StringVO $date_of_birth = null
     ) {
         $request =new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/consultiva'),
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/create/student'),
             new VO\HTTP\Method('POST')
         );
 
@@ -59,7 +59,7 @@ class ConsultivaAdminRepository extends BaseRepository
             'email' => $email->__toString(),
             'image' => $image ? $image->__toString() : '',
             'disability' => $disability->__toInteger(),
-            'disability_text' => $disability_text->__toString(),
+            'disability_text' => $disability_text ? $disability_text->__toString() : '',
             'street' => $street->__toString(),
             'city' => $city->__toString(),
             'state' => $state->__toString(),
@@ -73,7 +73,6 @@ class ConsultivaAdminRepository extends BaseRepository
 
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
-
         return $data;
     }
 }
