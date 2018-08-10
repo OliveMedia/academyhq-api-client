@@ -17,6 +17,68 @@ class ConsultivaAdminRepository extends BaseRepository
         $this->base_url .= '/oma';
     }
 
+    public function listApprenticeship(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\OrganisationID $organisation_id = null,
+        VO\Integer $current_page
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/apprenticeship'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger(),
+            'organisation_id' => $organisation_id ? $organisation_id->__toString() : ''
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+    public function list_student(
+        VO\Token $token,
+        VO\Integer $current_page,
+        VO\StringVO $search = null,
+        VO\OrganisationID $organisation_id = null,
+        VO\ApprenticeshipID $apprenticeship_id = null
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/student'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger(),
+            'organisation_id' => $organisation_id ? $organisation_id->__toString() : '',
+            'apprenticeship_id' => $apprenticeship_id ? $apprenticeship_id->__toString() : ''
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+
     public function create_student(
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
@@ -75,4 +137,6 @@ class ConsultivaAdminRepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
+
+
 }

@@ -100,32 +100,6 @@ class AlacrityGroupAdminRepository extends BaseRepository {
         return $data;
     }
 
-    public function listApprenticeship(
-        VO\Token $token,
-        VO\StringVO $search = null,
-        VO\Integer $current_page
-    ){
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/apprenticeship'),
-            new VO\HTTP\Method('POST')
-        );
-
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $request_parameters = array(
-            'search' => $search ? $search->__toString() : '',
-            'current_page' => $current_page->__toInteger()
-        );
-
-        $response = $request->send($request_parameters, $header_parameters);
-
-        $data = $response->get_data();
-
-        return $data;
-    }
-
 
     public function listOccupation(
         VO\Token $token,
