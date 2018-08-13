@@ -333,6 +333,27 @@ class GDPRRepository {
 		return $data;
 	}
 
+	public function rollback_member(
+		VO\MemberID $member_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/gdpr/member/rollback'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function vat_validate(
 		VO\StringVO $country_code,
 		VO\StringVO $vat_number,
