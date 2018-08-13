@@ -108,7 +108,7 @@ class Request implements iRequest
 
             $headers = array(
                 'Accept' => 'application/json',
-                'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://localhost"
+                // 'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://localhost"
             );
 
             if($header_parameters) {
