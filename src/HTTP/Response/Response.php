@@ -27,12 +27,13 @@ class Response implements iResponse
 
  	public function get_data()
  	{
+
  		$json_data = $this->response->getBody();
 
  		$data=json_decode($json_data);
 
- 		if(!isset($data->status)) {
 
+ 		if(!isset($data->status)) {
  		// 	$file = getcwd();
 			// $date = new \DateTime();
 

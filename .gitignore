@@ -2,3 +2,5 @@
 composer.lock
 /tests/
 composer.lock
+.idea
+Test

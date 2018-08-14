@@ -10,147 +10,123 @@ use AcademyHQ\API\Repository\BaseRepository;
 
 class AlacrityGroupAdminRepository extends BaseRepository {
 
-	public function __construct(Credentials $credentials){
-		parent::__construct();
-		$this->credentials = $credentials;
-		$this->base_url .= '/oma';
-	}
+    public function __construct(Credentials $credentials){
+        parent::__construct();
+        $this->credentials = $credentials;
+        $this->base_url .= '/oma';
+    }
 
-	public function ListEmployer( VO\Token $token, VO\StringVO $search, VO\Integer $current_page){
-		
-		$request = new Request(
-			new GuzzleClient,
-			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/consultiva'),
-			new VO\HTTP\Method('POST')
-		);
+    public function ListConsultiva( VO\Token $token, VO\StringVO $search = null, VO\Integer $current_page){
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/consultiva'),
+            new VO\HTTP\Method('POST')
+        );
 
-		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger()
-		);
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger()
+        );
 
-		$data = $response->get_data();
+        $response = $request->send($request_parameters, $header_parameters);
 
-		return $data;
+        $data = $response->get_data();
 
-	}
+        return $data;
 
-	public function createEmployer(
-		VO\Token $token,
-		VO\Email $email,
-		VO\StringVO $employer_name,
-		VO\Name $name,
-		VO\TaxNumber $tax_number
-	){
-		$request = new Request(
-			new GuzzleClient,
-			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/employer'),
-			new VO\HTTP\Method('POST')
-		);
+    }
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+    public function createEmployer(
+        VO\Token $token,
+        VO\Email $email,
+        VO\StringVO $employer_name,
+        VO\Name $name,
+        VO\TaxNumber $tax_number
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/employer'),
+            new VO\HTTP\Method('POST')
+        );
 
-		$request_parameters = array(
-			'email' => $email->__toString(),
-			'employer_name' => $employer_name->__toString(),
-			'first_name' => $name->get_first_name()->__toString(),
-			'last_name' => $name->get_last_name()->__toString(),
-			'tax_number' => $tax_number->__toString()
-		);
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters);
+        $request_parameters = array(
+            'email' => $email->__toString(),
+            'employer_name' => $employer_name->__toString(),
+            'first_name' => $name->get_first_name()->__toString(),
+            'last_name' => $name->get_last_name()->__toString(),
+            'tax_number' => $tax_number->__toString()
+        );
 
-		$data = $response->get_data();
+        $response = $request->send($request_parameters, $header_parameters);
 
-		return $data;
+        $data = $response->get_data();
 
-	}
+        return $data;
 
-	public function createApprenticeship(
-		VO\Token $token,
-		VO\OrganisationID $employer_id,
-		VO\OccupationID $occupation_id,
-		VO\MemberID $contact_person_id
-	){
-		$request = new Request(
-			new GuzzleClient,
-			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/apprenticeship'),
-			new VO\HTTP\Method('POST')
-		);
+    }
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+    public function createApprenticeship(
+        VO\Token $token,
+        VO\OrganisationID $employer_id,
+        VO\OccupationID $occupation_id,
+        VO\MemberID $contact_person_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/apprenticeship'),
+            new VO\HTTP\Method('POST')
+        );
 
-		$request_parameters = array(
-			'employer_id' => $employer_id->__toString(),
-			'occupation_id' => $occupation_id->__toString(),
-			'contact_person_id' => $contact_person_id->__toString()
-		);
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send($request_parameters, $header_parameters); 
+        $request_parameters = array(
+            'employer_id' => $employer_id->__toString(),
+            'occupation_id' => $occupation_id->__toString(),
+            'contact_person_id' => $contact_person_id->__toString()
+        );
 
-		$data = $response->get_data();
+        $response = $request->send($request_parameters, $header_parameters);
 
-		return $data;
-	}
-	
-	public function listApprenticeship(
-		VO\Token $token,
-		VO\StringVO $search,
-		VO\Integer $current_page
-	){
-		$request = new Request(
-			new GuzzleClient,
-			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/apprenticeship'),
-			new VO\HTTP\Method('POST')
-		);
+        $data = $response->get_data();
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
-
-		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger()
-		);
-
-		$response = $request->send($request_parameters, $header_parameters);
-
-		$data = $response->get_data();
-
-		return $data;
-	}
+        return $data;
+    }
 
 
-	public function listOccupation(
-		VO\Token $token,
-		VO\StringVO $search,
-		VO\Integer $current_page
-	){
-		$request = new Request(
-			new GuzzleClient,
-			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation'),
-			new VO\HTTP\Method('POST')
-		);
+    public function listOccupation(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $is_published = null,
+        VO\Integer $current_page
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation'),
+            new VO\HTTP\Method('POST')
+        );
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger()
-		);
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'is_published' => $is_published ? $is_published->__toInteger() : null,
+            'current_page' => $current_page->__toInteger(),
+        );
 
-		$response = $request->send($request_parameters, $header_parameters);
+        $response = $request->send($request_parameters, $header_parameters);
 
-		$data = $response->get_data();
+        $data = $response->get_data();
 
-		return $data;
-	}
-	
+        return $data;
+    }
+
 }
