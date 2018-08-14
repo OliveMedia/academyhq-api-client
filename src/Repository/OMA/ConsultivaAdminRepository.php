@@ -61,6 +61,7 @@ class ConsultivaAdminRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
+
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
@@ -71,7 +72,6 @@ class ConsultivaAdminRepository extends BaseRepository
         );
 
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
 
         return $data;

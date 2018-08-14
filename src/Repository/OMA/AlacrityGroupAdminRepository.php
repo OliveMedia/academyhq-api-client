@@ -104,6 +104,7 @@ class AlacrityGroupAdminRepository extends BaseRepository {
     public function listOccupation(
         VO\Token $token,
         VO\StringVO $search = null,
+        VO\Integer $is_published = null,
         VO\Integer $current_page
     ){
         $request = new Request(
@@ -117,7 +118,8 @@ class AlacrityGroupAdminRepository extends BaseRepository {
 
         $request_parameters = array(
             'search' => $search ? $search->__toString() : '',
-            'current_page' => $current_page->__toInteger()
+            'is_published' => $is_published ? $is_published->__toInteger() : null,
+            'current_page' => $current_page->__toInteger(),
         );
 
         $response = $request->send($request_parameters, $header_parameters);
