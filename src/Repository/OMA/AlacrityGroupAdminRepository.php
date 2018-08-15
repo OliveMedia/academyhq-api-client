@@ -8,16 +8,17 @@ use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 use AcademyHQ\API\Repository\BaseRepository;
 
-class AlacrityGroupAdminRepository extends BaseRepository {
-
-    public function __construct(Credentials $credentials){
+class AlacrityGroupAdminRepository extends BaseRepository
+{
+    public function __construct(Credentials $credentials)
+    {
         parent::__construct();
         $this->credentials = $credentials;
         $this->base_url .= '/oma';
     }
 
-    public function ListConsultiva( VO\Token $token, VO\StringVO $search = null, VO\Integer $current_page){
-
+    public function ListConsultiva(VO\Token $token, VO\StringVO $search = null, VO\Integer $current_page)
+    {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -37,7 +38,6 @@ class AlacrityGroupAdminRepository extends BaseRepository {
         $data = $response->get_data();
 
         return $data;
-
     }
 
     public function createEmployer(
@@ -46,7 +46,7 @@ class AlacrityGroupAdminRepository extends BaseRepository {
         VO\StringVO $employer_name,
         VO\Name $name,
         VO\TaxNumber $tax_number
-    ){
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -69,7 +69,6 @@ class AlacrityGroupAdminRepository extends BaseRepository {
         $data = $response->get_data();
 
         return $data;
-
     }
 
     public function createApprenticeship(
@@ -77,7 +76,7 @@ class AlacrityGroupAdminRepository extends BaseRepository {
         VO\OrganisationID $employer_id,
         VO\OccupationID $occupation_id,
         VO\MemberID $contact_person_id
-    ){
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -106,7 +105,7 @@ class AlacrityGroupAdminRepository extends BaseRepository {
         VO\StringVO $search = null,
         VO\Integer $is_published = null,
         VO\Integer $current_page
-    ){
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -114,13 +113,16 @@ class AlacrityGroupAdminRepository extends BaseRepository {
             new VO\HTTP\Method('POST')
         );
 
+
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
             'search' => $search ? $search->__toString() : '',
-            'is_published' => $is_published ? $is_published->__toInteger() : null,
             'current_page' => $current_page->__toInteger(),
         );
+        if (!is_null($is_published)) {
+            $request_parameters['is_published']=$is_published->__toInteger();
+        }
 
         $response = $request->send($request_parameters, $header_parameters);
 
@@ -128,5 +130,4 @@ class AlacrityGroupAdminRepository extends BaseRepository {
 
         return $data;
     }
-
 }
