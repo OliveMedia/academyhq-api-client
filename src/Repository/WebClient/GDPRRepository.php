@@ -94,7 +94,12 @@ class GDPRRepository {
 		VO\StringVO $price,
 		VO\StringVO $currency,
 		VO\StringVO $vat_rate,
-		VO\StringVO $vat_number
+		VO\StringVO $vat_number,
+		VO\StringVO $address_line_one,
+		VO\StringVO $address_line_two,
+		VO\StringVO $city,
+		VO\StringVO $postal_code,
+		VO\StringVO $country
 	){
 
 		$request = new Request(
@@ -112,7 +117,12 @@ class GDPRRepository {
 			'price' => $price->__toString(),
 			'currency' => $currency->__toString(),
 			'vat_rate' => $vat_rate->__toString(),
-			'vat_number' => $vat_number->__toString()
+			'vat_number' => $vat_number->__toString(),
+			'address_line_one' => $address_line_one->__toString(),
+			'address_line_two' => $address_line_two->__toString(),
+			'city' => $city->__toString(),
+			'postal_code' => $postal_code->__toString(),
+			'country' => $country->__toString()
 		);
 
 		$response = $request->send($request_parameters);
@@ -211,7 +221,12 @@ class GDPRRepository {
 		VO\StringVO $price,
 		VO\StringVO $currency,
 		VO\StringVO $vat_rate,
-		VO\StringVO $vat_number
+		VO\StringVO $vat_number,
+		VO\StringVO $address_line_one,
+		VO\StringVO $address_line_two,
+		VO\StringVO $city,
+		VO\StringVO $postal_code,
+		VO\StringVO $country
 	){
 
 		$request = new Request(
@@ -229,7 +244,12 @@ class GDPRRepository {
 			'price' => $price->__toString(),
 			'currency' => $currency->__toString(),
 			'vat_rate' => $vat_rate->__toString(),
-			'vat_number' => $vat_number->__toString()
+			'vat_number' => $vat_number->__toString(),
+			'address_line_one' => $address_line_one->__toString(),
+			'address_line_two' => $address_line_two->__toString(),
+			'city' => $city->__toString(),
+			'postal_code' => $postal_code->__toString(),
+			'country' => $country->__toString()
 		);
 
 		$response = $request->send($request_parameters);
