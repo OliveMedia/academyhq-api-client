@@ -32,7 +32,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'search' => $search ? $search->__toString() : '',
             'current_page' => $current_page->__toInteger()
         );
-
         $response = $request->send($request_parameters, $header_parameters);
 
         $data = $response->get_data();
@@ -123,6 +122,30 @@ class AlacrityGroupAdminRepository extends BaseRepository
         if (!is_null($is_published)) {
             $request_parameters['is_published']=$is_published->__toInteger();
         }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function createOccupation(
+        VO\Token $token,
+        VO\StringVO $name
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/occupation'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name' => $name->__toString(),
+        );
 
         $response = $request->send($request_parameters, $header_parameters);
 
