@@ -153,4 +153,160 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         return $data;
     }
+
+    public function createProgram(
+        VO\Token $token,
+        VO\StringVo $name,
+        VO\StrinhVo $description,
+        VO\StringVO $should_start_by,
+        VO\StringVO $should_end_by
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name' => $name->__toString(),
+            'description'=>$description->__toString(),
+            'should_start_by'=>$should_start_by->__toString(),
+            'should_end_by'=>$should_end_by->__toString(),
+            
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function createOcuupationProgram(
+        VO\Token $token,
+        VO\StringVo $name,
+        VO\StrinhVo $description,
+        VO\StringVO $should_start_by,
+        VO\StringVO $should_end_by
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name' => $name->__toString(),
+            'description'=>$description->__toString(),
+            'should_start_by'=>$should_start_by->__toString(),
+            'should_end_by'=>$should_end_by->__toString(),
+            
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+    public function createProgramCourse(
+        VO\Token $token,
+        VO\StringVo $name,
+        VO\StrinhVo $description,
+        VO\StringVO $should_start_by,
+        VO\StringVO $should_end_by
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name' => $name->__toString(),
+            'description'=>$description->__toString(),
+            'should_start_by'=>$should_start_by->__toString(),
+            'should_end_by'=>$should_end_by->__toString(),
+            
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function listAuditForms(
+        VO\Token $token,
+        VO\StringVo $name,
+        VO\StrinhVo $description,
+        VO\StringVO $should_start_by,
+        VO\StringVO $should_end_by
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name' => $name->__toString(),
+            'description'=>$description->__toString(),
+            'should_start_by'=>$should_start_by->__toString(),
+            'should_end_by'=>$should_end_by->__toString(),
+            
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function listLicense(
+        VO\Token $token,
+        VO\StringVo $name,
+        VO\StrinhVo $description,
+        VO\StringVO $should_start_by,
+        VO\StringVO $should_end_by
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name' => $name->__toString(),
+            'description'=>$description->__toString(),
+            'should_start_by'=>$should_start_by->__toString(),
+            'should_end_by'=>$should_end_by->__toString(),
+            
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 }

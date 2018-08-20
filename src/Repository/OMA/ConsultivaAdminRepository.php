@@ -22,7 +22,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\StringVO $search = null,
         VO\OrganisationID $organisation_id = null,
         VO\Integer $current_page
-    ){
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -53,7 +53,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\OrganisationID $organisation_id = null,
         VO\ApprenticeshipID $apprenticeship_id = null
 
-    ){
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -95,7 +95,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\StringVO $city,
         VO\StringVO $state,
         VO\StringVO $country,
-        VO\Integer $postal_code,
+        VO\StringVO $postal_code,
         VO\StringVO $employment = null,
         VO\StringVO $further_notes = null,
         VO\StringVO $nationality,
@@ -126,7 +126,7 @@ class ConsultivaAdminRepository extends BaseRepository
             'city' => $city->__toString(),
             'state' => $state->__toString(),
             'country' => $country->__toString(),
-            'postal_code' => $postal_code->__toInteger(),
+            'postal_code' => $postal_code->__toString(),
             'employment' => $employment ? $employment->__toString() : '',
             'further_notes' => $further_notes ? $further_notes->__toString() : '',
             'nationality' => $nationality-> __toString(),
@@ -135,8 +135,8 @@ class ConsultivaAdminRepository extends BaseRepository
 
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
+        var_dump($data);
+        die();
         return $data;
     }
-
-
 }
