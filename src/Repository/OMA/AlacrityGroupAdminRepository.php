@@ -405,9 +405,4 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
-
-        print_r($data);
-        exit;
-
-        print_r($data);
-        exit;
+}
