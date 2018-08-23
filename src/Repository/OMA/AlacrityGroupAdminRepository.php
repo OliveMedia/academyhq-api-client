@@ -17,8 +17,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $this->base_url .= '/oma';
     }
 
-    public function ListConsultiva(VO\Token $token, VO\StringVO $search = null, VO\Integer $current_page)
-    {
+    public function ListConsultiva(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $current_page
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -36,6 +39,86 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         $data = $response->get_data();
 
+        return $data;
+    }
+
+    public function listOccupation(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $is_published = null,
+        VO\Integer $current_page
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger(),
+        );
+        if (!is_null($is_published)) {
+            $request_parameters['is_published']=$is_published->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function listLicence(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $current_page
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/license'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger(),
+        );
+        
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    public function listAudit(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $current_page
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/audit_form'),
+            new VO\HTTP\Method('POST')
+        );
+
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger(),
+        );
+        
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+        print_r($data);
+        exit;
         return $data;
     }
 
@@ -99,40 +182,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
     }
 
 
-    public function listOccupation(
-        VO\Token $token,
-        VO\StringVO $search = null,
-        VO\Integer $is_published = null,
-        VO\Integer $current_page
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation'),
-            new VO\HTTP\Method('POST')
-        );
-
-
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $request_parameters = array(
-            'search' => $search ? $search->__toString() : '',
-            'current_page' => $current_page->__toInteger(),
-        );
-        if (!is_null($is_published)) {
-            $request_parameters['is_published']=$is_published->__toInteger();
-        }
-
-        $response = $request->send($request_parameters, $header_parameters);
-
-        $data = $response->get_data();
-
-        return $data;
-    }
-
     public function createOccupation(
         VO\Token $token,
-        VO\StringVO $name
+        VO\StringVO $name,
+        VO\StringVO $description = null,
+        VO\StringVO $logo = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -145,19 +199,20 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         $request_parameters = array(
             'name' => $name->__toString(),
+            'description' => $description ? $description->__toString():null,
+            'logo' => $logo  ? $logo->__toString() : null
+            
         );
 
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
 
     public function createProgram(
         VO\Token $token,
         VO\StringVo $name,
-        VO\StrinhVo $description,
+        VO\StringVo $description,
         VO\StringVO $should_start_by,
         VO\StringVO $should_end_by
     ) {
@@ -177,136 +232,182 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'should_end_by'=>$should_end_by->__toString(),
             
         );
-
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
+        print_r($data);
         return $data;
     }
-
+    
     public function createOcuupationProgram(
         VO\Token $token,
-        VO\StringVo $name,
-        VO\StrinhVo $description,
-        VO\StringVO $should_start_by,
-        VO\StringVO $should_end_by
+        VO\Integer $program_id,
+        VO\Integer $occupation_id
     ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create_occupation_program'),
             new VO\HTTP\Method('POST')
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $request_parameters = array(
-            'name' => $name->__toString(),
-            'description'=>$description->__toString(),
-            'should_start_by'=>$should_start_by->__toString(),
-            'should_end_by'=>$should_end_by->__toString(),
+            'program_id' => $program_id->__toInteger(),
+            'occupation_id'=>$occupation_id->__toInteger(),
             
         );
-
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
-
 
     public function createProgramCourse(
         VO\Token $token,
-        VO\StringVo $name,
-        VO\StrinhVo $description,
-        VO\StringVO $should_start_by,
-        VO\StringVO $should_end_by
+        VO\Integer $program_id,
+        VO\CourseIdArray $courses_id
+       
     ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program/course'),
             new VO\HTTP\Method('POST')
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            'name' => $name->__toString(),
-            'description'=>$description->__toString(),
-            'should_start_by'=>$should_start_by->__toString(),
-            'should_end_by'=>$should_end_by->__toString(),
-            
+            'program_id' => $program_id->__toInteger(),
+            'courses_id'=>$courses_id->__toArray(),
+                       
         );
 
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
+        
+        print_r($data);
 
         return $data;
     }
 
-    public function listAuditForms(
+    public function createProgramAudit(
+        VO\Token $token,
+        VO\Integer $program_id,
+        VO\IntegerArray $audit_forms_id
+       
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program/audit'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'program_id' => $program_id->__toInteger(),
+            'audit_forms_id'=>$audit_forms_id->__toArray(),
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    public function createOccupationProgram(
+        VO\Token $token,
+        VO\Integer $occupation_id,
+        VO\Integer $program_id
+       
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/occupation/program'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'occupation_id' => $occupation_id->__toInteger(),
+            'program_id'=>$program_id->__toInteger(),
+                       
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    public function createProgramUnit(
         VO\Token $token,
         VO\StringVo $name,
-        VO\StrinhVo $description,
-        VO\StringVO $should_start_by,
-        VO\StringVO $should_end_by
+        VO\StringVo $header,
+        VO\StringVo $description,
+        VO\Integer $is_evidence_required,
+        VO\Integer $image,
+        VO\Integer $video,
+        VO\Integer $attachment,
+        VO\Integer $program_id
+       
     ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program/unit'),
             new VO\HTTP\Method('POST')
         );
-
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
             'name' => $name->__toString(),
-            'description'=>$description->__toString(),
-            'should_start_by'=>$should_start_by->__toString(),
-            'should_end_by'=>$should_end_by->__toString(),
-            
+            'header' => $header->__toString(),
+            'description' => $description->__toString(),
+            'is_evidence_required' => $is_evidence_required->__toInteger(),
+            'image' => $image->__toInteger(),
+            'video' => $video->__toInteger(),
+            'attachment' => $attachment->__toInteger(),
+            'program_id'=>$program_id->__toInteger(),
+                       
         );
-
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
 
-    public function listLicense(
+
+    public function createProgramWelcomeResource(
         VO\Token $token,
         VO\StringVo $name,
-        VO\StrinhVo $description,
-        VO\StringVO $should_start_by,
-        VO\StringVO $should_end_by
+        VO\Integer $program_id,
+        VO\StringVo $document,
+        VO\StringVo $description,
+        VO\StringVo $link
+            
     ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program/welcome_resource'),
             new VO\HTTP\Method('POST')
         );
-
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
             'name' => $name->__toString(),
-            'description'=>$description->__toString(),
-            'should_start_by'=>$should_start_by->__toString(),
-            'should_end_by'=>$should_end_by->__toString(),
-            
+            'program_id'=>$program_id->__toInteger(),
+            'docuemnt' => $document->__toString(),
+            'description' => $description->__toString(),
+            'link' => $link->__toString(),
+                       
         );
-
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
-}
+
+        print_r($data);
+        exit;
+
+        print_r($data);
+        exit;

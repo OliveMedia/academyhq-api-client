@@ -134,7 +134,12 @@ class ConsultivaAdminRepository extends BaseRepository
         );
 
         $response = $request->send($request_parameters, $header_parameters);
+        
+       
         $data = $response->get_data();
+        print_r($data);
+        die();
+        
         return $data;
     }
 }
