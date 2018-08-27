@@ -30,9 +30,9 @@ class StudentRepository extends BaseRepository
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-        $response = $request->send($header_parameters);
+        $response = $request->send(array(),$header_parameters);
 
-      $data = $response->get_data();
+        $data = $response->get_data();
 
         return $data;
     }
@@ -51,7 +51,7 @@ class StudentRepository extends BaseRepository
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-        $response = $request->send($header_parameters);
+        $response = $request->send(array(),$header_parameters);
 
         $data = $response->get_data();
 
