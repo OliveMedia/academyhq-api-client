@@ -59,6 +59,31 @@ class StudentRepository extends BaseRepository
     }
 
 
+    public function member_apprenticeship_details(
+        VO\Token $token,
+        VO\Integer $member_apprenticeship_id
+    
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/apprenticeship/details'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger()
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters,$header_parameters);
+       
+        $data = $response->get_data();
+
+        return $data;
+    }
+
     
 
     
