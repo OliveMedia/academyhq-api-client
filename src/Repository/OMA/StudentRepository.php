@@ -38,6 +38,27 @@ class StudentRepository extends BaseRepository
     }
 
 
+    public function list_vip_members(
+        VO\Token $token
+    
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/list/vip/members'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
     
 
     
