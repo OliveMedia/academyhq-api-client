@@ -20,7 +20,7 @@ class StudentRepository extends BaseRepository
     public function list_member_apprenticeship(
         VO\Token $token
        
-    ){
+    ) {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -28,14 +28,59 @@ class StudentRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
-         $header_parameters = array('Authorization' => $token->__toEncodedString());
-         $response = $request->send($header_parameters);
-         $data = $response->get_data();
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send(array(), $header_parameters);
+
+        $data = $response->get_data();
+
         return $data;
     }
 
 
+    public function list_vip_members(
+        VO\Token $token
     
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/list/vip/members'),
+            new VO\HTTP\Method('POST')
+        );
 
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send(array(), $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+    public function member_apprenticeship_details(
+        VO\Token $token,
+        VO\Integer $member_apprenticeship_id
     
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/apprenticeship/details'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger()
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
