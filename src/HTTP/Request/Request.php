@@ -149,7 +149,6 @@ class Request implements iRequest
             }
 
             $request = $this->client->put($this->url, $headers, $multipart);
-
             $response = $request->send();
 
             return new \AcademyHQ\API\HTTP\Response\Response($response);
@@ -200,10 +199,8 @@ class Request implements iRequest
     private function generate_app_signature($url, $secret_key, $params)
     {
         $path = \parse_url($url, PHP_URL_PATH);
-
         ksort($params);
         $query_string = $path . '/?' . http_build_query($params, '', '&');
-        
         return hash_hmac("sha256", $query_string, $secret_key);
     }
 }

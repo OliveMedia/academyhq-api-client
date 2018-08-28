@@ -28,12 +28,9 @@ class StudentRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $response = $request->send($header_parameters);
-
-      $data = $response->get_data();
-
+         $header_parameters = array('Authorization' => $token->__toEncodedString());
+         $response = $request->send($header_parameters);
+         $data = $response->get_data();
         return $data;
     }
 
