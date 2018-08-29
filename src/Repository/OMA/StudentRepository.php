@@ -83,4 +83,28 @@ class StudentRepository extends BaseRepository
 
         return $data;
     }
+    public function program_units_list(
+        VO\Token $token,
+        VO\Integer $program_id
+    
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/program/units/list'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            
+            'program_id' => $program_id->__toInteger()
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
