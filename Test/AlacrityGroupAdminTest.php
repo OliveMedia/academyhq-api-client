@@ -87,11 +87,10 @@ final class AlacrityGroupAdminTest extends TestCase
     public function testCreateOccupation()
     {
         $apprenticeship = $this->repo->createOccupation(
-             new VO\Token('59a46aeb59fc4e0ec13839eb3ce4c3be'),
-             new VO\StringVO('Suman Testing Program'),
+             new VO\Token('36d89f960a7d82af692fa673a01ae72d'),
+             new VO\StringVO('Suman Testing Program Two'),
              new VO\StringVO('Suman Testing Program description is this'),
-            //  new VO\StringVO('http://www.telodicoio.org/wp-content/uploads/2015/02/ROSABLU.jpg')
-             new VO\StringVO('')
+              new VO\StringVO('http://www.telodicoio.org/wp-content/uploads/2015/02/ROSABLU.jpg')
 
          );
     }
