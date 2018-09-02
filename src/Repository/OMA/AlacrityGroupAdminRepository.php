@@ -88,7 +88,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'search' => $search ? $search->__toString() : '',
             'current_page' => $current_page->__toInteger(),
         );
-        
+
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
         return $data;
@@ -106,19 +106,17 @@ class AlacrityGroupAdminRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
-
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
             'search' => $search ? $search->__toString() : '',
             'current_page' => $current_page->__toInteger(),
         );
-        
+
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-        print_r($data);
-        exit;
+
         return $data;
     }
 
@@ -153,6 +151,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
         return $data;
     }
 
+
+
+
     public function createApprenticeship(
         VO\Token $token,
         VO\OrganisationID $employer_id,
@@ -176,17 +177,20 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         $response = $request->send($request_parameters, $header_parameters);
 
+
         $data = $response->get_data();
 
         return $data;
     }
 
 
+
     public function createOccupation(
         VO\Token $token,
         VO\StringVO $name,
         VO\StringVO $description = null,
-        VO\StringVO $logo = null
+        VO\StringVO $logo = null,
+        VO\Integer $occupation_id = null
     ) {
         $request =new Request(
             new GuzzleClient,
@@ -194,18 +198,59 @@ class AlacrityGroupAdminRepository extends BaseRepository
             VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/occupation'),
             new VO\HTTP\Method('POST')
         );
-     
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'name' => $name->__toString(),
+        );
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();
+        }
+        if(!is_null($logo)){
+            $request_parameters['logo'] = $logo->__toString();
+        }
+        if(!is_null($occupation_id)){
+            $request_parameters['occupation_id'] = $occupation_id->__toInteger();
+        }
+        $response = $request->send($request_parameters, $header_parameters);
+
+
+        $data = $response->get_data();
+        return $data;
+    }
+    public function createProgram(
+        VO\Token $token,
+        VO\StringVO $name,
+        VO\StringVO $description,
+        VO\StringVO $should_start_by,
+        VO\StringVO $shoudl_end_by,
+        VO\Integer $off_the_job_training = null,
+        VO\Integer $required_hours = null,
+        VO\Integer $program_id = null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
         $request_parameters = array(
             'name' => $name->__toString(),
             'description' => $description->__toString(),
-            'logo' => $logo->__toString()
+            'should_start_by' => $should_start_by->__toString(),
+            'should_end_by' => $shoudl_end_by->__toString()
         );
-
+        if(!is_null($off_the_job_training)){
+            $request_parameters['off_the_job_training'] = $off_the_job_training->__toInteger();
+        }
+        if(!is_null($required_hours)){
+            $request_parameters['required_hours'] = $required_hours->__toInteger();
+        }
+        if(!is_null($program_id)){
+            $request_parameters['program_id'] = $program_id->__toInteger();
+        }
         $response = $request->send($request_parameters, $header_parameters);
-        
-       
         $data = $response->get_data();
         return $data;
     }
@@ -214,7 +259,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Token $token,
         VO\Integer $program_id,
         VO\CourseIdArray $courses_id
-       
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -228,7 +273,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $request_parameters = array(
             'program_id' => $program_id->__toInteger(),
             'courses_id'=>$courses_id->__toArray(),
-                       
+
         );
 
         $response = $request->send($request_parameters, $header_parameters);
@@ -240,7 +285,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Token $token,
         VO\Integer $program_id,
         VO\IntegerArray $audit_forms_id
-       
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -264,7 +309,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Token $token,
         VO\Integer $occupation_id,
         VO\Integer $program_id
-       
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -278,7 +323,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $request_parameters = array(
             'occupation_id' => $occupation_id->__toInteger(),
             'program_id'=>$program_id->__toInteger(),
-                       
+
         );
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
@@ -295,7 +340,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Integer $video,
         VO\Integer $attachment,
         VO\Integer $program_id
-       
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -314,7 +359,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'video' => $video->__toInteger(),
             'attachment' => $attachment->__toInteger(),
             'program_id'=>$program_id->__toInteger(),
-                       
+
         );
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
@@ -329,7 +374,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\StringVo $document,
         VO\StringVo $description,
         VO\StringVo $link
-            
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -345,7 +390,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'docuemnt' => $document->__toString(),
             'description' => $description->__toString(),
             'link' => $link->__toString(),
-                       
+
         );
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
