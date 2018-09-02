@@ -107,4 +107,35 @@ class StudentRepository extends BaseRepository
 
         return $data;
     }
+
+
+
+    public function member_program_unit_details(
+        VO\Token $token,
+        VO\Integer $program_unit_id,
+        VO\Integer $member_apprenticeship_id
+    
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/apprenticeship/program/unit/view'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            
+            'program_unit_id' => $program_unit_id->__toInteger(),
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger()
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
+
 }
