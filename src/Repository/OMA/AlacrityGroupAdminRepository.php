@@ -339,7 +339,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Integer $image,
         VO\Integer $video,
         VO\Integer $attachment,
-        VO\Integer $program_id
+        VO\Integer $program_id,
+        VO\Integer $program_unit_id = null
 
     ) {
         $request = new Request(
@@ -361,6 +362,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'program_id'=>$program_id->__toInteger(),
 
         );
+        if(!is_null($program_unit_id)){
+            $request_parameters['program_unit_id'] = $program_unit_id->__toInteger();
+        }
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
         return $data;
