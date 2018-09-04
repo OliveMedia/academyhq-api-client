@@ -400,7 +400,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
     /*alicrity program publish and completed url repo*/
     public function publish_occupation(
         VO\Token $token,
-        VO\Integer $occupation_id,
+        VO\Integer $occupation_id
 
 
     ) {
@@ -419,7 +419,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $response = $request->send($request_parameters, $header_parameters);
 
         $data = $response->get_data();
-        
+
         return $data;
     }
 
