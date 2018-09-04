@@ -8,13 +8,14 @@ use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 
 class NotificationRepository {
-	
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
 
 	public function __construct(Credentials $credentials)
 	{
+		parent::__construct();
+		$this->base_url .= '/web/client';
 		$this->credentials = $credentials;
 	}
+
 
 	public function member_web_notifications(VO\Token $token, VO\MemberID $member_id) {
 
