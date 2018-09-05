@@ -236,10 +236,9 @@ class EmployerRepository extends BaseRepository{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/employer/base/member/'.$member_id.'/get'),
+			VO\HTTP\Url::fromNative($this->base_url.'/employer/base/member/'.$member_id->__toString().'/get'),
 			new VO\HTTP\Method('GET')
 		);
-
 		$response = $request->send();
 
 		$data = $response->get_data();
