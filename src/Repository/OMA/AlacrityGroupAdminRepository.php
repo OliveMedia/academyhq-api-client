@@ -340,8 +340,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Integer $video,
         VO\Integer $attachment,
         VO\Integer $program_id,
-        VO\Integer $program_unit_id = null
-
+        VO\Integer $program_unit_id=null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -350,7 +349,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $request_parameters = array(
             'name' => $name->__toString(),
             'header' => $header->__toString(),
@@ -360,7 +358,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'video' => $video->__toInteger(),
             'attachment' => $attachment->__toInteger(),
             'program_id'=>$program_id->__toInteger(),
-
         );
         if(!is_null($program_unit_id)){
             $request_parameters['program_unit_id'] = $program_unit_id->__toInteger();
@@ -370,7 +367,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
         return $data;
     }
 
-
     public function createProgramWelcomeResource(
         VO\Token $token,
         VO\StringVo $name,
@@ -378,7 +374,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\StringVo $document,
         VO\StringVo $description,
         VO\StringVo $link
-
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -387,14 +382,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $request_parameters = array(
             'name' => $name->__toString(),
             'program_id'=>$program_id->__toInteger(),
-            'docuemnt' => $document->__toString(),
+            'document' => $document->__toString(),
             'description' => $description->__toString(),
             'link' => $link->__toString(),
-
         );
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
