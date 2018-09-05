@@ -400,4 +400,31 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
+
+    /*alicrity program publish and completed url repo*/
+    public function publish_occupation(
+        VO\Token $token,
+        VO\Integer $occupation_id
+
+
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/publish/occupation'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            
+            'occupation_id'=>$occupation_id->__toInteger(),
+       );
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 }

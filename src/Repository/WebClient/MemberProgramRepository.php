@@ -2,18 +2,19 @@
 
 namespace AcademyHQ\API\Repository\WebClient;
 
-use AcademyHQ\API\ValueObjects as VO;
-use AcademyHQ\API\HTTP\Request\Request as Request;
-use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\HTTP\Request\Request as Request;
+use AcademyHQ\API\Repository\BaseRepository;
+use AcademyHQ\API\ValueObjects as VO;
+use Guzzle\Http\Client as GuzzleClient;
 
-class MemberProgramRepository {
+class MemberProgramRepository extends BaseRepository {
 
-	private $base_url = 'https://api.academyhq.com/api/v2/web/client';
-	
 	public function __construct(Credentials $credentials)
 	{
+		parent::__construct();
 		$this->credentials = $credentials;
+		$this->base_url .= '/web/client';
 	}
 
 	public function fetch_all_member_program(VO\Token $token, VO\MemberID $member_id){
