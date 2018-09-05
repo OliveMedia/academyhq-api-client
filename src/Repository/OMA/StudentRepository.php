@@ -137,5 +137,30 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    public function member_enrolment_details(
+        VO\Token $token,
+        VO\EnrolmentID $enrolment_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/enrolment/details'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            
+            'enrolment_id' => $enrolment_id->__toString(),
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
 
 }
