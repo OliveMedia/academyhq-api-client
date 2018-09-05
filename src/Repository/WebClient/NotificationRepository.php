@@ -2,12 +2,13 @@
 
 namespace AcademyHQ\API\Repository\WebClient;
 
-use AcademyHQ\API\ValueObjects as VO;
-use AcademyHQ\API\HTTP\Request\Request as Request;
-use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
+use AcademyHQ\API\HTTP\Request\Request as Request;
+use AcademyHQ\API\Repository\BaseRepository;
+use AcademyHQ\API\ValueObjects as VO;
+use Guzzle\Http\Client as GuzzleClient;
 
-class NotificationRepository {
+class NotificationRepository extends BaseRepository{
 
 	public function __construct(Credentials $credentials)
 	{
