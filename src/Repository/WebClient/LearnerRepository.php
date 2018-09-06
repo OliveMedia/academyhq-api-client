@@ -248,7 +248,7 @@ class LearnerRepository extends BaseRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/enrolment/'.$enrolment_id.'/launch/url'),
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/enrolment/'.$enrolment_id->__toString().'/launch/url'),
 			new VO\HTTP\Method('GET')
 		);
 
@@ -268,7 +268,7 @@ class LearnerRepository extends BaseRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/enrolment/'.$enrolment_id.'/callback'),
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/get/enrolment/'.$enrolment_id->__toString().'/callback'),
 			new VO\HTTP\Method('GET')
 		);
 
