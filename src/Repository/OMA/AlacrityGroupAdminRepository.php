@@ -258,7 +258,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
     public function createProgramCourse(
         VO\Token $token,
         VO\Integer $program_id,
-        VO\CourseIdArray $courses_id
+        VO\CourseIDArray $courses_id
 
     ) {
         $request = new Request(
