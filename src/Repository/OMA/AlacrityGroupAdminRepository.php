@@ -419,31 +419,4 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         return $data;
     }
-
-    /*alicrity get program phase details*/
-    public function occupation_program_details(
-        VO\Token $token,
-        VO\Integer $occupation_id
-
-
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/get/occupation/programs/details'),
-            new VO\HTTP\Method('POST')
-        );
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $request_parameters = array(
-            
-            'occupation_id'=>$occupation_id->__toInteger(),
-       );
-        $response = $request->send($request_parameters, $header_parameters);
-
-        $data = $response->get_data();
-
-        return $data;
-    }
-
 }
