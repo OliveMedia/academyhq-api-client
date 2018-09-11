@@ -29,11 +29,21 @@ final class StudentRepositoryTest extends TestCase
     }
 
 
-    public function testlistStudent()
+    /*public function testlistStudent()
     {
         $student_list_member = $this->repo->list_member_apprenticeship(
             new VO\Token('f99208b802494daa')
         //new VO\Integer(1)
         );
+    }*/
+
+    public function testMemberProgramStatus(){
+        $response = $this->repo->member_program_status(
+            new VO\Token('asdfghjkloiuytrewq12'),
+            new VO\ID(1),
+            new VO\Integer(1),
+            new VO\Integer(0)
+        );
+        print_r($response);
     }
 }

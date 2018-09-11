@@ -162,5 +162,40 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    public function member_program_status(
+        VO\Token $token,
+        VO\ID $member_program_id,
+        VO\Integer $completed = null,
+        VO\Integer $started = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/status'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            
+            'member_program_id' => $member_program_id->__toString(),
+        );
+
+        if(!is_null($completed)){
+            $request_parameters['completed'] = $completed->__toInteger();
+        }
+
+        if(!is_null($started)){
+            $request_parameters['started'] = $started->__toInteger();
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
 
 }
