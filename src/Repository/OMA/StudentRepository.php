@@ -197,5 +197,84 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    public function member_apprenticeship_program_evidence(
+        VO\Token $token,
+        VO\ID $member_apprenticeship_id = null, //required for create
+        VO\ID $program_unit_id = null, //required for create
+        VO\StringVO $description = null, //required for create
+        VO\StringVO $evidence_type = null, //required for create
+        VO\StringVO $document_url = null, //required for create
+        VO\StringVO $document_key = null, //required for create
+        VO\StringVO $address = null, //required for create
+        VO\StringVO $latitude = null, //required for create
+        VO\StringVO $longitude = null, //required for create
+        VO\Integer $approved = null,
+        VO\Integer $disapproved = null,
+        VO\ID $program_evidence_id = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/apprenticeship/program/evidence'),
+            new VO\HTTP\Method('POST')
+        );
+
+        if(!is_null($member_apprenticeship_id)){
+            $request_parameters['member_apprenticeship_id'] = $member_apprenticeship_id->__toString();
+        }
+
+        if(!is_null($program_unit_id)){
+            $request_parameters['program_unit_id'] = $program_unit_id->__toString();        
+        }
+
+        if(!is_null($address)){
+            $request_parameters['address'] = $address->__toString();        
+        }
+
+        if(!is_null($latitude)){
+            $request_parameters['latitude'] = $latitude->__toString();        
+        }
+
+        if(!is_null($longitude)){
+            $request_parameters['longitude'] = $longitude->__toString();        
+        }
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();        
+        }
+
+        if(!is_null($evidence_type)){
+            $request_parameters['evidence_type'] = $evidence_type->__toString();        
+        }
+
+        if(!is_null($document_url)){
+            $request_parameters['document_url'] = $document_url->__toString();        
+        }
+
+        if(!is_null($document_key)){
+            $request_parameters['document_key'] = $document_key->__toString();        
+        }
+
+        if(!is_null($approved)){
+            $request_parameters['approved'] = $approved->__toInteger();        
+        }
+
+        if(!is_null($disapproved)){
+            $request_parameters['disapproved'] = $disapproved->__toInteger();        
+        }
+
+        if(!is_null($program_evidence_id)){
+            $request_parameters['program_evidence_id'] = $program_evidence_id->__toString();        
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
 
 }
