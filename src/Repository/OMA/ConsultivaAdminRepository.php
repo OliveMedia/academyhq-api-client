@@ -51,7 +51,9 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\OrganisationID $organisation_id = null,
-        VO\ApprenticeshipID $apprenticeship_id = null
+        VO\ApprenticeshipID $apprenticeship_id = null,
+        VO\MemberID $assessor_id = null,
+        VO\MemberID $verifier_id = null
 
     ) {
         $request = new Request(
@@ -70,6 +72,14 @@ class ConsultivaAdminRepository extends BaseRepository
             'organisation_id' => $organisation_id ? $organisation_id->__toString() : '',
             'apprenticeship_id' => $apprenticeship_id ? $apprenticeship_id->__toString() : ''
         );
+
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id'] = $assessor_id->__toString();
+        }
+
+        if(!is_null($verifier_id)){
+            $request_parameters['verifier_id'] = $verifier_id->__toString();
+        }
 
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
@@ -97,10 +107,11 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\StringVO $postal_code,
         VO\Integer $disability,
         VO\StringVO $image = null,
+        VO\MemberID $verifier_id = null,
         VO\StringVO $employment = null,
         VO\StringVO $further_notes = null,
-        VO\StringVO $date_of_birth = null,
-        VO\StringVO $disability_text = null
+        VO\StringVO $disability_text = null,
+        VO\StringVO $date_of_birth = null
     ) {
         $request =new Request(
             new GuzzleClient,
@@ -131,9 +142,33 @@ class ConsultivaAdminRepository extends BaseRepository
             'image' => $image ? $image->__toString() : '',
             'employment' => $employment ? $employment->__toString() : '',
             'further_notes' => $further_notes ? $further_notes->__toString() : '',
-            'date_of_birth' => $date_of_birth ? $date_of_birth-> __toString() : '',
             'disability_text' => $disability_text ? $disability_text->__toString() : '',
+            'date_of_birth' => $date_of_birth ? $date_of_birth-> __toString() : ''
         );
+
+        if(!is_null($image)){
+            $request_parameters['image'] = $image->__toString();
+        }
+
+        if(!is_null($verifier_id)){
+            $request_parameters['verifier_id'] = $verifier_id->__toString();
+        }
+
+        if(!is_null($employment)){
+            $request_parameters['employment'] = $employment->__toString();
+        }
+
+        if(!is_null($further_notes)){
+            $request_parameters['further_notes'] = $further_notes->__toString();
+        }
+
+        if(!is_null($date_of_birth)){
+            $request_parameters['date_of_birth'] = $date_of_birth->__toString();
+        }
+
+        if(!is_null($disability_text)){
+            $request_parameters['disability_text'] = $disability_text->__toString();
+        }
 
         $response = $request->send($request_parameters, $header_parameters);
         
