@@ -130,7 +130,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/employer'),
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/consultiva'),
             new VO\HTTP\Method('POST')
         );
 
