@@ -276,5 +276,85 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    public function create_member(
+        VO\Token $token,
+        VO\Name $name,
+        VO\Email $email,
+        VO\Integer $is_assessor = null,
+        VO\Integer $is_verifier = null,
+        VO\Integer $is_mentor = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/create/member'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            
+            'first_name' => $name->get_first_name()->__toString(),
+            'last_name' => $name->get_last_name()->__toString(),
+            'email' => $email->__toString()
+        );
+
+        if(!is_null($is_assessor)){
+            $request_parameters['is_assessor']=$is_assessor->__toInteger();
+        }
+
+        if(!is_null($is_verifier)){
+            $request_parameters['is_verifier']=$is_verifier->__toInteger();
+        }
+
+        if(!is_null($is_mentor)){
+            $request_parameters['is_mentor']=$is_mentor->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function list_member(
+        VO\Token $token,
+        VO\StringVO $search,
+        VO\Integer $is_assessor = null,
+        VO\Integer $is_verifier = null,
+        VO\Integer $is_mentor = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/list/members'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search' => $search->__toString()
+        );
+
+        if(!is_null($is_assessor)){
+            $request_parameters['is_assessor']=$is_assessor->__toInteger();
+        }
+
+        if(!is_null($is_verifier)){
+            $request_parameters['is_verifier']=$is_verifier->__toInteger();
+        }
+
+        if(!is_null($is_mentor)){
+            $request_parameters['is_mentor']=$is_mentor->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 
 }
