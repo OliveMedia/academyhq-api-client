@@ -44,9 +44,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
     public function listOccupation(
         VO\Token $token,
+        VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\Integer $is_published = null,
-        VO\Integer $current_page
+        VO\OrganisationID $organisation_id = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -61,8 +62,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'search' => $search ? $search->__toString() : '',
             'current_page' => $current_page->__toInteger(),
         );
+
         if (!is_null($is_published)) {
             $request_parameters['is_published']=$is_published->__toInteger();
+        }
+
+        if (!is_null($organisation_id)) {
+            $request_parameters['organisation_id']=$organisation_id->__toString();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
