@@ -157,8 +157,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
     public function createApprenticeship(
         VO\Token $token,
         VO\OrganisationID $employer_id,
-        VO\OccupationID $occupation_id,
-        VO\MemberID $contact_person_id
+        VO\OccupationIDArray $occupations_id
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -171,8 +170,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         $request_parameters = array(
             'employer_id' => $employer_id->__toString(),
-            'occupation_id' => $occupation_id->__toString(),
-            'contact_person_id' => $contact_person_id->__toString()
+            'occupations_id' => $occupations_id->__toArray()
         );
 
         $response = $request->send($request_parameters, $header_parameters);
