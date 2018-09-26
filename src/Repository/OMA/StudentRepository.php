@@ -320,7 +320,7 @@ class StudentRepository extends BaseRepository
 
     public function list_member(
         VO\Token $token,
-        VO\StringVO $search,
+        VO\StringVO $search = null,
         VO\Integer $is_assessor = null,
         VO\Integer $is_verifier = null,
         VO\Integer $is_mentor = null
@@ -333,9 +333,11 @@ class StudentRepository extends BaseRepository
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-        $request_parameters = array(
-            'search' => $search->__toString()
-        );
+        $request_parameters = array();
+
+        if(!is_null($search)){
+            $request_parameters['search']=$search->__toString();
+        }
 
         if(!is_null($is_assessor)){
             $request_parameters['is_assessor']=$is_assessor->__toInteger();
