@@ -230,7 +230,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\StringVO $shoudl_end_by = null,
         VO\Integer $off_the_job_training = null,
         VO\Integer $required_hours = null,
-        VO\Integer $program_id = null
+        VO\Integer $program_id = null,
+        VO\StringVo $behavior=null,
+        VO\StringVo $endpoint=null,
+        VO\StringVo $final_review=null,
+        VO\StringVo $gateway=null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -245,19 +249,37 @@ class AlacrityGroupAdminRepository extends BaseRepository
         );
 
         if(!is_null($should_start_by)){
-            $request_parameters['should_start_by'] = $should_start_by->__toInteger();
+            $request_parameters['should_start_by'] = $should_start_by->__toString();
         }
 
         if(!is_null($shoudl_end_by)){
-            $request_parameters['shoudl_end_by'] = $shoudl_end_by->__toInteger();
+            $request_parameters['shoudl_end_by'] = $shoudl_end_by->__toString();
         }
 
         if(!is_null($off_the_job_training)){
             $request_parameters['off_the_job_training'] = $off_the_job_training->__toInteger();
         }
+
         if(!is_null($required_hours)){
             $request_parameters['required_hours'] = $required_hours->__toInteger();
         }
+
+        if(!is_null($behavior)){
+            $request_parameters['behavior'] = $behavior->__toString();
+        }
+
+        if(!is_null($endpoint)){
+            $request_parameters['endpoint'] = $endpoint->__toString();
+        }
+
+        if(!is_null($gateway)){
+            $request_parameters['gateway'] = $gateway->__toString();
+        }
+
+        if(!is_null($final_review)){
+            $request_parameters['final_review'] = $final_review->__toString();
+        }
+        
         if(!is_null($program_id)){
             $request_parameters['program_id'] = $program_id->__toInteger();
         }
@@ -402,7 +424,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'link' => $link->__toString(),
         );
         if(!is_null($welcome_resource_id)){
-            $request_parameters['welcome_resource_id'] = $welcome_resource_id->__toString();
+            $request_parameters['welcome_resourse_id'] = $welcome_resource_id->__toString();
         }
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
