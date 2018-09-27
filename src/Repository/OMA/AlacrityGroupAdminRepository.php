@@ -226,8 +226,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Token $token,
         VO\StringVO $name,
         VO\StringVO $description,
-        VO\StringVO $should_start_by,
-        VO\StringVO $shoudl_end_by,
+        VO\StringVO $should_start_by = null,
+        VO\StringVO $shoudl_end_by = null,
         VO\Integer $off_the_job_training = null,
         VO\Integer $required_hours = null,
         VO\Integer $program_id = null
@@ -241,10 +241,17 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $request_parameters = array(
             'name' => $name->__toString(),
-            'description' => $description->__toString(),
-            'should_start_by' => $should_start_by->__toString(),
-            'should_end_by' => $shoudl_end_by->__toString()
+            'description' => $description->__toString()
         );
+
+        if(!is_null($should_start_by)){
+            $request_parameters['should_start_by'] = $should_start_by->__toInteger();
+        }
+
+        if(!is_null($shoudl_end_by)){
+            $request_parameters['shoudl_end_by'] = $shoudl_end_by->__toInteger();
+        }
+
         if(!is_null($off_the_job_training)){
             $request_parameters['off_the_job_training'] = $off_the_job_training->__toInteger();
         }
