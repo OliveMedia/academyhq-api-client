@@ -358,5 +358,123 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    //added api for member program unit-create
+    public function member_program_unit_create(
+        VO\Token $token,
+        VO\ID $program_unit_id,
+        VO\ApprenticeshipID $member_apprenticeship_id,
+        VO\Integer $is_started = null,
+        VO\Integer $is_completed = null,
+        VO\Integer $is_submitted_for_assessment = null,
+        VO\StringVO $observation
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/create'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            
+            'program_unit_id' => $program_unit_id->__toInteger(),
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger(),
+            'observation' => $observation->__toInteger()
+        );
+
+        if(!is_null($is_started)){
+            $request_parameters['is_started'] = $is_started->__toInteger();
+        }
+
+        if(!is_null($is_completed)){
+            $request_parameters['is_completed'] = $is_completed->__toInteger();
+        }
+
+        if(!is_null($is_submitted_for_assessment)){
+            $request_parameters['is_submitted_for_assessment'] = $is_submitted_for_assessment->__toInteger();
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
+    //added api for member program unit-view
+    public function member_program_unit_view(
+        VO\Token $token,
+        VO\ApprenticeshipID $member_apprenticeship_id,
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/view'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger(),
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
+    //added api for member program unit-edit
+    public function member_program_unit_edit(
+        VO\Token $token,
+        VO\ID $program_unit_id,
+        VO\ApprenticeshipID $member_apprenticeship_id,
+        VO\Integer $is_started = null,
+        VO\Integer $is_completed = null,
+        VO\Integer $is_submitted_for_assessment = null,
+        VO\StringVO $observation
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/create'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            
+            'program_unit_id' => $program_unit_id->__toInteger(),
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger(),
+            'observation' => $observation->__toInteger()
+        );
+
+        if(!is_null($is_started)){
+            $request_parameters['is_started'] = $is_started->__toInteger();
+        }
+
+        if(!is_null($is_completed)){
+            $request_parameters['is_completed'] = $is_completed->__toInteger();
+        }
+
+        if(!is_null($is_submitted_for_assessment)){
+            $request_parameters['is_submitted_for_assessment'] = $is_submitted_for_assessment->__toInteger();
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
 
 }
