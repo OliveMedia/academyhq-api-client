@@ -407,7 +407,7 @@ class StudentRepository extends BaseRepository
     //added api for member program unit-view
     public function member_program_unit_view(
         VO\Token $token,
-        VO\ID $member_program_unit_id
+        VO\Integer $member_program_unit_id
     ){
         $request = new Request(
             new GuzzleClient,
@@ -432,7 +432,7 @@ class StudentRepository extends BaseRepository
     //added api for member program unit-edit
     public function member_program_unit_edit(
         VO\Token $token,
-        VO\ID $member_program_unit_id,
+        VO\Integer $member_program_unit_id,
         VO\Integer $is_started = null,
         VO\Integer $is_completed = null,
         VO\Integer $is_submitted_for_assessment = null,
@@ -447,8 +447,6 @@ class StudentRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            
-            'program_unit_id' => $program_unit_id->__toInteger(),
             'member_program_unit_id' => $member_program_unit_id->__toInteger(),
             'observation' => $observation->__toInteger()
         );
