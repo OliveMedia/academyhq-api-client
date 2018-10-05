@@ -407,8 +407,7 @@ class StudentRepository extends BaseRepository
     //added api for member program unit-view
     public function member_program_unit_view(
         VO\Token $token,
-        VO\ApprenticeshipID $member_apprenticeship_id,
-
+        VO\ApprenticeshipID $member_apprenticeship_id
     ){
         $request = new Request(
             new GuzzleClient,
