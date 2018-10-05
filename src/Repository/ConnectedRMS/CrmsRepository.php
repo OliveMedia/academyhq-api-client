@@ -275,7 +275,6 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
-	
 	public function update_organisation_subscription(
 		VO\OrganisationID $organisation_id,
 		VO\ID $subscription_id = null,
@@ -427,6 +426,42 @@ class CrmsRepository extends BaseRepository{
 		);
 
 		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function create_member_and_enroll(
+		VO\OrganisationID $organisation_id,
+		VO\Name $name,
+		VO\Email $email,
+		VO\Integer $is_admin = null,
+		VO\StringVO $token = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/member/enroll_to/package'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString()			
+		);
+
+		if(!is_null($is_admin)){
+			$request_parameters['is_admin'] = $is_admin->__toInteger();
+		}
+
+		if(!is_null($token)){
+			$request_parameters['token'] = $token->__toString();
+		}
+
+		$response = $request->send($request_parameters);
 
 		$data = $response->get_data();
 

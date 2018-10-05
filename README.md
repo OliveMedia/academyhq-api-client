@@ -1504,6 +1504,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+<<<<<<< Updated upstream
 ### 5> Find Organisation Package
 <pre>
 	/*@return return org_package_details std object */
@@ -1607,6 +1608,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$members_id = $member_api_repository->get_all_members_id(VO\OrganisationID $organisation_id);
 </pre>
 
+### 14> Create Member And Auto Enroll
+<pre>
+	/*@return return status and message*/
+	$response = $crms_repository->create_member_and_enroll(
+		new \AcademyHQ\API\ValueObjects\Token("token"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id"),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("First Name", "Last Name"),
+		new \AcademyHQ\API\ValueObjects\Email("email"),
+		new \AcademyHQ\API\ValueObjects\Integer("is_admin"),
+		new \AcademyHQ\API\ValueObjects\String("admin_token")
+	);
+</pre>
 
 ## Using Course Api Repository
 
