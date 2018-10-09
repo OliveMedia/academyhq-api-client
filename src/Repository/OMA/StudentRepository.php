@@ -474,7 +474,7 @@ class StudentRepository extends BaseRepository
     public function create_evidence_for_multiple_unit(
         VO\Token $token,
         VO\ID $member_apprenticeship_id,
-        VO\IDArray $program_units_id,
+        VO\IDArray $parent_program_units_id,
         VO\StringVO $evidence_type,
         VO\StringVO $document_url,
         VO\StringVO $document_key,
@@ -492,7 +492,7 @@ class StudentRepository extends BaseRepository
 
         $request_parameters = array(
             'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
-            'program_units_id'=> $program_units_id->__toArray(),    
+            'parent_program_units_id'=> $program_units_id->__toArray(),    
             'address'=> $address->__toString(),
             'latitude'=> $latitude->__toString(),
             'longitude'=> $longitude->__toString(),
