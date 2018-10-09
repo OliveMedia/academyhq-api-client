@@ -471,5 +471,48 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    public function create_evidence_for_multiple_unit(
+        VO\Token $token,
+        VO\ID $member_apprenticeship_id,
+        VO\IDArray $program_units_id,
+        VO\StringVO $evidence_type,
+        VO\StringVO $document_url,
+        VO\StringVO $document_key,
+        VO\StringVO $address,
+        VO\StringVO $latitude,
+        VO\StringVO $longitude,
+        VO\StringVO $description = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/apprenticeship/program/evidence'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
+            'program_units_id'=> $program_units_id->__toArray(),    
+            'address'=> $address->__toString(),
+            'latitude'=> $latitude->__toString(),
+            'longitude'=> $longitude->__toString(),
+            'evidence_type'=> $evidence_type->__toString(),
+            'document_url'=> $document_url->__toString(),
+            'document_key'=> $document_key->__toString()
+
+        );
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();        
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
 
 }
