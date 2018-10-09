@@ -486,7 +486,7 @@ class StudentRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/student/apprenticeship/program/evidence'),
+            VO\HTTP\Url::fromNative($this->base_url.'/student/create/evidence/for/multiple/units'),
             new VO\HTTP\Method('POST')
         );
 
