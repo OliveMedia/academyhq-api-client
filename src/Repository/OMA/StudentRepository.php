@@ -492,7 +492,7 @@ class StudentRepository extends BaseRepository
 
         $request_parameters = array(
             'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
-            'parent_program_units_id'=> $program_units_id->__toArray(),    
+            'parent_program_units_id'=> $parent_program_units_id->__toArray(),    
             'address'=> $address->__toString(),
             'latitude'=> $latitude->__toString(),
             'longitude'=> $longitude->__toString(),
