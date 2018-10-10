@@ -432,10 +432,11 @@ class StudentRepository extends BaseRepository
     public function member_program_unit_edit(
         VO\Token $token,
         VO\ID $member_program_unit_id,
+        VO\StringVO $observation = null,
         VO\Integer $is_started = null,
         VO\Integer $is_completed = null,
-        VO\Integer $is_submitted_for_assessment = null,
-        VO\StringVO $observation
+        VO\Integer $is_submitted_for_assessment = null
+        
 
     ){
         $request = new Request(
@@ -447,9 +448,10 @@ class StudentRepository extends BaseRepository
 
         $request_parameters = array(
             'member_program_unit_id' => $member_program_unit_id->__toString(),
-            'observation' => $observation->__toString()
         );
-
+        if(!is_null($observation)){
+            $request_parameters['observation'] = $observation->__toString();
+        }
         if(!is_null($is_started)){
             $request_parameters['is_started'] = $is_started->__toInteger();
         }
