@@ -166,7 +166,8 @@ class StudentRepository extends BaseRepository
         VO\Token $token,
         VO\ID $member_program_id,
         VO\Integer $completed = null,
-        VO\Integer $started = null
+        VO\Integer $started = null,
+        VO\Integer $submitted_for_assessment = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -182,6 +183,10 @@ class StudentRepository extends BaseRepository
 
         if(!is_null($completed)){
             $request_parameters['completed'] = $completed->__toInteger();
+        }
+
+        if(!is_null($submitted_for_assessment)){
+            $request_parameters['submitted_for_assessment'] = $submitted_for_assessment->__toInteger();
         }
 
         if(!is_null($started)){
