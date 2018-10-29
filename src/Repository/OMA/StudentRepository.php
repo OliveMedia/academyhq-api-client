@@ -166,7 +166,8 @@ class StudentRepository extends BaseRepository
         VO\Token $token,
         VO\ID $member_program_id,
         VO\Integer $completed = null,
-        VO\Integer $started = null
+        VO\Integer $started = null,
+        VO\Integer $submitted_for_assessment = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -182,6 +183,10 @@ class StudentRepository extends BaseRepository
 
         if(!is_null($completed)){
             $request_parameters['completed'] = $completed->__toInteger();
+        }
+
+        if(!is_null($submitted_for_assessment)){
+            $request_parameters['submitted_for_assessment'] = $submitted_for_assessment->__toInteger();
         }
 
         if(!is_null($started)){
@@ -358,5 +363,163 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    //added api for member program unit-create
+    public function member_program_unit_create(
+        VO\Token $token,
+        VO\ID $program_unit_id,
+        VO\ApprenticeshipID $member_apprenticeship_id,
+        VO\Integer $is_started = null,
+        VO\Integer $is_completed = null,
+        VO\Integer $is_submitted_for_assessment = null,
+        VO\StringVO $observation
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/create'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(      
+            'program_unit_id' => $program_unit_id->__toString(),
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toString(),
+            'observation' => $observation->__toString()
+        );
+
+        if(!is_null($is_started)){
+            $request_parameters['is_started'] = $is_started->__toInteger();
+        }
+
+        if(!is_null($is_completed)){
+            $request_parameters['is_completed'] = $is_completed->__toInteger();
+        }
+
+        if(!is_null($is_submitted_for_assessment)){
+            $request_parameters['is_submitted_for_assessment'] = $is_submitted_for_assessment->__toInteger();
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
+    //added api for member program unit-view
+    public function member_program_unit_view(
+        VO\Token $token,
+        VO\ID $member_program_unit_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/view'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_program_unit_id' => $member_program_unit_id->__toString(),
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    //added api for member program unit-edit
+    public function member_program_unit_edit(
+        VO\Token $token,
+        VO\ID $member_program_unit_id,
+        VO\StringVO $observation = null,
+        VO\Integer $is_started = null,
+        VO\Integer $is_completed = null,
+        VO\Integer $is_submitted_for_assessment = null
+        
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/edit'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_program_unit_id' => $member_program_unit_id->__toString(),
+        );
+        if(!is_null($observation)){
+            $request_parameters['observation'] = $observation->__toString();
+        }
+        if(!is_null($is_started)){
+            $request_parameters['is_started'] = $is_started->__toInteger();
+        }
+
+        if(!is_null($is_completed)){
+            $request_parameters['is_completed'] = $is_completed->__toInteger();
+        }
+
+        if(!is_null($is_submitted_for_assessment)){
+            $request_parameters['is_submitted_for_assessment'] = $is_submitted_for_assessment->__toInteger();
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
+    public function create_evidence_for_multiple_unit(
+        VO\Token $token,
+        VO\ID $member_apprenticeship_id,
+        VO\IDArray $parent_program_units_id,
+        VO\StringVO $evidence_type,
+        VO\StringVO $document_url,
+        VO\StringVO $document_key,
+        VO\StringVO $address,
+        VO\StringVO $latitude,
+        VO\StringVO $longitude,
+        VO\StringVO $description = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/create/evidence/for/multiple/units'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
+            'parent_program_units_id'=> $parent_program_units_id->__toArray(),    
+            'address'=> $address->__toString(),
+            'latitude'=> $latitude->__toString(),
+            'longitude'=> $longitude->__toString(),
+            'evidence_type'=> $evidence_type->__toString(),
+            'document_url'=> $document_url->__toString(),
+            'document_key'=> $document_key->__toString()
+
+        );
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();        
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+       
+        $data = $response->get_data();
+    
+        return $data;
+    }
 
 }

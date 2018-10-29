@@ -38,11 +38,14 @@ final class StudentRepositoryTest extends TestCase
     }*/
 
     public function testMemberProgramStatus(){
-        $response = $this->repo->member_program_status(
+        $response = $this->repo->member_program_unit_create(
             new VO\Token('asdfghjkloiuytrewq12'),
-            new VO\ID(1),
+            new VO\ID(95),
+            new VO\ApprenticeshipID(108),
             new VO\Integer(1),
-            new VO\Integer(0)
+            new VO\Integer(1),
+            new VO\Integer(1),
+            new VO\StringVO("ohhh")
         );
         print_r($response);
     }
