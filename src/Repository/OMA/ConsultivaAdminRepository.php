@@ -111,7 +111,8 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\StringVO $employment = null,
         VO\StringVO $further_notes = null,
         VO\StringVO $disability_text = null,
-        VO\StringVO $date_of_birth = null
+        VO\StringVO $date_of_birth = null,
+        VO\Integer $weekly_learning_hours=null
     ) {
         $request =new Request(
             new GuzzleClient,
@@ -168,6 +169,10 @@ class ConsultivaAdminRepository extends BaseRepository
 
         if(!is_null($disability_text)){
             $request_parameters['disability_text'] = $disability_text->__toString();
+        }
+
+        if(!is_null($weekly_learning_hours)){
+            $request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
