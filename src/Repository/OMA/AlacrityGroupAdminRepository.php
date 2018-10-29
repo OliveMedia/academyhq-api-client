@@ -225,7 +225,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
     public function createProgram(
         VO\Token $token,
         VO\StringVO $name,
-        VO\StringVO $description,
+        VO\StringVO $description = null,
         VO\StringVO $should_start_by = null,
         VO\StringVO $shoudl_end_by = null,
         VO\Integer $off_the_job_training = null,
@@ -244,9 +244,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $request_parameters = array(
-            'name' => $name->__toString(),
-            'description' => $description->__toString()
+            'name' => $name->__toString()
         );
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();
+        }
 
         if(!is_null($should_start_by)){
             $request_parameters['should_start_by'] = $should_start_by->__toString();
