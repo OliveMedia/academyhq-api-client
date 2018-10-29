@@ -370,7 +370,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\Token $token,
         VO\StringVo $name,
         VO\StringVo $header,
-        VO\StringVo $description,
+        VO\StringVo $description=null,
         VO\Integer $is_evidence_required,
         VO\Integer $image,
         VO\Integer $video,
@@ -389,13 +389,17 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $request_parameters = array(
             'name' => $name->__toString(),
             'header' => $header->__toString(),
-            'description' => $description->__toString(),
             'is_evidence_required' => $is_evidence_required->__toInteger(),
             'image' => $image->__toInteger(),
             'video' => $video->__toInteger(),
             'attachment' => $attachment->__toInteger(),
             'program_id'=>$program_id->__toInteger(),
         );
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();
+        }
+
         if(!is_null($program_unit_id)){
             $request_parameters['program_unit_id'] = $program_unit_id->__toInteger();
         }
@@ -414,7 +418,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\StringVo $name,
         VO\Integer $program_id,
         VO\StringVo $document,
-        VO\StringVo $description,
+        VO\StringVo $description=null,
         VO\StringVo $link,
         VO\ID $welcome_resource_id = null
     ) {
@@ -429,9 +433,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'name' => $name->__toString(),
             'program_id'=>$program_id->__toInteger(),
             'document' => $document->__toString(),
-            'description' => $description->__toString(),
             'link' => $link->__toString(),
         );
+
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();
+        }
+
         if(!is_null($welcome_resource_id)){
             $request_parameters['welcome_resourse_id'] = $welcome_resource_id->__toString();
         }
