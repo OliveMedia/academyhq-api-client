@@ -166,7 +166,8 @@ class StudentRepository extends BaseRepository
         VO\Token $token,
         VO\ID $member_program_id,
         VO\Integer $completed = null,
-        VO\Integer $started = null
+        VO\Integer $started = null,
+        VO\Integer $submitted_for_assessment = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -182,6 +183,10 @@ class StudentRepository extends BaseRepository
 
         if(!is_null($completed)){
             $request_parameters['completed'] = $completed->__toInteger();
+        }
+
+        if(!is_null($submitted_for_assessment)){
+            $request_parameters['submitted_for_assessment'] = $submitted_for_assessment->__toInteger();
         }
 
         if(!is_null($started)){
@@ -432,10 +437,11 @@ class StudentRepository extends BaseRepository
     public function member_program_unit_edit(
         VO\Token $token,
         VO\ID $member_program_unit_id,
+        VO\StringVO $observation = null,
         VO\Integer $is_started = null,
         VO\Integer $is_completed = null,
-        VO\Integer $is_submitted_for_assessment = null,
-        VO\StringVO $observation
+        VO\Integer $is_submitted_for_assessment = null
+        
 
     ){
         $request = new Request(
@@ -447,9 +453,10 @@ class StudentRepository extends BaseRepository
 
         $request_parameters = array(
             'member_program_unit_id' => $member_program_unit_id->__toString(),
-            'observation' => $observation->__toString()
         );
-
+        if(!is_null($observation)){
+            $request_parameters['observation'] = $observation->__toString();
+        }
         if(!is_null($is_started)){
             $request_parameters['is_started'] = $is_started->__toInteger();
         }
@@ -486,13 +493,13 @@ class StudentRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/student/apprenticeship/program/evidence'),
+            VO\HTTP\Url::fromNative($this->base_url.'/student/create/evidence/for/multiple/units'),
             new VO\HTTP\Method('POST')
         );
 
         $request_parameters = array(
             'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
-            'parent_program_units_id'=> $program_units_id->__toArray(),    
+            'parent_program_units_id'=> $parent_program_units_id->__toArray(),    
             'address'=> $address->__toString(),
             'latitude'=> $latitude->__toString(),
             'longitude'=> $longitude->__toString(),
