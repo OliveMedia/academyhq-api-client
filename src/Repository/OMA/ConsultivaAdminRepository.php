@@ -139,12 +139,7 @@ class ConsultivaAdminRepository extends BaseRepository
             'state' => $state->__toString(),
             'country' => $country->__toString(),
             'postal_code' => $postal_code->__toString(),
-            'disability' => $disability->__toInteger(),
-            'image' => $image ? $image->__toString() : '',
-            'employment' => $employment ? $employment->__toString() : '',
-            'further_notes' => $further_notes ? $further_notes->__toString() : '',
-            'disability_text' => $disability_text ? $disability_text->__toString() : '',
-            'date_of_birth' => $date_of_birth ? $date_of_birth-> __toString() : ''
+            'disability' => $disability->__toInteger()
         );
 
         if(!is_null($image)){
@@ -258,6 +253,81 @@ public function student_program_details(
             
             'occupation_id'=>$occupation_id->__toInteger(),
        );
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function create_member_apprenticeship(
+        VO\Token $token,
+        VO\ApprenticeshipID $apprenticeship_id,
+        VO\OrganisationID $organisation_id,
+        VO\MemberID $member_id,
+        VO\MemberID $assessor_id,
+        VO\StringVO $nationality,
+        VO\StringVO $street,
+        VO\StringVO $city,
+        VO\StringVO $state,
+        VO\StringVO $country,
+        VO\StringVO $postal_code,
+        VO\Integer $disability,
+        VO\StringVO $image = null,
+        VO\MemberID $verifier_id = null,
+        VO\StringVO $employment = null,
+        VO\StringVO $further_notes = null,
+        VO\StringVO $disability_text = null,
+        VO\StringVO $date_of_birth = null,
+        VO\Integer $weekly_learning_hours=null
+    ) {
+        $request =new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/create/member/apprenticeship'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'apprenticeship_id' => $apprenticeship_id->__toString(),
+            'organisation_id' => $organisation_id->__toString(),
+            'assessor_id' => $assessor_id->__toString(),
+            'member_id' => $member_id->__toString(),
+            'nationality' => $nationality-> __toString(),
+            'street' => $street->__toString(),
+            'city' => $city->__toString(),
+            'state' => $state->__toString(),
+            'country' => $country->__toString(),
+            'postal_code' => $postal_code->__toString(),
+            'disability' => $disability->__toInteger()
+        );
+
+        if(!is_null($image)){
+            $request_parameters['image'] = $image->__toString();
+        }
+
+        if(!is_null($verifier_id)){
+            $request_parameters['verifier_id'] = $verifier_id->__toString();
+        }
+
+        if(!is_null($employment)){
+            $request_parameters['employment'] = $employment->__toString();
+        }
+
+        if(!is_null($further_notes)){
+            $request_parameters['further_notes'] = $further_notes->__toString();
+        }
+
+        if(!is_null($disability_text)){
+            $request_parameters['disability_text'] = $disability_text->__toString();
+        }
+
+        if(!is_null($weekly_learning_hours)){
+            $request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
+        }
+
         $response = $request->send($request_parameters, $header_parameters);
 
         $data = $response->get_data();
