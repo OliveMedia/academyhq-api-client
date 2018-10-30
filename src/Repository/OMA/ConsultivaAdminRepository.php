@@ -266,6 +266,9 @@ public function student_program_details(
         VO\OrganisationID $organisation_id,
         VO\MemberID $member_id,
         VO\MemberID $assessor_id,
+        VO\StringVO $gender,
+        VO\StringVO $country_code,
+        VO\Integer $mobile_number,
         VO\StringVO $nationality,
         VO\StringVO $street,
         VO\StringVO $city,
@@ -310,6 +313,19 @@ public function student_program_details(
 
         if(!is_null($verifier_id)){
             $request_parameters['verifier_id'] = $verifier_id->__toString();
+        }
+
+        if(!is_null($gender)){
+            $request_parameters['gender'] = $gender->__toString();
+        }
+
+        if(!is_null($country_code)){
+            $request_parameters['country_code'] = $country_code->__toString();
+        }
+
+
+        if(!is_null($mobile_number)){
+            $request_parameters['mobile_number'] = $mobile_number->__toInteger();
         }
 
         if(!is_null($employment)){
