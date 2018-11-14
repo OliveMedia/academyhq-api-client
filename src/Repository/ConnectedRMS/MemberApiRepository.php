@@ -175,4 +175,35 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function fetch_profile_members(
+		VO\ID $profile_id,
+		VO\Integer $current_page,
+		VO\StringVO $search = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/profile/members'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'profile_id' => $profile_id->__toString()
+		);
+
+		if(!is_null($current_page)){
+			$request_parameters['current_page'] = $current_page->__toInteger();
+		}
+
+		if(!is_null($search)){
+			$request_parameters['search'] = $search->__toString();
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

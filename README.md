@@ -1504,11 +1504,10 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-<<<<<<< Updated upstream
 ### 5> Find Organisation Package
 <pre>
 	/*@return return org_package_details std object */
-  	$org_package_details = $crms_repository->find_license(
+  	$org_package_details = $crms_repository->find_org_package(
 		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id"),
 		new \AcademyHQ\API\ValueObjects\ID("package_id")
 	);
@@ -1544,13 +1543,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 ### 9> Fetch All Courses
 <pre>
 	/*@return all standard courses std object*/
-	$course_details = $crms_repository->get_courses(
+	$course_details = $crms_repository->get_all_courses(
 			new VO\Integer('current_page'),
 			new VO\Integer('per_page')
 	);
 </pre>
 
-### 10> RollBack created organisation and admin.
+### 10> Fetch Organisation App Credentials
+<pre>
+	/*@return all standard courses std object*/
+	$course_details = $crms_repository->fetch_organisation_api(
+			new VO\OrganisationID('organisation_id')
+	);
+</pre>
+
+### 11> RollBack created organisation and admin.
 <pre>
 	/*@return all standard courses std object*/
 	$rollback = $crms_repository->rollback(
@@ -1559,9 +1566,9 @@ Client Library that allow third party to access AcademyHQ APIs.
 				);
 </pre>
 
-### 9> RollBack created organisation and admin.
+### 12> Update Organisation Subscription
 <pre>
-	/*@return all standard courses std object*/
+	/*@return Update Organisation Subscription*/
 	$update_organisation_subscription = $crms_repository->update_organisation_subscription(
 						VO\OrganisationID $organisation_id,
 						VO\ID $subscription_id = null,
@@ -1573,10 +1580,24 @@ Client Library that allow third party to access AcademyHQ APIs.
 				);
 </pre>
 
-### 10> Create Member Admin or Learner
+### 13> Delete Organisation Subscription
+<pre>
+	/*@ Delete Organisation Subscription*/
+	 $crms_repository->delete_organisation_subscription(
+						VO\OrganisationID $organisation_id,
+						VO\ID $subscription_id = null,
+						VO\CourseIDArray $subscription_courses,
+						VO\CourseIDArray $subscription_bundles,
+						VO\Integer $max_enrolments,
+						VO\Integer $max_licenses,
+						VO\Integer $max_members
+				);
+</pre>
+
+### 14> Transger member to Academy
 <pre>
 	/*@return member id std object */
-  	$member_id = $crms_repository->create_org_admin(
+  	$member_id = $crms_repository->transfer_member(
 			new VO\OrganisationID("organisation_id"),
 			VO\Name::fromNative("First Name", "Last name"),
 			new VO\Email ("email"),
@@ -1584,7 +1605,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 11> Create Member Enrolment to Course
+### 15> Create Member Enrolment to Course
 <pre>
 	/*@return response with status and message std object */
   	$response = $crms_repository->member_enrolment_to_course(
@@ -1593,7 +1614,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 12> Create Member Enrolment to Package
+### 16> Create Member Enrolment to Package
 <pre>
 	/*@return response with status and message std object */
   	$response = $crms_repository->member_enrolment_to_course(
@@ -1602,13 +1623,13 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-### 13> Get Id of Members 
+### 17> Get Id of Members 
 <pre>
 	/*@returns members_id */
 	$members_id = $member_api_repository->get_all_members_id(VO\OrganisationID $organisation_id);
 </pre>
 
-### 14> Create Member And Auto Enroll
+### 18> Create Member And Auto Enroll
 <pre>
 	/*@return return status and message*/
 	$response = $crms_repository->create_member_and_enroll(
@@ -1762,6 +1783,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@returns member_details */
 	$member_details = $member_api_repository->get_member(
 		new \AcademyHQ\API\ValueObjects\MemberID("member_id")
+	);
+</pre>
+
+### 7> Get Profile Members 
+<pre>
+	/*@returns member_details */
+	$member_details = $member_api_repository->fetch_profile_members(
+		new \AcademyHQ\API\ValueObjects\ID("profile_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("current_page"),
+		new \AcademyHQ\API\ValueObjects\StringVO("search")
 	);
 </pre>
 
