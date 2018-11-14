@@ -100,11 +100,11 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\Integer $mobile_number,
         VO\Email $email,
         VO\StringVO $nationality,
-        VO\StringVO $street,
-        VO\StringVO $city,
-        VO\StringVO $state,
-        VO\StringVO $country,
-        VO\StringVO $postal_code,
+        VO\StringVO $street = null,
+        VO\StringVO $city = null,
+        VO\StringVO $state = null,
+        VO\StringVO $country = null,
+        VO\StringVO $postal_code = null,
         VO\Integer $disability,
         VO\StringVO $image = null,
         VO\MemberID $verifier_id = null,
@@ -134,13 +134,28 @@ class ConsultivaAdminRepository extends BaseRepository
             'mobile_number' => $mobile_number->__toInteger(),
             'email' => $email->__toString(),
             'nationality' => $nationality-> __toString(),
-            'street' => $street->__toString(),
-            'city' => $city->__toString(),
-            'state' => $state->__toString(),
-            'country' => $country->__toString(),
-            'postal_code' => $postal_code->__toString(),
             'disability' => $disability->__toInteger()
         );
+
+        if(!is_null($street)){
+            $request_parameters['street'] = $street->__toString();
+        }
+
+        if(!is_null($city)){
+            $request_parameters['city'] = $city->__toString();
+        }
+
+        if(!is_null($state)){
+            $request_parameters['state'] = $state->__toString();
+        }
+
+        if(!is_null($country)){
+            $request_parameters['country'] = $country->__toString();
+        }
+
+        if(!is_null($postal_code)){
+            $request_parameters['postal_code'] = $postal_code->__toString();
+        }
 
         if(!is_null($image)){
             $request_parameters['image'] = $image->__toString();
@@ -270,11 +285,11 @@ public function student_program_details(
         VO\StringVO $country_code,
         VO\Integer $mobile_number,
         VO\StringVO $nationality,
-        VO\StringVO $street,
-        VO\StringVO $city,
-        VO\StringVO $state,
-        VO\StringVO $country,
-        VO\StringVO $postal_code,
+        VO\StringVO $street = null,
+        VO\StringVO $city = null,
+        VO\StringVO $state = null,
+        VO\StringVO $country = null,
+        VO\StringVO $postal_code = null,
         VO\Integer $disability,
         VO\StringVO $image = null,
         VO\MemberID $verifier_id = null,
@@ -299,13 +314,28 @@ public function student_program_details(
             'assessor_id' => $assessor_id->__toString(),
             'member_id' => $member_id->__toString(),
             'nationality' => $nationality-> __toString(),
-            'street' => $street->__toString(),
-            'city' => $city->__toString(),
-            'state' => $state->__toString(),
-            'country' => $country->__toString(),
-            'postal_code' => $postal_code->__toString(),
             'disability' => $disability->__toInteger()
         );
+
+        if(!is_null($street)){
+            $request_parameters['street'] = $street->__toString();
+        }
+
+        if(!is_null($city)){
+            $request_parameters['city'] = $city->__toString();
+        }
+
+        if(!is_null($state)){
+            $request_parameters['state'] = $state->__toString();
+        }
+
+        if(!is_null($country)){
+            $request_parameters['country'] = $country->__toString();
+        }
+
+        if(!is_null($postal_code)){
+            $request_parameters['postal_code'] = $postal_code->__toString();
+        }
 
         if(!is_null($image)){
             $request_parameters['image'] = $image->__toString();
