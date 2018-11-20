@@ -135,7 +135,8 @@ class CrmsRepository extends BaseRepository{
 	}
 
 	public function get_organisations(
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		VO\Integer $per_page = null
 	){
 
 		$request = new Request(
@@ -148,6 +149,10 @@ class CrmsRepository extends BaseRepository{
 		$request_parameters = array(
 			'current_page' => $current_page->__toInteger()
 		);
+
+		if(!is_null($per_page)){
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
 
 		$response = $request->send($request_parameters);
 
@@ -468,5 +473,18 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function get_organisation_details(VO\OrganisationID $organisation_id){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/organisation/'.$organisation_id->__toString().'/details'),
+			new VO\HTTP\Method('get')
+		);
+		$response = $request->send();
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 
 }

@@ -1642,6 +1642,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 19> Get Organisation Details
+<pre>
+	/*@return return organisation details*/
+	$organisation_details = $crms_repository->get_organisation_details(
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id")
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
