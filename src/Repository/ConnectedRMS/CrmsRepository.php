@@ -136,7 +136,8 @@ class CrmsRepository extends BaseRepository{
 
 	public function get_organisations(
 		VO\Integer $current_page,
-		VO\Integer $per_page = null
+		VO\Integer $per_page = null,
+		VO\StringVO $search = null
 	){
 
 		$request = new Request(
@@ -152,6 +153,10 @@ class CrmsRepository extends BaseRepository{
 
 		if(!is_null($per_page)){
 			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+
+		if(!is_null($search)){
+			$request_parameters['search'] = $search->__toString();
 		}
 
 		$response = $request->send($request_parameters);
