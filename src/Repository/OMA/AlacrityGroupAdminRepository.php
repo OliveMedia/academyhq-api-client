@@ -375,7 +375,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	public function createProgramUnit(
 		VO\Token $token,
 		VO\StringVo $name,
-		VO\StringVo $header,
+		VO\StringVo $header=null,
 		VO\StringVo $description=null,
 		VO\Integer $is_evidence_required,
 		VO\Integer $image,
@@ -394,13 +394,15 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
 			'name' => $name->__toString(),
-			'header' => $header->__toString(),
 			'is_evidence_required' => $is_evidence_required->__toInteger(),
 			'image' => $image->__toInteger(),
 			'video' => $video->__toInteger(),
 			'attachment' => $attachment->__toInteger(),
 			'program_id'=>$program_id->__toInteger(),
 		);
+        if(!is_null($header)){
+            $request_parameters['header'] = $header->__toString();
+        }
 
 		if(!is_null($description)){
 			$request_parameters['description'] = $description->__toString();
