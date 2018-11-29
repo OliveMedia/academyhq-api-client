@@ -526,5 +526,25 @@ class StudentRepository extends BaseRepository
     
         return $data;
     }
+ 
+    public function getCertificates(
+            VO\Token $token
+        ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/get/certificates'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send(array(), $header_parameters);
+       // dd($response->get_data());
+        $data = $response->get_data();
+    
+        return $data;
+    }
+
 
 }
