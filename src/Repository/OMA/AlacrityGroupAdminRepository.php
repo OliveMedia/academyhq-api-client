@@ -482,4 +482,51 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		return $data;
 	}
+
+	public function delete_occupation(
+		VO\Token $token,
+		VO\Integer $occupation_id
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/delete/occupation'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+
+			'occupation_id'=>$occupation_id->__toInteger(),
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function delete_program(
+		VO\Token $token,
+		VO\Integer $program_id
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/delete/program'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+
+			'program_id'=>$program_id->__toInteger(),
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
