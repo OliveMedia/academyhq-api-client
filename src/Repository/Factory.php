@@ -17,6 +17,7 @@ use AcademyHQ\API\Repository\WebClient\GDPRRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CrmsRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CourseApiRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\MemberApiRepository;
+use AcademyHQ\API\Repository\OSA\BookingRepository;
 // use AcademyHQ\API\Repository\OMA as OMA;
 
 class Factory
@@ -128,5 +129,9 @@ class Factory
 		$className = '\AcademyHQ\API\Repository\OMA\\';
 		$className .= ucfirst($repo_name).'Repository';
 		return new $className($this->credentials);
+	}
+
+	public function get_booking_repository() {
+		return new BookingRepository($this->credentials);
 	}
 }
