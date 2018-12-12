@@ -42,7 +42,8 @@ class BookingRepository extends BaseRepository{
 		VO\StringVO $booking_description = null,
 		VO\StringVO $payment_information = null,
 		VO\StringVO $admin_name = null,
-		VO\StringVO $admin_email =null
+		VO\StringVO $admin_email =null,
+		VO\StringVO $attendees =null
 	)
 	{
 		$request = new Request(
@@ -56,26 +57,85 @@ class BookingRepository extends BaseRepository{
 			'booking_id' => $booking_id->__toInteger(),
 			'user_id' => $user_id->__toInteger(),
 			'course_id' => $course_id->__toInteger(),
-			'course_name' => ($course_name !==null ? $course_name->__toString():null),
-			'no_seats' => ($no_seats !==null ? $no_seats->__toInteger():null),
-			'event_id' => ($event_id !==null ? $event_id->__toInteger():null),
-			'user_type_id' => ($user_type_id !==null ? $user_type_id->__toInteger():null),
-			'company_name' => ($company_name !==null ? $company_name->__toString():null),
-			'company_contact' => ($company_contact !==null ? $company_contact->__toString():null),
-			'bdm' => ($bdm !==null ? $bdm->__toString():null),
-			'mh_required' => ($mh_required !==null ? $mh_required->__toString():null),
-			'pay_comment' => ($pay_comment !==null ? $pay_comment->__toString():null),
-			'transaction_id' => ($transaction_id !==null ? $transaction_id->__toString():null),
-			'event_dates' => ($event_dates !==null ? $event_dates->__toString():null),
-			'payment_status' => ($payment_status !==null ? $payment_status->__toInteger():null),
-			'client_name' =>  ($client_name !==null ? $client_name->__toString():null),
-			'type' => ($type !==null ? $type->__toString():null),
-			'booking_description' => ($client_name !==null ? $client_name->__toString():null),
-			'payment_information' => ($payment_information !==null ? $payment_information->__toString():null),
-			'admin_name' => ($admin_name !==null ? $admin_name->__toString():null),
-			'admin_email' => ($admin_email !==null ? $admin_email->__toString():null)
 			
 		);
+
+		if(!is_null($course_name)){
+			$request_parameters['course_name'] = $course_name->__toString();
+		}
+
+		if(!is_null($no_seats)){
+			$request_parameters['no_seats'] = $no_seats->__toInteger();
+		}
+
+		if(!is_null($event_id)){
+			$request_parameters['event_id'] = $event_id->__toInteger();
+		}
+
+		if(!is_null($user_type_id)){
+			$request_parameters['user_type_id'] = $user_type_id->__toInteger();
+		}
+
+		if(!is_null($company_name)){
+			$request_parameters['company_name'] = $company_name->__toString();
+		}
+
+		if(!is_null($company_contact)){
+			$request_parameters['company_contact'] = $company_contact->__toString();
+		}
+
+		if(!is_null($bdm)){
+			$request_parameters['bdm'] = $bdm->__toString();
+		}
+
+		if(!is_null($mh_required)){
+			$request_parameters['mh_required'] = $mh_required->__toString();
+		}
+
+		if(!is_null($pay_comment)){
+			$request_parameters['pay_comment'] = $pay_comment->__toString();
+		}
+
+		if(!is_null($transaction_id)){
+			$request_parameters['transaction_id'] = $transaction_id->__toString();
+		}
+
+		if(!is_null($event_dates)){
+			$request_parameters['event_dates'] = $event_dates->__toString();
+		}
+
+		if(!is_null($payment_status)){
+			$request_parameters['payment_status'] = $payment_status->__toInteger();
+		}
+
+		if(!is_null($client_name)){
+			$request_parameters['client_name'] = $client_name->__toString();
+		}
+
+		if(!is_null($type)){
+			$request_parameters['type'] = $type->__toString();
+		}
+
+		if(!is_null($booking_description)){
+			$request_parameters['booking_description'] = $booking_description->__toString();
+		}
+
+		if(!is_null($payment_information)){
+			$request_parameters['payment_information'] = $payment_information->__toString();
+		}
+
+		if(!is_null($admin_name)){
+			$request_parameters['admin_name'] = $admin_name->__toString();
+		}
+
+		if(!is_null($admin_email)){
+			$request_parameters['admin_email'] = $admin_email->__toString();
+		}
+
+		if(!is_null($attendees)){
+			$request_parameters['attendees'] = $attendees->__toString();
+		}
+
 		$response = $request->send($request_parameters);
 
 		return $response->get_data();
