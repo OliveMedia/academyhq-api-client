@@ -13,8 +13,9 @@ class BookingRepository extends BaseRepository{
 	
 	public function __construct(Credentials $credentials)
 	{
-		$this->credentials = $credentials;
-		$this->base_url = 'http://api.academyhq.localhost/api/v2/classroom-course';
+		parent::__construct();
+		$this->credentials 	= $credentials;
+		$this->base_url 	.= '/classroom-course';
 	}
 
 	/**
