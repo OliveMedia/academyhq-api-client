@@ -17,6 +17,7 @@ use AcademyHQ\API\Repository\WebClient\GDPRRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CrmsRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CourseApiRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\MemberApiRepository;
+use AcademyHQ\API\Repository\ConnectedRMS\OrganisationApiRepository;
 
 class Factory
 {
@@ -119,5 +120,10 @@ class Factory
 	public function get_member_api_repository() {
 
 		return new MemberApiRepository($this->credentials);
+	}
+
+	public function get_organisation_api_repository() {
+
+		return new OrganisationApiRepository($this->credentials);
 	}
 }

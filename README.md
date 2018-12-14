@@ -1650,6 +1650,59 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 20> Create ThirdParty Member
+<pre>
+	/*@return return member details*/
+	$member_details = $crms_repository->third_party_member_create(
+			new VO\OrganisationID('organisation_id'),
+			VO\Name::fromNative('first_name','last_name'),
+			new VO\Email('email'),
+			new VO\Username('username'),
+			new VO\Integer('is_admin'),
+			new VO\PublicID('pub_id'),
+			new VO\Password('password'),
+			new VO\Integer('mobile_number'),
+			new VO\StringVO('street'),
+			new VO\StringVO('city'),
+			new VO\StringVO('state'),
+			new VO\StringVO('country'),
+			new VO\StringVO('postal_code')
+		);
+	);
+</pre>
+
+### 21> Edit ThirdParty Member
+<pre>
+	/*@return return member details*/
+	$member_details = $crms_repository->third_party_member_edit(
+			new VO\OrganisationID('organisation_id'),
+			new VO\PublicID('pub_id'),
+			VO\Name::fromNative('first_name','last_name'),
+			new VO\Email('email'),
+			new VO\Username('username'),
+			new VO\Integer('is_admin'),
+			new VO\Password('password'),
+			new VO\Integer('mobile_number'),
+			new VO\Integer('is_deleted'),
+			new VO\StringVO('street'),
+			new VO\StringVO('city'),
+			new VO\StringVO('state'),
+			new VO\StringVO('country'),
+			new VO\StringVO('postal_code')
+		);
+	);
+</pre>
+
+### 22> fetch ThirdParty Member
+<pre>
+	/*@return return member details*/
+	$member_details = $crms_repository->third_party_member_fetch(
+			new VO\OrganisationID('organisation_id'),
+			new VO\PublicID('pub_id')
+		);
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
@@ -1803,4 +1856,17 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO("search")
 	);
 </pre>
+
+
+## Using Organisation Api Repository
+
+### 1> Delete Partner
+<pre>
+	/*@return status success with success message */
+  	$response = $organisation_api_repository->delete_partner(
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id")
+	);
+</pre>
+
+
 

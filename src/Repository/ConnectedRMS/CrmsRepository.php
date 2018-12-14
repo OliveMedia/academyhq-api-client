@@ -492,4 +492,185 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function third_party_member_create(
+		VO\OrganisationID $organisation_id,
+		VO\Name $name,
+		VO\Email $email,
+		VO\Username $username,
+		VO\Integer $is_admin,
+		VO\PublicID $pub_id = null,
+		VO\Password $password = null,
+		VO\Integer $mobile_number = null,
+		VO\StringVO $street = null,
+		VO\StringVO $city = null,
+		VO\StringVO $state = null,
+		VO\StringVO $country = null ,
+		VO\StringVO $postal_code = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/thirdParty/member/create'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'email' => $email->__toString(),
+			'username' => $username->__toString(),
+			'is_admin' => $is_admin->__toInteger()
+		);
+
+		if(!is_null($pub_id)){
+			$request_parameters['pub_id'] = $pub_id->__toString();
+		}
+
+		if(!is_null($password)){
+			$request_parameters['password'] = $password->__toString();
+		}
+
+		if(!is_null($mobile_number)){
+			$request_parameters['mobile_number'] = $mobile_number->__toInteger();
+		}
+
+		if(!is_null($street)){
+			$request_parameters['street'] = $street->__toString();
+		}
+
+		if(!is_null($city)){
+			$request_parameters['city'] = $city->__toString();
+		}
+
+		if(!is_null($state)){
+			$request_parameters['state'] = $state->__toString();
+		}
+
+		if(!is_null($country)){
+			$request_parameters['country'] = $country->__toString();
+		}
+
+		if(!is_null($postal_code)){
+			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function third_party_member_edit(
+		VO\OrganisationID $organisation_id,
+		VO\PublicID $pub_id,
+		VO\Name $name = null,
+		VO\Email $email = null ,
+		VO\Username $username =null,
+		VO\Integer $is_admin = null,
+		VO\Password $password = null,
+		VO\Integer $mobile_number = null,
+		VO\Integer $is_deleted = null,
+		VO\StringVO $street = null,
+		VO\StringVO $city = null,
+		VO\StringVO $state = null,
+		VO\StringVO $country = null ,
+		VO\StringVO $postal_code = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/thirdParty/member/edit'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'pub_id' => $pub_id->__toString()
+		);
+
+		if(!is_null($name)){
+			$request_parameters['first_name'] = $name->get_first_name()->__toString();
+			$request_parameters['last_name'] = $name->get_last_name()->__toString();
+		}
+
+		if(!is_null($email)){
+			$request_parameters['email'] = $email->__toString();
+
+		}
+
+		if(!is_null($username)){
+			$request_parameters['username'] = $username->__toString();
+
+		}
+
+		if(!is_null($is_admin)){
+			$request_parameters['is_admin'] = $is_admin->__toInteger();
+
+		}
+
+		if(!is_null($is_deleted)){
+			$request_parameters['is_deleted'] = $is_deleted->__toInteger();
+
+		}
+
+		if(!is_null($password)){
+			$request_parameters['password'] = $password->__toString();
+		}
+
+		if(!is_null($mobile_number)){
+			$request_parameters['mobile_number'] = $mobile_number->__toInteger();
+		}
+
+		if(!is_null($street)){
+			$request_parameters['street'] = $street->__toString();
+		}
+
+		if(!is_null($city)){
+			$request_parameters['city'] = $city->__toString();
+		}
+
+		if(!is_null($state)){
+			$request_parameters['state'] = $state->__toString();
+		}
+
+		if(!is_null($country)){
+			$request_parameters['country'] = $country->__toString();
+		}
+
+		if(!is_null($postal_code)){
+			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function third_party_member_fetch(
+		VO\OrganisationID $organisation_id,
+		VO\PublicID $pub_id){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/thirdParty/member/fetch'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'pub_id' => $pub_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
 }
