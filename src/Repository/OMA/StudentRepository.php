@@ -546,6 +546,14 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    /**
+     * Get Certificates for given enrollment
+     * @param VO\Token $token
+     * @param VO\ID $enrollment_id
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
     public function getCertificatesForEnrollment(
         VO\Token $token,
         VO\ID $enrollment_id
