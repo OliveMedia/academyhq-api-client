@@ -16,6 +16,10 @@ class OrganisationApiRepository extends BaseRepository{
 
 	}
 
+	private function get_url(){
+		return $this->base_url.'/crms';
+	}
+
 	public function delete_partner(
 		VO\OrganisationID $organisation_id
 	){
