@@ -19,7 +19,7 @@ class StudentRepository extends BaseRepository
 
     public function list_member_apprenticeship(
         VO\Token $token
-       
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -40,7 +40,7 @@ class StudentRepository extends BaseRepository
 
     public function list_vip_members(
         VO\Token $token
-    
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -62,7 +62,7 @@ class StudentRepository extends BaseRepository
     public function member_apprenticeship_details(
         VO\Token $token,
         VO\Integer $member_apprenticeship_id
-    
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -71,14 +71,14 @@ class StudentRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            
+
             'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger()
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
 
         return $data;
@@ -86,7 +86,7 @@ class StudentRepository extends BaseRepository
     public function program_units_list(
         VO\Token $token,
         VO\Integer $program_id
-    
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -95,14 +95,14 @@ class StudentRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            
+
             'program_id' => $program_id->__toInteger()
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
 
         return $data;
@@ -114,7 +114,7 @@ class StudentRepository extends BaseRepository
         VO\Token $token,
         VO\Integer $program_unit_id,
         VO\Integer $member_apprenticeship_id
-    
+
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -123,7 +123,7 @@ class StudentRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            
+
             'program_unit_id' => $program_unit_id->__toInteger(),
             'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger()
         );
@@ -131,9 +131,9 @@ class StudentRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
 
@@ -149,16 +149,16 @@ class StudentRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            
+
             'enrolment_id' => $enrolment_id->__toString(),
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
 
@@ -177,7 +177,7 @@ class StudentRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            
+
             'member_program_id' => $member_program_id->__toString(),
         );
 
@@ -196,9 +196,9 @@ class StudentRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
 
@@ -229,55 +229,55 @@ class StudentRepository extends BaseRepository
         }
 
         if(!is_null($program_unit_id)){
-            $request_parameters['program_unit_id'] = $program_unit_id->__toString();        
+            $request_parameters['program_unit_id'] = $program_unit_id->__toString();
         }
 
         if(!is_null($address)){
-            $request_parameters['address'] = $address->__toString();        
+            $request_parameters['address'] = $address->__toString();
         }
 
         if(!is_null($latitude)){
-            $request_parameters['latitude'] = $latitude->__toString();        
+            $request_parameters['latitude'] = $latitude->__toString();
         }
 
         if(!is_null($longitude)){
-            $request_parameters['longitude'] = $longitude->__toString();        
+            $request_parameters['longitude'] = $longitude->__toString();
         }
 
         if(!is_null($description)){
-            $request_parameters['description'] = $description->__toString();        
+            $request_parameters['description'] = $description->__toString();
         }
 
         if(!is_null($evidence_type)){
-            $request_parameters['evidence_type'] = $evidence_type->__toString();        
+            $request_parameters['evidence_type'] = $evidence_type->__toString();
         }
 
         if(!is_null($document_url)){
-            $request_parameters['document_url'] = $document_url->__toString();        
+            $request_parameters['document_url'] = $document_url->__toString();
         }
 
         if(!is_null($document_key)){
-            $request_parameters['document_key'] = $document_key->__toString();        
+            $request_parameters['document_key'] = $document_key->__toString();
         }
 
         if(!is_null($approved)){
-            $request_parameters['approved'] = $approved->__toInteger();        
+            $request_parameters['approved'] = $approved->__toInteger();
         }
 
         if(!is_null($disapproved)){
-            $request_parameters['disapproved'] = $disapproved->__toInteger();        
+            $request_parameters['disapproved'] = $disapproved->__toInteger();
         }
 
         if(!is_null($program_evidence_id)){
-            $request_parameters['program_evidence_id'] = $program_evidence_id->__toString();        
+            $request_parameters['program_evidence_id'] = $program_evidence_id->__toString();
         }
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
 
@@ -298,7 +298,7 @@ class StudentRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            
+
             'first_name' => $name->get_first_name()->__toString(),
             'last_name' => $name->get_last_name()->__toString(),
             'email' => $email->__toString()
@@ -386,7 +386,7 @@ class StudentRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
-        $request_parameters = array(      
+        $request_parameters = array(
             'program_unit_id' => $program_unit_id->__toString(),
             'member_apprenticeship_id' => $member_apprenticeship_id->__toString(),
             'observation' => $observation->__toString()
@@ -407,9 +407,9 @@ class StudentRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
 
@@ -446,7 +446,7 @@ class StudentRepository extends BaseRepository
         VO\Integer $is_started = null,
         VO\Integer $is_completed = null,
         VO\Integer $is_submitted_for_assessment = null
-        
+
 
     ){
         $request = new Request(
@@ -477,9 +477,9 @@ class StudentRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
 
@@ -504,7 +504,7 @@ class StudentRepository extends BaseRepository
 
         $request_parameters = array(
             'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
-            'parent_program_units_id'=> $parent_program_units_id->__toArray(),    
+            'parent_program_units_id'=> $parent_program_units_id->__toArray(),
             'address'=> $address->__toString(),
             'latitude'=> $latitude->__toString(),
             'longitude'=> $longitude->__toString(),
@@ -515,18 +515,18 @@ class StudentRepository extends BaseRepository
         );
 
         if(!is_null($description)){
-            $request_parameters['description'] = $description->__toString();        
+            $request_parameters['description'] = $description->__toString();
         }
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $response = $request->send($request_parameters, $header_parameters);
-       
+
         $data = $response->get_data();
-    
+
         return $data;
     }
- 
+
     public function getCertificates(
             VO\Token $token
         ){
@@ -542,9 +542,28 @@ class StudentRepository extends BaseRepository
         $response = $request->send(array(), $header_parameters);
        // dd($response->get_data());
         $data = $response->get_data();
-    
+
         return $data;
     }
 
+    public function getCertificatesForEnrollment(
+        VO\Token $token,
+        VO\ID $enrollment_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/get/certificates/enrollment/'. $enrollment_id->__toString() ),
+            new VO\HTTP\Method('GET')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array();
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
 
 }
