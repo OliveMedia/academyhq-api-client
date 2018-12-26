@@ -25,6 +25,7 @@ class ClassroomRepository extends BaseRepository{
 	
 	public function public_book(
 	
+		VO\Integer $booking_id 				= null,
 		VO\Integer $course_id 				= null,
 		VO\Integer $no_seats 				= null,
 		VO\StringVO $event_dates 			= null,
@@ -44,6 +45,10 @@ class ClassroomRepository extends BaseRepository{
 
 
 		$request_parameters = array();
+
+		if(!is_null($booking_id)){
+			$request_parameters['booking_id'] = $booking_id->__toInteger();
+		}
 
 		if(!is_null($course_id)){
 			$request_parameters['course_id'] = $course_id->__toInteger();
@@ -84,7 +89,8 @@ class ClassroomRepository extends BaseRepository{
 	*/
 	
 	public function private_book(
-	
+
+		VO\Integer $booking_id 				= null,
 		VO\Integer $course_id 				= null,
 		VO\Integer $no_seats 				= null,
 		VO\StringVO $event_dates 			= null,
@@ -108,6 +114,10 @@ class ClassroomRepository extends BaseRepository{
 
 
 		$request_parameters = array();
+
+		if(!is_null($booking_id)){
+			$request_parameters['booking_id'] = $booking_id->__toInteger();
+		}
 
 		if(!is_null($course_id)){
 			$request_parameters['course_id'] = $course_id->__toInteger();
