@@ -240,6 +240,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 	$success_message = $enrolment_repository->create_package_enrolment(
 		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
 		new \AcademyHQ\API\ValueObjects\ID('package_id')
+		new \AcademyHQ\API\ValueObjects\Integer('license_deduct')
 	);
 
 </pre>
@@ -1458,6 +1459,21 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
 		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
 		new \AcademyHQ\API\ValueObjects\StringVO('price_of_license'),
+		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
+		new \AcademyHQ\API\ValueObjects\StringVO('vat_number')
+	);
+</pre>
+
+### 12> Create Organisation Package
+<pre>
+ 	/*@returns organisation_package of created license*/
+	$organisation_package = $GDPR_repository->create_organisation_package(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('sub_organisation_id'),
+		new \AcademyHQ\API\ValueObjects\ID("package_id"),
+		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
+		new \AcademyHQ\API\ValueObjects\StringVO('price'),
+		new \AcademyHQ\API\ValueObjects\Integer('quantity_of_license'),
 		new \AcademyHQ\API\ValueObjects\StringVO('currency'),
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_rate'),
 		new \AcademyHQ\API\ValueObjects\StringVO('vat_number')

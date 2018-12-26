@@ -313,4 +313,35 @@ class GDPRRepository extends BaseRepository {
 
 	}
 
+	public function create_organisation_package(
+        VO\OrganisationID $organisation_id,
+        VO\ID $package_id,
+        VO\MemberID $admin_id,
+        VO\StringVO $price,
+        VO\Integer $number_of_license,
+        VO\StringVO $currency,
+        VO\StringVO $vat_rate,
+        VO\StringVO $vat_number
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/create/organisation/package'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'organisation_id' => $organisation_id->__toString(),
+            'package_id' => $package_id->__toString(),
+            'admin_id' => $admin_id->__toString(),
+            'price' => $price->__toString(),
+            'number_of_license' => $number_of_license->__toInteger(),
+            'currency' => $currency->__toString(),
+            'vat_rate' => $vat_rate->__toString(),
+            'vat_number' => $vat_number->__toString()
+        );
+        $response = $request->send($request_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
 }

@@ -308,7 +308,7 @@ class EnrolmentRepository extends BaseRepository
 		return $enrolment_ids;
 	}
 
-	public function create_package_enrolment(VO\MemberID $member_id, VO\ID $package_id)
+	public function create_package_enrolment(VO\MemberID $member_id, VO\ID $package_id, VO\Integer $license_deduct = null)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -321,6 +321,10 @@ class EnrolmentRepository extends BaseRepository
 			'member_id' => $member_id->__toString(),
 			'package_id' => $package_id->__toString()
 		);
+
+		if(!is_null($license_deduct)){
+			$request_parameters['license_deduct'] = true;
+		}
 
 
 		$response = $request->send($request_parameters);
