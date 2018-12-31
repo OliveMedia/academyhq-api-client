@@ -27,6 +27,7 @@ class ClassroomRepository extends BaseRepository{
 	
 		VO\Integer $booking_id 				= null,
 		VO\Integer $course_id 				= null,
+		VO\Integer $event_id 				= null,
 		VO\Integer $no_seats 				= null,
 		VO\StringVO $event_dates 			= null,
 		VO\Integer $payment_status 			= null,
@@ -52,6 +53,10 @@ class ClassroomRepository extends BaseRepository{
 
 		if(!is_null($course_id)){
 			$request_parameters['course_id'] = $course_id->__toInteger();
+		}
+
+		if(!is_null($event_id)){
+			$request_parameters['event_id'] = $event_id->__toInteger();
 		}
 
 		if(!is_null($no_seats)){
