@@ -483,10 +483,26 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    /**
+     * Creates Evidences for each of the program children units
+     * @param VO\Token $token
+     * @param VO\ID $member_apprenticeship_id
+     * @param VO\IDArray $program_units_id
+     * @param VO\StringVO $evidence_type
+     * @param VO\StringVO $document_url
+     * @param VO\StringVO $document_key
+     * @param VO\StringVO $address
+     * @param VO\StringVO $latitude
+     * @param VO\StringVO $longitude
+     * @param VO\StringVO|null $description
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
     public function create_evidence_for_multiple_unit(
         VO\Token $token,
         VO\ID $member_apprenticeship_id,
-        VO\IDArray $parent_program_units_id,
+        VO\IDArray $program_units_id,
         VO\StringVO $evidence_type,
         VO\StringVO $document_url,
         VO\StringVO $document_key,
@@ -504,7 +520,7 @@ class StudentRepository extends BaseRepository
 
         $request_parameters = array(
             'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
-            'parent_program_units_id'=> $parent_program_units_id->__toArray(),
+            'program_units_id'=> $program_units_id->__toArray(),
             'address'=> $address->__toString(),
             'latitude'=> $latitude->__toString(),
             'longitude'=> $longitude->__toString(),
