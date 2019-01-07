@@ -236,7 +236,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $endpoint=null,
 		VO\StringVo $final_review=null,
 		VO\StringVo $gateway=null,
-		VO\Integer $duration=null
+        VO\Integer $duration=null,
+        VO\Integer $holidays=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -272,6 +273,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($duration)){
 			$request_parameters['duration'] = $duration->__toInteger();
 		}
+
+        if(!is_null($holidays)){
+            $request_parameters['holidays'] = $holidays->__toInteger();
+        }
 
 		if(!is_null($behavior)){
 			$request_parameters['behavior'] = $behavior->__toString();

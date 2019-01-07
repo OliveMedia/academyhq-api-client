@@ -94,7 +94,7 @@ class LearnerRepository extends BaseRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/learner/ennrolment/'.$enrolment_id.'/certificate/get'),
+			VO\HTTP\Url::fromNative($this->base_url.'/learner/enrolment/'.$enrolment_id.'/certificate/get'),
 			new VO\HTTP\Method('GET')
 		);
 
