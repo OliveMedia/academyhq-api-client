@@ -238,7 +238,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $gateway=null,
         VO\Integer $duration=null,
         VO\Integer $holidays=null,
-        VO\StringVO $journal=null
+        VO\StringVo $journal=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
