@@ -1884,5 +1884,23 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+## Using Learner Api Repository
+
+### 1> get all Enrolments of Learner
+<pre>
+	/*@return all Enrolments of learner */
+  	$enrolments = $learner_api_repository->get_all_enrollments(
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
+### 2> get all bundles of Learner
+<pre>
+	/*@return all learner get_all_bundles */
+  	$bundles = $learner_api_repository->get_all_enrollments(
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
 
 

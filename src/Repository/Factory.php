@@ -126,4 +126,9 @@ class Factory
 
 		return new OrganisationApiRepository($this->credentials);
 	}
+	
+	public function get_learner_api_repository() {
+
+        return new LearnerApiRepository($this->credentials);
+    }
 }
