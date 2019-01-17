@@ -316,12 +316,13 @@ class GDPRRepository extends BaseRepository {
 	public function create_organisation_package(
         VO\OrganisationID $organisation_id,
         VO\ID $package_id,
-        VO\MemberID $admin_id,
+        VO\MemberID $admin_id = null,
         VO\StringVO $price,
         VO\Integer $number_of_license,
         VO\StringVO $currency,
         VO\StringVO $vat_rate,
-        VO\StringVO $vat_number
+        VO\StringVO $vat_number,
+        VO\StringVO $member_details=null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -332,13 +333,19 @@ class GDPRRepository extends BaseRepository {
         $request_parameters = array(
             'organisation_id' => $organisation_id->__toString(),
             'package_id' => $package_id->__toString(),
-            'admin_id' => $admin_id->__toString(),
             'price' => $price->__toString(),
             'number_of_license' => $number_of_license->__toInteger(),
             'currency' => $currency->__toString(),
             'vat_rate' => $vat_rate->__toString(),
             'vat_number' => $vat_number->__toString()
         );
+
+        if ( !is_null($member_details)){
+            $request_parameters['member_details'] = $member_details->__toString();
+        }
+        if ( !is_null($admin_id)){
+            $request_parameters['admin_id'] = $admin_id->__toString();
+        }
         $response = $request->send($request_parameters);
         $data = $response->get_data();
         return $data;
