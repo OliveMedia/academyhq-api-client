@@ -107,4 +107,29 @@ class AuthRepository extends BaseRepository{
 		$data = $response->get_data();
 		return $data;
 	}
+
+	public function login_from_email_only(
+        VO\Email $email,
+        VO\Token $redisUserToken
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/auth/login/from/email/only'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'email' => $email->__toEncodedString(),
+            'redisUserToken' => $redisUserToken->__toEncodedString()
+        );
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+    
 }

@@ -329,6 +329,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 4> Login From Email only
+<pre>
+ 	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
+	$login = $auth_repository->login_from_email_only(
+		new \AcademyHQ\API\ValueObjects\Email('email'),
+		new \AcademyHQ\API\ValueObjects\Token('redisUserToken')))
+	);
+</pre>
+
+
 ## Using Employer Repository
 
 ### 1> Create Sub Organisation Admin
