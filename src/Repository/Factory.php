@@ -18,6 +18,7 @@ use AcademyHQ\API\Repository\ConnectedRMS\CrmsRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\CourseApiRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\MemberApiRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\OrganisationApiRepository;
+use AcademyHQ\API\Repository\ConnectedRMS\LearnerApiRepository;
 
 class Factory
 {
