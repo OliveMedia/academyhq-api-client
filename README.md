@@ -1913,5 +1913,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 3> get all certificates of Learner
+<pre>
+	/*@return all learner get_all_certificates */
+  	$$certificates = $learner_api_repository->get_all_certificates(
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
+### 3> get certificate detail of Learner
+<pre>
+	/*@return all learner get_certificate_detail */
+  	$$certificateDetail = $learner_api_repository->get_certificate_detail(
+		new \AcademyHQ\API\ValueObjects\Integer("certificateId"),
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
 
 
