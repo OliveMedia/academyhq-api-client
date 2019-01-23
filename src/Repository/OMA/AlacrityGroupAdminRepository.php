@@ -438,7 +438,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $document,
 		VO\StringVo $description=null,
 		VO\StringVo $link,
-		VO\ID $welcome_resource_id = null
+		VO\ID $welcome_resource_id = null,
+        VO\StringVo $meta = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -457,6 +458,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		if(!is_null($description)){
 			$request_parameters['description'] = $description->__toString();
+		}
+
+		if(!is_null($meta)){
+			$request_parameters['meta'] = $meta->__toString();
 		}
 
 		if(!is_null($welcome_resource_id)){
