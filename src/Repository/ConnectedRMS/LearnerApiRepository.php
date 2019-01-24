@@ -43,6 +43,28 @@ class LearnerApiRepository extends BaseRepository{
         return $data;
     }
 
+    public function get_enrollment_detail(
+        Vo\Integer $enrollmentId,
+        VO\Token $token
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/learner/get/enrollment/' . $enrollmentId->__toInteger()),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParams = array(
+            'Authorization' => $token->__toEncodedString()
+        );
+
+        $response = $request->send(array(), $headerParams);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
     public function get_all_bundles(
         VO\Token $token
     )
