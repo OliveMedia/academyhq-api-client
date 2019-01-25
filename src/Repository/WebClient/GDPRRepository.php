@@ -97,7 +97,8 @@ class GDPRRepository extends BaseRepository {
 		VO\StringVO $price,
 		VO\StringVO $currency,
 		VO\StringVO $vat_rate,
-		VO\StringVO $vat_number
+		VO\StringVO $vat_number,
+		VO\StringVO $sub_domain = null
 	){
 
 		$request = new Request(
@@ -117,6 +118,10 @@ class GDPRRepository extends BaseRepository {
 			'vat_rate' => $vat_rate->__toString(),
 			'vat_number' => $vat_number->__toString()
 		);
+		
+		if(!is_null($sub_domain)){
+		    $request_parameters['sub_domain'] = $sub_domain->__toString();
+        }
 
 		$response = $request->send($request_parameters);
 
@@ -134,7 +139,8 @@ class GDPRRepository extends BaseRepository {
 		VO\StringVO $price,
 		VO\StringVO $currency,
 		VO\StringVO $vat_rate,
-		VO\StringVO $vat_number
+        VO\StringVO $vat_number,
+        VO\StringVO $sub_domain=null
 	){
 
 		$request = new Request(
@@ -154,6 +160,10 @@ class GDPRRepository extends BaseRepository {
 			'vat_rate' => $vat_rate->__toString(),
 			'vat_number' => $vat_number->__toString()
 		);
+
+		if(!is_null($sub_domain)){
+		    $request_parameters['sub_domain'] = $sub_domain->__toString();
+        }
 
 		$response = $request->send($request_parameters);
 
@@ -322,7 +332,8 @@ class GDPRRepository extends BaseRepository {
         VO\StringVO $currency,
         VO\StringVO $vat_rate,
         VO\StringVO $vat_number,
-        VO\StringVO $member_details=null
+        VO\StringVO $member_details=null,
+        VO\StringVO $sub_domain=null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -346,6 +357,11 @@ class GDPRRepository extends BaseRepository {
         if ( !is_null($admin_id)){
             $request_parameters['admin_id'] = $admin_id->__toString();
         }
+
+        if ( !is_null($sub_domain)){
+            $request_parameters['sub_domain'] = $sub_domain->__toString();
+        }
+        
         $response = $request->send($request_parameters);
         $data = $response->get_data();
         return $data;
