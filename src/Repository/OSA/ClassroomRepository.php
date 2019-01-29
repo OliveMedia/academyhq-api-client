@@ -26,13 +26,16 @@ class ClassroomRepository extends BaseRepository
 
         VO\Integer $booking_id = null,
         VO\Integer $course_id = null,
-        VO\Integer $event_id = null,
+        VO\Integer $classroom_id = null,
         VO\Integer $no_seats = null,
-        VO\StringVO $event_dates = null,
-        VO\Integer $payment_status = null,
-        VO\StringVO $booking_description = null,
-        VO\StringVO $payment_information = null,
-        VO\StringVO $attendees = null
+        VO\StringVO $classroom_dates = null,
+        VO\StringVO $attendees = null,
+        VO\User $booking_user = null,
+        VO\StringVO $booking_date = null,
+        VO\Boolean $paid = null,
+        VO\StringVO $transaction_id = null,
+        VO\StringVO $payment_status = null,
+        VO\StringVO $type = null  
     ) {
 
         $request = new Request(
@@ -52,32 +55,45 @@ class ClassroomRepository extends BaseRepository
             $request_parameters['course_id'] = $course_id->__toInteger();
         }
 
-        if (!is_null($event_id)) {
-            $request_parameters['event_id'] = $event_id->__toInteger();
+        if (!is_null($classroom_id)) {
+            $request_parameters['classroom_id'] = $classroom_id->__toInteger();
         }
 
         if (!is_null($no_seats)) {
             $request_parameters['no_seats'] = $no_seats->__toInteger();
         }
 
-        if (!is_null($event_dates)) {
-            $request_parameters['event_dates'] = $event_dates->__toString();
-        }
-
-        if (!is_null($payment_status)) {
-            $request_parameters['payment_status'] = $payment_status->__toInteger();
-        }
-
-        if (!is_null($booking_description)) {
-            $request_parameters['booking_description'] = $booking_description->__toString();
-        }
-
-        if (!is_null($payment_information)) {
-            $request_parameters['payment_information'] = $payment_information->__toString();
+        if (!is_null($classroom_dates)) {
+            $request_parameters['classroom_dates'] = $classroom_dates->__toString();
         }
 
         if (!is_null($attendees)) {
             $request_parameters['attendees'] = $attendees->__toString();
+        }
+
+        if (!is_null($booking_user)) {
+            $request_parameters['booking_user'] = json_encode($booking_user->__toObject());
+
+        }
+
+        if (!is_null($booking_date)) {
+            $request_parameters['booking_date'] = $booking_date->__toString();
+        }
+
+        if (!is_null($paid)) {
+            $request_parameters['paid'] = $paid->__toBoolean();
+        }
+
+        if (!is_null($transaction_id)) {
+            $request_parameters['transaction_id'] = $transaction_id->__toString();
+        }
+
+        if (!is_null($payment_status)) {
+            $request_parameters['payment_status'] = $payment_status->__toString();
+        }
+
+        if (!is_null($type)) {
+            $request_parameters['type'] = $type->__toString();
         }
 
         $response = $request->send($request_parameters);
