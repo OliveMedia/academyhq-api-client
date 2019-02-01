@@ -30,9 +30,8 @@ class ClassroomRepository extends BaseRepository
         VO\Integer $no_seats = null,
         VO\StringVO $classroom_dates = null,
         VO\StringVO $attendees = null,
-        VO\User $booking_user = null,
+        VO\StringVO $booking_user = null,
         VO\StringVO $booking_date = null,
-        VO\Boolean $paid = null,
         VO\StringVO $transaction_id = null,
         VO\StringVO $payment_status = null,
         VO\StringVO $type = null  
@@ -72,16 +71,11 @@ class ClassroomRepository extends BaseRepository
         }
 
         if (!is_null($booking_user)) {
-            $request_parameters['booking_user'] = json_encode($booking_user->__toObject());
+            $request_parameters['booking_user'] = $booking_user->__toString();
 
         }
-
         if (!is_null($booking_date)) {
             $request_parameters['booking_date'] = $booking_date->__toString();
-        }
-
-        if (!is_null($paid)) {
-            $request_parameters['paid'] = $paid->__toBoolean();
         }
 
         if (!is_null($transaction_id)) {
