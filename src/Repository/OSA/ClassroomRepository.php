@@ -186,7 +186,7 @@ class ClassroomRepository extends BaseRepository
 
     }
 
-    /**
+     /**
      * @return response
      */
 
@@ -194,16 +194,16 @@ class ClassroomRepository extends BaseRepository
 
         VO\Integer $booking_id = null,
         VO\Integer $course_id = null,
+        VO\StringVO $classroom_dates = null,
         VO\Integer $no_seats = null,
-        VO\StringVO $event_dates = null,
-        VO\Integer $payment_status = null,
+        VO\StringVO $booking_olive_agent = null,
+        VO\StringVO $booking_date = null,
+        VO\StringVO $payment_status = null,
+        VO\StringVO $type = null, 
+        VO\StringVO $payment_information = null, 
         VO\StringVO $booking_description = null,
-        VO\StringVO $payment_information = null,
-        VO\StringVO $client_name = null,
-        VO\StringVO $admin_first_name = null,
-        VO\StringVO $admin_last_name = null,
-        VO\StringVO $admin_email = null,
-        VO\StringVO $attendees = null
+        VO\Integer $organisation_id = null,
+        VO\Integer $client_admin_id = null
     ) {
 
         $request = new Request(
@@ -223,40 +223,47 @@ class ClassroomRepository extends BaseRepository
             $request_parameters['course_id'] = $course_id->__toInteger();
         }
 
+        if (!is_null($classroom_dates)) {
+            $request_parameters['classroom_dates'] = $classroom_dates->__toString();
+        }
+
         if (!is_null($no_seats)) {
             $request_parameters['no_seats'] = $no_seats->__toInteger();
         }
 
-        if (!is_null($event_dates)) {
-            $request_parameters['event_dates'] = $event_dates->__toString();
+        if (!is_null($booking_olive_agent)) {
+            $request_parameters['booking_olive_agent'] = $booking_olive_agent->__toString();
+
+        }
+        if (!is_null($booking_date)) {
+            $request_parameters['booking_date'] = $booking_date->__toString();
         }
 
         if (!is_null($payment_status)) {
-            $request_parameters['payment_status'] = $payment_status->__toInteger();
+            $request_parameters['payment_status'] = $payment_status->__toString();
         }
 
-        if (!is_null($booking_description)) {
-            $request_parameters['booking_description'] = $booking_description->__toString();
+        if (!is_null($type)) {
+            $request_parameters['type'] = $type->__toString();
         }
 
         if (!is_null($payment_information)) {
             $request_parameters['payment_information'] = $payment_information->__toString();
+
         }
 
-        if (!is_null($client_name)) {
-            $request_parameters['client_name'] = $client_name->__toString();
+        if (!is_null($booking_description)) {
+            $request_parameters['booking_description'] = $booking_description->__toString();
+
         }
 
-        if (!is_null($admin_first_name)) {
-            $request_parameters['admin_first_name'] = $admin_first_name->__toString();
+        if (!is_null($organisation_id)) {
+            $request_parameters['organisation_id'] = $organisation_id->__toInteger();
         }
 
-        if (!is_null($admin_last_name)) {
-            $request_parameters['admin_last_name'] = $admin_last_name->__toString();
-        }
+        if (!is_null($client_admin_id)) {
+            $request_parameters['client_admin_id'] = $client_admin_id->__toInteger();
 
-        if (!is_null($admin_email)) {
-            $request_parameters['admin_email'] = $admin_email->__toString();
         }
 
         $response = $request->send($request_parameters);
@@ -264,6 +271,7 @@ class ClassroomRepository extends BaseRepository
         return $response->get_data();
 
     }
+
 
     /**
      * @return response
