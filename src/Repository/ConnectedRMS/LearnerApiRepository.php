@@ -21,7 +21,8 @@ class LearnerApiRepository extends BaseRepository{
     }
 
     public function get_all_enrollments(
-        VO\Token $token
+        VO\Token $token,
+        VO\Integer $current_page
     )
     {
         $request = new Request(
@@ -35,8 +36,11 @@ class LearnerApiRepository extends BaseRepository{
             'Authorization' => $token->__toEncodedString()
         );
 
+        $request_parameters = array(
+            'current_page' => $current_page->__toInteger()
+        );
 
-        $response = $request->send(array(), $headerParams);
+        $response = $request->send($request_parameters, $headerParams);
 
         $data = $response->get_data();
 
@@ -66,7 +70,8 @@ class LearnerApiRepository extends BaseRepository{
     }
 
     public function get_all_bundles(
-        VO\Token $token
+        VO\Token $token,
+        VO\Integer $current_page
     )
     {
         $request = new Request(
@@ -80,16 +85,42 @@ class LearnerApiRepository extends BaseRepository{
             'Authorization' => $token->__toEncodedString()
         );
 
+        $request_parameters = array(
+            'current_page' => $current_page->__toInteger()
+        );
 
-        $response = $request->send(array(), $headerParams);
+        $response = $request->send($request_parameters, $headerParams);
 
         $data = $response->get_data();
 
         return $data;
     }
 
-    public function get_all_certificates(
+    public function get_bundle_detail(
+        Vo\Integer $bundleId,
         VO\Token $token
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/learner/get/bundle/' . $bundleId->__toInteger()),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParams = array(
+            'Authorization' => $token->__toEncodedString()
+        );
+
+        $response = $request->send(array(), $headerParams);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function get_all_certificates(
+        VO\Token $token,
+        VO\Integer $current_page
     )
     {
         $request = new Request(
@@ -103,7 +134,11 @@ class LearnerApiRepository extends BaseRepository{
             'Authorization' => $token->__toEncodedString()
         );
 
-        $response = $request->send(array(), $headerParams);
+        $request_parameters = array(
+            'current_page' => $current_page->__toInteger()
+        );
+
+        $response = $request->send($request_parameters, $headerParams);
 
         $data = $response->get_data();
 
