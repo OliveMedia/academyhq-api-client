@@ -484,6 +484,63 @@ class StudentRepository extends BaseRepository
     }
 
     /**
+     * Create Or Update Observation for Multiple Unit
+     * @param VO\Token $token
+     * @param VO\IDArray $program_unit_ids
+     * @param VO\ApprenticeshipID $member_apprenticeship_id
+     * @param VO\Integer|null $is_started
+     * @param VO\Integer|null $is_completed
+     * @param VO\Integer|null $is_submitted_for_assessment
+     * @param VO\StringVO $observation
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function member_program_multiple_unit_create_or_update(
+        VO\Token $token,
+        VO\IDArray $program_unit_ids,
+        VO\ApprenticeshipID $member_apprenticeship_id,
+        VO\Integer $is_started = null,
+        VO\Integer $is_completed = null,
+        VO\Integer $is_submitted_for_assessment = null,
+        VO\StringVO $observation
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/student/member/program/multiple-unit/create-update'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'program_unit_ids'          => $program_unit_ids->__toArray(),
+            'member_apprenticeship_id'  => $member_apprenticeship_id->__toString(),
+            'observation'               => $observation->__toString()
+        );
+
+        if(!is_null($is_started)){
+            $request_parameters['is_started'] = $is_started->__toInteger();
+        }
+
+        if(!is_null($is_completed)){
+            $request_parameters['is_completed'] = $is_completed->__toInteger();
+        }
+
+        if(!is_null($is_submitted_for_assessment)){
+            $request_parameters['is_submitted_for_assessment'] = $is_submitted_for_assessment->__toInteger();
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    /**
      * Creates Evidences for each of the program children units
      * @param VO\Token $token
      * @param VO\ID $member_apprenticeship_id
@@ -519,15 +576,14 @@ class StudentRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'member_apprenticeship_id'=> $member_apprenticeship_id->__toString(),
-            'program_units_id'=> $program_units_id->__toArray(),
-            'address'=> $address->__toString(),
-            'latitude'=> $latitude->__toString(),
-            'longitude'=> $longitude->__toString(),
-            'evidence_type'=> $evidence_type->__toString(),
-            'document_url'=> $document_url->__toString(),
-            'document_key'=> $document_key->__toString()
-
+            'member_apprenticeship_id'  => $member_apprenticeship_id->__toString(),
+            'program_units_id'          => $program_units_id->__toArray(),
+            'address'                   => $address->__toString(),
+            'latitude'                  => $latitude->__toString(),
+            'longitude'                 => $longitude->__toString(),
+            'evidence_type'             => $evidence_type->__toString(),
+            'document_url'              => $document_url->__toString(),
+            'document_key'              => $document_key->__toString()
         );
 
         if(!is_null($description)){
