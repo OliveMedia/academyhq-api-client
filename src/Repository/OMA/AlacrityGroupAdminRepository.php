@@ -236,7 +236,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $endpoint=null,
 		VO\StringVo $final_review=null,
 		VO\StringVo $gateway=null,
-		VO\Integer $duration=null
+        VO\Integer $duration=null,
+        VO\Integer $holidays=null,
+        VO\StringVo $journal=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -273,6 +275,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			$request_parameters['duration'] = $duration->__toInteger();
 		}
 
+        if(!is_null($holidays)){
+            $request_parameters['holidays'] = $holidays->__toInteger();
+        }
+
 		if(!is_null($behavior)){
 			$request_parameters['behavior'] = $behavior->__toString();
 		}
@@ -287,6 +293,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		if(!is_null($final_review)){
 			$request_parameters['final_review'] = $final_review->__toString();
+		}
+
+		if(!is_null($journal)){
+			$request_parameters['journal'] = $journal->__toString();
 		}
 
 		if(!is_null($program_id)){
@@ -428,7 +438,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $document,
 		VO\StringVo $description=null,
 		VO\StringVo $link,
-		VO\ID $welcome_resource_id = null
+		VO\ID $welcome_resource_id = null,
+        VO\StringVo $video = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -447,6 +458,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		if(!is_null($description)){
 			$request_parameters['description'] = $description->__toString();
+		}
+
+		if(!is_null($video)){
+			$request_parameters['video'] = $video->__toString();
 		}
 
 		if(!is_null($welcome_resource_id)){
@@ -528,5 +543,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		return $data;
 	}
+	
 
 }

@@ -646,4 +646,41 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+
+    /**
+     *  Member Password Change
+     * @param VO\Token $token
+     * @param VO\Password $old_password
+     * @param VO\Password $new_password
+     * @param VO\Password $confirm_password
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function change_password(
+        VO\Token $token,
+        VO\Password $old_password,
+        VO\Password $new_password,
+        VO\Password $confirm_password
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/member/password/change'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'password_old' => $old_password->__toEncodedString(),
+            'password_new' => $new_password->__toEncodedString(),
+            'password_new_confirm' => $confirm_password->__toEncodedString()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 }
