@@ -3,3 +3,4 @@ composer.lock
 /tests/
 composer.lock
 .idea
+.phpintel
