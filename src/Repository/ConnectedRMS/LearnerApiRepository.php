@@ -167,4 +167,53 @@ class LearnerApiRepository extends BaseRepository{
         return $data;
     }
 
+    public function get_all_videos(
+        VO\Token $token,
+        VO\Integer $current_page
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/learner/get/videos'),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParams = array(
+            'Authorization' => $token->__toEncodedString()
+        );
+
+        $request_parameters = array(
+            'current_page' => $current_page->__toInteger()
+        );
+
+        $response = $request->send($request_parameters, $headerParams);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function get_video_detail(
+        Vo\Integer $videoId,
+        VO\Token $token
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/learner/get/video/' . $videoId->__toInteger()),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParams = array(
+            'Authorization' => $token->__toEncodedString()
+        );
+
+        $response = $request->send(array(), $headerParams);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 }
