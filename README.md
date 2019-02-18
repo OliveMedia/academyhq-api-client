@@ -1939,5 +1939,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 6> get all videos of Learner
+<pre>
+	/*@return all learner get_all_videos */
+  	$videos = $learner_api_repository->get_all_videos(
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
+### 7> get video detail of Learner
+<pre>
+	/*@return all learner get_certificate_detail */
+  	$videoDetail = $learner_api_repository->get_video_detail(
+		new \AcademyHQ\API\ValueObjects\Integer("videoId"),
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
 
 
