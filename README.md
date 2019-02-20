@@ -1956,5 +1956,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
-
+### 8> get enrollment launch url detail of Learner
+<pre>
+	/*@return all learner get_enrollment_launch_url_detail */
+  	$enrollmentDetail = $learner_api_repository->get_enrollment_launch_url_detail(
+		new \AcademyHQ\API\ValueObjects\Integer("enrollmentId"),
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
 
