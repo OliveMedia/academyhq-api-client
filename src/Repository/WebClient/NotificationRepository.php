@@ -74,7 +74,7 @@ class NotificationRepository extends BaseRepository{
 		return $data->notification;
 	}
 
-	public function member_notifications(VO\Token $token) {
+	public function member_notifications(VO\Token $token, VO\Integer $page=null) {
 
 		$request = new Request(
 			new GuzzleClient,
@@ -85,7 +85,13 @@ class NotificationRepository extends BaseRepository{
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
-		$response = $request->send(null,$header_parameters);
+		$query_parameters = array();
+
+		if($page) {
+		    $query_parameters['page'] = $page->__toInteger();
+        }
+
+		$response = $request->send($query_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
