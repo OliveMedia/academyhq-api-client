@@ -238,7 +238,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $gateway=null,
         VO\Integer $duration=null,
         VO\Integer $holidays=null,
-        VO\StringVo $journal=null
+        VO\StringVo $journal=null,
+        VO\StringVo $skill=null,
+        VO\StringVo $knowledge=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -297,6 +299,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		if(!is_null($journal)){
 			$request_parameters['journal'] = $journal->__toString();
+		}
+
+		if(!is_null($skill)){
+			$request_parameters['skill'] = $skill->__toString();
+		}
+
+		if(!is_null($knowledge)){
+			$request_parameters['knowledge'] = $knowledge->__toString();
 		}
 
 		if(!is_null($program_id)){
