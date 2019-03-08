@@ -1965,3 +1965,12 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 9> get enrollment launch callback detail of Learner
+<pre>
+	/*@return all learner enrollment_callback */
+  	$enrollmentDetail = $learner_api_repository->enrollment_callback(
+		new \AcademyHQ\API\ValueObjects\Integer("enrollmentId"),
+		new \AcademyHQ\API\ValueObjects\Token("token")
+	);
+</pre>
+
