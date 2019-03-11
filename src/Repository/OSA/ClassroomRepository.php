@@ -34,7 +34,7 @@ class ClassroomRepository extends BaseRepository
         VO\StringVO $booking_date = null,
         VO\StringVO $transaction_id = null,
         VO\StringVO $payment_status = null,
-        VO\StringVO $type = null  
+        VO\StringVO $type = null
     ) {
 
         $request = new Request(
@@ -112,8 +112,8 @@ class ClassroomRepository extends BaseRepository
         VO\StringVO $booking_date = null,
         VO\StringVO $transaction_id = null,
         VO\StringVO $payment_status = null,
-        VO\StringVO $type = null, 
-        VO\StringVO $payment_information = null, 
+        VO\StringVO $type = null,
+        VO\StringVO $payment_information = null,
         VO\StringVO $booking_description = null
     ) {
 
@@ -199,11 +199,12 @@ class ClassroomRepository extends BaseRepository
         VO\StringVO $booking_olive_agent = null,
         VO\StringVO $booking_date = null,
         VO\StringVO $payment_status = null,
-        VO\StringVO $type = null, 
-        VO\StringVO $payment_information = null, 
+        VO\StringVO $type = null,
+        VO\StringVO $payment_information = null,
         VO\StringVO $booking_description = null,
         VO\Integer $organisation_id = null,
-        VO\Integer $client_admin_id = null
+        VO\Integer $client_admin_id = null,
+        VO\StringVO $contact_person = null
     ) {
 
         $request = new Request(
@@ -264,6 +265,10 @@ class ClassroomRepository extends BaseRepository
         if (!is_null($client_admin_id)) {
             $request_parameters['client_admin_id'] = $client_admin_id->__toInteger();
 
+        }
+
+        if (!is_null($contact_person)) {
+            $request_parameters['contact_person'] = $contact_person->__toString();
         }
 
         $response = $request->send($request_parameters);
