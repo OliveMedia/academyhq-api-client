@@ -457,71 +457,83 @@ class ClassroomRepository extends BaseRepository
         return $response->get_data();
 
     }
-
     /**
      * [create_booking_stripe_payment_post description]
      * @param  [type] $booking_id     [description]
      * @param  [type] $transaction_id [description]
+     * @param  [type] $payment_status [description]
      * @return [type]                 [description]
      */
-    public function create_booking_stripe_payment_post(
-      VO\Integer $booking_id = null,
-      VO\StringVO $transaction_id = null
-      )
-    {
-      $request = new Request(
-          new GuzzleClient,
-          $this->credentials,
-          VO\HTTP\Url::fromNative($this->base_url . '/classroom/agent/book/stripe_payment'),
-          new VO\HTTP\Method('POST')
-      );
+      public function create_booking_stripe_payment_post(
+        VO\Integer $booking_id = null,
+        VO\StringVO $transaction_id = null,
+        VO\StringVO $payment_status = null
 
-      $request_parameters = array();
+        )
+      {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/classroom/agent/book/stripe_payment'),
+            new VO\HTTP\Method('POST')
+        );
 
-      if (!is_null($booking_id)) {
-          $request_parameters['booking_id'] = $booking_id->__toInteger();
+        $request_parameters = array();
+
+        if (!is_null($booking_id)) {
+            $request_parameters['booking_id'] = $booking_id->__toInteger();
+        }
+
+        if (!is_null($transaction_id)) {
+            $request_parameters['transaction_id'] = $transaction_id->__toString();
+        }
+
+        if (!is_null($payment_status)) {
+            $request_parameters['payment_status'] = $payment_status->__toString();
+        }
+
+
+        $response = $request->send($request_parameters);
+
+        return $response->get_data();
       }
-
-      if (!is_null($transaction_id)) {
-          $request_parameters['transaction_id'] = $transaction_id->__toString();
-      }
-
-      $response = $request->send($request_parameters);
-
-      return $response->get_data();
-    }
     /**
      * [create_booking_invoice_payment_post description]
-     * @param  [type] $booking_id [description]
-     * @param  [type] $invoice    [description]
-     * @return [type]             [description]
+     * @param  [type] $booking_id     [description]
+     * @param  [type] $invoice        [description]
+     * @param  [type] $payment_status [description]
+     * @return [type]                 [description]
      */
 
-    public function create_booking_invoice_payment_post(
-      VO\Integer $booking_id = null,
-      VO\StringVO $invoice = null
-      )
-    {
-      $request = new Request(
-          new GuzzleClient,
-          $this->credentials,
-          VO\HTTP\Url::fromNative($this->base_url . '/classroom/agent/book/invoice_payment'),
-          new VO\HTTP\Method('POST')
-      );
+      public function create_booking_invoice_payment_post(
+        VO\Integer $booking_id = null,
+        VO\StringVO $invoice = null,
+        VO\StringVO $payment_status = null
+        )
+      {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/classroom/agent/book/invoice_payment'),
+            new VO\HTTP\Method('POST')
+        );
 
-      $request_parameters = array();
+        $request_parameters = array();
 
-      if (!is_null($booking_id)) {
-          $request_parameters['booking_id'] = $booking_id->__toInteger();
+        if (!is_null($booking_id)) {
+            $request_parameters['booking_id'] = $booking_id->__toInteger();
+        }
+
+        if (!is_null($invoice)) {
+            $request_parameters['invoice'] = $invoice->__toString();
+        }
+
+        if (!is_null($payment_status)) {
+            $request_parameters['payment_status'] = $payment_status->__toString();
+        }
+
+        $response = $request->send($request_parameters);
+        return $response->get_data();
       }
-
-      if (!is_null($invoice)) {
-          $request_parameters['invoice'] = $invoice->__toString();
-      }
-
-      $response = $request->send($request_parameters);
-
-      return $response->get_data();
-    }
 
 }
