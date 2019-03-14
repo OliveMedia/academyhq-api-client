@@ -217,8 +217,7 @@ class LearnerApiRepository extends BaseRepository{
         return $data;
     }
 
-    public function get_all_videos(
-        VO\Token $token,
+     public function get_all_videos(
         VO\Integer $current_page
     )
     {
@@ -229,15 +228,11 @@ class LearnerApiRepository extends BaseRepository{
             new VO\HTTP\Method('GET')
         );
 
-        $headerParams = array(
-            'Authorization' => $token->__toEncodedString()
-        );
-
         $request_parameters = array(
             'current_page' => $current_page->__toInteger()
         );
 
-        $response = $request->send($request_parameters, $headerParams);
+        $response = $request->send($request_parameters, []);
 
         $data = $response->get_data();
 
