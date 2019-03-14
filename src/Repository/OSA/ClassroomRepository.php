@@ -112,6 +112,7 @@ class ClassroomRepository extends BaseRepository
         VO\StringVO $booking_date = null,
         VO\StringVO $transaction_id = null,
         VO\StringVO $payment_status = null,
+        VO\StringVO $invoice = null,
         VO\StringVO $type = null,
         VO\StringVO $payment_information = null,
         VO\StringVO $booking_description = null
@@ -160,6 +161,10 @@ class ClassroomRepository extends BaseRepository
 
         if (!is_null($transaction_id)) {
             $request_parameters['transaction_id'] = $transaction_id->__toString();
+        }
+
+        if (!is_null($invoice)) {
+            $request_parameters['invoice'] = $invoice->__toString();
         }
 
         if (!is_null($payment_status)) {
