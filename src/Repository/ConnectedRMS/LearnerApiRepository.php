@@ -225,7 +225,7 @@ class LearnerApiRepository extends BaseRepository{
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->get_url().'/learner/get/videos'),
+            VO\HTTP\Url::fromNative($this->get_url().'/organization/get/videos'),
             new VO\HTTP\Method('GET')
         );
 
