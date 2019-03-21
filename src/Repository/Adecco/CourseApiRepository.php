@@ -24,7 +24,7 @@ class CourseApiRepository extends BaseRepository
 
     }
 
-    public function getAllBundles(
+    public function getOrganizationBundles(
             VO\Token  $token,
             VO\Integer $currentPage
         )
@@ -116,6 +116,26 @@ class CourseApiRepository extends BaseRepository
 
         return $data;
 
+    }
+
+    public function getEnrollmentDetails(
+        VO\Token  $token,
+        VO\ID     $enrollmentId
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/get/enrollment/'.$enrollmentId),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send(array(), $headerParameters);
+        $data = $response->get_data();
+
+        return $data;
     }
 
 
