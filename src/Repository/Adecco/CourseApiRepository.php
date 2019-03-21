@@ -89,6 +89,35 @@ class CourseApiRepository extends BaseRepository
         return $data;
     }
 
+    public function createLearnerEnrollmentForParticularBundle(
+        VO\Token    $token,
+        VO\Integer  $bundleId,
+        VO\Integer  $memberId
+    )
+    {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/create/bundle/enrollment'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $headerParameters = array('Authorization' => $token->__toEncodedString());
+
+        $requestParameters = array(
+            'package_id'    => $bundleId->__toInteger(),
+            'member_id'     => $memberId->__toInteger()
+        );
+
+        $response = $request->send($requestParameters, $headerParameters);
+
+        $data = $response->get_data();
+
+        return $data;
+
+    }
+
 
 
 
