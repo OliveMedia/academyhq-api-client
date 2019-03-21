@@ -69,7 +69,7 @@ class CourseApiRepository extends BaseRepository
         return $data;
     }
 
-    public function getCourseListFromBundle(
+    public function getBundleDetails(
         VO\Token  $token,
         VO\ID $bundleId
     )
