@@ -38,11 +38,6 @@ class CourseApiRepository extends BaseRepository
 
         $headerParameters = array('Authorization' => $token->__toEncodedString());
 
-        // $requestParameters = array(
-        //     'current_page' => $currentPage->__toInteger()
-        // );
-
-//        $response = $request->send($requestParameters, $headerParameters);
         $response = $request->send(array(), $headerParameters);
 
         $data = $response->get_data();
@@ -69,6 +64,26 @@ class CourseApiRepository extends BaseRepository
         );
 
         $response = $request->send($requestParameters, $headerParameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    public function getCourseListFromBundle(
+        VO\Token  $token,
+        VO\ID $bundleId
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/get/bundle/'.$bundleId),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParameters = array('Authorization' => $token->__toEncodedString());
+
+        $response = $request->send(array(), $headerParameters);
         $data = $response->get_data();
 
         return $data;
