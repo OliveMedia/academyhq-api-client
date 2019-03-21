@@ -131,5 +131,29 @@ class AuthRepository extends BaseRepository{
 
         return $data;
     }
+
+    public function get_login_url_to_ahq(
+        VO\Email $email,
+        VO\Token $redisUserToken
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/auth/fetch/login_url'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'email' => $email->__toEncodedString(),
+            'redisUserToken' => $redisUserToken->__toEncodedString()
+        );
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
     
 }

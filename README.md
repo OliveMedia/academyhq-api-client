@@ -338,6 +338,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 5> Get Direct Login Url
+<pre>
+ 	/*@returns direct login url*/
+	$login_url = $auth_repository->login_from_email_only(
+		new \AcademyHQ\API\ValueObjects\Email('email'),
+		new \AcademyHQ\API\ValueObjects\Token('redisUserToken')))
+	);
+</pre>
+
 
 ## Using Employer Repository
 
