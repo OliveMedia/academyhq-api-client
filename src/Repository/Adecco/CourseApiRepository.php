@@ -25,8 +25,7 @@ class CourseApiRepository extends BaseRepository
     }
 
     public function getOrganizationBundles(
-            VO\Token  $token,
-            VO\Integer $currentPage
+            VO\Token  $token
         )
     {
         $request = new Request(
