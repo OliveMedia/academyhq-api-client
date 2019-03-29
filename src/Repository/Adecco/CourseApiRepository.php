@@ -31,7 +31,7 @@ class CourseApiRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/get/organization/bundles'),
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/get/organization/bundles'),
             new VO\HTTP\Method('GET')
         );
 
@@ -52,7 +52,7 @@ class CourseApiRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/get/bundles'),
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/get/learner/bundles'),
             new VO\HTTP\Method('GET')
         );
 
@@ -76,7 +76,7 @@ class CourseApiRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/get/bundle/'.$bundleId),
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/learner/get/bundle/'.$bundleId),
             new VO\HTTP\Method('GET')
         );
 
@@ -98,7 +98,7 @@ class CourseApiRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/create/bundle/enrollment'),
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/learner/create/bundle/enrollment'),
             new VO\HTTP\Method('POST')
         );
 
@@ -125,7 +125,7 @@ class CourseApiRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/crms/learner/get/enrollment/'.$enrollmentId),
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/learner/get/enrollment/'.$enrollmentId),
             new VO\HTTP\Method('GET')
         );
 
