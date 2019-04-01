@@ -1740,6 +1740,31 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 23> fetch courses details
+<pre>
+	/*@return return courses details*/
+	$courses_details = $crms_repository->classroom_courses_details(
+			\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array())
+		);
+	);
+</pre>
+
+### 24> create client and client admin
+<pre>
+	/*@return return organisation and member details*/
+	$response = $crms_repository->create_organisation_and_admin(
+			new \AcademyHQ\API\ValueObjects\StringVO('organisation_name'),
+			new \AcademyHQ\API\ValueObjects\StringVO('domain'),
+			new \AcademyHQ\API\ValueObjects\Email('email'),
+			\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+			new \AcademyHQ\API\ValueObjects\StringVO('contact_number'),
+			new \AcademyHQ\API\ValueObjects\StringVO('billing_address'),
+			new \AcademyHQ\API\ValueObjects\StringVO('tax_code'),
+			new \AcademyHQ\API\ValueObjects\StringVO('company_website')
+		);
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses

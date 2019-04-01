@@ -673,4 +673,70 @@ class CrmsRepository extends BaseRepository{
 
 	}
 
+	public function classroom_courses_details(
+		VO\CourseIDArray $courses_ids
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/classroom/courses/details'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'courses_ids' => $course_ids->__toArray(),
+			
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+	
+	public function create_organisation_and_admin(
+		VO\StringVO $organisation_name,
+		VO\StringVO $domain,
+		VO\Email $email,
+		VO\Name $name,
+		VO\StringVO $contact_number = null,
+		VO\StringVO $billing_address = null,
+		VO\StringVO $tax_code = null,
+		VO\StringVO $company_website = null
+	){	
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/organisation/and/admin/create'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_name' => $organisation_name->__toString(),
+			'domain' => $domain->__toString(),
+			'email_address' => $email->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+		);
+		if(!is_null($contact_number)){
+			$request_parameters['contact_number'] = $contact_number->__toString();
+		}
+		if(!is_null($billing_address)){
+			$request_parameters['billing_address'] = $billing_address->__toString();
+		}
+		if(!is_null($tax_code)){
+			$request_parameters['tax_code'] = $tax_code->__toString();
+		}
+		if(!is_null($company_website)){
+			$request_parameters['company_website'] = $company_website->__toString();
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
