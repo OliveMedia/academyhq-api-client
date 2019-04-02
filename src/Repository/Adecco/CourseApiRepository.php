@@ -138,6 +138,31 @@ class CourseApiRepository extends BaseRepository
     }
 
 
+    public function getEnrollmentLaunchUrlDetail(
+        VO\Token  $token,
+        VO\ID     $enrollmentId,
+        VO\StringVO $callbackUrl
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/learner/get/enrollment/'.$enrollmentId.'/launch/url'),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParameters = array('Authorization' => $token->__toEncodedString());
+        $requestParameters = array(
+            'callback_url'     => $callbackUrl->__toString()
+        );
+        $response = $request->send($requestParameters, $headerParameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+
 
 
 }
