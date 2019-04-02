@@ -161,6 +161,27 @@ class CourseApiRepository extends BaseRepository
         return $data;
     }
 
+    public function getEnrollmentCallback(
+        VO\Token  $token,
+        VO\ID     $enrollmentId
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/learner/get/enrollment/'.$enrollmentId.'/callback'),
+            new VO\HTTP\Method('GET')
+        );
+
+        $headerParameters = array('Authorization' => $token->__toEncodedString());
+        $requestParameters = array(
+        );
+        $response = $request->send($requestParameters, $headerParameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 
 
 
