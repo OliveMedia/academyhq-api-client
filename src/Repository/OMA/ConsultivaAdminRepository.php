@@ -386,8 +386,8 @@ public function student_program_details(
         VO\Token $token,
         VO\ID $member_apprenticeship_id,
         VO\MemberID $member_id,
-        VO\Boolean $is_verifier=null,
-        VO\Boolean $is_assessor=null
+        VO\Integer $is_verifier=null,
+        VO\Integer $is_assessor=null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -404,11 +404,11 @@ public function student_program_details(
         );
 
         if(!is_null($is_verifier)) {
-            $request_parameters['is_verifier'] = $is_verifier->__toBoolean();
+            $request_parameters['is_verifier'] = $is_verifier->__toInteger();
         }
 
         if(!is_null($is_assessor)) {
-            $request_parameters['is_assessor'] = $is_assessor->__toBoolean();
+            $request_parameters['is_assessor'] = $is_assessor->__toInteger();
         }        
         
         $response = $request->send($request_parameters, $header_parameters);
