@@ -381,4 +381,41 @@ public function student_program_details(
         return $data;
     }
 
+
+    public function assign_member_apprenticeship_vip(
+        VO\Token $token,
+        VO\ID $member_apprenticeship_id,
+        VO\MemberID $member_id,
+        VO\Boolean $is_verifier=null,
+        VO\Boolean $is_assessor=null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/member/apprenticeship/assign/vip'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toString(),
+            'member_id' => $member_id->__toString()
+        );
+
+        if(!is_null($is_verifier)) {
+            $request_parameters['is_verifier'] = $is_verifier->__toBoolean();
+        }
+
+        if(!is_null($is_assessor)) {
+            $request_parameters['is_assessor'] = $is_assessor->__toBoolean();
+        }        
+        
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 }
