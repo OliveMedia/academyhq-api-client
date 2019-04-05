@@ -739,4 +739,30 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function create_bulk_licenses(
+		VO\OrganisationID $organisation_id,
+		VO\CourseIDArray $courses_ids,
+		VO\Integer $no_of_licenses
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/bulk/licenses'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_i->__toString(),
+			'courses_ids' => $course_ids->__toArray(),
+			'no_of_licenses' => $no_of_licenses->__toInteger()
+			
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

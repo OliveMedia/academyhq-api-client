@@ -1693,20 +1693,19 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return return member details*/
 	$member_details = $crms_repository->third_party_member_create(
-			new VO\OrganisationID('organisation_id'),
-			VO\Name::fromNative('first_name','last_name'),
-			new VO\Email('email'),
-			new VO\Username('username'),
-			new VO\Integer('is_admin'),
-			new VO\PublicID('pub_id'),
-			new VO\Password('password'),
-			new VO\Integer('mobile_number'),
-			new VO\StringVO('street'),
-			new VO\StringVO('city'),
-			new VO\StringVO('state'),
-			new VO\StringVO('country'),
-			new VO\StringVO('postal_code')
-		);
+		new VO\OrganisationID('organisation_id'),
+		VO\Name::fromNative('first_name','last_name'),
+		new VO\Email('email'),
+		new VO\Username('username'),
+		new VO\Integer('is_admin'),
+		new VO\PublicID('pub_id'),
+		new VO\Password('password'),
+		new VO\Integer('mobile_number'),
+		new VO\StringVO('street'),
+		new VO\StringVO('city'),
+		new VO\StringVO('state'),
+		new VO\StringVO('country'),
+		new VO\StringVO('postal_code')
 	);
 </pre>
 
@@ -1714,21 +1713,20 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return return member details*/
 	$member_details = $crms_repository->third_party_member_edit(
-			new VO\OrganisationID('organisation_id'),
-			new VO\PublicID('pub_id'),
-			VO\Name::fromNative('first_name','last_name'),
-			new VO\Email('email'),
-			new VO\Username('username'),
-			new VO\Integer('is_admin'),
-			new VO\Password('password'),
-			new VO\Integer('mobile_number'),
-			new VO\Integer('is_deleted'),
-			new VO\StringVO('street'),
-			new VO\StringVO('city'),
-			new VO\StringVO('state'),
-			new VO\StringVO('country'),
-			new VO\StringVO('postal_code')
-		);
+		new VO\OrganisationID('organisation_id'),
+		new VO\PublicID('pub_id'),
+		VO\Name::fromNative('first_name','last_name'),
+		new VO\Email('email'),
+		new VO\Username('username'),
+		new VO\Integer('is_admin'),
+		new VO\Password('password'),
+		new VO\Integer('mobile_number'),
+		new VO\Integer('is_deleted'),
+		new VO\StringVO('street'),
+		new VO\StringVO('city'),
+		new VO\StringVO('state'),
+		new VO\StringVO('country'),
+		new VO\StringVO('postal_code')
 	);
 </pre>
 
@@ -1736,9 +1734,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return return member details*/
 	$member_details = $crms_repository->third_party_member_fetch(
-			new VO\OrganisationID('organisation_id'),
-			new VO\PublicID('pub_id')
-		);
+		new VO\OrganisationID('organisation_id'),
+		new VO\PublicID('pub_id')
 	);
 </pre>
 
@@ -1746,8 +1743,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return return courses details*/
 	$courses_details = $crms_repository->classroom_courses_details(
-			\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array())
-		);
+		\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array())
 	);
 </pre>
 
@@ -1755,15 +1751,24 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return return organisation and member details*/
 	$response = $crms_repository->create_organisation_and_admin(
-			new \AcademyHQ\API\ValueObjects\StringVO('organisation_name'),
-			new \AcademyHQ\API\ValueObjects\StringVO('domain'),
-			new \AcademyHQ\API\ValueObjects\Email('email'),
-			\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
-			new \AcademyHQ\API\ValueObjects\StringVO('contact_number'),
-			new \AcademyHQ\API\ValueObjects\StringVO('billing_address'),
-			new \AcademyHQ\API\ValueObjects\StringVO('tax_code'),
-			new \AcademyHQ\API\ValueObjects\StringVO('company_website')
-		);
+		new \AcademyHQ\API\ValueObjects\StringVO('organisation_name'),
+		new \AcademyHQ\API\ValueObjects\StringVO('domain'),
+		new \AcademyHQ\API\ValueObjects\Email('email'),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\StringVO('contact_number'),
+		new \AcademyHQ\API\ValueObjects\StringVO('billing_address'),
+		new \AcademyHQ\API\ValueObjects\StringVO('tax_code'),
+		new \AcademyHQ\API\ValueObjects\StringVO('company_website')
+	);
+</pre>
+
+### 25> create Bulk Licenses for Organisation
+<pre>
+	/*@return created licenses ids*/
+	$licenses_ids = $crms_repository->create_bulk_licenses(
+		new \AcademyHQ\API\ValueObjects\OrganisationVO('organisation_id'),
+		\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array()),
+		new \AcademyHQ\API\ValueObjects\Integer('no_of_licenses')
 	);
 </pre>
 
