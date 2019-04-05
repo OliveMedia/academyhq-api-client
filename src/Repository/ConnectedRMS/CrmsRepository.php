@@ -765,4 +765,33 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function register_member(
+		VO\MemberID $member_id,
+		VO\Password $password,
+		VO\Username $username = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/complete/registration'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'password' => $password->__toString(),
+			
+		);
+		
+		if(!is_null($username)){
+			$request_parameters['username'] = $username->__toString();		
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

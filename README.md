@@ -1772,6 +1772,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 26> Register member
+<pre>
+	/*@return details of registered member */
+	$licenses_ids = $crms_repository->register_member(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\Password('password'),
+		new \AcademyHQ\API\ValueObjects\Username('username')
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
