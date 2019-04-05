@@ -752,8 +752,8 @@ class CrmsRepository extends BaseRepository{
 		);
 
 		$request_parameters = array(
-			'organisation_id' => $organisation_i->__toString(),
-			'courses_ids' => $course_ids->__toArray(),
+			'organisation_id' => $organisation_id->__toString(),
+			'courses_ids' => $courses_ids->__toArray(),
 			'no_of_licenses' => $no_of_licenses->__toInteger()
 			
 		);
