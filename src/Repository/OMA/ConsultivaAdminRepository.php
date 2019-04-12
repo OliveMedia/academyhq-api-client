@@ -418,4 +418,30 @@ public function student_program_details(
         return $data;
     }
 
+	/**
+	 * Get the details of the members
+	 * @param VO\Token   $token
+	 * @param VO\IDArray $member_ids
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function base_member_alt(VO\Token $token, VO\IDArray $member_ids)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/member/base_alt'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'member_ids'                => $member_ids->__toArray()
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
 }
