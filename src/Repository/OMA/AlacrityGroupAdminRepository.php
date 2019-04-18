@@ -251,7 +251,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $score=null,
 		VO\StringVo $video=null,
 		VO\StringVo $week=null,
-		VO\StringVo $day=null
+		VO\StringVo $day=null,
+		VO\StringVo $pdp=null,
+		VO\StringVo $documentation=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -334,6 +336,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		if(!is_null($day)){
 			$request_parameters['day'] = $day->__toString();
+		}
+
+		if(!is_null($pdp)){
+			$request_parameters['pdp'] = $pdp->__toString();
+		}
+
+		if(!is_null($documentation)){
+			$request_parameters['documentation'] = $documentation->__toString();
 		}
 
 		if(!is_null($program_id)){
