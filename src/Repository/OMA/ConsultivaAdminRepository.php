@@ -53,8 +53,8 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\OrganisationID $organisation_id = null,
         VO\ApprenticeshipID $apprenticeship_id = null,
         VO\MemberID $assessor_id = null,
-        VO\MemberID $verifier_id = null
-
+        VO\MemberID $verifier_id = null,
+	    VO\OccupationID $occupation_id = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -79,6 +79,10 @@ class ConsultivaAdminRepository extends BaseRepository
 
         if(!is_null($verifier_id)){
             $request_parameters['verifier_id'] = $verifier_id->__toString();
+        }
+
+        if(!is_null($occupation_id)){
+        	$request_parameters['occupation_id'] = $occupation_id->__toString();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
