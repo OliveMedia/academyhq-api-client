@@ -287,7 +287,7 @@ public function student_program_details(
         VO\ApprenticeshipID $apprenticeship_id,
         VO\OrganisationID $organisation_id,
         VO\MemberID $member_id,
-        VO\MemberID $assessor_id,
+        VO\MemberID $assessor_id=null,
         VO\StringVO $gender,
         VO\StringVO $country_code,
         VO\Integer $mobile_number,
@@ -318,7 +318,6 @@ public function student_program_details(
         $request_parameters = array(
             'apprenticeship_id' => $apprenticeship_id->__toString(),
             'organisation_id' => $organisation_id->__toString(),
-            'assessor_id' => $assessor_id->__toString(),
             'member_id' => $member_id->__toString(),
             'nationality' => $nationality-> __toString(),
             'disability' => $disability->__toInteger()
@@ -346,6 +345,10 @@ public function student_program_details(
 
         if(!is_null($image)){
             $request_parameters['image'] = $image->__toString();
+        }
+
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id'] = $assessor_id->__toString();
         }
 
         if(!is_null($verifier_id)){
