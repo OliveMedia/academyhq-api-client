@@ -93,7 +93,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
         VO\OrganisationID $organisation_id,
-        VO\MemberID $assessor_id,
+        VO\MemberID $assessor_id=null,
         VO\Name $name,
         VO\StringVO $gender,
         VO\StringVO $country_code,
@@ -126,7 +126,6 @@ class ConsultivaAdminRepository extends BaseRepository
         $request_parameters = array(
             'apprenticeship_id' => $apprenticeship_id->__toString(),
             'organisation_id' => $organisation_id->__toString(),
-            'assessor_id' => $assessor_id->__toString(),
             'first_name' => $name->get_first_name()->__toString(),
             'last_name' => $name->get_last_name()->__toString(),
             'gender' => $gender->__toString(),
@@ -160,7 +159,11 @@ class ConsultivaAdminRepository extends BaseRepository
         if(!is_null($image)){
             $request_parameters['image'] = $image->__toString();
         }
-
+        
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id'] = $assessor_id->__toString();
+        }
+        
         if(!is_null($verifier_id)){
             $request_parameters['verifier_id'] = $verifier_id->__toString();
         }
