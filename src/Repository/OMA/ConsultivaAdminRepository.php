@@ -53,8 +53,8 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\OrganisationID $organisation_id = null,
         VO\ApprenticeshipID $apprenticeship_id = null,
         VO\MemberID $assessor_id = null,
-        VO\MemberID $verifier_id = null
-
+        VO\MemberID $verifier_id = null,
+	    VO\OccupationID $occupation_id = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -81,6 +81,10 @@ class ConsultivaAdminRepository extends BaseRepository
             $request_parameters['verifier_id'] = $verifier_id->__toString();
         }
 
+        if(!is_null($occupation_id)){
+        	$request_parameters['occupation_id'] = $occupation_id->__toString();
+        }
+
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
 
@@ -93,7 +97,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
         VO\OrganisationID $organisation_id,
-        VO\MemberID $assessor_id,
+        VO\MemberID $assessor_id=null,
         VO\Name $name,
         VO\StringVO $gender,
         VO\StringVO $country_code,
@@ -126,7 +130,6 @@ class ConsultivaAdminRepository extends BaseRepository
         $request_parameters = array(
             'apprenticeship_id' => $apprenticeship_id->__toString(),
             'organisation_id' => $organisation_id->__toString(),
-            'assessor_id' => $assessor_id->__toString(),
             'first_name' => $name->get_first_name()->__toString(),
             'last_name' => $name->get_last_name()->__toString(),
             'gender' => $gender->__toString(),
@@ -160,7 +163,11 @@ class ConsultivaAdminRepository extends BaseRepository
         if(!is_null($image)){
             $request_parameters['image'] = $image->__toString();
         }
-
+        
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id'] = $assessor_id->__toString();
+        }
+        
         if(!is_null($verifier_id)){
             $request_parameters['verifier_id'] = $verifier_id->__toString();
         }
@@ -280,7 +287,7 @@ public function student_program_details(
         VO\ApprenticeshipID $apprenticeship_id,
         VO\OrganisationID $organisation_id,
         VO\MemberID $member_id,
-        VO\MemberID $assessor_id,
+        VO\MemberID $assessor_id=null,
         VO\StringVO $gender,
         VO\StringVO $country_code,
         VO\Integer $mobile_number,
@@ -311,7 +318,6 @@ public function student_program_details(
         $request_parameters = array(
             'apprenticeship_id' => $apprenticeship_id->__toString(),
             'organisation_id' => $organisation_id->__toString(),
-            'assessor_id' => $assessor_id->__toString(),
             'member_id' => $member_id->__toString(),
             'nationality' => $nationality-> __toString(),
             'disability' => $disability->__toInteger()
@@ -339,6 +345,10 @@ public function student_program_details(
 
         if(!is_null($image)){
             $request_parameters['image'] = $image->__toString();
+        }
+
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id'] = $assessor_id->__toString();
         }
 
         if(!is_null($verifier_id)){
@@ -381,4 +391,40 @@ public function student_program_details(
         return $data;
     }
 
+
+    public function assign_member_apprenticeship_vip(
+        VO\Token $token,
+        VO\ID $member_apprenticeship_id,
+        VO\MemberID $member_id,
+        VO\Integer $is_verifier=null,
+        VO\Integer $is_assessor=null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/member/apprenticeship/assign/vip'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toString(),
+            'member_id' => $member_id->__toString()
+        );
+
+        if(!is_null($is_verifier)) {
+            $request_parameters['is_verifier'] = $is_verifier->__toInteger();
+        }
+
+        if(!is_null($is_assessor)) {
+            $request_parameters['is_assessor'] = $is_assessor->__toInteger();
+        }        
+        
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 }

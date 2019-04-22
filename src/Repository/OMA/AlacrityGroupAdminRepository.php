@@ -188,13 +188,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	}
 
 
-
 	public function createOccupation(
 		VO\Token $token,
 		VO\StringVO $name,
 		VO\StringVO $description = null,
 		VO\StringVO $logo = null,
-		VO\Integer $occupation_id = null
+		VO\Integer $occupation_id = null,
+		VO\Integer $has_weeks = null,
+		VO\Integer $weeks = null
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -212,6 +213,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($logo)){
 			$request_parameters['logo'] = $logo->__toString();
+		}
+		if(!is_null($has_weeks)) {
+			$request_parameters['has_weeks'] = $has_weeks->__toInteger();
+		}
+		if(!is_null($weeks)) {
+			$request_parameters['weeks'] = $weeks->__toInteger();
 		}
 		if(!is_null($occupation_id)){
 			$request_parameters['occupation_id'] = $occupation_id->__toInteger();
@@ -241,7 +248,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
         VO\StringVo $journal=null,
         VO\StringVo $skill=null,
         VO\StringVo $knowledge=null,
-        VO\StringVo $score=null
+		VO\StringVo $score=null,
+		VO\StringVo $video=null,
+		VO\StringVo $week=null,
+		VO\StringVo $day=null,
+		VO\StringVo $pdp=null,
+		VO\StringVo $documentation=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -312,6 +324,26 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		if(!is_null($score)){
 			$request_parameters['score'] = $score->__toString();
+		}
+
+		if(!is_null($video)){
+			$request_parameters['video'] = $video->__toString();
+		}
+
+		if(!is_null($week)){
+			$request_parameters['week'] = $week->__toString();
+		}
+
+		if(!is_null($day)){
+			$request_parameters['day'] = $day->__toString();
+		}
+
+		if(!is_null($pdp)){
+			$request_parameters['pdp'] = $pdp->__toString();
+		}
+
+		if(!is_null($documentation)){
+			$request_parameters['documentation'] = $documentation->__toString();
 		}
 
 		if(!is_null($program_id)){
