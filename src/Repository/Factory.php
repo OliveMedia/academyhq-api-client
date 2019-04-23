@@ -19,7 +19,9 @@ use AcademyHQ\API\Repository\ConnectedRMS\CourseApiRepository;
 use AcademyHQ\API\Repository\ConnectedRMS\MemberApiRepository;
 use AcademyHQ\API\Repository\OSA\ClassroomRepository;
 use AcademyHQ\API\Repository\Adecco\CourseApiRepository as AdeccoCourseApiRepository;
+use AcademyHQ\API\Repository\Adecco\AdeccoOrganisationApiRepository;
 use AcademyHQ\API\Repository\Adecco\AdeccoAuthApiRepository;
+
 // use AcademyHQ\API\Repository\OMA as OMA;
 
 class Factory
@@ -140,6 +142,11 @@ class Factory
 	public function get_adecco_package_repository()
     {
         return new AdeccoCourseApiRepository($this->credentials);
+	}
+
+	public function get_adecco_organisation_repository()
+    {
+        return new AdeccoOrganisationApiRepository($this->credentials);
 	}
 	
 	public function get_adeccoauthapi_repository()
