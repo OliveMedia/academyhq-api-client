@@ -25,19 +25,24 @@ class CourseApiRepository extends BaseRepository
     }
 
     public function getOrganizationBundles(
-            VO\Token  $token
+            VO\Token  $token,
+            $bundleIds
         )
     {
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/get/organization/bundles'),
-            new VO\HTTP\Method('GET')
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/organisation/bundles'),
+            new VO\HTTP\Method('Post')
+        );
+
+        $requestParameters = array(
+            'package_ids'    => $bundleIds,
         );
 
         $headerParameters = array('Authorization' => $token->__toEncodedString());
 
-        $response = $request->send(array(), $headerParameters);
+        $response = $request->send($requestParameters, $headerParameters);
 
         $data = $response->get_data();
 
