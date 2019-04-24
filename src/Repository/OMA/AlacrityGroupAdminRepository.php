@@ -253,7 +253,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVo $week=null,
 		VO\StringVo $day=null,
 		VO\StringVo $pdp=null,
-		VO\StringVo $documentation=null
+		VO\StringVo $documentation=null,
+		VO\StringVo $gap_template=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -345,6 +346,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($documentation)){
 			$request_parameters['documentation'] = $documentation->__toString();
 		}
+
+		if(!is_null($gap_template)){
+			$request_parameters['gap_template'] = $gap_template->__toString();
+		}
+
 
 		if(!is_null($program_id)){
 			$request_parameters['program_id'] = $program_id->__toInteger();
