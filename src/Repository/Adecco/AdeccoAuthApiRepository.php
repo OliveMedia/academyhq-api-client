@@ -41,6 +41,30 @@ class AdeccoAuthApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function login_from_username(
+		VO\Username $username,
+		VO\Password $password
+
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/client/auth/login/from/username'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'username' => $username->__toEncodedString(),
+			'password' => $password->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function logout(VO\Token $token) 
 	{
 		$request = new Request(
