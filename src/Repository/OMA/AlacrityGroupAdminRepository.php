@@ -239,22 +239,23 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $off_the_job_training = null,
 		VO\Integer $required_hours = null,
 		VO\Integer $program_id = null,
-		VO\StringVo $behavior=null,
-		VO\StringVo $endpoint=null,
-		VO\StringVo $final_review=null,
-		VO\StringVo $gateway=null,
+		VO\StringVO $behavior=null,
+		VO\StringVO $endpoint=null,
+		VO\StringVO $final_review=null,
+		VO\StringVO $gateway=null,
         VO\Integer $duration=null,
         VO\Integer $holidays=null,
-        VO\StringVo $journal=null,
-        VO\StringVo $skill=null,
-        VO\StringVo $knowledge=null,
-		VO\StringVo $score=null,
-		VO\StringVo $video=null,
-		VO\StringVo $week=null,
-		VO\StringVo $day=null,
-		VO\StringVo $pdp=null,
-		VO\StringVo $documentation=null,
-		VO\StringVo $gap_template=null
+        VO\StringVO $journal=null,
+        VO\StringVO $skill=null,
+        VO\StringVO $knowledge=null,
+		VO\StringVO $score=null,
+		VO\StringVO $video=null,
+		VO\StringVO $week=null,
+		VO\StringVO $day=null,
+		VO\StringVO $pdp=null,
+		VO\StringVO $documentation=null,
+		VO\StringVO $gap_template=null,
+		VO\StringVO $program_image=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -355,6 +356,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($program_id)){
 			$request_parameters['program_id'] = $program_id->__toInteger();
 		}
+
+		if(!is_null($program_image)){
+			$request_parameters['program_image'] = $program_image->__toString();
+		}
+
+
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
