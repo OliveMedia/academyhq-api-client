@@ -793,5 +793,26 @@ class CrmsRepository extends BaseRepository{
 
 		return $data;
 	}
+	
+	public function classroom_course_typeahead(
+		VO\StringVO $search
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/classroom/courses/search'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'search' => $search->__toString(),
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 
 }

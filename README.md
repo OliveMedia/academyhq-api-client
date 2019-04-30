@@ -1782,6 +1782,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 27> fetch courses details
+<pre>
+	/*@return return courses details*/
+	$classroom_courses = $crms_repository->classroom_course_typeahead(
+		new \AcademyHQ\API\ValueObjects\StringVO('search_term')
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
