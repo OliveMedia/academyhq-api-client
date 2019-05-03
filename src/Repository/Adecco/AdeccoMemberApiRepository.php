@@ -62,7 +62,7 @@ class AdeccoMemberApiRepository extends BaseRepository {
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-            'member_id'     => $memberId->__toEncodedString(),
+            'member_id'     => $memberId->__toString(),
             'team'          => $team->__toString()
 		);
 
