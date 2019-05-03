@@ -44,6 +44,33 @@ class AdeccoMemberApiRepository extends BaseRepository {
 		$data = $response->get_data();
 
 		return $data;
+	}
+	
+	public function promote_member(
+		VO\Token $token,
+        VO\ID $memberId,
+        VO\StringVo $team
+	) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/promote/member'),
+			new VO\HTTP\Method('POST')
+        );
+        
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+            'member_id'     => $memberId->__toEncodedString(),
+            'team'          => $team->__toString()
+		);
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
     }
     
    
