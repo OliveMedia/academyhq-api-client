@@ -131,7 +131,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Email $email,
 		VO\StringVO $employer_name,
 		VO\Name $name,
-		VO\TaxNumber $tax_number
+		VO\TaxNumber $tax_number,
+		VO\StringVO $image_url = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -150,13 +151,16 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			'tax_number' => $tax_number->__toString()
 		);
 
+		if(!is_null($image_url)) {
+			$request_parameters['image_url'] = $image_url->__toString(); 
+		}
+
 		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
 		return $data;
 	}
-
 
 
 
@@ -255,7 +259,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVO $pdp=null,
 		VO\StringVO $documentation=null,
 		VO\StringVO $gap_template=null,
-		VO\StringVO $program_image=null
+		VO\StringVO $program_image=null,
+		VO\StringVO $is_communication_forum=null,
+		VO\StringVO $phase_title=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -361,12 +367,20 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			$request_parameters['program_image'] = $program_image->__toString();
 		}
 
+		if(!is_null($is_communication_forum)){
+			$request_parameters['is_communication_forum'] = $is_communication_forum->__toString();
+		}
+
+		if(!is_null($phase_title)){
+			$request_parameters['phase_title'] = $phase_title->__toString();
+		}
+
 
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
 	}
-
+	
 	public function createProgramCourse(
 		VO\Token $token,
 		VO\Integer $program_id,
