@@ -70,7 +70,7 @@ class AdeccoMemberApiRepository extends BaseRepository {
 
 
 	public function set_member_user_password(
-		VO\Token $member_invite_token,
+		VO\StringVO $member_invite_token,
 		VO\Name  $name,
 		VO\Username $username,
 		VO\Password $password,
