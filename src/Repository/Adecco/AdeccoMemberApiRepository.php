@@ -76,11 +76,11 @@ class AdeccoMemberApiRepository extends BaseRepository {
 		VO\Password $password,
 		VO\Password $password_confirm
 	) {
-
+	
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/create/member'),
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/member/set/password'),
 			new VO\HTTP\Method('POST')
         );
         
