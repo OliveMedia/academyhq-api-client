@@ -131,7 +131,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Email $email,
 		VO\StringVO $employer_name,
 		VO\Name $name,
-		VO\TaxNumber $tax_number,
+		VO\TaxNumber $tax_number=null,
 		VO\StringVO $image_url = null
 	) {
 		$request = new Request(
@@ -148,8 +148,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			'employer_name' => $employer_name->__toString(),
 			'first_name' => $name->get_first_name()->__toString(),
 			'last_name' => $name->get_last_name()->__toString(),
-			'tax_number' => $tax_number->__toString()
 		);
+
+		if(!is_null($tax_number)) {
+			$request_parameters['tax_number'] = $tax_number->__toString();
+		}
 
 		if(!is_null($image_url)) {
 			$request_parameters['image_url'] = $image_url->__toString(); 
