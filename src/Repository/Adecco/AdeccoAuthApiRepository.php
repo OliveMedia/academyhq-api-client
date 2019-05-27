@@ -84,4 +84,47 @@ class AdeccoAuthApiRepository extends BaseRepository {
 
 		return $data;
 	}
+
+	public function reset_learner_password_via_username(
+		VO\Username $username
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/reset/member/password'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'username' => $username->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+
+	public function reset_learner_password_via_email(
+		VO\Email $email
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/reset/member/password'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toEncodedString(),
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
