@@ -102,6 +102,38 @@ class AdeccoMemberApiRepository extends BaseRepository {
 
 		return $data;
 	}
+
+
+	public function update_member_password(
+		VO\Token $token,
+		VO\Password $password_old,
+		VO\Password $password_new,
+		VO\Password $password_confirm
+	) {
+	
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/update/member/password'),
+			new VO\HTTP\Method('POST')
+        );
+        
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+	 
+			'password_new'          	=> $password_new->__toEncodedString(),
+			'password_new_confirm'  	=> $password_confirm->__toEncodedString(),
+			'password_old'				=> $password_old->__toEncodedString()
+			
+		);
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 	
 	public function promote_member(
 		VO\Token $token,
