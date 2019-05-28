@@ -127,4 +127,30 @@ class AdeccoAuthApiRepository extends BaseRepository {
 
 		return $data;
 	}
+
+
+	public function set_reset_learner_password(
+		VO\Token $token,
+		VO\Password $password,
+		VO\Password $confirm_password
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/reset/member/password/by/hash_key'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'hash_key' 			=> $token->__toEncodedString(),
+			'password' 			=> $password->__toEncodedString(),
+			'password_confirm' 	=> $confirm_password->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
