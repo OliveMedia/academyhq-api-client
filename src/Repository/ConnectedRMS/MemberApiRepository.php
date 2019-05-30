@@ -213,7 +213,7 @@ class MemberApiRepository extends BaseRepository{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->get_url().'/check/exist'),
+			VO\HTTP\Url::fromNative($this->get_url().'/member/check/exist'),
 			new VO\HTTP\Method('POST')
 		);
 
