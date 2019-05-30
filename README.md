@@ -1944,6 +1944,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 8> Check Member Exist 
+<pre>
+	/*@returns member_details if exist*/
+	$member_details = $member_api_repository->check_member_exist(
+		new \AcademyHQ\API\ValueObjects\Email("example@example.com"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id")
+	);
+</pre>
+
 
 ## Using Organisation Api Repository
 
