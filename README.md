@@ -1758,7 +1758,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('contact_number'),
 		new \AcademyHQ\API\ValueObjects\StringVO('billing_address'),
 		new \AcademyHQ\API\ValueObjects\StringVO('tax_code'),
-		new \AcademyHQ\API\ValueObjects\StringVO('company_website')
+		new \AcademyHQ\API\ValueObjects\StringVO('company_website'),
+		new \AcademyHQ\API\ValueObjects\StringVO('image_url')
 	);
 </pre>
 

@@ -703,7 +703,8 @@ class CrmsRepository extends BaseRepository{
 		VO\StringVO $contact_number = null,
 		VO\StringVO $billing_address = null,
 		VO\StringVO $tax_code = null,
-		VO\StringVO $company_website = null
+		VO\StringVO $company_website = null,
+		VO\StringVO $image_url = null
 	){	
 		$request = new Request(
 			new GuzzleClient,
@@ -730,6 +731,9 @@ class CrmsRepository extends BaseRepository{
 		}
 		if(!is_null($company_website)){
 			$request_parameters['company_website'] = $company_website->__toString();
+		}
+		if(!is_null($image_url)){
+			$request_parameters['branding_logo_url'] = $image_url->__toString();
 		}
 
 		$response = $request->send($request_parameters);
