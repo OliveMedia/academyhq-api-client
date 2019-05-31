@@ -815,4 +815,29 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function notify_classroom_admin(
+		VO\OrganisationID $organisation_id,
+		VO\MemberID $admin_id,
+		VO\StringVO $classroom_ids_and_seats
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/notify_classroom_admin'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'admin_id' => $admin_id->__toString(),
+			'classroom_ids_and_seats' => $classroom_ids_and_seats->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
