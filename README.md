@@ -1791,6 +1791,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 28> Notify classroom admin
+<pre>
+	/*@return success message */
+	$response = $crms_repository->notify_classroom_admin(
+		new \AcademyHQ\API\ValueObjects\OrganisationID('organisation'),
+		new \AcademyHQ\API\ValueObjects\MemberID('admin_id'),
+		new \AcademyHQ\API\ValueObjects\StringVO('json_data_with_classrooms_ids_and_seats')
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
@@ -1942,6 +1952,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\ID("profile_id"),
 		new \AcademyHQ\API\ValueObjects\Integer("current_page"),
 		new \AcademyHQ\API\ValueObjects\StringVO("search")
+	);
+</pre>
+
+### 8> Check Member Exist 
+<pre>
+	/*@returns member_details if exist*/
+	$member_details = $member_api_repository->check_member_exist(
+		new \AcademyHQ\API\ValueObjects\Email("example@example.com"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id")
 	);
 </pre>
 

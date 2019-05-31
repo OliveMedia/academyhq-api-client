@@ -206,4 +206,27 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function check_member_exist(
+		VO\Email $email,
+		VO\OrganisationID $organisation_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/check/exist'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toString(),
+			'organisation_id' => $organisation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
