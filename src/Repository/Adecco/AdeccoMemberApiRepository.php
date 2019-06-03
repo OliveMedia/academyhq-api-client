@@ -134,6 +134,35 @@ class AdeccoMemberApiRepository extends BaseRepository {
 
 		return $data;
 	}
+
+	public function update_member_profile_image(
+		VO\Token $token,
+		VO\StringVO $imagePath,
+		VO\StringVO $imageFullUrl
+	) {
+	
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/update/member/profile/image'),
+			new VO\HTTP\Method('POST')
+        );
+        
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+	 
+			'image_key'     => $imagePath->__toString(),
+			'image_url'  	=> $imageFullUrl->__toString()
+			
+		);
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 	
 	public function promote_member(
 		VO\Token $token,
