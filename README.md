@@ -1759,7 +1759,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 		new \AcademyHQ\API\ValueObjects\StringVO('billing_address'),
 		new \AcademyHQ\API\ValueObjects\StringVO('tax_code'),
 		new \AcademyHQ\API\ValueObjects\StringVO('company_website'),
-		new \AcademyHQ\API\ValueObjects\StringVO('image_url'),
+		new \AcademyHQ\API\ValueObjects\StringVO('branding_logo_url'),
 		new \AcademyHQ\API\ValueObjects\StringVO('background_url'),
 		new \AcademyHQ\API\ValueObjects\StringVO('organisation_id')
 	);

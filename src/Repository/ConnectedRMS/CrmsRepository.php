@@ -704,7 +704,7 @@ class CrmsRepository extends BaseRepository{
 		VO\StringVO $billing_address = null,
 		VO\StringVO $tax_code = null,
 		VO\StringVO $company_website = null,
-		VO\StringVO $image_url = null,
+		VO\StringVO $branding_logo_url = null,
 		VO\StringVO $background_url = null,
 		VO\OrganisationID $organisation_id = null
 	){	
@@ -734,8 +734,8 @@ class CrmsRepository extends BaseRepository{
 		if(!is_null($company_website)){
 			$request_parameters['company_website'] = $company_website->__toString();
 		}
-		if(!is_null($image_url)){
-			$request_parameters['image_url'] = $image_url->__toString();
+		if(!is_null($branding_logo_url)){
+			$request_parameters['branding_logo_url'] = $branding_logo_url->__toString();
 		}
 		if(!is_null($background_url)){
 			$request_parameters['background_url'] = $background_url->__toString();
