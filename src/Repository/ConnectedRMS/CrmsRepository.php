@@ -852,4 +852,38 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function check_email_exist(
+		VO\Email $email
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/check/email/' . $email->__toEncodedString()),
+			new VO\HTTP\Method('get')
+		);
+
+		$response = $request->send(array());
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function check_sub_domain_exist(
+		VO\StringVo $sub_domain
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/check/sub_domain/' . $sub_domain->__toString()),
+			new VO\HTTP\Method('get')
+		);
+
+		$response = $request->send(array());
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

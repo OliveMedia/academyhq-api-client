@@ -1803,6 +1803,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 29> check email exist
+<pre>
+	/*@return std object */
+  	$member_details = $crms_repository->check_email_exist(
+			new VO\Email ("email")
+	);
+</pre>
+
+### 30> check subdomain exist
+<pre>
+	/*@return std object */
+  	$member_details = $crms_repository->check_sub_domain_exist(
+			new VO\StringVO ("sub_domain")
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
