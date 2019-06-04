@@ -858,11 +858,11 @@ class CrmsRepository extends BaseRepository{
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->get_url().'/check/email/' . $email->__toEncodedString()),
+			VO\HTTP\Url::fromNative($this->get_url().'/check/email'),
 			new VO\HTTP\Method('get')
 		);
-
-		$response = $request->send(array());
+		
+		$response = $request->send(array('email'=>$email->__toString()));
 
 		$data = $response->get_data();
 
