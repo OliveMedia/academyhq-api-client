@@ -620,6 +620,67 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		return $data;
 	}
-	
+
+	/**
+	 * Get Active Program Status for Admin Visualisation
+	 * @param VO\Token               $token
+	 * @param VO\Integer|null        $is_published
+	 * @param VO\OrganisationID|null $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getActiveOccupationForVisualisation(
+		VO\Token $token,
+		VO\Integer $is_published = null,
+		VO\OrganisationID $organisation_id = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		if (!is_null($is_published)) {
+			$request_parameters['is_published']=$is_published->__toInteger();
+		}
+		if (!is_null($organisation_id)) {
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+
+	}
+
+	/**
+	 * Get Active Learner Status for Admin Visualisation
+	 * @param VO\Token               $token
+	 * @param VO\OrganisationID|null $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getActiveStudentForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/students_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		if (!is_null($organisation_id)) {
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
 
 }
