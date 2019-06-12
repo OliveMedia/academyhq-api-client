@@ -643,6 +643,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			new VO\HTTP\Method('POST')
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
 		if (!is_null($is_published)) {
 			$request_parameters['is_published']=$is_published->__toInteger();
 		}
@@ -675,6 +676,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			new VO\HTTP\Method('POST')
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
 		if (!is_null($organisation_id)) {
 			$request_parameters['organisation_id'] = $organisation_id->__toString();
 		}
@@ -683,4 +685,37 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Get Top 7 Programme with maximum number of students with the progress of Students
+	 * @param VO\Token               $token
+	 * @param VO\OrganisationID|null $organisation_id
+	 * @param VO\Integer|null $limit
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getProgrammeProgressStatusForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id = null,
+		VO\Integer $limit = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/students_program_progress_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		if (!is_null($organisation_id)) {
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
+		if (!is_null($limit)) {
+			$request_parameters['limit'] = $limit->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
 }
