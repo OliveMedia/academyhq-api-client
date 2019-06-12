@@ -645,7 +645,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
 		if (!is_null($is_published)) {
-			$request_parameters['is_published']=$is_published->__toInteger();
+			$request_parameters['is_published'] = $is_published->__toInteger();
 		}
 		if (!is_null($organisation_id)) {
 			$request_parameters['organisation_id'] = $organisation_id->__toString();
@@ -713,6 +713,36 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if (!is_null($limit)) {
 			$request_parameters['limit'] = $limit->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get the Learner Weekly Login Details
+	 * @param VO\Token               $token
+	 * @param VO\OrganisationID|null $organisation_id
+	 * @param VO\StringVO|null       $to_date
+	 */
+	public function getLearnerWeeklyLoginForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id = null,
+		VO\StringVO $to_date = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/students_weekly_login_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		if (!is_null($organisation_id)) {
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
+		if (!is_null($to_date)) {
+			$request_parameters['to_date'] = $to_date->__toString();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
