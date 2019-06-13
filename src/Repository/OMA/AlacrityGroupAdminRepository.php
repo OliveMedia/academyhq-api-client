@@ -8,8 +8,19 @@ use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 use AcademyHQ\API\Repository\BaseRepository;
 
+/**
+ * Class AlacrityGroupAdminRepository
+ *
+ * @package AcademyHQ\API\Repository\OMA
+ */
 class AlacrityGroupAdminRepository extends BaseRepository
 {
+
+	/**
+	 * AlacrityGroupAdminRepository constructor.
+	 *
+	 * @param Credentials $credentials
+	 */
 	public function __construct(Credentials $credentials)
 	{
 		parent::__construct();
@@ -17,6 +28,16 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$this->base_url .= '/oma';
 	}
 
+	/**
+	 * List Employer
+	 * @param VO\Token         $token
+	 * @param VO\StringVO|null $search
+	 * @param VO\Integer       $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function ListConsultiva(
 		VO\Token $token,
 		VO\StringVO $search = null,
@@ -32,8 +53,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger()
+			'search'        => $search ? $search->__toString() : '',
+			'current_page'  => $current_page->__toInteger()
 		);
 		$response = $request->send($request_parameters, $header_parameters);
 
@@ -42,6 +63,18 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * List Occupation
+	 * @param VO\Token               $token
+	 * @param VO\Integer             $current_page
+	 * @param VO\StringVO|null       $search
+	 * @param VO\Integer|null        $is_published
+	 * @param VO\OrganisationID|null $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function listOccupation(
 		VO\Token $token,
 		VO\Integer $current_page,
@@ -59,8 +92,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger(),
+			'search'        => $search ? $search->__toString() : '',
+			'current_page'  => $current_page->__toInteger(),
 		);
 
 		if (!is_null($is_published)) {
@@ -78,6 +111,16 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * List License
+	 * @param VO\Token         $token
+	 * @param VO\StringVO|null $search
+	 * @param VO\Integer       $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function listLicence(
 		VO\Token $token,
 		VO\StringVO $search = null,
@@ -91,8 +134,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger(),
+			'search'        => $search ? $search->__toString() : '',
+			'current_page'  => $current_page->__toInteger(),
 		);
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -100,6 +143,16 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * List Audit Form
+	 * @param VO\Token         $token
+	 * @param VO\StringVO|null $search
+	 * @param VO\Integer       $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function listAudit(
 		VO\Token $token,
 		VO\StringVO $search = null,
@@ -111,12 +164,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/audit_form'),
 			new VO\HTTP\Method('POST')
 		);
-
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
-
 		$request_parameters = array(
-			'search' => $search ? $search->__toString() : '',
-			'current_page' => $current_page->__toInteger(),
+			'search'        => $search ? $search->__toString() : '',
+			'current_page'  => $current_page->__toInteger(),
 		);
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -126,6 +177,19 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Create Employer
+	 * @param VO\Token          $token
+	 * @param VO\Email          $email
+	 * @param VO\StringVO       $employer_name
+	 * @param VO\Name           $name
+	 * @param VO\TaxNumber|null $tax_number
+	 * @param VO\StringVO|null  $image_url
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createEmployer(
 		VO\Token $token,
 		VO\Email $email,
@@ -144,29 +208,33 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'email' => $email->__toString(),
+			'email'         => $email->__toString(),
 			'employer_name' => $employer_name->__toString(),
-			'first_name' => $name->get_first_name()->__toString(),
-			'last_name' => $name->get_last_name()->__toString(),
+			'first_name'    => $name->get_first_name()->__toString(),
+			'last_name'     => $name->get_last_name()->__toString(),
 		);
 
 		if(!is_null($tax_number)) {
 			$request_parameters['tax_number'] = $tax_number->__toString();
 		}
-
 		if(!is_null($image_url)) {
 			$request_parameters['image_url'] = $image_url->__toString(); 
 		}
-
 		$response = $request->send($request_parameters, $header_parameters);
-
 		$data = $response->get_data();
-
 		return $data;
 	}
 
-
-
+	/**
+	 * Create Apprenticeship
+	 * @param VO\Token             $token
+	 * @param VO\OrganisationID    $employer_id
+	 * @param VO\OccupationIDArray $occupations_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createApprenticeship(
 		VO\Token $token,
 		VO\OrganisationID $employer_id,
@@ -182,8 +250,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'employer_id' => $employer_id->__toString(),
-			'occupations_id' => $occupations_id->__toArray()
+			'employer_id'       => $employer_id->__toString(),
+			'occupations_id'    => $occupations_id->__toArray()
 		);
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -194,7 +262,20 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
-
+	/**
+	 * Create Occupation
+	 * @param VO\Token         $token
+	 * @param VO\StringVO      $name
+	 * @param VO\StringVO|null $description
+	 * @param VO\StringVO|null $logo
+	 * @param VO\Integer|null  $occupation_id
+	 * @param VO\Integer|null  $has_weeks
+	 * @param VO\Integer|null  $weeks
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createOccupation(
 		VO\Token $token,
 		VO\StringVO $name,
@@ -237,6 +318,40 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Create Program
+	 * @param VO\Token         $token
+	 * @param VO\StringVO      $name
+	 * @param VO\StringVO|null $description
+	 * @param VO\StringVO|null $should_start_by
+	 * @param VO\StringVO|null $should_end_by
+	 * @param VO\Integer|null  $off_the_job_training
+	 * @param VO\Integer|null  $required_hours
+	 * @param VO\Integer|null  $program_id
+	 * @param VO\StringVO|null $behavior
+	 * @param VO\StringVO|null $endpoint
+	 * @param VO\StringVO|null $final_review
+	 * @param VO\StringVO|null $gateway
+	 * @param VO\Integer|null  $duration
+	 * @param VO\Integer|null  $holidays
+	 * @param VO\StringVO|null $journal
+	 * @param VO\StringVO|null $skill
+	 * @param VO\StringVO|null $knowledge
+	 * @param VO\StringVO|null $score
+	 * @param VO\StringVO|null $video
+	 * @param VO\StringVO|null $week
+	 * @param VO\StringVO|null $day
+	 * @param VO\StringVO|null $pdp
+	 * @param VO\StringVO|null $documentation
+	 * @param VO\StringVO|null $gap_template
+	 * @param VO\StringVO|null $program_image
+	 * @param VO\StringVO|null $is_communication_forum
+	 * @param VO\StringVO|null $phase_title
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createProgram(
 		VO\Token $token,
 		VO\StringVO $name,
@@ -383,7 +498,17 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$data = $response->get_data();
 		return $data;
 	}
-	
+
+	/**
+	 * Create Program Course
+	 * @param VO\Token         $token
+	 * @param VO\Integer       $program_id
+	 * @param VO\CourseIDArray $courses_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createProgramCourse(
 		VO\Token $token,
 		VO\Integer $program_id,
@@ -400,9 +525,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'program_id' => $program_id->__toInteger(),
-			'courses_id'=>$courses_id->__toArray(),
-
+			'program_id'    => $program_id->__toInteger(),
+			'courses_id'    => $courses_id->__toArray(),
 		);
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -410,6 +534,16 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Create Program Audit Form
+	 * @param VO\Token        $token
+	 * @param VO\Integer      $program_id
+	 * @param VO\IntegerArray $audit_forms_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createProgramAudit(
 		VO\Token $token,
 		VO\Integer $program_id,
@@ -426,14 +560,24 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-			'program_id' => $program_id->__toInteger(),
-			'audit_forms_id'=>$audit_forms_id->__toArray(),
+			'program_id'        => $program_id->__toInteger(),
+			'audit_forms_id'    => $audit_forms_id->__toArray(),
 		);
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
 	}
 
+	/**
+	 * Create Occupation Program
+	 * @param VO\Token   $token
+	 * @param VO\Integer $occupation_id
+	 * @param VO\Integer $program_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createOccupationProgram(
 		VO\Token $token,
 		VO\Integer $occupation_id,
@@ -451,7 +595,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 		$request_parameters = array(
 			'occupation_id' => $occupation_id->__toInteger(),
-			'program_id'=>$program_id->__toInteger(),
+			'program_id'    => $program_id->__toInteger(),
 
 		);
 		$response = $request->send($request_parameters, $header_parameters);
@@ -459,18 +603,36 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Create Program Unit
+	 * @param VO\Token         $token
+	 * @param VO\StringVo      $name
+	 * @param VO\StringVo|null $header
+	 * @param VO\StringVo|null $description
+	 * @param VO\Integer       $is_evidence_required
+	 * @param VO\Integer       $image
+	 * @param VO\Integer       $video
+	 * @param VO\Integer       $attachment
+	 * @param VO\Integer       $program_id
+	 * @param VO\Integer|null  $program_unit_id
+	 * @param VO\Integer|null  $parent_unit_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createProgramUnit(
 		VO\Token $token,
 		VO\StringVo $name,
-		VO\StringVo $header=null,
-		VO\StringVo $description=null,
+		VO\StringVo $header = null,
+		VO\StringVo $description = null,
 		VO\Integer $is_evidence_required,
 		VO\Integer $image,
 		VO\Integer $video,
 		VO\Integer $attachment,
 		VO\Integer $program_id,
-		VO\Integer $program_unit_id=null,
-		VO\Integer $parent_unit_id=null
+		VO\Integer $program_unit_id = null,
+		VO\Integer $parent_unit_id = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -480,12 +642,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'name' => $name->__toString(),
-			'is_evidence_required' => $is_evidence_required->__toInteger(),
-			'image' => $image->__toInteger(),
-			'video' => $video->__toInteger(),
-			'attachment' => $attachment->__toInteger(),
-			'program_id'=>$program_id->__toInteger(),
+			'name'                  => $name->__toString(),
+			'is_evidence_required'  => $is_evidence_required->__toInteger(),
+			'image'                 => $image->__toInteger(),
+			'video'                 => $video->__toInteger(),
+			'attachment'            => $attachment->__toInteger(),
+			'program_id'            => $program_id->__toInteger(),
 		);
         if(!is_null($header)){
             $request_parameters['header'] = $header->__toString();
@@ -508,12 +670,27 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Create Program Welcome Resource
+	 * @param VO\Token         $token
+	 * @param VO\StringVo      $name
+	 * @param VO\Integer       $program_id
+	 * @param VO\StringVo      $document
+	 * @param VO\StringVo|null $description
+	 * @param VO\StringVo      $link
+	 * @param VO\ID|null       $welcome_resource_id
+	 * @param VO\StringVo|null $video
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function createProgramWelcomeResource(
 		VO\Token $token,
 		VO\StringVo $name,
 		VO\Integer $program_id,
 		VO\StringVo $document,
-		VO\StringVo $description=null,
+		VO\StringVo $description = null,
 		VO\StringVo $link,
 		VO\ID $welcome_resource_id = null,
         VO\StringVo $video = null
@@ -526,13 +703,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'name' => $name->__toString(),
-			'program_id'=>$program_id->__toInteger(),
-			'document' => $document->__toString(),
-			'link' => $link->__toString(),
+			'name'          => $name->__toString(),
+			'program_id'    => $program_id->__toInteger(),
+			'document'      => $document->__toString(),
+			'link'          => $link->__toString()
 		);
-
-
 		if(!is_null($description)){
 			$request_parameters['description'] = $description->__toString();
 		}
@@ -549,12 +724,18 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
-	/*alicrity program publish and completed url repo*/
+	/**
+	 * Publish Program
+	 * @param VO\Token   $token
+	 * @param VO\Integer $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function publish_occupation(
 		VO\Token $token,
 		VO\Integer $occupation_id
-
-
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -565,7 +746,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-
 			'occupation_id'=>$occupation_id->__toInteger(),
 		);
 		$response = $request->send($request_parameters, $header_parameters);
@@ -575,6 +755,15 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Delete Occupation
+	 * @param VO\Token   $token
+	 * @param VO\Integer $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function delete_occupation(
 		VO\Token $token,
 		VO\Integer $occupation_id
@@ -588,8 +777,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
 		$request_parameters = array(
-
-			'occupation_id'=>$occupation_id->__toInteger(),
+			'occupation_id' => $occupation_id->__toInteger(),
 		);
 		$response = $request->send($request_parameters, $header_parameters);
 
@@ -598,6 +786,15 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Delete Program
+	 * @param VO\Token   $token
+	 * @param VO\Integer $program_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function delete_program(
 		VO\Token $token,
 		VO\Integer $program_id
@@ -609,15 +806,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			new VO\HTTP\Method('POST')
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
-
 		$request_parameters = array(
-
-			'program_id'=>$program_id->__toInteger(),
+			'program_id' => $program_id->__toInteger(),
 		);
 		$response = $request->send($request_parameters, $header_parameters);
-
 		$data = $response->get_data();
-
 		return $data;
 	}
 
@@ -633,8 +826,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function getActiveOccupationForVisualisation(
 		VO\Token $token,
-		VO\Integer $is_published = null,
-		VO\OrganisationID $organisation_id = null
+		VO\OrganisationID $organisation_id,
+		VO\Integer $is_published = null
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -644,12 +837,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
 		if (!is_null($is_published)) {
 			$request_parameters['is_published'] = $is_published->__toInteger();
 		}
-		if (!is_null($organisation_id)) {
-			$request_parameters['organisation_id'] = $organisation_id->__toString();
-		}
+
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
@@ -667,7 +859,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function getActiveStudentForVisualisation(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id = null
+		VO\OrganisationID $organisation_id
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -677,9 +869,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
-		if (!is_null($organisation_id)) {
-			$request_parameters['organisation_id'] = $organisation_id->__toString();
-		}
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
@@ -697,7 +887,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function getProgrammeProgressStatusForVisualisation(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id = null,
+		VO\OrganisationID $organisation_id,
 		VO\Integer $limit = null
 	) {
 		$request = new Request(
@@ -708,9 +898,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
-		if (!is_null($organisation_id)) {
-			$request_parameters['organisation_id'] = $organisation_id->__toString();
-		}
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
 		if (!is_null($limit)) {
 			$request_parameters['limit'] = $limit->__toInteger();
 		}
@@ -721,13 +909,17 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 	/**
 	 * Get the Learner Weekly Login Details
-	 * @param VO\Token               $token
-	 * @param VO\OrganisationID|null $organisation_id
-	 * @param VO\StringVO|null       $to_date
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\StringVO|null  $to_date
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function getLearnerWeeklyLoginForVisualisation(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id = null,
+		VO\OrganisationID $organisation_id,
 		VO\StringVO $to_date = null
 	) {
 		$request = new Request(
@@ -738,11 +930,67 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
-		if (!is_null($organisation_id)) {
-			$request_parameters['organisation_id'] = $organisation_id->__toString();
-		}
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
 		if (!is_null($to_date)) {
 			$request_parameters['to_date'] = $to_date->__toString();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Learner Programmer Progress Details
+	 *
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\StringVO|null  $status
+	 * @param VO\Integer|null   $employer
+	 * @param VO\Integer|null   $occupation
+	 * @param VO\Integer|null   $phase
+	 * @param VO\StringVO|null  $search
+	 * @param VO\Integer|null   $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerProgrammerProgressDetailsForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\StringVO $status = null,
+		VO\Integer $employer = null,
+		VO\Integer $occupation = null,
+		VO\Integer $phase = null,
+		VO\StringVO $search = null,
+		VO\Integer $current_page = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/students_programme_progress_details_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($status)) {
+			$request_parameters['status'] = $status->__toString();
+		}
+		if (!is_null($employer)) {
+			$request_parameters['employer'] = $employer->__toInteger();
+		}
+		if (!is_null($occupation)) {
+			$request_parameters['occupation'] = $occupation->__toInteger();
+		}
+		if (!is_null($phase)) {
+			$request_parameters['phase'] = $phase->__toInteger();
+		}
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		if (!is_null($current_page)) {
+			$request_parameters['current_page'] = $current_page->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();

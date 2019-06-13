@@ -256,12 +256,18 @@ public function student_program_details(
         return $data;
     }
 
-    /*alicrity get program phase details*/
+	/**
+	 * Get Program Phase Details
+	 * @param VO\Token   $token
+	 * @param VO\Integer $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function occupation_program_details(
         VO\Token $token,
         VO\Integer $occupation_id
-
-
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -270,18 +276,43 @@ public function student_program_details(
             new VO\HTTP\Method('POST')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $request_parameters = array(
-            
-            'occupation_id'=>$occupation_id->__toInteger(),
+            'occupation_id' => $occupation_id->__toInteger(),
        );
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
 
+	/**
+	 * Create Member Apprenticeships
+	 * @param VO\Token            $token
+	 * @param VO\ApprenticeshipID $apprenticeship_id
+	 * @param VO\OrganisationID   $organisation_id
+	 * @param VO\MemberID         $member_id
+	 * @param VO\MemberID|null    $assessor_id
+	 * @param VO\StringVO         $gender
+	 * @param VO\StringVO         $country_code
+	 * @param VO\Integer          $mobile_number
+	 * @param VO\StringVO         $nationality
+	 * @param VO\StringVO|null    $street
+	 * @param VO\StringVO|null    $city
+	 * @param VO\StringVO|null    $state
+	 * @param VO\StringVO|null    $country
+	 * @param VO\StringVO|null    $postal_code
+	 * @param VO\Integer          $disability
+	 * @param VO\StringVO|null    $image
+	 * @param VO\MemberID|null    $verifier_id
+	 * @param VO\StringVO|null    $employment
+	 * @param VO\StringVO|null    $further_notes
+	 * @param VO\StringVO|null    $disability_text
+	 * @param VO\StringVO|null    $date_of_birth
+	 * @param VO\Integer|null     $weekly_learning_hours
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function create_member_apprenticeship(
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
