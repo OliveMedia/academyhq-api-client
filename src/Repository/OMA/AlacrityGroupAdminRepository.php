@@ -945,8 +945,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\Token          $token
 	 * @param VO\OrganisationID $organisation_id
 	 * @param VO\Integer|null   $employer
-	 * @param VO\Integer|null   $occupation
-	 * @param VO\StringVO|null  $occupation_status
+	 * @param VO\Integer|null   $program
 	 * @param VO\Integer|null   $phase
 	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
@@ -960,7 +959,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Token $token,
 		VO\OrganisationID $organisation_id,
 		VO\Integer $employer = null,
-		VO\Integer $occupation = null,
+		VO\Integer $program = null,
 		VO\Integer $phase = null,
 		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
@@ -978,8 +977,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if (!is_null($employer)) {
 			$request_parameters['employer'] = $employer->__toInteger();
 		}
-		if (!is_null($occupation)) {
-			$request_parameters['occupation'] = $occupation->__toInteger();
+		if (!is_null($program)) {
+			$request_parameters['program'] = $program->__toInteger();
 		}
 		if (!is_null($phase)) {
 			$request_parameters['phase'] = $phase->__toInteger();
