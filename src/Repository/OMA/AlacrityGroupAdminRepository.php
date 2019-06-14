@@ -944,10 +944,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 *
 	 * @param VO\Token          $token
 	 * @param VO\OrganisationID $organisation_id
-	 * @param VO\StringVO|null  $status
 	 * @param VO\Integer|null   $employer
 	 * @param VO\Integer|null   $occupation
+	 * @param VO\StringVO|null  $occupation_status
 	 * @param VO\Integer|null   $phase
+	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
 	 * @param VO\Integer|null   $current_page
 	 *
@@ -958,10 +959,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	public function getLearnerProgrammerProgressDetailsForVisualisation(
 		VO\Token $token,
 		VO\OrganisationID $organisation_id,
-		VO\StringVO $status = null,
 		VO\Integer $employer = null,
 		VO\Integer $occupation = null,
 		VO\Integer $phase = null,
+		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
 		VO\Integer $current_page = null
 	){
@@ -974,9 +975,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
 		$request_parameters['organisation_id'] = $organisation_id->__toString();
-		if (!is_null($status)) {
-			$request_parameters['status'] = $status->__toString();
-		}
 		if (!is_null($employer)) {
 			$request_parameters['employer'] = $employer->__toInteger();
 		}
@@ -985,6 +983,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if (!is_null($phase)) {
 			$request_parameters['phase'] = $phase->__toInteger();
+			if (!is_null($phase_status)) {
+				$request_parameters['phase_status'] = $phase_status->__toString();
+			}
 		}
 		if (!is_null($search)) {
 			$request_parameters['search'] = $search->__toString();
@@ -993,7 +994,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			$request_parameters['current_page'] = $current_page->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
-		$data = $response->get_data();
+		$data     = $response->get_data();
 		return $data;
 	}
 }
