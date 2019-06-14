@@ -955,7 +955,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @throws VO\Exception\MethodNotAllowedException
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
-	public function getLearnerProgrammerProgressDetailsForVisualisation(
+	public function getLearnerProgrammeProgressDetailsForVisualisation(
 		VO\Token $token,
 		VO\OrganisationID $organisation_id,
 		VO\Integer $employer = null,
