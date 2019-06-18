@@ -1025,10 +1025,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			$request_parameters['verifier'] = $verifier->__toInteger();
 		}
 		if (!is_null($from_date)) {
-			$request_parameters['from_date'] = $from_date->__toInteger();
+			$request_parameters['from_date'] = $from_date->__toString();
 		}
 		if (!is_null($to_date)) {
-			$request_parameters['to_date'] = $to_date->__toInteger();
+			$request_parameters['to_date'] = $to_date->__toString();
 		}
 		if (!is_null($search)) {
 			$request_parameters['search'] = $search->__toString();
