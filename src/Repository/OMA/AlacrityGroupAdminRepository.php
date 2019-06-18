@@ -169,11 +169,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			'search'        => $search ? $search->__toString() : '',
 			'current_page'  => $current_page->__toInteger(),
 		);
-
 		$response = $request->send($request_parameters, $header_parameters);
-
 		$data = $response->get_data();
-
 		return $data;
 	}
 
@@ -253,10 +250,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			'employer_id'       => $employer_id->__toString(),
 			'occupations_id'    => $occupations_id->__toArray()
 		);
-
 		$response = $request->send($request_parameters, $header_parameters);
-
-
 		$data = $response->get_data();
 
 		return $data;
@@ -312,8 +306,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			$request_parameters['occupation_id'] = $occupation_id->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
-
-
 		$data = $response->get_data();
 		return $data;
 	}
@@ -467,33 +459,24 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($pdp)){
 			$request_parameters['pdp'] = $pdp->__toString();
 		}
-
 		if(!is_null($documentation)){
 			$request_parameters['documentation'] = $documentation->__toString();
 		}
-
 		if(!is_null($gap_template)){
 			$request_parameters['gap_template'] = $gap_template->__toString();
 		}
-
-
 		if(!is_null($program_id)){
 			$request_parameters['program_id'] = $program_id->__toInteger();
 		}
-
 		if(!is_null($program_image)){
 			$request_parameters['program_image'] = $program_image->__toString();
 		}
-
 		if(!is_null($is_communication_forum)){
 			$request_parameters['is_communication_forum'] = $is_communication_forum->__toString();
 		}
-
 		if(!is_null($phase_title)){
 			$request_parameters['phase_title'] = $phase_title->__toString();
 		}
-
-
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
@@ -548,7 +531,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Token $token,
 		VO\Integer $program_id,
 		VO\IntegerArray $audit_forms_id
-
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -590,13 +572,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/occupation/program'),
 			new VO\HTTP\Method('POST')
 		);
-
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
-
 		$request_parameters = array(
 			'occupation_id' => $occupation_id->__toInteger(),
 			'program_id'    => $program_id->__toInteger(),
-
 		);
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
@@ -949,7 +928,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\Integer|null   $phase
 	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
-	 * @param VO\Integer|null   $current_page
+	 * @param VO\Integer   $current_page
+	 * @param VO\Integer   $csv
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -963,7 +943,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $phase = null,
 		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
-		VO\Integer $current_page = null
+		VO\Integer $current_page,
+		VO\Integer $csv
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -989,11 +970,74 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if (!is_null($search)) {
 			$request_parameters['search'] = $search->__toString();
 		}
-		if (!is_null($current_page)) {
-			$request_parameters['current_page'] = $current_page->__toInteger();
-		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$request_parameters['csv'] = $csv->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
+	}
+
+	/**
+	 * Get Learner Login Details for Visualisation
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer|null   $employer
+	 * @param VO\Integer|null   $assessor
+	 * @param VO\Integer|null   $verifier
+	 * @param VO\StringVO|null  $from_date
+	 * @param VO\StringVO|null  $to_date
+	 * @param VO\StringVO|null  $search
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer        $csv
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerLoginDetailsForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $employer = null,
+		VO\Integer $assessor = null,
+		VO\Integer $verifier = null,
+		VO\StringVO $from_date = null,
+		VO\StringVO $to_date = null,
+		VO\StringVO $search = null,
+		VO\Integer $current_page,
+		VO\Integer $csv
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/students_login_details_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($employer)) {
+			$request_parameters['employer'] = $employer->__toInteger();
+		}
+		if (!is_null($assessor)) {
+			$request_parameters['assessor'] = $assessor->__toInteger();
+		}
+		if (!is_null($verifier)) {
+			$request_parameters['verifier'] = $verifier->__toInteger();
+		}
+		if (!is_null($from_date)) {
+			$request_parameters['from_date'] = $from_date->__toInteger();
+		}
+		if (!is_null($to_date)) {
+			$request_parameters['to_date'] = $to_date->__toInteger();
+		}
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$request_parameters['csv'] = $csv->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+
 	}
 }

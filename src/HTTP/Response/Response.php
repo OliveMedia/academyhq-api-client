@@ -43,6 +43,7 @@ class Response implements iResponse
     public function get_data()
     {
         $json_data = $this->response->getBody();
+        echo $json_data;
         $data = json_decode($json_data);
     
         if (!isset($data->status)) {
