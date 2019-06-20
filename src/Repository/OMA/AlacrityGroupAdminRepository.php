@@ -1038,6 +1038,42 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
+	}
 
+	/**
+	 * Get login logs of Learner and get assessor and verifier details
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer|null   $member
+	 * @param VO\StringVO|null  $search
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer        $csv
+	 */
+	public function getLearnerLoginLogsForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $member,
+		VO\StringVO $search = null,
+		VO\Integer $current_page,
+		VO\Integer $csv
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/students_login_logs_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		$request_parameters['member'] = $member->__toInteger();
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$request_parameters['csv'] = $csv->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
 	}
 }
