@@ -667,7 +667,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 *
 	 * @param VO\Token          $token
 	 * @param VO\OrganisationID $organisation_id
-	 * @param VO\Integer|null   $program
+	 * @param VO\Integer|null   $apprenticeship
 	 * @param VO\Integer|null   $phase
 	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
@@ -681,7 +681,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	public function getLearnerProgrammeProgressDetailsForVisualisation(
 		VO\Token $token,
 		VO\OrganisationID $organisation_id,
-		VO\Integer $program = null,
+		VO\Integer $apprenticeship = null,
 		VO\Integer $phase = null,
 		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
@@ -697,8 +697,8 @@ class ConsultivaAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
 		$request_parameters['organisation_id'] = $organisation_id->__toString();
-		if (!is_null($program)) {
-			$request_parameters['program'] = $program->__toInteger();
+		if (!is_null($apprenticeship)) {
+			$request_parameters['apprenticeship'] = $apprenticeship->__toInteger();
 		}
 		if (!is_null($phase)) {
 			$request_parameters['phase'] = $phase->__toInteger();
