@@ -26,6 +26,7 @@ class CourseApiRepository extends BaseRepository
 
     public function getOrganizationBundles(
             VO\Token  $token,
+            $teams,
             $bundleIds
         )
     {
@@ -38,6 +39,7 @@ class CourseApiRepository extends BaseRepository
 
         $requestParameters = array(
             'package_ids'    => $bundleIds,
+            'learner_teams'  => $teams
         );
 
         $headerParameters = array('Authorization' => $token->__toEncodedString());
