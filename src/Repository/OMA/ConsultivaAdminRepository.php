@@ -8,16 +8,37 @@ use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 use AcademyHQ\API\Repository\BaseRepository;
 
+/**
+ * Class ConsultivaAdminRepository
+ *
+ * @package AcademyHQ\API\Repository\OMA
+ */
 class ConsultivaAdminRepository extends BaseRepository
 {
-    public function __construct(Credentials $credentials)
+
+	/**
+	 * ConsultivaAdminRepository constructor.
+	 *
+	 * @param Credentials $credentials
+	 */
+	public function __construct(Credentials $credentials)
     {
         parent::__construct();
         $this->credentials = $credentials;
         $this->base_url .= '/oma';
     }
 
-    public function listApprenticeship(
+	/**
+	 * @param VO\Token               $token
+	 * @param VO\StringVO|null       $search
+	 * @param VO\OrganisationID|null $organisation_id
+	 * @param VO\Integer             $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listApprenticeship(
         VO\Token $token,
         VO\StringVO $search = null,
         VO\OrganisationID $organisation_id = null,
@@ -46,7 +67,21 @@ class ConsultivaAdminRepository extends BaseRepository
     }
 
 
-    public function list_student(
+	/**
+	 * @param VO\Token                 $token
+	 * @param VO\Integer               $current_page
+	 * @param VO\StringVO|null         $search
+	 * @param VO\OrganisationID|null   $organisation_id
+	 * @param VO\ApprenticeshipID|null $apprenticeship_id
+	 * @param VO\MemberID|null         $assessor_id
+	 * @param VO\MemberID|null         $verifier_id
+	 * @param VO\OccupationID|null     $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function list_student(
         VO\Token $token,
         VO\Integer $current_page,
         VO\StringVO $search = null,
@@ -92,8 +127,36 @@ class ConsultivaAdminRepository extends BaseRepository
     }
 
 
-
-    public function create_student(
+	/**
+	 * @param VO\Token            $token
+	 * @param VO\ApprenticeshipID $apprenticeship_id
+	 * @param VO\OrganisationID   $organisation_id
+	 * @param VO\MemberID|null    $assessor_id
+	 * @param VO\Name             $name
+	 * @param VO\StringVO         $gender
+	 * @param VO\StringVO         $country_code
+	 * @param VO\Integer          $mobile_number
+	 * @param VO\Email            $email
+	 * @param VO\StringVO         $nationality
+	 * @param VO\StringVO|null    $street
+	 * @param VO\StringVO|null    $city
+	 * @param VO\StringVO|null    $state
+	 * @param VO\StringVO|null    $country
+	 * @param VO\StringVO|null    $postal_code
+	 * @param VO\Integer          $disability
+	 * @param VO\StringVO|null    $image
+	 * @param VO\MemberID|null    $verifier_id
+	 * @param VO\StringVO|null    $employment
+	 * @param VO\StringVO|null    $further_notes
+	 * @param VO\StringVO|null    $disability_text
+	 * @param VO\StringVO|null    $date_of_birth
+	 * @param VO\Integer|null     $weekly_learning_hours
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function create_student(
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
         VO\OrganisationID $organisation_id,
@@ -201,8 +264,16 @@ class ConsultivaAdminRepository extends BaseRepository
     }
 
 
-    //member program list 
-    public function student_program_list(
+	/**
+	 * member program list
+	 * @param VO\Token   $token
+	 * @param VO\Integer $member_apprenticeship_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function student_program_list(
         VO\Token $token,
         VO\Integer $member_apprenticeship_id
     
@@ -228,12 +299,19 @@ class ConsultivaAdminRepository extends BaseRepository
     }
 
 
-
-public function student_program_details(
+	/**
+	 * @param VO\Token   $token
+	 * @param VO\Integer $member_apprenticeship_id
+	 * @param VO\Integer $program_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function student_program_details(
         VO\Token $token,
         VO\Integer $member_apprenticeship_id,
         VO\Integer $program_id
-    
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -242,26 +320,27 @@ public function student_program_details(
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            
-            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger(),
-            'program_id' => $program_id->__toInteger()
+            'member_apprenticeship_id'  => $member_apprenticeship_id->__toInteger(),
+            'program_id'                => $program_id->__toInteger()
         );
-
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $response = $request->send($request_parameters, $header_parameters);
-       
         $data = $response->get_data();
-        
         return $data;
     }
 
-    /*alicrity get program phase details*/
+	/**
+	 * Get Program Phase Details
+	 * @param VO\Token   $token
+	 * @param VO\Integer $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function occupation_program_details(
         VO\Token $token,
         VO\Integer $occupation_id
-
-
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -270,18 +349,43 @@ public function student_program_details(
             new VO\HTTP\Method('POST')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $request_parameters = array(
-            
-            'occupation_id'=>$occupation_id->__toInteger(),
+            'occupation_id' => $occupation_id->__toInteger(),
        );
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
 
+	/**
+	 * Create Member Apprenticeships
+	 * @param VO\Token            $token
+	 * @param VO\ApprenticeshipID $apprenticeship_id
+	 * @param VO\OrganisationID   $organisation_id
+	 * @param VO\MemberID         $member_id
+	 * @param VO\MemberID|null    $assessor_id
+	 * @param VO\StringVO         $gender
+	 * @param VO\StringVO         $country_code
+	 * @param VO\Integer          $mobile_number
+	 * @param VO\StringVO         $nationality
+	 * @param VO\StringVO|null    $street
+	 * @param VO\StringVO|null    $city
+	 * @param VO\StringVO|null    $state
+	 * @param VO\StringVO|null    $country
+	 * @param VO\StringVO|null    $postal_code
+	 * @param VO\Integer          $disability
+	 * @param VO\StringVO|null    $image
+	 * @param VO\MemberID|null    $verifier_id
+	 * @param VO\StringVO|null    $employment
+	 * @param VO\StringVO|null    $further_notes
+	 * @param VO\StringVO|null    $disability_text
+	 * @param VO\StringVO|null    $date_of_birth
+	 * @param VO\Integer|null     $weekly_learning_hours
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function create_member_apprenticeship(
         VO\Token $token,
         VO\ApprenticeshipID $apprenticeship_id,
@@ -392,7 +496,18 @@ public function student_program_details(
     }
 
 
-    public function assign_member_apprenticeship_vip(
+	/**
+	 * @param VO\Token        $token
+	 * @param VO\ID           $member_apprenticeship_id
+	 * @param VO\MemberID     $member_id
+	 * @param VO\Integer|null $is_verifier
+	 * @param VO\Integer|null $is_assessor
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function assign_member_apprenticeship_vip(
         VO\Token $token,
         VO\ID $member_apprenticeship_id,
         VO\MemberID $member_id,
@@ -406,25 +521,293 @@ public function student_program_details(
             new VO\HTTP\Method('POST')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-
         $request_parameters = array(
-            
-            'member_apprenticeship_id' => $member_apprenticeship_id->__toString(),
-            'member_id' => $member_id->__toString()
+            'member_apprenticeship_id'  => $member_apprenticeship_id->__toString(),
+            'member_id'                 => $member_id->__toString()
         );
 
         if(!is_null($is_verifier)) {
             $request_parameters['is_verifier'] = $is_verifier->__toInteger();
         }
-
         if(!is_null($is_assessor)) {
             $request_parameters['is_assessor'] = $is_assessor->__toInteger();
-        }        
-        
+        }
         $response = $request->send($request_parameters, $header_parameters);
-
         $data = $response->get_data();
-
         return $data;
     }
+
+	/**
+	 * Get Active Program Status for Employer Visualisation
+	 * @param VO\Token               $token
+	 * @param VO\Integer|null        $is_published
+	 * @param VO\OrganisationID|null $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getActiveOccupationForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $is_published = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/occupation_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($is_published)) {
+			$request_parameters['is_published'] = $is_published->__toInteger();
+		}
+
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+
+	}
+
+	/**
+	 * Get Active Learner Status for Employer Visualisation
+	 * @param VO\Token               $token
+	 * @param VO\OrganisationID|null $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getActiveStudentForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/students_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Top 7 Programme with maximum number of students with the progress of Students
+	 * @param VO\Token               $token
+	 * @param VO\OrganisationID|null $organisation_id
+	 * @param VO\Integer|null $limit
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getProgrammeProgressStatusForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $limit = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/students_program_progress_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($limit)) {
+			$request_parameters['limit'] = $limit->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get the Learner Weekly Login Details
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\StringVO|null  $to_date
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerWeeklyLoginForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\StringVO $to_date = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/students_weekly_login_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($to_date)) {
+			$request_parameters['to_date'] = $to_date->__toString();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Learner Programmer Progress Details
+	 *
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer|null   $program
+	 * @param VO\Integer|null   $phase
+	 * @param VO\StringVO|null  $phase_status
+	 * @param VO\StringVO|null  $search
+	 * @param VO\Integer   $current_page
+	 * @param VO\Integer   $csv
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerProgrammeProgressDetailsForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $program = null,
+		VO\Integer $phase = null,
+		VO\StringVO $phase_status = null,
+		VO\StringVO $search = null,
+		VO\Integer $current_page,
+		VO\Integer $csv
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/students_programme_progress_details_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($program)) {
+			$request_parameters['program'] = $program->__toInteger();
+		}
+		if (!is_null($phase)) {
+			$request_parameters['phase'] = $phase->__toInteger();
+			if (!is_null($phase_status)) {
+				$request_parameters['phase_status'] = $phase_status->__toString();
+			}
+		}
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$request_parameters['csv'] = $csv->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Learner Login Details for Visualisation
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer|null   $assessor
+	 * @param VO\Integer|null   $verifier
+	 * @param VO\StringVO|null  $from_date
+	 * @param VO\StringVO|null  $to_date
+	 * @param VO\StringVO|null  $search
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer        $csv
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerLoginDetailsForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $assessor = null,
+		VO\Integer $verifier = null,
+		VO\StringVO $from_date = null,
+		VO\StringVO $to_date = null,
+		VO\StringVO $search = null,
+		VO\Integer $current_page,
+		VO\Integer $csv
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/students_login_details_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($assessor)) {
+			$request_parameters['assessor'] = $assessor->__toInteger();
+		}
+		if (!is_null($verifier)) {
+			$request_parameters['verifier'] = $verifier->__toInteger();
+		}
+		if (!is_null($from_date)) {
+			$request_parameters['from_date'] = $from_date->__toString();
+		}
+		if (!is_null($to_date)) {
+			$request_parameters['to_date'] = $to_date->__toString();
+		}
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$request_parameters['csv'] = $csv->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get login logs of Learner and get assessor and verifier details
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer|null   $member
+	 * @param VO\StringVO|null  $search
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer        $csv
+	 */
+	public function getLearnerLoginLogsForVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $member,
+		VO\StringVO $search = null,
+		VO\Integer $current_page,
+		VO\Integer $csv
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/students_login_logs_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		$request_parameters['member'] = $member->__toInteger();
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$request_parameters['csv'] = $csv->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
 }
