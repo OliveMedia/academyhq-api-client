@@ -672,7 +672,6 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
 	 * @param VO\Integer   $current_page
-	 * @param VO\Integer   $csv
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -685,8 +684,7 @@ class ConsultivaAdminRepository extends BaseRepository
 		VO\Integer $phase = null,
 		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
-		VO\Integer $current_page,
-		VO\Integer $csv
+		VO\Integer $current_page
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -710,7 +708,6 @@ class ConsultivaAdminRepository extends BaseRepository
 			$request_parameters['search'] = $search->__toString();
 		}
 		$request_parameters['current_page'] = $current_page->__toInteger();
-		$request_parameters['csv'] = $csv->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
@@ -740,8 +737,7 @@ class ConsultivaAdminRepository extends BaseRepository
 		VO\StringVO $from_date = null,
 		VO\StringVO $to_date = null,
 		VO\StringVO $search = null,
-		VO\Integer $current_page,
-		VO\Integer $csv
+		VO\Integer $current_page
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -768,7 +764,6 @@ class ConsultivaAdminRepository extends BaseRepository
 			$request_parameters['search'] = $search->__toString();
 		}
 		$request_parameters['current_page'] = $current_page->__toInteger();
-		$request_parameters['csv'] = $csv->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
@@ -788,8 +783,7 @@ class ConsultivaAdminRepository extends BaseRepository
 		VO\OrganisationID $organisation_id,
 		VO\Integer $member,
 		VO\StringVO $search = null,
-		VO\Integer $current_page,
-		VO\Integer $csv
+		VO\Integer $current_page
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -805,7 +799,6 @@ class ConsultivaAdminRepository extends BaseRepository
 			$request_parameters['search'] = $search->__toString();
 		}
 		$request_parameters['current_page'] = $current_page->__toInteger();
-		$request_parameters['csv'] = $csv->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
