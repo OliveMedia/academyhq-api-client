@@ -16,6 +16,34 @@ class AdeccoMemberApiRepository extends BaseRepository {
 		$this->credentials = $credentials; 
 	}
 
+	public function get_member_role_type(
+		VO\Token $token
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/get/member/role'),
+			new VO\HTTP\Method('GET')
+        );
+        
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		// $request_parameters = array(
+        //     'first_name'    => $name->get_first_name()->__toString(),
+        //     'last_name'     => $name->get_last_name()->__toString(),
+        //     'email'         => $email->__toEncodedString(),
+        //     'team'          => $team->__toString()
+		// );
+
+		$request_parameters = array();
+		$response = $request->send($request_parameters, $header_parameters);
+		
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function register_member_with_email(
 		VO\Token $token,
         VO\Name $name,
