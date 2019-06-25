@@ -942,6 +942,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $phase = null,
 		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
+		VO\Integer $per_page = null,
 		VO\Integer $current_page
 	){
 		$request = new Request(
@@ -967,6 +968,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if (!is_null($search)) {
 			$request_parameters['search'] = $search->__toString();
+		}
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
 		}
 		$request_parameters['current_page'] = $current_page->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
@@ -999,6 +1003,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVO $from_date = null,
 		VO\StringVO $to_date = null,
 		VO\StringVO $search = null,
+		VO\Integer $per_page = null,
 		VO\Integer $current_page
 	) {
 		$request = new Request(
@@ -1027,6 +1032,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if (!is_null($search)) {
 			$request_parameters['search'] = $search->__toString();
+		}
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
 		}
 		$request_parameters['current_page'] = $current_page->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
