@@ -1905,6 +1905,23 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 10> Get Package and OranisationPackage if exists from Licenses 
+<pre>
+	/*@returns package_id organisation_package id if exists */
+	$response = $course_api_repository->package_get_from_licenses();
+</pre>
+
+### 11> create Package and OranisationPackage from Licenses 
+<pre>
+	/*@returns package_details and organisation_package id */
+	$response = $course_api_repository->package_get_from_licenses(
+		new \AcademyHQ\API\ValueObjects\StringVO("name"),
+		new \AcademyHQ\API\ValueObjects\StringVO("description"),
+		new \AcademyHQ\API\ValueObjects\StringVO("image"),
+		new \AcademyHQ\API\ValueObjects\StringVO("certificate_logo_url")
+	);
+</pre>
+
 ## Using Member Api Repository
 
 ### 1> Fetch All Organisation Licenses

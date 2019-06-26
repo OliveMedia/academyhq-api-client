@@ -224,5 +224,46 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function package_get_from_licenses(){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/package/get/from/licenses'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$response = $request->send(array());
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function package_make_from_licenses(
+		VO\StringVO $name,
+		VO\StringVO $description,
+		VO\StringVO $image,
+		VO\StringVO $certificate_logo_url
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/package/make/from/licenses'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'name' => $name->__toString(),
+			'description' => $description->__toString(),
+			'image' => $image->__toString(),
+			'certificate_logo_url' => $certificate_logo_url->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 
 }
