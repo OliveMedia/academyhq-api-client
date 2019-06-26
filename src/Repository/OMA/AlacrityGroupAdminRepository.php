@@ -867,7 +867,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	public function getProgrammeProgressStatusForVisualisation(
 		VO\Token $token,
 		VO\OrganisationID $organisation_id,
-		VO\Integer $limit = null
+		VO\Integer $limit = null,
+		VO\Integer $per_page = null,
+		VO\Integer $current_page = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -880,6 +882,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$request_parameters['organisation_id'] = $organisation_id->__toString();
 		if (!is_null($limit)) {
 			$request_parameters['limit'] = $limit->__toInteger();
+		}
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+		if (!is_null($current_page)) {
+			$request_parameters['current_page'] = $current_page->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
