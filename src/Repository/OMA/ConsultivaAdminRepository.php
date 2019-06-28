@@ -799,7 +799,8 @@ class ConsultivaAdminRepository extends BaseRepository
 		VO\OrganisationID $organisation_id,
 		VO\Integer $member,
 		VO\StringVO $search = null,
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		VO\Integer $per_page = null
 	){
 		$request = new Request(
 			new GuzzleClient,
