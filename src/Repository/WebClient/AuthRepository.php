@@ -155,5 +155,29 @@ class AuthRepository extends BaseRepository{
 
         return $data;
     }
+
+    public function login_from_member_id_only(
+        VO\MemberID $member_id,
+        VO\Token $redisUserToken
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->get_url().'/auth/login/from/member_id/only'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_id' => $member_id->__toString(),
+            'redisUserToken' => $redisUserToken->__toEncodedString()
+        );
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
     
 }
