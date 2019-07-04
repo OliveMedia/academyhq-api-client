@@ -48,5 +48,62 @@ class AdeccoAdminApiRepository extends BaseRepository {
 	}
 	
 
+	public function fetch_user(
+		VO\Token $token,
+        VO\StringVo $search = null,
+        VO\Integer $fetchAll = null,
+        VO\Integer $currentPage = null,
+        VO\Integer $perPage = null
+	) {
+
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/organisation/members/get'),
+			new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		
+		$request_parameters = array();
+
+
+        if($search->__toString() != null) {
+			$request_parameters['search'] = $search->__toString();
+        }
+
+        if($fetchAll->__toInteger() != null) {
+			// $request_parameters = array(
+		 //        'fetchAll'  => $fetchAll->__toInteger(),
+		 //    );
+		   $request_parameters['fetchAll'] = $fetchAll->__toInteger();
+        }
+
+        if($currentPage->__toInteger() != null) {
+			// $request_parameters = array(
+		 //        'current_page'  => $currentPage->__toInteger(),
+		 //    );
+		    $request_parameters['current_page'] = $currentPage->__toInteger();
+
+        }
+
+        if($perPage->__toInteger() != null) {
+			// $request_parameters = array(
+		 //        'per_page'  => $perPage->__toInteger(),
+		 //    );
+		    $request_parameters['per_page'] = $perPage->__toInteger();
+
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
    
 }
