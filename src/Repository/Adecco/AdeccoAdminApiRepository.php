@@ -78,7 +78,7 @@ class AdeccoAdminApiRepository extends BaseRepository {
 			// $request_parameters = array(
 		 //        'fetchAll'  => $fetchAll->__toInteger(),
 		 //    );
-		   $request_parameters['fetchAll'] = $fetchAll->__toInteger();
+		   $request_parameters['fetch_all'] = $fetchAll->__toInteger();
         }
 
         if($currentPage->__toInteger() != null) {
