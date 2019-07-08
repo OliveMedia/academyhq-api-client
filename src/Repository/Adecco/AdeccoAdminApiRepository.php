@@ -75,24 +75,15 @@ class AdeccoAdminApiRepository extends BaseRepository {
         }
 
         if($fetchAll->__toInteger() != null) {
-			// $request_parameters = array(
-		 //        'fetchAll'  => $fetchAll->__toInteger(),
-		 //    );
 		   $request_parameters['fetch_all'] = $fetchAll->__toInteger();
         }
 
         if($currentPage->__toInteger() != null) {
-			// $request_parameters = array(
-		 //        'current_page'  => $currentPage->__toInteger(),
-		 //    );
 		    $request_parameters['current_page'] = $currentPage->__toInteger();
 
         }
 
         if($perPage->__toInteger() != null) {
-			// $request_parameters = array(
-		 //        'per_page'  => $perPage->__toInteger(),
-		 //    );
 		    $request_parameters['per_page'] = $perPage->__toInteger();
 
         }
