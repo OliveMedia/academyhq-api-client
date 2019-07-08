@@ -1085,4 +1085,39 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$data     = $response->get_data();
 		return $data;
 	}
+
+	/**
+	 * Get Programme Detail
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer|null   $per_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getActiveProgramProgressDetailsForVisualization(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $current_page,
+		VO\Integer $per_page = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation_progress_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
 }
