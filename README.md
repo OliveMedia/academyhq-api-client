@@ -334,16 +334,20 @@ Client Library that allow third party to access AcademyHQ APIs.
  	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
 	$login = $auth_repository->login_from_email_only(
 		new \AcademyHQ\API\ValueObjects\Email('email'),
-		new \AcademyHQ\API\ValueObjects\Token('redisUserToken')))
+		new \AcademyHQ\API\ValueObjects\Token('redisUserToken'))),
+		new \AcademyHQ\API\ValueObjects\StringVO('callback')))
 	);
 </pre>
 
 ### 5> Get Direct Login Url
 <pre>
  	/*@returns direct login url*/
-	$login_url = $auth_repository->login_from_email_only(
+	$login_url = $auth_repository->get_login_url_to_ahq(
 		new \AcademyHQ\API\ValueObjects\Email('email'),
-		new \AcademyHQ\API\ValueObjects\Token('redisUserToken')))
+		new \AcademyHQ\API\ValueObjects\Token('redisUserToken'))),
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'))),
+		new \AcademyHQ\API\ValueObjects\Token('ahq_token'))),
+		new \AcademyHQ\API\ValueObjects\StringVO('callback')))
 	);
 </pre>
 
@@ -352,7 +356,8 @@ Client Library that allow third party to access AcademyHQ APIs.
  	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
 	$login = $auth_repository->login_from_member_id_only(
 		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
-		new \AcademyHQ\API\ValueObjects\Token('redisUserToken')))
+		new \AcademyHQ\API\ValueObjects\Token('redisUserToken'))),
+		new \AcademyHQ\API\ValueObjects\StringVO('callback')))
 	);
 </pre>
 

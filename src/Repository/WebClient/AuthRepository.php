@@ -110,7 +110,8 @@ class AuthRepository extends BaseRepository{
 
 	public function login_from_email_only(
         VO\Email $email,
-        VO\Token $redisUserToken
+        VO\Token $redisUserToken,
+        VO\StringVO $callback
     ) {
 
         $request = new Request(
@@ -122,7 +123,8 @@ class AuthRepository extends BaseRepository{
 
         $request_parameters = array(
             'email' => $email->__toEncodedString(),
-            'redisUserToken' => $redisUserToken->__toEncodedString()
+            'redisUserToken' => $redisUserToken->__toEncodedString(),
+            'callback' => $callback->__toString()
         );
 
         $response = $request->send($request_parameters);
@@ -134,7 +136,10 @@ class AuthRepository extends BaseRepository{
 
     public function get_login_url_to_ahq(
         VO\Email $email,
-        VO\Token $redisUserToken
+        VO\Token $redisUserToken,
+        VO\MemberID $member_id = null,
+        VO\Token $ahq_token = null,
+        VO\StringVO $callback
     ) {
 
         $request = new Request(
@@ -146,9 +151,15 @@ class AuthRepository extends BaseRepository{
 
         $request_parameters = array(
             'email' => $email->__toEncodedString(),
-            'redisUserToken' => $redisUserToken->__toEncodedString()
+            'redisUserToken' => $redisUserToken->__toEncodedString(),
+            'callback' => $callback->__toString()
         );
-
+        if(!is_null($member_id)){
+        	$request_parameters['member_id'] = $member_id->__toString();
+        }
+        if(!is_null($ahq_token)){
+	    	$request_parameters['ahq_token'] = $ahq_token->__toEncodedString();
+        }
         $response = $request->send($request_parameters);
 
         $data = $response->get_data();
@@ -158,7 +169,8 @@ class AuthRepository extends BaseRepository{
 
     public function login_from_member_id_only(
         VO\MemberID $member_id,
-        VO\Token $redisUserToken
+        VO\Token $redisUserToken,
+        VO\StringVO $callback
     ) {
 
         $request = new Request(
@@ -170,7 +182,8 @@ class AuthRepository extends BaseRepository{
 
         $request_parameters = array(
             'member_id' => $member_id->__toString(),
-            'redisUserToken' => $redisUserToken->__toEncodedString()
+            'redisUserToken' => $redisUserToken->__toEncodedString(),
+            'callback' => $callback->__toString()
         );
 
         $response = $request->send($request_parameters);
