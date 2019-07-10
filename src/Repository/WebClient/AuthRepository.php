@@ -68,6 +68,30 @@ class AuthRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function login_from_email_rms(
+		VO\Email $email,
+		VO\Password $password
+	) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/auth/login/from/email/rms'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toEncodedString(),
+			'password' => $password->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function logout(VO\Token $token) 
 	{
 		$request = new Request(

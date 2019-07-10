@@ -886,4 +886,34 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function member_register_or_create(
+		VO\Email $email,
+		VO\OrganisationID $organisation_id,
+		VO\Name $name,
+		VO\Integer $is_admin,
+		VO\Password $password
+	){	
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/createORregister'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toString(),
+			'organisation_id' => $organisation_id->__toString(),
+			'first_name' => $name->get_first_name()->__toString(),
+			'last_name' => $name->get_last_name()->__toString(),
+			'is_admin' => $is_admin->__toInteger(),
+			'password' => $password->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

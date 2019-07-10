@@ -361,6 +361,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 7> Login From Email For RMS
+<pre>
+ 	/*@returns token after sucessfull login which is valid for next two hours of genertation time*/
+	$login = $auth_repository->login_from_email_rms(
+		new \AcademyHQ\API\ValueObjects\Email('email_address'),
+		new \AcademyHQ\API\ValueObjects\Password('password')))
+	);
+</pre>
+
 ## Using Employer Repository
 
 ### 1> Create Sub Organisation Admin
@@ -1829,6 +1838,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 	/*@return std object */
   	$member_details = $crms_repository->check_sub_domain_exist(
 			new VO\StringVO ("sub_domain")
+	);
+</pre>
+
+### 31> Member RegisterOrCreate
+<pre>
+	/*@return success message with member_id*/
+	$response = $crms_repository->member_register_or_create(
+		new \AcademyHQ\API\ValueObjects\Email('email'),
+		new \AcademyHQ\API\ValueObjects\OrganisationID('organisation'),
+		\AcademyHQ\API\ValueObjects\Name::fromNative("first_name", "last_name"),
+		new \AcademyHQ\API\ValueObjects\Integer('is_admin'),
+		new \AcademyHQ\API\ValueObjects\Password('password')
 	);
 </pre>
 
