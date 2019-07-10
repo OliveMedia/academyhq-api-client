@@ -916,4 +916,27 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function ahq_update_password(
+		VO\MemberID $member_id,
+		VO\Password $password
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/update/member/password'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'password' => $password->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

@@ -1853,6 +1853,15 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 32> Member Password change
+<pre>
+	/*@return success message with member_id*/
+	$response = $crms_repository->ahq_update_password(
+		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
+		new \AcademyHQ\API\ValueObjects\Password('password')
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses
