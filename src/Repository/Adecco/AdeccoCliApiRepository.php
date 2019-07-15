@@ -37,6 +37,27 @@ class AdeccoCliApiRepository extends BaseRepository {
 
 		return $data;
 	}
+
+	public function fetch_organisation_member_with_enrollment() 
+	{
+		
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/organisation/get/members/enroll'),
+			new VO\HTTP\Method('GET')
+        );
+
+        $header_parameters = array();
+
+        $request_parameters = array();
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 	
 
 
