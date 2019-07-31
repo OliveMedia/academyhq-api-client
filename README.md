@@ -1965,6 +1965,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 12> Get Sub-Organisation Packages
+<pre>
+	/*@returns package_details of all organisation packages of sub organisation*/
+	$package_details = $course_api_repository->get_organisation_packages(
+		new \AcademyHQ\API\ValueObjects\OrganisationID("sub_organisation_id")
+	);
+</pre>
+
 ## Using Member Api Repository
 
 ### 1> Fetch All Organisation Licenses

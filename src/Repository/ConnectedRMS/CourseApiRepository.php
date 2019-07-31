@@ -265,5 +265,25 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function get_sub_organisation_packages(
+		VO\OrganisationID $organisation_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/sub_organisation/packages'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'organisation_id'=>$organisation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 
 }
