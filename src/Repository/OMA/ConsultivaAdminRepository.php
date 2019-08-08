@@ -856,4 +856,40 @@ class ConsultivaAdminRepository extends BaseRepository
 		$data     = $response->get_data();
 		return $data;
 	}
+
+	
+	/**
+	 * Bulk Member Upload
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\ApprenticeshipID        $apprenticeship_id
+	 * @param VO\StringVO   $csvFile
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function importBulkMembers(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\ApprenticeshipID $apprenticeship_id,
+		VO\StringVO $csvFile
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/bulk/import_member_apprenticeship'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array(
+			'organisation_id' 	=> $organisation_id->__toString(),
+			'apprenticeship_id'	=> $apprenticeship_id->__toString(),
+			'csvFile'			=> $csvFile->__toString()
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+
+	}
 }
