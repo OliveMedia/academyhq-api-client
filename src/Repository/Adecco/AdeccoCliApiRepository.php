@@ -38,7 +38,6 @@ class AdeccoCliApiRepository extends BaseRepository {
 
 	public function fetch_organisation_team_member_with_completed_bundle($teamBundleIds)
 	{
-
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
@@ -46,12 +45,12 @@ class AdeccoCliApiRepository extends BaseRepository {
 			new VO\HTTP\Method('GET')
         );
 
+
         $header_parameters = array();
 
-        $requestParameters = array(
-            'team_bundle_ids'    => $teamBundleIds,
+        $request_parameters = array(
+            'team_bundle_ids'    => $teamBundleIds
         );
-
         $response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
