@@ -2061,6 +2061,16 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 2> Create Organisation Package
+<pre>
+	/*@return status success with organisation_package details */
+  	$response = $organisation_api_repository->create_org_package(
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id"),
+		new \AcademyHQ\API\ValueObjects\ID("package_id"),
+		new \AcademyHQ\API\ValueObjects\Integer("number_of_package")
+	);
+</pre>
+
 ## Using Learner Api Repository
 
 ### 1> get all Enrolments of Learner

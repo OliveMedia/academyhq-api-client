@@ -41,5 +41,32 @@ class OrganisationApiRepository extends BaseRepository{
 
 		return $data;
 	}
+
+	public function create_org_package(
+		VO\OrganisationID $organisation_id,
+		VO\ID $package_id,
+		VO\Integer $number_of_license
+
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/organisation/org_package/create'),
+			new VO\HTTP\Method('POST')
+		);
+		
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+			'package_id' => $package_id->__toString(),
+			'number_of_license' => $number_of_license->__toInteger()
+		);
+
+		$response = $request->send($request_parameters);
+		
+		$data = $response->get_data();
+
+		return $data;
+	
+	}
 	
 }
