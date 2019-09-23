@@ -683,4 +683,39 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+    public function member_program_unit_feedback_create_or_update(
+        VO\Token $token,
+        VO\ID $member_program_unit_id,
+        VO\StringVO $description,
+        VO\StringVO $creator_role = null,
+        VO\ID $id = null
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/member/program/unit/feedback'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'member_program_unit_id' => $member_program_unit_id->__toString(),
+            'description' => $description->__toString()
+        );
+
+        if(!is_null($creator_role)) {
+            $request_parameters['creator_role'] = $creator_role;
+        }
+
+        if(!is_null($id)) {
+            $request_parameters['id'] = $id;
+        }
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 }
