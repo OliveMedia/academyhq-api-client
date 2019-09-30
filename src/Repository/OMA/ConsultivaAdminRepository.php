@@ -904,6 +904,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * @param VO\MemberID|null         $assessor_id
 	 * @param VO\MemberID|null         $verifier_id
 	 * @param VO\OccupationID|null     $occupation_id
+	 * @param VO\StringVO|null         $status
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -917,7 +918,8 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\ApprenticeshipID $apprenticeship_id = null,
         VO\MemberID $assessor_id = null,
         VO\MemberID $verifier_id = null,
-	    VO\OccupationID $occupation_id = null
+	    VO\OccupationID $occupation_id = null,
+		VO\StringVO $status = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -930,9 +932,9 @@ class ConsultivaAdminRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            'search' => $search ? $search->__toString() : '',
-            'current_page' => $current_page->__toInteger(),
-            'organisation_id' => $organisation_id ? $organisation_id->__toString() : '',
+            'search'            => $search ? $search->__toString() : '',
+            'current_page'      => $current_page->__toInteger(),
+            'organisation_id'   => $organisation_id ? $organisation_id->__toString() : '',
             'apprenticeship_id' => $apprenticeship_id ? $apprenticeship_id->__toString() : ''
         );
 
@@ -946,6 +948,10 @@ class ConsultivaAdminRepository extends BaseRepository
 
         if(!is_null($occupation_id)){
         	$request_parameters['occupation_id'] = $occupation_id->__toString();
+        }
+
+        if(!is_null($status)) {
+	        $request_parameters['status'] = $status->__toString();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
