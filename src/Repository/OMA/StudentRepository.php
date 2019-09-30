@@ -694,7 +694,7 @@ class StudentRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/member/program/unit/feedback'),
+            VO\HTTP\Url::fromNative($this->base_url.'/student/member/program/unit/feedback'),
             new VO\HTTP\Method('POST')
         );
 
