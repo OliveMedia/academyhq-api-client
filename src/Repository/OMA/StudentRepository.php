@@ -438,16 +438,28 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
-    //added api for member program unit-edit
+	/**
+	 * added api for member program unit-edit
+	 * @param VO\Token         $token
+	 * @param VO\ID            $member_program_unit_id
+	 * @param VO\StringVO|null $observation
+	 * @param VO\Integer|null  $is_started
+	 * @param VO\Integer|null  $is_completed
+	 * @param VO\Integer|null  $is_submitted_for_assessment
+	 * @param VO\Integer|null  $is_resubmission
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function member_program_unit_edit(
         VO\Token $token,
         VO\ID $member_program_unit_id,
         VO\StringVO $observation = null,
         VO\Integer $is_started = null,
         VO\Integer $is_completed = null,
-        VO\Integer $is_submitted_for_assessment = null
-
-
+        VO\Integer $is_submitted_for_assessment = null,
+        VO\Integer $is_resubmission = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -473,6 +485,10 @@ class StudentRepository extends BaseRepository
         if(!is_null($is_submitted_for_assessment)){
             $request_parameters['is_submitted_for_assessment'] = $is_submitted_for_assessment->__toInteger();
         }
+
+	    if(!is_null($is_resubmission)){
+		    $request_parameters['is_resubmission'] = $is_resubmission->__toInteger();
+	    }
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
