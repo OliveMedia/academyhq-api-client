@@ -704,11 +704,11 @@ class StudentRepository extends BaseRepository
         );
 
         if(!is_null($creator_role)) {
-            $request_parameters['creator_role'] = $creator_role;
+            $request_parameters['creator_role'] = $creator_role->__toString();
         }
 
         if(!is_null($id)) {
-            $request_parameters['id'] = $id;
+            $request_parameters['id'] = $id->__toString();
         }
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
