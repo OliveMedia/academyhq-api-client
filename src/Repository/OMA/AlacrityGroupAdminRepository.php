@@ -339,6 +339,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\StringVO|null $program_image
 	 * @param VO\StringVO|null $is_communication_forum
 	 * @param VO\StringVO|null $phase_title
+	 * @param VO\Integer|null  $on_the_job_training
+	 * @param VO\Integer|null  $on_the_job_training_required_hours
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -371,7 +373,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVO $gap_template=null,
 		VO\StringVO $program_image=null,
 		VO\StringVO $is_communication_forum=null,
-		VO\StringVO $phase_title=null
+		VO\StringVO $phase_title=null,
+		VO\Integer $on_the_job_training = null,
+		VO\Integer $on_the_job_training_required_hours = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -476,6 +480,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($phase_title)){
 			$request_parameters['phase_title'] = $phase_title->__toString();
+		}
+		if(!is_null($on_the_job_training)){
+			$request_parameters['on_the_job_training'] = $on_the_job_training->__toInteger();
+		}
+
+		if(!is_null($on_the_job_training_required_hours)){
+			$request_parameters['on_the_job_training_required_hours'] = $on_the_job_training_required_hours->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
