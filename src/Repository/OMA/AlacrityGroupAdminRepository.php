@@ -1135,7 +1135,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	/**
 	 * Create On The Job Phase
 	 * @param VO\Token          $token
-	 * @param VO\OrganisationID $organisation_id
 	 * @param VO\Integer        $program_id
 	 * @param VO\StringVO       $on_the_job_id
 	 * @param VO\Integer|null   $member_apprenticeship_id
@@ -1146,7 +1145,6 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function createOnTheJobPhase(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id,
 		VO\Integer $program_id,
 		VO\StringVO $on_the_job_id,
 		VO\Integer $member_apprenticeship_id = null
@@ -1154,12 +1152,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation_progress_viz'),
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program/on/the/job/training'),
 			new VO\HTTP\Method('POST')
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'organisation_id'   => $organisation_id->__toString(),
 			'program_id'        => $program_id->__toInteger(),
 			'on_the_job_id'     => $on_the_job_id->__toString()
 		);
