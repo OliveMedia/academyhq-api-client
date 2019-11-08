@@ -677,13 +677,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function createProgramWelcomeResource(
 		VO\Token $token,
-		VO\StringVo $name,
+		VO\StringVO $name,
 		VO\Integer $program_id,
-		VO\StringVo $document,
-		VO\StringVo $description = null,
-		VO\StringVo $link,
+		VO\StringVO $document,
+		VO\StringVO $description = null,
+		VO\StringVO $link,
 		VO\ID $welcome_resource_id = null,
-        VO\StringVo $video = null
+        VO\StringVO $video = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -1130,5 +1130,45 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
+	}
+
+	/**
+	 * Create On The Job Phase
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer        $program_id
+	 * @param VO\StringVO       $on_the_job_id
+	 * @param VO\Integer|null   $member_apprenticeship_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function createOnTheJobPhase(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id,
+		VO\Integer $program_id,
+		VO\StringVO $on_the_job_id,
+		VO\Integer $member_apprenticeship_id = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation_progress_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array(
+			'organisation_id'   => $organisation_id->__toString(),
+			'program_id'        => $program_id->__toInteger(),
+			'on_the_job_id'     => $on_the_job_id->__toString()
+		);
+		if (!is_null($member_apprenticeship_id)) {
+			$request_parameters['member_apprenticeship_id'] = $member_apprenticeship_id->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+
 	}
 }
