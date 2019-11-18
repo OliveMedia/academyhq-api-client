@@ -54,11 +54,11 @@ class AdeccoThirdPartyClient extends BaseRepository {
 		$request = new Request(
 			new GuzzleClient,
 			$this->credentials,
-			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/promote/member'),
+			VO\HTTP\Url::fromNative($this->base_url.'/onscensus/member/promote'),
 			new VO\HTTP\Method('POST')
         );
         
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $header_parameters = array();
 
 		$request_parameters = array(
             'member_id'     => $memberId->__toString(),
