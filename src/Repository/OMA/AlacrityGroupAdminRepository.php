@@ -4,6 +4,8 @@ namespace AcademyHQ\API\Repository\OMA;
 
 use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
+use App\AHQService\ApprenticeshipService;
+use App\Helpers\Log;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 use AcademyHQ\API\Repository\BaseRepository;
@@ -1166,6 +1168,36 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
+		
+	}
 
+	/**
+	 * Get all program ids
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getAllProgramIds(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/occupation_ids'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString()
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
 	}
 }

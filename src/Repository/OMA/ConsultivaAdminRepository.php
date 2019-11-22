@@ -960,5 +960,35 @@ class ConsultivaAdminRepository extends BaseRepository
         return $data;
     }
 
+	/**
+	 * Get all program ids
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getAllProgramIds(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/list/occupation_ids'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString()
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
 
 }
