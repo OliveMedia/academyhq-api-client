@@ -24,6 +24,8 @@ use AcademyHQ\API\Repository\Adecco\AdeccoAuthApiRepository;
 use AcademyHQ\API\Repository\Adecco\AdeccoMemberApiRepository;
 use AcademyHQ\API\Repository\Adecco\AdeccoAdminApiRepository;
 use AcademyHQ\API\Repository\Adecco\AdeccoCliApiRepository;
+use AcademyHQ\API\Repository\Adecco\AdeccoThirdPartyClient;
+
 
 // use AcademyHQ\API\Repository\OMA as OMA;
 
@@ -170,5 +172,10 @@ class Factory
 	public function get_adecco_cli_repository()
 	{
 		return new AdeccoCliApiRepository($this->credentials);
+	}
+
+	public function get_adecco_third_party_client_repository()
+	{
+		return new AdeccoThirdPartyClient($this->credentials);
 	}
 }
