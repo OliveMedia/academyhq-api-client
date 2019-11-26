@@ -71,6 +71,34 @@ class AdeccoThirdPartyClient extends BaseRepository {
 
 		return $data;
     }
+
+    public function member_package_progress_details(
+        VO\ID $memberId,
+        VO\StringVo $team,
+        $bundleIds
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/get/member/package/progress/details'),
+            new VO\HTTP\Method('Post')
+        );
+
+        $requestParameters = array(
+            'member_id'     => $memberId->__toString(),
+            'package_ids'    => $bundleIds,
+            'team'  => $team->__toString()
+        );
+
+        $header_parameters = array();
+
+        $response = $request->send($requestParameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
     
    
 }
