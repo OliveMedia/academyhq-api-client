@@ -1195,7 +1195,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array();
 		if (!is_null($organisation_id)) {
-			$request_parameters['organisation_id'] = $organisation_id->__toEncodedString();
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
