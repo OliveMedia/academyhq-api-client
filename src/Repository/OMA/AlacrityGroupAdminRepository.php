@@ -1182,7 +1182,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function getAllProgramIds(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id
+		VO\OrganisationID $organisation_id = null
 	)
 	{
 		$request = new Request(
@@ -1193,9 +1193,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
-		$request_parameters = array(
-			'organisation_id' => $organisation_id->__toString()
-		);
+		$request_parameters = array();
+		if (!is_null($organisation_id)) {
+			$request_parameters['organisation_id'] = $organisation_id->__toEncodedString();
+		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
