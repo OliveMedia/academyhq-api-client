@@ -939,4 +939,69 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function createORupdate_sub_org(
+		VO\StringVO $organisation_name = null,
+		VO\StringVO $domain = null,
+		VO\Email $email = null,
+		VO\StringVO $contact_number = null,
+		VO\StringVO $billing_address = null,
+		VO\StringVO $tax_code = null,
+		VO\StringVO $company_website = null,
+		VO\StringVO $branding_logo_url = null,
+		VO\StringVO $background_url = null,
+		VO\OrganisationID $organisation_id = null,
+		VO\OrganisationID $super_org_id = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/sub_organisation/createorupdate'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array();
+
+		if(!is_null($organisation_name)){
+			$request_parameters['organisation_name'] = $organisation_name->__toString();
+		}
+		if(!is_null($domain)){
+			$request_parameters['domain'] = $domain->__toString();
+		}
+		if(!is_null($background_url)){
+			$request_parameters['background_url'] = $background_url->__toString();
+		}
+		if(!is_null($branding_logo_url)){
+			$request_parameters['branding_logo_url'] = $branding_logo_url->__toString();
+		}
+		if(!is_null($tax_code)){
+			$request_parameters['tax_code'] = $tax_code->__toString();
+		}
+		if(!is_null($contact_number)){
+			$request_parameters['contact_number'] = $contact_number->__toString();
+		}
+		if(!is_null($email)){
+			$request_parameters['email_address'] = $email->__toString();
+		}
+		if(!is_null($company_website)){
+			$request_parameters['company_website'] = $company_website->__toString();
+		}
+		if(!is_null($billing_address)){
+
+			$request_parameters['billing_address'] = $billing_address->__toString();
+		}
+		if(!is_null($super_org_id)){
+			$request_parameters['super_org_id'] = $super_org_id->__toString();
+		}
+
+		if(!is_null($organisation_id)){
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
