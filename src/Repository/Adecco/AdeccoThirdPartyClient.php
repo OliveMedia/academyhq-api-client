@@ -47,7 +47,7 @@ class AdeccoThirdPartyClient extends BaseRepository {
 	
 
 	public function promote_member(
-        VO\ID $memberId,
+        VO\ID $pubId,
         VO\StringVo $team
 	) {
 
@@ -61,7 +61,7 @@ class AdeccoThirdPartyClient extends BaseRepository {
         $header_parameters = array();
 
 		$request_parameters = array(
-            'member_id'     => $memberId->__toString(),
+            'pub_id'        => $pubId->__toString(),
             'team'          => $team->__toString()
 		);
 
