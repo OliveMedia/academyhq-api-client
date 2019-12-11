@@ -99,6 +99,36 @@ class AdeccoThirdPartyClient extends BaseRepository {
 
         return $data;
     }
+
+
+    public function get_member_teams(
+        VO\ID $pubId
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/get/member/team/details'),
+            new VO\HTTP\Method('Post')
+        );
+
+        $requestParameters = array(
+            'pub_id'     => $pubId->__toString(),
+        );
+
+        $header_parameters = array();
+
+        $response = $request->send($requestParameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
     
+
+
+
+
    
 }
