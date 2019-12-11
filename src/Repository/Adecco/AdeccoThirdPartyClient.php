@@ -73,7 +73,7 @@ class AdeccoThirdPartyClient extends BaseRepository {
     }
 
     public function member_package_progress_details(
-        VO\ID $memberId,
+        VO\ID $pubId,
         VO\StringVo $team,
         $bundleIds
     )
@@ -86,7 +86,7 @@ class AdeccoThirdPartyClient extends BaseRepository {
         );
 
         $requestParameters = array(
-            'member_id'     => $memberId->__toString(),
+            'pub_id'     => $pubId->__toString(),
             'package_ids'    => $bundleIds,
             'team'  => $team->__toString()
         );
