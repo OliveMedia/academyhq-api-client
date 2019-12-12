@@ -125,6 +125,33 @@ class AdeccoThirdPartyClient extends BaseRepository {
         return $data;
     }
 
+
+    public function change_member_status(
+        VO\ID $pubId,
+        VO\StringVo $status
+    ) {
+
+         $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/onscensus/change/member/status'),
+            new VO\HTTP\Method('Post')
+        );
+
+        $requestParameters = array(
+            'pub_id'     => $pubId->__toString(),
+            'change_status' =>  $status->__toString()
+        );
+
+        $header_parameters = array();
+
+        $response = $request->send($requestParameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
     
 
 
