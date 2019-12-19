@@ -862,13 +862,11 @@ class StudentRepository extends BaseRepository
 	 * @param VO\Token        $token
 	 * @param VO\IDArray      $memberIds
 	 * @param VO\ID           $programId
-	 * @param VO\Integer|null $default
 	 */
     public function createMemberProgramsForEvents(
 	    VO\Token $token,
 	    VO\IDArray $memberIds,
-		VO\ID $programId,
-	    VO\Integer $default = null
+		VO\ID $programId
     ){
 	    $request = new Request(
 		    new GuzzleClient,
@@ -886,10 +884,40 @@ class StudentRepository extends BaseRepository
 		    'program_id'        => $programId->__toString()
 	    );
 
-	    if(!is_null($default)){
-		    $request_parameters['default'] = $default->__toInteger();
-	    }
 	    $response = $request->send($request_parameters, $header_parameters);
 	    return $response->get_data();
+	}
+
+	/**
+	 * Patch Member Program for Older Event Users
+	 * @param VO\Token $token
+	 * @param array    $data
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function patchMemberProgramForOlderEventUsers(
+		VO\Token $token,
+		VO\StringVO $data
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url . '/member/program/patch/events'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString()
+		);
+
+		$request_parameters = array(
+			'events'            => $data->__toString()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+		return $response->get_data();
+
 	}
 }
