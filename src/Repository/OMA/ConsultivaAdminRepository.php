@@ -1014,7 +1014,7 @@ class ConsultivaAdminRepository extends BaseRepository
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'module_id'         => $module_id->__toInteger(),
+			'module_id'         => $module_id->__toString(),
 			'callback_url'      => $callback_url->__toString()
 		);
 		$response = $request->send($request_parameters, $header_parameters);
@@ -1045,7 +1045,7 @@ class ConsultivaAdminRepository extends BaseRepository
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'module_id'         => $module_id->__toInteger(),
+			'module_id'         => $module_id->__toString(),
 			'callback_url'      => $callback_url->__toString()
 		);
 		$response = $request->send($request_parameters, $header_parameters);
