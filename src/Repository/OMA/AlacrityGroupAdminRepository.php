@@ -1201,4 +1201,33 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$data = $response->get_data();
 		return $data;
 	}
+
+	/**
+	 * Preview Scorm Course
+	 * @param VO\Token $token
+	 * @param VO\ID    $module_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function previewScormCourse(
+		VO\Token $token,
+		VO\ID $module_id
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url . '/course/scorm/preview'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array(
+			'module_id'        => $module_id->__toInteger()
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+		return $response->get_data();
+
+	}
 }
