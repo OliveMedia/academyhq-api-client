@@ -1024,7 +1024,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	/**
 	 * Get Course Details with Course ID
 	 * @param VO\Token    $token
-	 * @param VO\ID       $module_id
+	 * @param VO\ID       $course_id
 	 * @param VO\StringVO $callback_url
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
@@ -1033,7 +1033,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 */
 	public function previewCourseDetailWithCourseId(
 		VO\Token $token,
-		VO\ID $module_id,
+		VO\ID $course_id,
 		VO\StringVO $callback_url
 	) {
 		$request = new Request(
@@ -1045,7 +1045,7 @@ class ConsultivaAdminRepository extends BaseRepository
 
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'module_id'         => $module_id->__toString(),
+			'course_id'         => $course_id->__toString(),
 			'callback_url'      => $callback_url->__toString()
 		);
 		$response = $request->send($request_parameters, $header_parameters);
