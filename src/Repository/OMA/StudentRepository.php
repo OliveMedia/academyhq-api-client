@@ -162,12 +162,25 @@ class StudentRepository extends BaseRepository
         return $data;
     }
 
+	/**
+	 * @param VO\Token        $token
+	 * @param VO\ID           $member_program_id
+	 * @param VO\Integer|null $completed
+	 * @param VO\Integer|null $started
+	 * @param VO\Integer|null $submitted_for_assessment
+	 * @param VO\Integer|null $is_assigned_for_resubmission
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function member_program_status(
         VO\Token $token,
         VO\ID $member_program_id,
         VO\Integer $completed = null,
         VO\Integer $started = null,
-        VO\Integer $submitted_for_assessment = null
+        VO\Integer $submitted_for_assessment = null,
+		VO\Integer $is_assigned_for_resubmission = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -191,6 +204,10 @@ class StudentRepository extends BaseRepository
 
         if(!is_null($started)){
             $request_parameters['started'] = $started->__toInteger();
+        }
+
+        if(!is_null($is_assigned_for_resubmission)){
+            $request_parameters['is_assigned_for_resubmission'] = $is_assigned_for_resubmission->__toInteger();
         }
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
