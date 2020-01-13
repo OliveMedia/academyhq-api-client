@@ -893,11 +893,11 @@ class ConsultivaAdminRepository extends BaseRepository
 
 	}
 
-
 	/**
 	 * Assessor Inbox
 	 * @param VO\Token                 $token
 	 * @param VO\Integer               $current_page
+	 * @param VO\Integer               $per_page
 	 * @param VO\StringVO|null         $search
 	 * @param VO\OrganisationID|null   $organisation_id
 	 * @param VO\ApprenticeshipID|null $apprenticeship_id
@@ -913,6 +913,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	public function assessor_inbox(
         VO\Token $token,
         VO\Integer $current_page,
+        VO\Integer $per_page,
         VO\StringVO $search = null,
         VO\OrganisationID $organisation_id = null,
         VO\ApprenticeshipID $apprenticeship_id = null,
@@ -934,6 +935,7 @@ class ConsultivaAdminRepository extends BaseRepository
         $request_parameters = array(
             'search'            => $search ? $search->__toString() : '',
             'current_page'      => $current_page->__toInteger(),
+            'per_page'          => $per_page->__toInteger(),
             'organisation_id'   => $organisation_id ? $organisation_id->__toString() : '',
             'apprenticeship_id' => $apprenticeship_id ? $apprenticeship_id->__toString() : ''
         );
