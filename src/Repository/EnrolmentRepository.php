@@ -223,21 +223,28 @@ class EnrolmentRepository extends BaseRepository
     }
 
 
-    /**
-     * Sync Result from OMA Enrollment
-     * @param VO\EnrolmentID $enrolment_id
-     * @param VO\Token $token
-     * @return mixed
-     * @throws VO\Exception\MethodNotAllowedException
-     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
-     */
-    public function sync_oma_enrollment_result(VO\Token $token, VO\EnrolmentID $enrolment_id)
+	/**
+	 * Sync Result from OMA Enrollment
+	 * @param VO\Token           $token
+	 * @param VO\EnrolmentID     $enrolment_id
+	 * @param VO\MemberProgramID $member_program_id
+	 *
+	 * @return mixed
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function sync_oma_enrollment_result(
+    	VO\Token $token,
+	    VO\EnrolmentID $enrolment_id,
+		VO\MemberProgramID $member_program_id
+	)
     {
         $enrolment_id = $enrolment_id->__toString();
+        $member_program_id = $member_program_id->__toString();
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/oma/student/enrolment/'.$enrolment_id.'/sync_result'),
+            VO\HTTP\Url::fromNative($this->base_url.'/oma/student/enrolment/'.$enrolment_id.'/' . $member_program_id . '/sync_result'),
             new VO\HTTP\Method('GET')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
