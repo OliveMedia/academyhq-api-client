@@ -937,4 +937,36 @@ class StudentRepository extends BaseRepository
 		return $response->get_data();
 
 	}
+
+	/**
+	 * @param VO\Token    $token
+	 * @param VO\StringVO $data
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function syncMasterClassAndLearnerJournalForPivot(
+		VO\Token $token,
+		VO\StringVO $data
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url . '/member/program/patch/pivots-for-masterclass-and-journals'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array(
+			'Authorization' => $token->__toEncodedString()
+		);
+
+		$request_parameters = array(
+			'studentPrograms'            => $data->__toString()
+		);
+
+		$response = $request->send($request_parameters, $header_parameters);
+		return $response->get_data();
+
+	}
 }
