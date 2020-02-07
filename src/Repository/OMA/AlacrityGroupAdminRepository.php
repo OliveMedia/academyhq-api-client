@@ -1201,4 +1201,30 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$data = $response->get_data();
 		return $data;
 	}
+
+	/**
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function deleteEmployer(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/organisation/delete'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters['organisation_id'] = $organisation_id->__toString();
+		$response = $request->send($request_parameters, $header_parameters);
+		return $response->get_data();
+
+	}
 }
