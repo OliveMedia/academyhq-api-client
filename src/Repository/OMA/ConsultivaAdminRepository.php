@@ -1055,5 +1055,57 @@ class ConsultivaAdminRepository extends BaseRepository
 
 	}
 
+    /**
+     * @param VO\Token          $token
+     * @param VO\memberId $memberId
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function deleteLearner(
+        VO\Token $token,
+        VO\ID $memberId
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/learner/delete'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters['member_id'] = $memberId->__toString();
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+
+    }
+
+    /**
+     * @param VO\Token          $token
+     * @param VO\apprenticeshipId $apprenticeshipId
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function deleteMemberApprenticeship(
+        VO\Token $token,
+        VO\ID $apprenticeshipId
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/apprenticeship/delete'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters['apprenticeship_id'] = $apprenticeshipId->__toString();
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+
+    }
+
 
 }
