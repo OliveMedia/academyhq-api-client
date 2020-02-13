@@ -54,4 +54,134 @@ class OffSessionRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 *
+	 * @param VO\ApprenticeshipID $apprenticeship_id
+	 * @param VO\OrganisationID   $organisation_id
+	 * @param VO\MemberID|null    $assessor_id
+	 * @param VO\Name             $name
+	 * @param VO\StringVO         $gender
+	 * @param VO\StringVO         $country_code
+	 * @param VO\Integer          $mobile_number
+	 * @param VO\Email            $email
+	 * @param VO\StringVO         $nationality
+	 * @param VO\StringVO|null    $street
+	 * @param VO\StringVO|null    $city
+	 * @param VO\StringVO|null    $state
+	 * @param VO\StringVO|null    $country
+	 * @param VO\StringVO|null    $postal_code
+	 * @param VO\Integer          $disability
+	 * @param VO\StringVO|null    $image
+	 * @param VO\MemberID|null    $verifier_id
+	 * @param VO\StringVO|null    $employment
+	 * @param VO\StringVO|null    $further_notes
+	 * @param VO\StringVO|null    $disability_text
+	 * @param VO\StringVO|null    $date_of_birth
+	 * @param VO\Integer|null     $weekly_learning_hours
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function create_student(
+		VO\ApprenticeshipID $apprenticeship_id,
+		VO\OrganisationID $organisation_id,
+		VO\MemberID $assessor_id = null,
+		VO\Name $name,
+		VO\StringVO $gender,
+		VO\StringVO $country_code,
+		VO\Integer $mobile_number,
+		VO\Email $email,
+		VO\StringVO $nationality,
+		VO\StringVO $street = null,
+		VO\StringVO $city = null,
+		VO\StringVO $state = null,
+		VO\StringVO $country = null,
+		VO\StringVO $postal_code = null,
+		VO\Integer $disability,
+		VO\StringVO $image = null,
+		VO\MemberID $verifier_id = null,
+		VO\StringVO $employment = null,
+		VO\StringVO $further_notes = null,
+		VO\StringVO $disability_text = null,
+		VO\StringVO $date_of_birth = null,
+		VO\Integer $weekly_learning_hours=null
+	) {
+		$request =new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/out_session/student/create'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'apprenticeship_id' => $apprenticeship_id->__toString(),
+			'organisation_id'   => $organisation_id->__toString(),
+			'first_name'        => $name->get_first_name()->__toString(),
+			'last_name'         => $name->get_last_name()->__toString(),
+			'gender'            => $gender->__toString(),
+			'country_code'      => $country_code->__toString(),
+			'mobile_number'     => $mobile_number->__toInteger(),
+			'email'             => $email->__toString(),
+			'nationality'       => $nationality-> __toString(),
+			'disability'        => $disability->__toInteger()
+		);
+
+		if(!is_null($street)){
+			$request_parameters['street'] = $street->__toString();
+		}
+
+		if(!is_null($city)){
+			$request_parameters['city'] = $city->__toString();
+		}
+
+		if(!is_null($state)){
+			$request_parameters['state'] = $state->__toString();
+		}
+
+		if(!is_null($country)){
+			$request_parameters['country'] = $country->__toString();
+		}
+
+		if(!is_null($postal_code)){
+			$request_parameters['postal_code'] = $postal_code->__toString();
+		}
+
+		if(!is_null($image)){
+			$request_parameters['image'] = $image->__toString();
+		}
+
+		if(!is_null($assessor_id)){
+			$request_parameters['assessor_id'] = $assessor_id->__toString();
+		}
+
+		if(!is_null($verifier_id)){
+			$request_parameters['verifier_id'] = $verifier_id->__toString();
+		}
+
+		if(!is_null($employment)){
+			$request_parameters['employment'] = $employment->__toString();
+		}
+
+		if(!is_null($further_notes)){
+			$request_parameters['further_notes'] = $further_notes->__toString();
+		}
+
+		if(!is_null($date_of_birth)){
+			$request_parameters['date_of_birth'] = $date_of_birth->__toString();
+		}
+
+		if(!is_null($disability_text)){
+			$request_parameters['disability_text'] = $disability_text->__toString();
+		}
+
+		if(!is_null($weekly_learning_hours)){
+			$request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
+		}
+		$response = $request->send($request_parameters, null);
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }
