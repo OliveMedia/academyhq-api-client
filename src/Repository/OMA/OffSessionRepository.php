@@ -30,7 +30,6 @@ class OffSessionRepository extends BaseRepository
 
 	/**
 	 * Get Program Details
-	 * @param VO\Token   $token
 	 * @param VO\Integer $occupation_id
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
@@ -180,6 +179,31 @@ class OffSessionRepository extends BaseRepository
 		$response = $request->send($request_parameters, null);
 		$data = $response->get_data();
 
+		return $data;
+	}
+
+	/**
+	 * Get Organisation details
+	 * @param VO\OrganisationID $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getOrganisationDetails(
+		VO\OrganisationID $organisation_id
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/out_session/organisation/details'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'organisation_id' => $organisation_id->__toString(),
+		);
+		$response = $request->send($request_parameters, null);
+		$data = $response->get_data();
 		return $data;
 	}
 
