@@ -969,4 +969,40 @@ class StudentRepository extends BaseRepository
 		return $response->get_data();
 
 	}
+
+
+	/**
+	 * @param VO\Token   $token
+	 * @param VO\ID      $member_apprenticeship_id
+	 * @param VO\IDArray $program_unit_ids
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function get_multiple_member_program_unit_details(
+		VO\Token $token,
+		VO\ID $member_apprenticeship_id,
+		VO\IDArray $program_unit_ids
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/student/multiple-program-unit/details'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_apprenticeship_id'  => $member_apprenticeship_id->__toString(),
+			'program_unit_ids'          => $program_unit_ids->__toArray()
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
