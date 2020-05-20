@@ -44,7 +44,7 @@ class Response implements iResponse
     {
         $json_data = $this->response->getBody();
         $data = json_decode($json_data);
-    
+
         if (!isset($data->status)) {
             // 	$file = getcwd();
             // $date = new \DateTime();

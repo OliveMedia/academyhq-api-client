@@ -207,4 +207,29 @@ class OffSessionRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * Check if email address exists in AHQ database
+	 * @param VO\Email $email
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function checkIfEmailExistsInAHQ(
+		VO\Email $email
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/out_session/check/existing/email/ahq'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'email' => $email->__toString()
+		);
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+		return $data;
+
+	}
+
 }
