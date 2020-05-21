@@ -229,4 +229,31 @@ class MemberApiRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function create_bulk_enrolments(
+		VO\MemberID $member_id,
+		VO\OrganisationID $organisation_id,
+		VO\CourseIDArray $courses_ids,
+		VO\Flag $deduct_license
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/create/bulk/enrolment'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'organisation_id' => $organisation_id->__toString(),
+			'courses_ids' => $courses_ids->__toArray(),
+			'deduct_license' => $deduct_license->__toBool()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 }

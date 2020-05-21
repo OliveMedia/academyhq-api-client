@@ -2050,6 +2050,17 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 9> Create Bulk Enrolment 
+<pre>
+	/*@returns success response*/
+	$response = $member_api_repository->create_bulk_enrolments(
+		new \AcademyHQ\API\ValueObjects\MemberID("member_id"),
+		new \AcademyHQ\API\ValueObjects\OrganisationID("organisation_id")
+		\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array('course_id_1', 'course_id_2')),
+		new \AcademyHq\API\ValueObjects\Flag("deduct_license");
+	);
+</pre>
+
 
 ## Using Organisation Api Repository
 
