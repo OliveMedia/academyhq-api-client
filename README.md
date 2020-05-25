@@ -1973,6 +1973,14 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 13> Get Sub-Organisation Packages
+<pre>
+	/*@returns true for licenses exist for all courses and false for licesnse not exists for all*/
+	$package_details = $course_api_repository->licenses_check(
+		\AcademyHQ\API\ValueObjects\CourseIDArray::fromNative(array('course_id1','course_id2'))
+	);
+</pre>
+
 ## Using Member Api Repository
 
 ### 1> Fetch All Organisation Licenses

@@ -171,6 +171,23 @@ class CourseApiRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function licenses_check(VO\CourseIDArray $courses_id){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/check/licenses'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'courses_id' => $courses_id->__toArray()
+		);
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function get_organisation_packages(){
 		$request = new Request(
 			new GuzzleClient,
