@@ -4,8 +4,6 @@ namespace AcademyHQ\API\Repository\OMA;
 
 use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\HTTP\Request\Request as Request;
-use App\AHQService\ApprenticeshipService;
-use App\Helpers\Log;
 use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Common\Credentials;
 use AcademyHQ\API\Repository\BaseRepository;
@@ -343,6 +341,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\StringVO|null $phase_title
 	 * @param VO\Integer|null  $on_the_job_training
 	 * @param VO\Integer|null  $on_the_job_training_required_hours
+	 * @param VO\Integer|null  $off_the_job_training_usa
+	 * @param VO\Integer|null  $off_the_job_training_usa_required_hours
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -357,27 +357,29 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $off_the_job_training = null,
 		VO\Integer $required_hours = null,
 		VO\Integer $program_id = null,
-		VO\StringVO $behavior=null,
-		VO\StringVO $endpoint=null,
-		VO\StringVO $final_review=null,
-		VO\StringVO $gateway=null,
-        VO\Integer $duration=null,
-        VO\Integer $holidays=null,
-        VO\StringVO $journal=null,
-        VO\StringVO $skill=null,
-        VO\StringVO $knowledge=null,
-		VO\StringVO $score=null,
-		VO\StringVO $video=null,
-		VO\StringVO $week=null,
-		VO\StringVO $day=null,
-		VO\StringVO $pdp=null,
-		VO\StringVO $documentation=null,
-		VO\StringVO $gap_template=null,
-		VO\StringVO $program_image=null,
-		VO\StringVO $is_communication_forum=null,
-		VO\StringVO $phase_title=null,
+		VO\StringVO $behavior = null,
+		VO\StringVO $endpoint = null,
+		VO\StringVO $final_review = null,
+		VO\StringVO $gateway = null,
+        VO\Integer $duration = null,
+        VO\Integer $holidays = null,
+        VO\StringVO $journal = null,
+        VO\StringVO $skill = null,
+        VO\StringVO $knowledge = null,
+		VO\StringVO $score = null,
+		VO\StringVO $video = null,
+		VO\StringVO $week = null,
+		VO\StringVO $day = null,
+		VO\StringVO $pdp = null,
+		VO\StringVO $documentation = null,
+		VO\StringVO $gap_template = null,
+		VO\StringVO $program_image = null,
+		VO\StringVO $is_communication_forum = null,
+		VO\StringVO $phase_title = null,
 		VO\Integer $on_the_job_training = null,
-		VO\Integer $on_the_job_training_required_hours = null
+		VO\Integer $on_the_job_training_required_hours = null,
+		VO\Integer $off_the_job_training_usa = null,
+		VO\Integer $off_the_job_training_usa_required_hours = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -483,12 +485,25 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($phase_title)){
 			$request_parameters['phase_title'] = $phase_title->__toString();
 		}
+		/**
+		 * On Thee Job Meter
+		 */
 		if(!is_null($on_the_job_training)){
 			$request_parameters['on_the_job_training'] = $on_the_job_training->__toInteger();
 		}
 
 		if(!is_null($on_the_job_training_required_hours)){
 			$request_parameters['on_the_job_training_required_hours'] = $on_the_job_training_required_hours->__toInteger();
+		}
+
+		/**
+		 * Off The Job Training USA
+		 */
+		if(!is_null($off_the_job_training_usa)){
+			$request_parameters['off_the_job_training_usa'] = $off_the_job_training_usa->__toInteger();
+		}
+		if(!is_null($off_the_job_training_usa_required_hours)){
+			$request_parameters['off_the_job_training_usa_required_hours'] = $off_the_job_training_usa_required_hours->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
@@ -1225,6 +1240,43 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$request_parameters['organisation_id'] = $organisation_id->__toString();
 		$response = $request->send($request_parameters, $header_parameters);
 		return $response->get_data();
+
+	}
+
+	/**
+	 * Create Off The Job USA Phase
+	 * @param VO\Token          $token
+	 * @param VO\Integer        $program_id
+	 * @param VO\StringVO       $off_the_job_usa_id
+	 * @param VO\Integer|null   $member_apprenticeship_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function createOffTheJobUSAPhase(
+		VO\Token $token,
+		VO\Integer $program_id,
+		VO\StringVO $off_the_job_usa_id,
+		VO\Integer $member_apprenticeship_id = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/create/program/off/the/job/training/usa'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array(
+			'program_id'            => $program_id->__toInteger(),
+			'off_the_job_usa_id'    => $off_the_job_usa_id->__toString()
+		);
+		if (!is_null($member_apprenticeship_id)) {
+			$request_parameters['member_apprenticeship_id'] = $member_apprenticeship_id->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
 
 	}
 }
