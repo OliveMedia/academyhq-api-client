@@ -41,7 +41,9 @@ class GDPRRepository extends BaseRepository {
 	}
 
 	public function create_partner_with_apis(
-		VO\StringVO $name
+		VO\StringVO $name,
+		VO\StringVO $sub_domain=null
+
 	){
 	$request = new Request(
 			new GuzzleClient,
@@ -53,6 +55,10 @@ class GDPRRepository extends BaseRepository {
 		$request_parameters = array(
 			'name' => $name->__toString()
 		);
+
+		if(!is_null($sub_domain)){
+			$request_parameters['sub_domain'] = $sub_domain->__toString();
+		}
 
 		$response = $request->send($request_parameters);
 

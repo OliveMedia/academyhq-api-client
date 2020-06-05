@@ -1473,7 +1473,8 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
  	/*@returns organisation_details of created sub organisation*/
 	$sub_organisation = $GDPR_repository->create_partner_with_apis(
-		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation")
+		new \AcademyHQ\API\ValueObjects\StringVO("Test Organisation"),
+		new \AcademyHQ\API\ValueObjects\StringVO("Sub Domain") <!-- nullable -->
 	);
 </pre>
 
