@@ -614,8 +614,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * Create Program Unit
 	 * @param VO\Token         $token
 	 * @param VO\StringVo      $name
-	 * @param VO\StringVo|null $header
-	 * @param VO\StringVo|null $description
+	 * @param VO\StringVO|null $header
+	 * @param VO\StringVO|null $description
 	 * @param VO\Integer       $is_evidence_required
 	 * @param VO\Integer       $image
 	 * @param VO\Integer       $video
@@ -630,9 +630,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 */
 	public function createProgramUnit(
 		VO\Token $token,
-		VO\StringVo $name,
-		VO\StringVo $header = null,
-		VO\StringVo $description = null,
+		VO\StringVO $name,
+		VO\StringVO $header = null,
+		VO\StringVO $description = null,
 		VO\Integer $is_evidence_required,
 		VO\Integer $image,
 		VO\Integer $video,
@@ -884,12 +884,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 	/**
 	 * Get Top 7 Programme with maximum number of students with the progress of Students
-	 * @param VO\Token               $token
-	 * @param VO\OrganisationID|null $organisation_id
-	 * @param VO\Integer|null $limit
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer|null   $limit
+	 * @param VO\Integer|null   $per_page
+	 * @param VO\Integer|null   $current_page
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
-	 * @throws VO\Exception\MethodNotAllowedException
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function getProgrammeProgressStatusForVisualisation(
@@ -964,7 +965,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\Integer|null   $phase
 	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
-	 * @param VO\Integer   $current_page
+	 * @param VO\Integer        $current_page
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException

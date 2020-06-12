@@ -1032,4 +1032,42 @@ class StudentRepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
+
+	/**
+	 * Update Member Apprenticeship Progress
+	 * @param VO\Token        $token
+	 * @param VO\Integer      $member_apprenticeship_id
+	 * @param VO\Integer|null $progress
+	 * @param VO\Integer|null $score
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function updateMemberApprenticeProgress(
+	    VO\Token $token,
+	    VO\ID $member_apprenticeship_id,
+	    VO\Integer $progress=null,
+	    VO\Integer $score=null
+    ) {
+	    $request = new Request(
+		    new GuzzleClient,
+		    $this->credentials,
+		    VO\HTTP\Url::fromNative($this->base_url.'/student/update-member-apprentice-progress'),
+		    new VO\HTTP\Method('POST')
+	    );
+	    $request_parameters = array(
+		    'member_apprenticeship_id'  => $member_apprenticeship_id->__toString()
+	    );
+	    if(!is_null($progress)){
+		    $request_parameters['progress'] = $progress->__toInteger();
+	    }
+	    if(!is_null($score)){
+		    $request_parameters['score'] = $score->__toInteger();
+	    }
+	    $header_parameters = array('Authorization' => $token->__toEncodedString());
+	    $response = $request->send($request_parameters, $header_parameters);
+	    $data = $response->get_data();
+	    return $data;
+
+    }
 }
