@@ -39,7 +39,7 @@ class OffSessionRepository extends BaseRepository
 	 */
 	public function get_occupation_details(
 		VO\Integer $occupation_id,
-		VO\Integer $employer_id
+		VO\Integer $employer_id=null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -49,8 +49,11 @@ class OffSessionRepository extends BaseRepository
 		);
 		$request_parameters = array(
 			'occupation_id'     => $occupation_id->__toInteger(),
-			'organisation_id'   => $employer_id->__toInteger(),
 		);
+		if(!is_null($employer_id)){
+			$request_parameters['organisation_id'] = $employer_id->__toInteger();
+		}
+
 		$response = $request->send($request_parameters, null);
 		$data = $response->get_data();
 		return $data;
