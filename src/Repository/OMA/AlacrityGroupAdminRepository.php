@@ -265,9 +265,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\Integer|null  $occupation_id
 	 * @param VO\Integer|null  $has_weeks
 	 * @param VO\Integer|null  $weeks
+	 * @param VO\StringVO|null $banner_image
+	 * @param VO\StringVO|null $banner_description
+	 * @param VO\StringVO|null $subject
+	 * @param VO\StringVO|null $signature
+	 * @param VO\StringVO|null $body
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
-	 * @throws VO\Exception\MethodNotAllowedException
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function createOccupation(
@@ -277,7 +281,12 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVO $logo = null,
 		VO\Integer $occupation_id = null,
 		VO\Integer $has_weeks = null,
-		VO\Integer $weeks = null
+		VO\Integer $weeks = null,
+		VO\StringVO $banner_image = null,
+		VO\StringVO $banner_description = null,
+		VO\StringVO $subject = null,
+		VO\StringVO $signature = null,
+		VO\StringVO $body = null
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -304,6 +313,21 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($occupation_id)){
 			$request_parameters['occupation_id'] = $occupation_id->__toInteger();
+		}
+		if(!is_null($banner_image)){
+			$request_parameters['banner_image'] = $banner_image->__toString();
+		}
+		if(!is_null($banner_description)){
+			$request_parameters['banner_description'] = $banner_description->__toString();
+		}
+		if(!is_null($subject)){
+			$request_parameters['subject'] = $subject->__toString();
+		}
+		if(!is_null($signature)){
+			$request_parameters['signature'] = $signature->__toString();
+		}
+		if(!is_null($body)){
+			$request_parameters['body'] = $body->__toString();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
