@@ -68,7 +68,7 @@ class OffSessionRepository extends BaseRepository
 	 * @param VO\StringVO       $country_code
 	 * @param VO\Integer        $mobile_number
 	 * @param VO\Email          $email
-	 * @param VO\StringVO       $nationality
+	 * @param VO\StringVO|null  $nationality
 	 * @param VO\StringVO|null  $street
 	 * @param VO\StringVO|null  $city
 	 * @param VO\StringVO|null  $state
@@ -82,6 +82,7 @@ class OffSessionRepository extends BaseRepository
 	 * @param VO\StringVO|null  $disability_text
 	 * @param VO\StringVO|null  $date_of_birth
 	 * @param VO\Integer|null   $weekly_learning_hours
+	 * @param VO\StringVO|null  $custom_fields
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -96,7 +97,7 @@ class OffSessionRepository extends BaseRepository
 		VO\StringVO $country_code,
 		VO\Integer $mobile_number,
 		VO\Email $email,
-		VO\StringVO $nationality,
+		VO\StringVO $nationality=null,
 		VO\StringVO $street = null,
 		VO\StringVO $city = null,
 		VO\StringVO $state = null,
@@ -109,7 +110,8 @@ class OffSessionRepository extends BaseRepository
 		VO\StringVO $further_notes = null,
 		VO\StringVO $disability_text = null,
 		VO\StringVO $date_of_birth = null,
-		VO\Integer $weekly_learning_hours=null
+		VO\Integer $weekly_learning_hours=null,
+		VO\StringVO $custom_fields=null
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -127,9 +129,12 @@ class OffSessionRepository extends BaseRepository
 			'country_code'      => $country_code->__toString(),
 			'mobile_number'     => $mobile_number->__toInteger(),
 			'email'             => $email->__toString(),
-			'nationality'       => $nationality-> __toString(),
 			'disability'        => $disability->__toInteger()
 		);
+
+		if(!is_null($nationality)){
+			$request_parameters['nationality'] = $nationality->__toString();
+		}
 
 		if(!is_null($street)){
 			$request_parameters['street'] = $street->__toString();
@@ -182,6 +187,10 @@ class OffSessionRepository extends BaseRepository
 		if(!is_null($weekly_learning_hours)){
 			$request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
 		}
+		if(!is_null($custom_fields)) {
+			$request_parameters['custom_fields'] = $custom_fields->__toString();
+		}
+
 		$response = $request->send($request_parameters, null);
 		$data = $response->get_data();
 
@@ -369,6 +378,4 @@ class OffSessionRepository extends BaseRepository
 
 		return $data;
 	}
-
-
 }
