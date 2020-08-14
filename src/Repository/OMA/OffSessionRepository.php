@@ -64,7 +64,7 @@ class OffSessionRepository extends BaseRepository
 	 * @param VO\OccupationID   $occupation_id
 	 * @param VO\MemberID|null  $assessor_id
 	 * @param VO\Name           $name
-	 * @param VO\StringVO       $gender
+	 * @param VO\StringVO|null  $gender
 	 * @param VO\StringVO       $country_code
 	 * @param VO\Integer        $mobile_number
 	 * @param VO\Email          $email
@@ -93,7 +93,7 @@ class OffSessionRepository extends BaseRepository
 		VO\OccupationID $occupation_id,
 		VO\MemberID $assessor_id = null,
 		VO\Name $name,
-		VO\StringVO $gender,
+		VO\StringVO $gender=null,
 		VO\StringVO $country_code,
 		VO\Integer $mobile_number,
 		VO\Email $email,
@@ -125,13 +125,15 @@ class OffSessionRepository extends BaseRepository
 			'occupation_id'     => $occupation_id->__toString(),
 			'first_name'        => $name->get_first_name()->__toString(),
 			'last_name'         => $name->get_last_name()->__toString(),
-			'gender'            => $gender->__toString(),
 			'country_code'      => $country_code->__toString(),
 			'mobile_number'     => $mobile_number->__toInteger(),
 			'email'             => $email->__toString(),
 			'disability'        => $disability->__toInteger()
 		);
 
+		if(!is_null($gender)){
+			$request_parameters['gender']       = $gender->__toString();
+		}
 		if(!is_null($nationality)){
 			$request_parameters['nationality'] = $nationality->__toString();
 		}
