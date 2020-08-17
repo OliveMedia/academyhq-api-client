@@ -82,7 +82,7 @@ class OffSessionRepository extends BaseRepository
 	 * @param VO\StringVO|null  $disability_text
 	 * @param VO\StringVO|null  $date_of_birth
 	 * @param VO\Integer|null   $weekly_learning_hours
-	 * @param VO\StringVO|null  $custom_fields
+	 * @param VO\StringVO|null  $custom_fields_data
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -111,7 +111,7 @@ class OffSessionRepository extends BaseRepository
 		VO\StringVO $disability_text = null,
 		VO\StringVO $date_of_birth = null,
 		VO\Integer $weekly_learning_hours=null,
-		VO\StringVO $custom_fields=null
+		VO\StringVO $custom_fields_data=null
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -189,8 +189,8 @@ class OffSessionRepository extends BaseRepository
 		if(!is_null($weekly_learning_hours)){
 			$request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
 		}
-		if(!is_null($custom_fields)) {
-			$request_parameters['custom_fields'] = $custom_fields->__toString();
+		if(!is_null($custom_fields_data)) {
+			$request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
 		}
 
 		$response = $request->send($request_parameters, null);
