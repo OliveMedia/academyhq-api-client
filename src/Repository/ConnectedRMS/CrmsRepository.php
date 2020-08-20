@@ -1004,4 +1004,32 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function ahq_update_member_details(
+		VO\MemberID $member_id,
+		VO\StringVO $first_name,
+		VO\StringVO $last_name,
+		VO\StringVO $profile_image_url=null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/update/member/details'),
+			new VO\HTTP\Method('post')
+		);
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'first_name' => $first_name->__toString(),
+			'last_name' => $last_name->__toString()
+		);
+		if(!empty($profile_image_url)) {
+			$request_parameters['profile_image_url'] =  $profile_image_url->__toString();
+		}
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+
+
 }
