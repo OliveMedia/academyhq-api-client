@@ -702,7 +702,8 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * @param VO\Integer|null   $phase
 	 * @param VO\StringVO|null  $phase_status
 	 * @param VO\StringVO|null  $search
-	 * @param VO\Integer   $current_page
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer|null   $is_export
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -716,7 +717,8 @@ class ConsultivaAdminRepository extends BaseRepository
 		VO\StringVO $phase_status = null,
 		VO\StringVO $search = null,
 		VO\Integer $per_page = null,
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		VO\Integer $is_export = null
 	){
 		$request = new Request(
 			new GuzzleClient,
@@ -742,6 +744,11 @@ class ConsultivaAdminRepository extends BaseRepository
 		if (!is_null($per_page)) {
 			$request_parameters['per_page'] = $per_page->__toInteger();
 		}
+
+		if(!is_null($is_export)){
+			$request_parameters['is_export'] = $is_export->__toInteger();
+		}
+
 		$request_parameters['current_page'] = $current_page->__toInteger();
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
@@ -1129,6 +1136,5 @@ class ConsultivaAdminRepository extends BaseRepository
         return $response->get_data();
 
     }
-
 
 }
