@@ -257,7 +257,7 @@ class OffSessionRepository extends BaseRepository
 	 * @param VO\MemberID|null    $assessor_id
 	 * @param VO\StringVO         $gender
 	 * @param VO\StringVO         $country_code
-	 * @param VO\Integer          $mobile_number
+	 * @param VO\StringVO         $mobile_number
 	 * @param VO\StringVO         $nationality
 	 * @param VO\StringVO|null    $street
 	 * @param VO\StringVO|null    $city
@@ -282,7 +282,7 @@ class OffSessionRepository extends BaseRepository
 		VO\MemberID $member_id,
 		VO\StringVO $gender,
 		VO\StringVO $country_code,
-		VO\Integer $mobile_number,
+		VO\StringVO $mobile_number,
 		VO\StringVO $nationality,
 		VO\Integer $disability,
 		VO\MemberID $assessor_id = null,
@@ -355,7 +355,7 @@ class OffSessionRepository extends BaseRepository
 
 
 		if(!is_null($mobile_number)){
-			$request_parameters['mobile_number'] = $mobile_number->__toInteger();
+			$request_parameters['mobile_number'] = $mobile_number->__toString();
 		}
 
 		if(!is_null($employment)){
