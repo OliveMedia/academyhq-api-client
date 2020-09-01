@@ -158,7 +158,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * @param VO\Name             $name
 	 * @param VO\StringVO         $gender
 	 * @param VO\StringVO         $country_code
-	 * @param VO\Integer          $mobile_number
+	 * @param VO\StringVO         $mobile_number
 	 * @param VO\Email            $email
 	 * @param VO\StringVO         $nationality
 	 * @param VO\StringVO|null    $street
@@ -187,7 +187,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\Name $name,
         VO\StringVO $gender,
         VO\StringVO $country_code,
-        VO\Integer $mobile_number,
+        VO\StringVO $mobile_number,
         VO\Email $email,
         VO\StringVO $nationality,
         VO\StringVO $street = null,
@@ -214,16 +214,16 @@ class ConsultivaAdminRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            'apprenticeship_id' => $apprenticeship_id->__toString(),
-            'organisation_id' => $organisation_id->__toString(),
-            'first_name' => $name->get_first_name()->__toString(),
-            'last_name' => $name->get_last_name()->__toString(),
-            'gender' => $gender->__toString(),
-            'country_code' => $country_code->__toString(),
-            'mobile_number' => $mobile_number->__toInteger(),
-            'email' => $email->__toString(),
-            'nationality' => $nationality-> __toString(),
-            'disability' => $disability->__toInteger()
+            'apprenticeship_id'     => $apprenticeship_id->__toString(),
+            'organisation_id'       => $organisation_id->__toString(),
+            'first_name'            => $name->get_first_name()->__toString(),
+            'last_name'             => $name->get_last_name()->__toString(),
+            'gender'                => $gender->__toString(),
+            'country_code'          => $country_code->__toString(),
+            'mobile_number'         => $mobile_number->__toString(),
+            'email'                 => $email->__toString(),
+            'nationality'           => $nationality-> __toString(),
+            'disability'            => $disability->__toInteger()
         );
 
         if(!is_null($street)){
@@ -389,7 +389,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * @param VO\MemberID|null    $assessor_id
 	 * @param VO\StringVO         $gender
 	 * @param VO\StringVO         $country_code
-	 * @param VO\Integer          $mobile_number
+	 * @param VO\StringVO         $mobile_number
 	 * @param VO\StringVO         $nationality
 	 * @param VO\StringVO|null    $street
 	 * @param VO\StringVO|null    $city
@@ -417,7 +417,7 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\MemberID $assessor_id=null,
         VO\StringVO $gender,
         VO\StringVO $country_code,
-        VO\Integer $mobile_number,
+        VO\StringVO $mobile_number,
         VO\StringVO $nationality,
         VO\StringVO $street = null,
         VO\StringVO $city = null,
@@ -443,11 +443,11 @@ class ConsultivaAdminRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            'apprenticeship_id' => $apprenticeship_id->__toString(),
-            'organisation_id' => $organisation_id->__toString(),
-            'member_id' => $member_id->__toString(),
-            'nationality' => $nationality-> __toString(),
-            'disability' => $disability->__toInteger()
+            'apprenticeship_id'     => $apprenticeship_id->__toString(),
+            'organisation_id'       => $organisation_id->__toString(),
+            'member_id'             => $member_id->__toString(),
+            'nationality'           => $nationality-> __toString(),
+            'disability'            => $disability->__toInteger()
         );
 
         if(!is_null($street)){
@@ -492,7 +492,7 @@ class ConsultivaAdminRepository extends BaseRepository
 
 
         if(!is_null($mobile_number)){
-            $request_parameters['mobile_number'] = $mobile_number->__toInteger();
+            $request_parameters['mobile_number'] = $mobile_number->__toString();
         }
 
         if(!is_null($employment)){
