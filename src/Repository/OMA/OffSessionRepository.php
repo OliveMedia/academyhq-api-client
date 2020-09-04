@@ -380,27 +380,4 @@ class OffSessionRepository extends BaseRepository
 
 		return $data;
 	}
-
-	/*
-		Fetch all enrolments completed after the last_sent_at date under provided organisation
-		@params : organisation_id, last_sent_at
-	*/
-	public function recentEnrolments(
-        VO\Integer $organisation_id,
-        VO\StringVO $last_sent_at
-        ){
-        $request = new Request(
-                new GuzzleClient,
-                $this->credentials,
-                VO\HTTP\Url::fromNative($this->base_url . '/out_session/recent/enrolments'),
-                new VO\HTTP\Method('POST')
-            );
-        $request_parameters = array(
-            'organisation_id' => $organisation_id->__toInteger(),
-            'last_sent_at' => $last_sent_at->__toString(),
-        );
-        $response = $request->send($request_parameters);
-        $data = $response->get_data();
-        return $data;
-    }
 }
