@@ -1310,11 +1310,15 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 	}
 
+	/*
+		Add admin to an employer
+	*/
 	public function addConsultant(
         VO\Token $token,
         VO\Name $name,
         VO\Email $email,
         VO\Integer $organisation_id,
+		VO\StringVO $profile_picture = null,
         VO\Integer $is_assessor = null,
         VO\Integer $is_verifier = null,
         VO\Integer $is_mentor = null
@@ -1335,6 +1339,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'organisation_id' => $organisation_id->__toInteger()
         );
 
+        if(!is_null($profile_picture)){
+            $request_parameters['profile_picture']=$profile_picture->__toString();
+        }
+
         if(!is_null($is_assessor)){
             $request_parameters['is_assessor']=$is_assessor->__toInteger();
         }
@@ -1351,6 +1359,42 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         $data = $response->get_data();
 
+        return $data;
+    }
+
+    /*
+		List Employer Admins
+    */
+
+    public function listAdmins(
+        VO\Token $token,
+        VO\Integer $employerId,
+        VO\Integer $per_page = null,
+        VO\Integer $current_page = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/employer/admins'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'employerId' => $employerId->__toInteger()
+        );
+
+        if(!is_null($per_page)){
+            $request_parameters['per_page']=$per_page->__toInteger();
+        }
+
+        if(!is_null($current_page)){
+            $request_parameters['current_page']=$current_page->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
         return $data;
     }
 }
