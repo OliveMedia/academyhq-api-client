@@ -413,19 +413,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'name' => $name->__toString()
+			'name'              => $name->__toString(),
+			'should_start_by'   => !is_null($should_start_by) ? $should_start_by->__toString() : '',
+			'should_end_by'     => !is_null($should_end_by) ? $should_end_by->__toString() : ''
 		);
 
 		if(!is_null($description)){
 			$request_parameters['description'] = $description->__toString();
-		}
-
-		if(!is_null($should_start_by)){
-			$request_parameters['should_start_by'] = $should_start_by->__toString();
-		}
-
-		if(!is_null($should_end_by)){
-			$request_parameters['should_end_by'] = $should_end_by->__toString();
 		}
 
 		if(!is_null($off_the_job_training)){
