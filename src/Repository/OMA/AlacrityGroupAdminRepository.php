@@ -202,7 +202,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			new VO\HTTP\Method('POST')
 		);
 
-		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$lang = \Session::exists('lang') ? \Session::get('lang') : null;
+		$header_parameters = array('Authorization' => $token->__toEncodedString(), 'lang'=> @$lang);
 
 		$request_parameters = array(
 			'email'         => $email->__toString(),
@@ -1323,7 +1324,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
             VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/add/consultant'),
             new VO\HTTP\Method('POST')
         );
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        
+        $lang = \Session::exists('lang') ? \Session::get('lang') : null;
+		$header_parameters = array('Authorization' => $token->__toEncodedString(), 'lang'=> @$lang);
 
         $request_parameters = array(
 
