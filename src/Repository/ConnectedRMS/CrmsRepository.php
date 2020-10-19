@@ -1031,5 +1031,36 @@ class CrmsRepository extends BaseRepository{
 	}
 
 
+	public function ahq_update_branding_details(
+		VO\OrganisationID $ahq_id,
+		VO\StringVO $branding_logo_url =null,
+		VO\StringVO $background_url =null,
+		VO\StringVO $branding_hex = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/update/branding/details'),
+			new VO\HTTP\Method('post')
+		);
+		$request_parameters = array(
+			'ahq_id' => $ahq_id->__toString(),
+		);
+		if(!empty($branding_logo_url)) {
+			$request_parameters['branding_logo_url'] =  $branding_logo_url->__toString();
+		}
+		if(!empty($background_url)) {
+			$request_parameters['background_url'] =  $background_url->__toString();
+		}
+		if(!empty($branding_hex)) {
+			$request_parameters['branding_hex'] =  $branding_hex->__toString();
+		}
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+
 
 }
