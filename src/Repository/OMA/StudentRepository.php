@@ -763,11 +763,11 @@ class StudentRepository extends BaseRepository
 	 * Edit Profile Details
 	 * @param VO\Token         $token
 	 * @param VO\Name          $name
-	 * @param VO\StringVO      $gender
+	 * @param VO\StringVO|null $gender
 	 * @param VO\StringVO      $country_code
 	 * @param VO\StringVO      $mobile_number
 	 * @param VO\Email         $email
-	 * @param VO\StringVO      $nationality
+	 * @param VO\StringVO|null $nationality
 	 * @param VO\Integer       $disability
 	 * @param VO\StringVO|null $street
 	 * @param VO\StringVO|null $city
@@ -780,19 +780,19 @@ class StudentRepository extends BaseRepository
 	 * @param VO\StringVO|null $disability_text
 	 * @param VO\StringVO|null $date_of_birth
 	 * @param VO\Integer|null  $weekly_learning_hours
+	 * @param VO\StringVO|null $custom_fields_data
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
-	 * @throws VO\Exception\MethodNotAllowedException
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
     public function edit_profile_details(
 	    VO\Token $token,
 	    VO\Name $name,
-	    VO\StringVO $gender,
+	    VO\StringVO $gender=null,
 	    VO\StringVO $country_code,
 	    VO\StringVO $mobile_number,
 	    VO\Email $email,
-	    VO\StringVO $nationality,
+	    VO\StringVO $nationality=null,
 	    VO\Integer $disability,
 	    VO\StringVO $street = null,
 	    VO\StringVO $city = null,
@@ -804,7 +804,8 @@ class StudentRepository extends BaseRepository
 	    VO\StringVO $further_notes = null,
 	    VO\StringVO $disability_text = null,
 	    VO\StringVO $date_of_birth = null,
-	    VO\Integer $weekly_learning_hours=null
+	    VO\Integer $weekly_learning_hours=null,
+	    VO\StringVO $custom_fields_data = null
     )
     {
 	    $request = new Request(
@@ -819,13 +820,19 @@ class StudentRepository extends BaseRepository
 	    $request_parameters = array(
 		    'first_name'    => $name->get_first_name()->__toString(),
 		    'last_name'     => $name->get_last_name()->__toString(),
-		    'gender'        => $gender->__toString(),
 		    'country_code'  => $country_code->__toString(),
 		    'mobile_number' => $mobile_number->__toString(),
 		    'email'         => $email->__toString(),
-		    'nationality'   => $nationality-> __toString(),
 		    'disability'    => $disability->__toInteger()
 	    );
+
+	    if(!is_null($gender)){
+		    $request_parameters['gender'] = $gender->__toString();
+	    }
+
+	    if(!is_null($nationality)){
+		    $request_parameters['nationality'] = $nationality->__toString();
+	    }
 
 	    if(!is_null($street)){
 		    $request_parameters['street'] = $street->__toString();
@@ -870,6 +877,11 @@ class StudentRepository extends BaseRepository
 	    if(!is_null($weekly_learning_hours)){
 		    $request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
 	    }
+
+	    if(!is_null($custom_fields_data)) {
+		    $request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
+	    }
+
 	    $response = $request->send($request_parameters, $header_parameters);
 	    return $response->get_data();
     }

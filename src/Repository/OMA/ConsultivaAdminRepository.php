@@ -151,16 +151,17 @@ class ConsultivaAdminRepository extends BaseRepository
 
 
 	/**
+	 * Create Student
 	 * @param VO\Token            $token
 	 * @param VO\ApprenticeshipID $apprenticeship_id
 	 * @param VO\OrganisationID   $organisation_id
 	 * @param VO\MemberID|null    $assessor_id
 	 * @param VO\Name             $name
-	 * @param VO\StringVO         $gender
+	 * @param VO\StringVO|null    $gender
 	 * @param VO\StringVO         $country_code
 	 * @param VO\StringVO         $mobile_number
 	 * @param VO\Email            $email
-	 * @param VO\StringVO         $nationality
+	 * @param VO\StringVO|null    $nationality
 	 * @param VO\StringVO|null    $street
 	 * @param VO\StringVO|null    $city
 	 * @param VO\StringVO|null    $state
@@ -174,9 +175,9 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * @param VO\StringVO|null    $disability_text
 	 * @param VO\StringVO|null    $date_of_birth
 	 * @param VO\Integer|null     $weekly_learning_hours
+	 * @param VO\StringVO|null    $custom_fields_data
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
-	 * @throws VO\Exception\MethodNotAllowedException
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function create_student(
@@ -185,11 +186,11 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\OrganisationID $organisation_id,
         VO\MemberID $assessor_id=null,
         VO\Name $name,
-        VO\StringVO $gender,
+		VO\StringVO $gender=null,
         VO\StringVO $country_code,
         VO\StringVO $mobile_number,
         VO\Email $email,
-        VO\StringVO $nationality,
+		VO\StringVO $nationality=null,
         VO\StringVO $street = null,
         VO\StringVO $city = null,
         VO\StringVO $state = null,
@@ -202,7 +203,8 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\StringVO $further_notes = null,
         VO\StringVO $disability_text = null,
         VO\StringVO $date_of_birth = null,
-        VO\Integer $weekly_learning_hours=null
+        VO\Integer $weekly_learning_hours = null,
+		VO\StringVO $custom_fields_data = null
     ) {
         $request =new Request(
             new GuzzleClient,
@@ -219,13 +221,18 @@ class ConsultivaAdminRepository extends BaseRepository
             'organisation_id'       => $organisation_id->__toString(),
             'first_name'            => $name->get_first_name()->__toString(),
             'last_name'             => $name->get_last_name()->__toString(),
-            'gender'                => $gender->__toString(),
             'country_code'          => $country_code->__toString(),
             'mobile_number'         => $mobile_number->__toString(),
             'email'                 => $email->__toString(),
-            'nationality'           => $nationality-> __toString(),
             'disability'            => $disability->__toInteger()
         );
+
+		if(!is_null($gender)){
+			$request_parameters['gender']       = $gender->__toString();
+		}
+		if(!is_null($nationality)){
+			$request_parameters['nationality'] = $nationality->__toString();
+		}
 
         if(!is_null($street)){
             $request_parameters['street'] = $street->__toString();
@@ -278,6 +285,10 @@ class ConsultivaAdminRepository extends BaseRepository
         if(!is_null($weekly_learning_hours)){
             $request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
         }
+
+		if(!is_null($custom_fields_data)) {
+			$request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
+		}
 
         $response = $request->send($request_parameters, $header_parameters);
         
@@ -416,10 +427,10 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\OrganisationID $organisation_id,
         VO\MemberID $member_id,
         VO\MemberID $assessor_id=null,
-        VO\StringVO $gender,
+        VO\StringVO $gender=null,
         VO\StringVO $country_code,
         VO\StringVO $mobile_number,
-        VO\StringVO $nationality,
+        VO\StringVO $nationality=null,
         VO\StringVO $street = null,
         VO\StringVO $city = null,
         VO\StringVO $state = null,
@@ -432,7 +443,8 @@ class ConsultivaAdminRepository extends BaseRepository
         VO\StringVO $further_notes = null,
         VO\StringVO $disability_text = null,
         VO\StringVO $date_of_birth = null,
-        VO\Integer $weekly_learning_hours=null
+        VO\Integer $weekly_learning_hours=null,
+	    VO\StringVO $custom_fields_data = null
     ) {
         $request =new Request(
             new GuzzleClient,
@@ -447,7 +459,6 @@ class ConsultivaAdminRepository extends BaseRepository
             'apprenticeship_id'     => $apprenticeship_id->__toString(),
             'organisation_id'       => $organisation_id->__toString(),
             'member_id'             => $member_id->__toString(),
-            'nationality'           => $nationality-> __toString(),
             'disability'            => $disability->__toInteger()
         );
 
@@ -487,6 +498,10 @@ class ConsultivaAdminRepository extends BaseRepository
             $request_parameters['gender'] = $gender->__toString();
         }
 
+	    if(!is_null($nationality)){
+		    $request_parameters['nationality'] = $nationality->__toString();
+	    }
+
         if(!is_null($country_code)){
             $request_parameters['country_code'] = $country_code->__toString();
         }
@@ -511,6 +526,10 @@ class ConsultivaAdminRepository extends BaseRepository
         if(!is_null($weekly_learning_hours)){
             $request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
         }
+
+	    if(!is_null($custom_fields_data)) {
+		    $request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
+	    }
 
         $response = $request->send($request_parameters, $header_parameters);
 
