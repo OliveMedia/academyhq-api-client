@@ -1004,12 +1004,7 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
-	public function ahq_update_member_details(
-		VO\MemberID $member_id,
-		VO\StringVO $first_name,
-		VO\StringVO $last_name,
-		VO\StringVO $profile_image_url=null
-	)
+	public function ahq_update_member_details($params)
 	{
 		$request = new Request(
 			new GuzzleClient,
@@ -1018,12 +1013,19 @@ class CrmsRepository extends BaseRepository{
 			new VO\HTTP\Method('post')
 		);
 		$request_parameters = array(
-			'member_id' => $member_id->__toString(),
-			'first_name' => $first_name->__toString(),
-			'last_name' => $last_name->__toString()
+			'member_id' => $params['member_id']->__toString(),
 		);
-		if(!empty($profile_image_url)) {
-			$request_parameters['profile_image_url'] =  $profile_image_url->__toString();
+		if(!empty($params['first_name'])) {
+			$request_parameters['first_name'] =  $params['first_name']->__toString();
+		}
+		if(!empty($params['last_name'])) {
+			$request_parameters['last_name'] =  $params['last_name']->__toString();
+		}
+		if(!empty($params['profile_image_url'])) {
+			$request_parameters['profile_image_url'] =  $params['profile_image_url']->__toString();
+		}
+		if(!empty($params['email'])) {
+			$request_parameters['email'] =  $params['email']->__toString();
 		}
 		$response = $request->send($request_parameters);
 		$data = $response->get_data();
