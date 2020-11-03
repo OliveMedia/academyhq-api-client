@@ -1867,10 +1867,7 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return success message with member_id*/
 	$response = $crms_repository->ahq_update_member_details(
-		new \AcademyHQ\API\ValueObjects\MemberID('member_id'),
-		new \AcademyHQ\API\ValueObjects\StringVO('first_name'),
-		new \AcademyHQ\API\ValueObjects\StringVO('last_name'),
-		new \AcademyHQ\API\ValueObjects\StringVO('profile_imagge_url'),
+		$params
 	);
 </pre>
 
