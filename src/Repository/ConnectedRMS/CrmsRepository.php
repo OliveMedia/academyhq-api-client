@@ -1021,8 +1021,8 @@ class CrmsRepository extends BaseRepository{
 		if(!empty($params['last_name'])) {
 			$request_parameters['last_name'] =  $params['last_name']->__toString();
 		}
-		if(!empty($params['profile_image_url'])) {
-			$request_parameters['profile_image_url'] =  $params['profile_image_url']->__toString();
+		if(!empty($params['upload_file'])) {
+			$request_parameters['upload_file'] =  $params['upload_file']->__toString();
 		}
 		if(!empty($params['email'])) {
 			$request_parameters['email'] =  $params['email']->__toString();
