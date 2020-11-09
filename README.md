@@ -1875,10 +1875,18 @@ Client Library that allow third party to access AcademyHQ APIs.
 <pre>
 	/*@return success message with member_id*/
 	$response = $crms_repository->ahq_update_branding_details(
-		new VO\OrganisationID($request->ahq_id),
-        new VO\StringVO($request->branding_logo_url),
-        new VO\StringVO($request->background_url),
-        new VO\StringVO($request->branding_hex)
+		new VO\OrganisationID('ahq_id'),
+        new VO\StringVO('branding_logo_url'),
+        new VO\StringVO('background_url'),
+        new VO\StringVO('branding_hex')
+	);
+</pre>
+
+### 34> Deactivate organisation in AHQ
+<pre>
+	/*@return success message*/
+	$response = $crms_repository->organisation_deactivate(
+		new VO\OrganisationID('organisation_id')
 	);
 </pre>
 
