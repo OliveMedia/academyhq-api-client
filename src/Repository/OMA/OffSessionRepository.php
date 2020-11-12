@@ -252,25 +252,7 @@ class OffSessionRepository extends BaseRepository
 	/**
 	 * Create Member Apprenticeships
 	 * @param VO\ApprenticeshipID $apprenticeship_id
-	 * @param VO\OrganisationID   $organisation_id
 	 * @param VO\MemberID         $member_id
-	 * @param VO\MemberID|null    $assessor_id
-	 * @param VO\StringVO         $gender
-	 * @param VO\StringVO         $country_code
-	 * @param VO\StringVO         $mobile_number
-	 * @param VO\StringVO         $nationality
-	 * @param VO\StringVO|null    $street
-	 * @param VO\StringVO|null    $city
-	 * @param VO\StringVO|null    $state
-	 * @param VO\StringVO|null    $country
-	 * @param VO\StringVO|null    $postal_code
-	 * @param VO\Integer          $disability
-	 * @param VO\StringVO|null    $image
-	 * @param VO\MemberID|null    $verifier_id
-	 * @param VO\StringVO|null    $employment
-	 * @param VO\StringVO|null    $further_notes
-	 * @param VO\StringVO|null    $disability_text
-	 * @param VO\Integer|null     $weekly_learning_hours
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -278,25 +260,7 @@ class OffSessionRepository extends BaseRepository
 	 */
 	public function create_student_from_member(
 		VO\ApprenticeshipID $apprenticeship_id,
-		VO\OrganisationID $organisation_id,
-		VO\MemberID $member_id,
-		VO\StringVO $gender,
-		VO\StringVO $country_code,
-		VO\StringVO $mobile_number,
-		VO\StringVO $nationality,
-		VO\Integer $disability,
-		VO\MemberID $assessor_id = null,
-		VO\MemberID $verifier_id = null,
-		VO\StringVO $street = null,
-		VO\StringVO $city = null,
-		VO\StringVO $state = null,
-		VO\StringVO $country = null,
-		VO\StringVO $postal_code = null,
-		VO\StringVO $image = null,
-		VO\StringVO $employment = null,
-		VO\StringVO $further_notes = null,
-		VO\StringVO $disability_text = null,
-		VO\Integer $weekly_learning_hours=null
+		VO\MemberID $member_id
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -307,72 +271,8 @@ class OffSessionRepository extends BaseRepository
 
 		$request_parameters = array(
 			'apprenticeship_id' => $apprenticeship_id->__toString(),
-			'organisation_id'   => $organisation_id->__toString(),
-			'member_id'         => $member_id->__toString(),
-			'nationality'       => $nationality-> __toString(),
-			'disability'        => $disability->__toInteger()
+			'member_id'         => $member_id->__toString()
 		);
-
-		if(!is_null($street)){
-			$request_parameters['street'] = $street->__toString();
-		}
-
-		if(!is_null($city)){
-			$request_parameters['city'] = $city->__toString();
-		}
-
-		if(!is_null($state)){
-			$request_parameters['state'] = $state->__toString();
-		}
-
-		if(!is_null($country)){
-			$request_parameters['country'] = $country->__toString();
-		}
-
-		if(!is_null($postal_code)){
-			$request_parameters['postal_code'] = $postal_code->__toString();
-		}
-
-		if(!is_null($image)){
-			$request_parameters['image'] = $image->__toString();
-		}
-
-		if(!is_null($assessor_id)){
-			$request_parameters['assessor_id'] = $assessor_id->__toString();
-		}
-
-		if(!is_null($verifier_id)){
-			$request_parameters['verifier_id'] = $verifier_id->__toString();
-		}
-
-		if(!is_null($gender)){
-			$request_parameters['gender'] = $gender->__toString();
-		}
-
-		if(!is_null($country_code)){
-			$request_parameters['country_code'] = $country_code->__toString();
-		}
-
-
-		if(!is_null($mobile_number)){
-			$request_parameters['mobile_number'] = $mobile_number->__toString();
-		}
-
-		if(!is_null($employment)){
-			$request_parameters['employment'] = $employment->__toString();
-		}
-
-		if(!is_null($further_notes)){
-			$request_parameters['further_notes'] = $further_notes->__toString();
-		}
-
-		if(!is_null($disability_text)){
-			$request_parameters['disability_text'] = $disability_text->__toString();
-		}
-
-		if(!is_null($weekly_learning_hours)){
-			$request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
-		}
 
 		$response = $request->send($request_parameters, null);
 
