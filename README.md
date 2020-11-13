@@ -1890,6 +1890,22 @@ Client Library that allow third party to access AcademyHQ APIs.
 	);
 </pre>
 
+### 35> Delete member in AHQ
+<pre>
+	/*@return success message*/
+	$response = $crms_repository->member_delete(
+		new VO\MemberID('member_id')
+	);
+</pre>
+
+### 36> Restore member in AHQ
+<pre>
+	/*@return success message*/
+	$response = $crms_repository->member_restore(
+		new VO\MemberID('member_id')
+	);
+</pre>
+
 ## Using Course Api Repository
 
 ### 1> Fetch All Organisation Licenses

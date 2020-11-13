@@ -1082,4 +1082,42 @@ class CrmsRepository extends BaseRepository{
 		return $data;
 	}
 
+	public function member_delete(
+		VO\MemberID $member_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/delete'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString()
+		);
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	public function member_restore(
+		VO\MemberID $member_id
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->get_url().'/member/restore'),
+			new VO\HTTP\Method('post')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString()
+		);
+		$response = $request->send($request_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
 }
