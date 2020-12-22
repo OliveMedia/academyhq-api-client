@@ -213,8 +213,7 @@ class ConsultivaAdminRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
-        $lang = \Session::exists('lang') ? \Session::get('lang') : null;
-        $header_parameters = array('Authorization' => $token->__toEncodedString(), 'lang'=> @$lang);
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
             'apprenticeship_id'     => $apprenticeship_id->__toString(),

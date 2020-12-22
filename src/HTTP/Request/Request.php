@@ -59,7 +59,8 @@ class Request implements iRequest
             $query['app_signature'] = $this->generate_app_signature($this->url, $this->credentials->get_secret_key(), $query);
 
             $headers = array(
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
+                'lang'  => $this->credentials->get_lang()
             );
 
             if ($header_parameters) {
@@ -99,7 +100,8 @@ class Request implements iRequest
 
             $headers = array(
                 'Accept' => 'application/json',
-                'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]"
+                'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]",
+                'lang'  => $this->credentials->get_lang()
 
             );
 
@@ -139,7 +141,8 @@ class Request implements iRequest
             $multipart['app_signature'] = $this->generate_app_signature($this->url, $this->credentials->get_secret_key(), $multipart);
 
             $headers = array(
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
+                'lang'  => $this->credentials->get_lang()
             );
 
             if ($header_parameters) {
