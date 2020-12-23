@@ -280,4 +280,28 @@ class OffSessionRepository extends BaseRepository
 
 		return $data;
 	}
+
+	/**
+	 * @param VO\OccupationID $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function get_occupation_program_details(
+		VO\OccupationID $occupation_id
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/out_session/occupation/program/details'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'occupation_id'     => $occupation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters, null);
+		$data = $response->get_data();
+		return $data;
+	}
 }
