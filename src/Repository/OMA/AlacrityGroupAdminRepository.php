@@ -1392,4 +1392,34 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
+    
+    public function occupation_publish_for_public(
+    	VO\Token $token,
+    	VO\OccupationID $occupation_id,
+    	VO\StringVO $price,
+		VO\Integer $vat,
+		VO\StringVO $currency,
+		VO\Flag $publish
+    ){
+    	$request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/publish/occupation/for/public'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'occupation_id' => $occupation_id->__toString(),
+            'price' => $price->__toString(),
+            'vat' => $vat->__toInteger(),
+            'currency' => $currency->__toString(),
+            'publish' => $publish->__toBool(),
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+        return $data;
+    }
 }

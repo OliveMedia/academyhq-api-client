@@ -1156,4 +1156,35 @@ class ConsultivaAdminRepository extends BaseRepository
 
     }
 
+    public function addQualityAssessor(
+        VO\Token $token,
+        VO\OrganisationID $organisation_id,
+        VO\Name $name,
+        VO\Email $email,
+        VO\Flag $is_internal,
+        VO\StringVO $profile_picture = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/add/quality-assessor'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'organisation_id' => $organisation_id->__toString(),
+            'first_name'      => $name->get_first_name()->__toString(),
+            'last_name'       => $name->get_last_name()->__toString(),
+            'email'           => $email->__toString(),
+            'is_internal'     => $is_internal->__toBool()
+        );
+
+        if(!is_null($profile_picture)){
+            $request_parameters['profile_picture'] = $profile_picture->__toString();
+        }
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+    }
+
 }
