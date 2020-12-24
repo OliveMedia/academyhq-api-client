@@ -1399,7 +1399,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
     	VO\StringVO $price,
 		VO\Integer $vat,
 		VO\StringVO $currency,
-		VO\Flag $publish
+		VO\Flag $publish = null 
     ){
     	$request = new Request(
             new GuzzleClient,
@@ -1414,8 +1414,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
             'price' => $price->__toString(),
             'vat' => $vat->__toInteger(),
             'currency' => $currency->__toString(),
-            'publish' => $publish->__toBool(),
         );
+        if(!is_null($publish)){
+            $request_parameters['publish'] = $publish->__toBool();
+        }
 
         $response = $request->send($request_parameters, $header_parameters);
 
