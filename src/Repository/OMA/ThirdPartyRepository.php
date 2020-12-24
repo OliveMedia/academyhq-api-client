@@ -128,4 +128,70 @@ class ThirdPartyRepository extends BaseRepository
 
         return $data;
     }
+
+
+    /*
+    Parameters :
+        @current_page : num | null
+        @per_page : num | null
+        @direction : asc | desc | null
+        @sort_by : name | created_at | null
+        @search : student's name | null
+        @status : active | inactive | null
+        @program : program's name | null
+        @employer : employer's name | null
+    */
+    public function listApprentices(
+        VO\Integer $current_page,
+        VO\Integer $per_page,
+        VO\StringVO $direction = null,
+        VO\StringVO $sort_by = null,
+        VO\StringVO $search = null,
+        VO\StringVO $status = null,
+        VO\StringVO $program = null,
+        VO\StringVO $employer = null
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/list/apprentices'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'current_page' => $current_page->__toInteger(),
+            'per_page' => $per_page->__toInteger(),
+        );
+
+        if ($direction) {
+            $request_parameters['direction'] = $direction->__toString();
+        }
+
+        if ($sort_by) {
+            $request_parameters['sort_by'] = $sort_by->__toString();
+        }
+
+        if ($search) {
+            $request_parameters['search'] = $search->__toString();
+        }
+
+        if ($status) {
+            $request_parameters['status'] = $status->__toString();
+        }
+
+        if ($program) {
+            $request_parameters['program'] = $program->__toString();
+        }
+
+        if ($employer) {
+            $request_parameters['employer'] = $employer->__toString();
+        }
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
