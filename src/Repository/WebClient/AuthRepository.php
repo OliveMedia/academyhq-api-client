@@ -41,6 +41,30 @@ class AuthRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function login_cross_organisation(
+		VO\Username $username,
+		VO\Password $password
+	) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/login/cross-organisation'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'username' => $username->__toEncodedString(),
+			'password' => $password->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function login_to_academy(
 		VO\Username $username,
 		VO\Password $password
@@ -74,6 +98,30 @@ class AuthRepository extends BaseRepository {
 			new GuzzleClient,
 			$this->credentials,
 			VO\HTTP\Url::fromNative($this->base_url.'/auth/login/from/email'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toEncodedString(),
+			'password' => $password->__toEncodedString()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
+	public function login_from_email_cross_organisation(
+		VO\Email $email,
+		VO\Password $password
+	) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/login/from/email/cross-organisation'),
 			new VO\HTTP\Method('POST')
 		);
 

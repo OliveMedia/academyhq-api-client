@@ -304,4 +304,24 @@ class OffSessionRepository extends BaseRepository
 		$data = $response->get_data();
 		return $data;
 	}
+
+	public function licenseCheckOrMake(
+		VO\OrganisationID $organisation,
+		VO\CourseIDArray $courses_ids
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/out_session/checkOrMake/license'),
+			new VO\HTTP\Method('POST')
+		);
+		$request_parameters = array(
+			'organisation'     	=> $organisation->__toString(),
+			'courses_ids'		=> $courses_ids->__toArray()
+		);
+
+		$response = $request->send($request_parameters, null);
+		$data = $response->get_data();
+		return $data;
+	}
 }
