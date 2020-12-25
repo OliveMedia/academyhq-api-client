@@ -286,7 +286,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\StringVO $banner_description = null,
 		VO\StringVO $subject = null,
 		VO\StringVO $signature = null,
-		VO\StringVO $body = null
+		VO\StringVO $body = null,
+		VO\Flag $is_unlimited = null,
+		VO\OccupationID $parent_occupation_id = null,
+		VO\Integer $no_of_seats = null
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -328,6 +331,15 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($body)){
 			$request_parameters['body'] = $body->__toString();
+		}
+		if(!is_null($is_unlimited)){
+			$request_parameters['is_unlimited'] = $is_unlimited->__toBool();
+		}
+		if(!is_null($parent_occupation_id)){
+			$request_parameters['parent_occupation_id'] = $parent_occupation_id->__toString();
+		}
+		if(!is_null($no_of_seats)){
+			$request_parameters['no_of_seats'] = $no_of_seats->__toInteger();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
