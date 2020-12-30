@@ -1187,27 +1187,4 @@ class ConsultivaAdminRepository extends BaseRepository
         return $response->get_data();
     }
 
-    public function licenseCheckOrMake(
-        VO\Token $token,
-        VO\OrganisationID $organisation,
-        VO\CourseIDArray $courses_ids
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/checkOrMake/license'),
-            new VO\HTTP\Method('POST')
-        );
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $request_parameters = array(
-            'organisation'      => $organisation->__toString(),
-            'courses_ids'       => $courses_ids->__toArray()
-        );
-
-        $response = $request->send($request_parameters, null);
-        $data = $response->get_data();
-        return $data;
-    }
-
 }
