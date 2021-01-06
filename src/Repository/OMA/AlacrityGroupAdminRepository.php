@@ -379,6 +379,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	 * @param VO\Integer|null  $on_the_job_training_required_hours
 	 * @param VO\Integer|null  $off_the_job_training_usa
 	 * @param VO\Integer|null  $off_the_job_training_usa_required_hours
+	 * @param VO\Flag|null  $editable
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
@@ -415,7 +416,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $on_the_job_training = null,
 		VO\Integer $on_the_job_training_required_hours = null,
 		VO\Integer $off_the_job_training_usa = null,
-		VO\Integer $off_the_job_training_usa_required_hours = null
+		VO\Integer $off_the_job_training_usa_required_hours = null,
+		VO\Flag $editable = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -534,6 +536,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($off_the_job_training_usa_required_hours)){
 			$request_parameters['off_the_job_training_usa_required_hours'] = $off_the_job_training_usa_required_hours->__toInteger();
+		}
+		if(!is_null($editable)){
+			$request_parameters['editable'] = $editable->__toBool();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
