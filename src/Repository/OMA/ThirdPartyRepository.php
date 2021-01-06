@@ -138,8 +138,8 @@ class ThirdPartyRepository extends BaseRepository
         @sort_by : name | created_at | null
         @search : student's name | null
         @status : active | inactive | null
-        @program : program's name | null
-        @employer : employer's name | null
+        @program : program id | null
+        @employer : employer id | null
     */
     public function listApprentices(
         VO\Integer $current_page,
@@ -174,6 +174,53 @@ class ThirdPartyRepository extends BaseRepository
 
         if ($search) {
             $request_parameters['search'] = $search->__toString();
+        }
+
+        if ($status) {
+            $request_parameters['status'] = $status->__toString();
+        }
+
+        if ($program) {
+            $request_parameters['program'] = $program->__toString();
+        }
+
+        if ($employer) {
+            $request_parameters['employer'] = $employer->__toString();
+        }
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+    /*
+    Parameters :
+        @status : active | inactive | null
+        @program : program id | null
+        @employer : employer id | null
+    */
+    public function counter(
+        VO\StringVO $published = null,
+        VO\StringVO $status = null,
+        VO\StringVO $program = null,
+        VO\StringVO $employer = null
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/counter'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+        );
+
+        if ($published) {
+            $request_parameters['published'] = $published->__toString();
         }
 
         if ($status) {
