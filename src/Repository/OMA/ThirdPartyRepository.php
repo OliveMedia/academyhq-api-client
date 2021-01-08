@@ -294,4 +294,30 @@ class ThirdPartyRepository extends BaseRepository
 
         return $data;
     }
+
+    /*
+    Parameters :
+        @username : username | email
+    */
+    public function listApprenticeOrganisations(
+        VO\StringVO $username
+    ) {
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/list/apprentice/organisations'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'username' => $username->__toString()
+        );
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
