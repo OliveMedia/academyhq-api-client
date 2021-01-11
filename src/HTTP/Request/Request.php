@@ -60,7 +60,8 @@ class Request implements iRequest
 
             $headers = array(
                 'Accept' => 'application/json',
-                'lang'  => $this->credentials->get_lang()
+                'lang'  => $this->credentials->get_lang(),
+                'client_lang'  => $this->credentials->get_client_lang()
             );
 
             if ($header_parameters) {
@@ -101,7 +102,8 @@ class Request implements iRequest
             $headers = array(
                 'Accept' => 'application/json',
                 'Origin' => (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]",
-                'lang'  => $this->credentials->get_lang()
+                'lang'  => $this->credentials->get_lang(),
+                'client_lang'  => $this->credentials->get_client_lang()
 
             );
 
