@@ -113,6 +113,32 @@ class AuthRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function login_from_duplicate_email(
+		VO\Email $email,
+		VO\Password $password,
+		VO\Integer $organisationId
+	) {
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/login/from/duplicate/email'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toEncodedString(),
+			'password' => $password->__toEncodedString(),
+			'organisation_id' => $organisationId->__toInteger()
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function login_from_email_cross_organisation(
 		VO\Email $email,
 		VO\Password $password
