@@ -1481,49 +1481,4 @@ class AlacrityGroupAdminRepository extends BaseRepository
         return $data;
     }
 
-    public function checkOccupationExist(
-        VO\Token $token,
-        VO\OrganisationID $organisation_id,
-        VO\OccupationID $parent_occupation_id
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/check/occupation/exist'),
-            new VO\HTTP\Method('POST')
-        );
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $request_parameters = array(
-            'organisation_id'      => $organisation_id->__toString(),
-            'parent_occupation_id' => $parent_occupation_id->__toString()
-        );
-
-        $response = $request->send($request_parameters, $header_parameters);
-        $data = $response->get_data();
-        return $data;
-    }
-
-    public function addOccupationSeat(
-        VO\Token $token,
-        VO\OccupationID $occupation_id,
-        VO\Integer $total_seats
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/add/occupation/seat'),
-            new VO\HTTP\Method('POST')
-        );
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-
-        $request_parameters = array(
-            'occupation_id'     => $occupation_id->__toString(),
-            'total_seats'		=> $total_seats->__toInteger()
-        );
-
-        $response = $request->send($request_parameters, $header_parameters);
-        $data = $response->get_data();
-        return $data;
-    }
 }

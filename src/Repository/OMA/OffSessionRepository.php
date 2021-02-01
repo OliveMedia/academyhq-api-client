@@ -304,4 +304,47 @@ class OffSessionRepository extends BaseRepository
 		$data = $response->get_data();
 		return $data;
 	}
+
+
+	public function checkOccupationExist(
+        VO\OrganisationID $organisation_id,
+        VO\OccupationID $parent_occupation_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/out_session/check/occupation/exist'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'organisation_id'      => $organisation_id->__toString(),
+            'parent_occupation_id' => $parent_occupation_id->__toString()
+        );
+
+        $response = $request->send($request_parameters, null);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    public function addOccupationSeat(
+        VO\OccupationID $occupation_id,
+        VO\Integer $total_seats
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/out_session/add/occupation/seat'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'occupation_id'     => $occupation_id->__toString(),
+            'total_seats'		=> $total_seats->__toInteger()
+        );
+
+        $response = $request->send($request_parameters, null);
+        $data = $response->get_data();
+        return $data;
+    }
 }
