@@ -291,7 +291,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\OccupationID $parent_occupation_id = null,
 		VO\Integer $no_of_seats = null,
 		VO\Integer $duration = null,
-		VO\Flag $lock_after_duration = null
+		VO\Flag $lock_after_duration = null,
+		VO\StringVO $start_duration_after = null
 	) {
 		$request =new Request(
 			new GuzzleClient,
@@ -348,6 +349,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($lock_after_duration)){
 			$request_parameters['lock_after_duration'] = $lock_after_duration->__toBool();
+		}
+		if(!is_null($start_duration_after)){
+			$request_parameters['start_duration_after'] = $start_duration_after->__toString();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
@@ -427,7 +431,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $off_the_job_training_usa_required_hours = null,
 		VO\Flag $editable = null,
 		VO\Integer $program_length = null,
-		VO\Flag $lock_after_program_length = null
+		VO\Flag $lock_after_program_length = null,
+		VO\StringVO $start_duration_after = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -555,6 +560,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 		if(!is_null($lock_after_program_length)){
 			$request_parameters['lock_after_program_length'] = $lock_after_program_length->__toBool();
+		}
+
+		if(!is_null($start_duration_after)){
+			$request_parameters['start_duration_after'] = $start_duration_after->__toString();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
