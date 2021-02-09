@@ -1187,4 +1187,48 @@ class ConsultivaAdminRepository extends BaseRepository
         return $response->get_data();
     }
 
+    public function updateMemberProgramDeadline(
+        VO\Token $token,
+        VO\MemberProgramID $member_program_id,
+        VO\StringVO $deadline
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/update/member-program/deadline'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'member_program_id' => $member_program_id->__toString(),
+            'deadline' => $deadline->__toString(),
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+
+    }
+
+    public function updateMemberapprenticeshipDeadline(
+        VO\Token $token,
+        VO\ID $member_apprenticeship_id,
+        VO\StringVO $deadline
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/consultiva/admin/update/member-apprenticeship/deadline'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toString(),
+            'deadline' => $deadline->__toString(),
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+
+    }
+
 }
