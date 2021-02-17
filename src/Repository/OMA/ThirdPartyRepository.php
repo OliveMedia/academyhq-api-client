@@ -87,6 +87,8 @@ class ThirdPartyRepository extends BaseRepository
         VO\StringVO $sort_by = null,
         VO\StringVO $search = null,
         VO\StringVO $status = null,
+        VO\StringVO $start_date = null,
+        VO\StringVO $end_date = null,
         VO\StringVO $is_published = null
     ) {
 
@@ -116,6 +118,14 @@ class ThirdPartyRepository extends BaseRepository
 
         if ($status) {
             $request_parameters['status'] = $status->__toString();
+        }
+
+        if ($start_date) {
+            $request_parameters['start_date'] = $start_date->__toString();
+        }
+
+        if ($end_date) {
+            $request_parameters['end_date'] = $end_date->__toString();
         }
 
         if (!is_null($is_published)) {
@@ -149,7 +159,9 @@ class ThirdPartyRepository extends BaseRepository
         VO\StringVO $search = null,
         VO\StringVO $status = null,
         VO\StringVO $program = null,
-        VO\StringVO $employer = null
+        VO\StringVO $employer = null,
+        VO\StringVO $start_date = null,
+        VO\StringVO $end_date = null
     ) {
 
         $request = new Request(
@@ -186,6 +198,14 @@ class ThirdPartyRepository extends BaseRepository
 
         if ($employer) {
             $request_parameters['employer'] = $employer->__toString();
+        }
+
+        if ($start_date) {
+            $request_parameters['start_date'] = $start_date->__toString();
+        }
+
+        if ($end_date) {
+            $request_parameters['end_date'] = $end_date->__toString();
         }
 
         $response = $request->send($request_parameters);
@@ -313,6 +333,76 @@ class ThirdPartyRepository extends BaseRepository
         $request_parameters = array(
             'username' => $username->__toString()
         );
+
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+    /*
+        Parameters :
+        @employer_id : employer_id
+        @program_id : program_id
+        @is_existing_member : is_existing_member
+        @member_id : member_id
+        @first_name : first_name
+        @last_name : last_name
+        @email_address : email_address
+        @profile_picture : profile_picture
+        @mobile_number : mobile_number
+    */
+    public function createApprentice(
+        VO\Integer $employer_id,
+        VO\Integer $program_id,
+        VO\Integer $is_existing_member=null,
+        VO\Integer $member_id=null,
+        VO\StringVO $first_name=null,
+        VO\StringVO $last_name=null,
+        VO\StringVO $email_address=null,
+        VO\StringVO $profile_picture=null,
+        VO\StringVO $mobile_number=null
+    ) {
+
+
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/create/apprentice'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'employer_id' => $employer_id->__toInteger(),
+            'program_id' => $program_id->__toInteger(),
+            'is_existing_member' => $is_existing_member->__toInteger()
+        );
+
+        if($member_id) {
+            $request_parameters['member_id'] = $member_id->__toInteger();
+        }
+
+        if($first_name) {
+            $request_parameters['first_name'] = $first_name->__toString();
+        }
+
+        if($last_name) {
+            $request_parameters['last_name'] = $last_name->__toString();
+        }
+
+        if($email_address) {
+            $request_parameters['email_address'] = $email_address->__toString();
+        }
+
+        if($profile_picture) {
+            $request_parameters['profile_picture'] = $profile_picture->__toString();
+        }
+
+        if($mobile_number) {
+            $request_parameters['mobile_number'] = $mobile_number->__toString();
+        }
 
         $response = $request->send($request_parameters);
 
