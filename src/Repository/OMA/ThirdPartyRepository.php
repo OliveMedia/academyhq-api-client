@@ -352,6 +352,7 @@ class ThirdPartyRepository extends BaseRepository
         @last_name : last_name
         @email_address : email_address
         @profile_picture : profile_picture
+        @country_code : country_code
         @mobile_number : mobile_number
     */
     public function createApprentice(
@@ -363,6 +364,7 @@ class ThirdPartyRepository extends BaseRepository
         VO\StringVO $last_name=null,
         VO\StringVO $email_address=null,
         VO\StringVO $profile_picture=null,
+        VO\StringVO $country_code=null,
         VO\StringVO $mobile_number=null
     ) {
 
@@ -398,6 +400,10 @@ class ThirdPartyRepository extends BaseRepository
 
         if($profile_picture) {
             $request_parameters['profile_picture'] = $profile_picture->__toString();
+        }
+
+        if($country_code) {
+            $request_parameters['country_code'] = $country_code->__toString();
         }
 
         if($mobile_number) {
