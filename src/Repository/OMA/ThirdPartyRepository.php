@@ -8,25 +8,37 @@ use Guzzle\Http\Client as GuzzleClient;
 use AcademyHQ\API\Repository\BaseRepository;
 use AcademyHQ\API\HTTP\Request\Request as Request;
 
+/**
+ * Class ThirdPartyRepository
+ *
+ * @package AcademyHQ\API\Repository\OMA
+ */
 class ThirdPartyRepository extends BaseRepository
 {
-    public function __construct(Credentials $credentials)
+	/**
+	 * ThirdPartyRepository constructor.
+	 *
+	 * @param Credentials $credentials
+	 */
+	public function __construct(Credentials $credentials)
     {
         parent::__construct();
         $this->credentials = $credentials;
         $this->base_url .= '/third-party';
     }
 
-    /*
-    Parameters :
-        @current_page : num | null
-        @per_page : num | null
-        @direction : asc | desc | null
-        @sort_by : name | created_at | null
-        @search : employer's name | null
-        @status : active | inactive | null
-    */
-    public function listEmployers(
+	/**
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $direction
+	 * @param VO\StringVO|null $sort_by
+	 * @param VO\StringVO|null $search
+	 * @param VO\StringVO|null $status
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listEmployers(
         VO\Integer $current_page,
         VO\Integer $per_page,
         VO\StringVO $direction = null,
@@ -34,17 +46,15 @@ class ThirdPartyRepository extends BaseRepository
         VO\StringVO $search = null,
         VO\StringVO $status = null
     ) {
-
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
             VO\HTTP\Url::fromNative($this->base_url . '/list/employers'),
             new VO\HTTP\Method('POST')
         );
-
         $request_parameters = array(
-            'current_page' => $current_page->__toInteger(),
-            'per_page' => $per_page->__toInteger(),
+            'current_page'  => $current_page->__toInteger(),
+            'per_page'      => $per_page->__toInteger(),
         );
 
         if ($direction) {
@@ -70,17 +80,21 @@ class ThirdPartyRepository extends BaseRepository
         return $data;
     }
 
-    /*
-    Parameters :
-        @current_page : num | null
-        @per_page : num | null
-        @direction : asc | desc | null
-        @sort_by : name | created_at | null
-        @search : employer's name | null
-        @status : active | inactive | null
-        @is_published : 1 | 0 | null
-    */
-    public function listPrograms(
+	/**
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $direction
+	 * @param VO\StringVO|null $sort_by
+	 * @param VO\StringVO|null $search
+	 * @param VO\StringVO|null $status
+	 * @param VO\StringVO|null $start_date
+	 * @param VO\StringVO|null $end_date
+	 * @param VO\StringVO|null $is_published
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listPrograms(
         VO\Integer $current_page,
         VO\Integer $per_page,
         VO\StringVO $direction = null,
@@ -100,8 +114,8 @@ class ThirdPartyRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'current_page' => $current_page->__toInteger(),
-            'per_page' => $per_page->__toInteger(),
+            'current_page'  => $current_page->__toInteger(),
+            'per_page'      => $per_page->__toInteger(),
         );
 
         if ($direction) {
@@ -139,19 +153,22 @@ class ThirdPartyRepository extends BaseRepository
         return $data;
     }
 
-
-    /*
-    Parameters :
-        @current_page : num | null
-        @per_page : num | null
-        @direction : asc | desc | null
-        @sort_by : name | created_at | null
-        @search : student's name | null
-        @status : active | inactive | null
-        @program : program id | null
-        @employer : employer id | null
-    */
-    public function listApprentices(
+	/**
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $direction
+	 * @param VO\StringVO|null $sort_by
+	 * @param VO\StringVO|null $search
+	 * @param VO\StringVO|null $status
+	 * @param VO\StringVO|null $program
+	 * @param VO\StringVO|null $employer
+	 * @param VO\StringVO|null $start_date
+	 * @param VO\StringVO|null $end_date
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listApprentices(
         VO\Integer $current_page,
         VO\Integer $per_page,
         VO\StringVO $direction = null,
@@ -172,8 +189,8 @@ class ThirdPartyRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'current_page' => $current_page->__toInteger(),
-            'per_page' => $per_page->__toInteger(),
+            'current_page'  => $current_page->__toInteger(),
+            'per_page'      => $per_page->__toInteger(),
         );
 
         if ($direction) {
@@ -215,20 +232,21 @@ class ThirdPartyRepository extends BaseRepository
         return $data;
     }
 
-
-    /*
-    Parameters :
-        @status : active | inactive | null
-        @program : program id | null
-        @employer : employer id | null
-    */
-    public function counter(
+	/**
+	 * @param VO\StringVO|null $published
+	 * @param VO\StringVO|null $status
+	 * @param VO\StringVO|null $program
+	 * @param VO\StringVO|null $employer
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function counter(
         VO\StringVO $published = null,
         VO\StringVO $status = null,
         VO\StringVO $program = null,
         VO\StringVO $employer = null
     ) {
-
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -236,8 +254,7 @@ class ThirdPartyRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
 
-        $request_parameters = array(
-        );
+        $request_parameters = array();
 
         if ($published) {
             $request_parameters['published'] = $published->__toString();
@@ -262,16 +279,18 @@ class ThirdPartyRepository extends BaseRepository
         return $data;
     }
 
-    /*
-    Parameters :
-        @current_page : num | null
-        @per_page : num | null
-        @direction : asc | desc | null
-        @sort_by : name | created_at | null
-        @search : employer's name | null
-        @member : member_id
-    */
-    public function listApprenticePrograms(
+	/**
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $direction
+	 * @param VO\StringVO|null $sort_by
+	 * @param VO\StringVO|null $search
+	 * @param VO\StringVO|null $member
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listApprenticePrograms(
         VO\Integer $current_page,
         VO\Integer $per_page,
         VO\StringVO $direction = null,
@@ -288,8 +307,8 @@ class ThirdPartyRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'current_page' => $current_page->__toInteger(),
-            'per_page' => $per_page->__toInteger(),
+            'current_page'  => $current_page->__toInteger(),
+            'per_page'      => $per_page->__toInteger(),
         );
 
         if ($direction) {
@@ -315,11 +334,13 @@ class ThirdPartyRepository extends BaseRepository
         return $data;
     }
 
-    /*
-    Parameters :
-        @username : username | email
-    */
-    public function listApprenticeOrganisations(
+	/**
+	 * @param VO\StringVO $username
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listApprenticeOrganisations(
         VO\StringVO $username
     ) {
 
@@ -341,21 +362,22 @@ class ThirdPartyRepository extends BaseRepository
         return $data;
     }
 
-
-    /*
-        Parameters :
-        @employer_id : employer_id
-        @program_id : program_id
-        @is_existing_member : is_existing_member
-        @member_id : member_id
-        @first_name : first_name
-        @last_name : last_name
-        @email_address : email_address
-        @profile_picture : profile_picture
-        @country_code : country_code
-        @mobile_number : mobile_number
-    */
-    public function createApprentice(
+	/**
+	 * @param VO\Integer       $employer_id
+	 * @param VO\Integer       $program_id
+	 * @param VO\Integer|null  $is_existing_member
+	 * @param VO\Integer|null  $member_id
+	 * @param VO\StringVO|null $first_name
+	 * @param VO\StringVO|null $last_name
+	 * @param VO\StringVO|null $email_address
+	 * @param VO\StringVO|null $profile_picture
+	 * @param VO\StringVO|null $country_code
+	 * @param VO\StringVO|null $mobile_number
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function createApprentice(
         VO\Integer $employer_id,
         VO\Integer $program_id,
         VO\Integer $is_existing_member=null,
@@ -367,8 +389,6 @@ class ThirdPartyRepository extends BaseRepository
         VO\StringVO $country_code=null,
         VO\StringVO $mobile_number=null
     ) {
-
-
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
@@ -377,9 +397,9 @@ class ThirdPartyRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'employer_id' => $employer_id->__toInteger(),
-            'program_id' => $program_id->__toInteger(),
-            'is_existing_member' => $is_existing_member->__toInteger()
+            'employer_id'           => $employer_id->__toInteger(),
+            'program_id'            => $program_id->__toInteger(),
+            'is_existing_member'    => $is_existing_member->__toInteger()
         );
 
         if($member_id) {
@@ -415,5 +435,54 @@ class ThirdPartyRepository extends BaseRepository
         $data = $response->get_data();
 
         return $data;
+    }
+
+	/**
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $direction
+	 * @param VO\StringVO|null $sort_by
+	 * @param VO\StringVO|null $search
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listResellingPrograms(
+	    VO\Integer $current_page,
+	    VO\Integer $per_page,
+	    VO\StringVO $direction = null,
+	    VO\StringVO $sort_by = null,
+	    VO\StringVO $search = null
+    ) {
+	    $request = new Request(
+		    new GuzzleClient,
+		    $this->credentials,
+		    VO\HTTP\Url::fromNative($this->base_url . '/list/reselling/programs'),
+		    new VO\HTTP\Method('POST')
+	    );
+
+	    $request_parameters = array(
+		    'current_page'  => $current_page->__toInteger(),
+		    'per_page'      => $per_page->__toInteger(),
+	    );
+
+	    if ($direction) {
+		    $request_parameters['direction'] = $direction->__toString();
+	    }
+
+	    if ($sort_by) {
+		    $request_parameters['sort_by'] = $sort_by->__toString();
+	    }
+
+	    if ($search) {
+		    $request_parameters['search'] = $search->__toString();
+	    }
+
+	    $response = $request->send($request_parameters);
+
+	    $data = $response->get_data();
+
+	    return $data;
+
     }
 }
