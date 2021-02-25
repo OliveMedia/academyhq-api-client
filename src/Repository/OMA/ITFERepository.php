@@ -75,4 +75,29 @@ class ITFERepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
+
+    /*
+        Optional program_id as array
+        get array of program_id with summative assessment phase's id
+    */
+    public function getProgramIdWithSummativeAsessmentPhase(
+        VO\StringVO $program_id =null
+    ) {
+        $request = new Request(
+                new GuzzleClient,
+                $this->credentials,
+                VO\HTTP\Url::fromNative($this->base_url . '/itfe/summative-assessments'),
+                new VO\HTTP\Method('POST')
+            );
+        $request_parameters = array();
+
+        if(isset($program_id)) {
+            $request_parameters['program_id'] = $program_id->__toEncodedString();
+        }
+
+
+        $response = $request->send($request_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
 }
