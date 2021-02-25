@@ -70,4 +70,71 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
+    
+    public function list_student(
+        VO\Token $token,
+        VO\Integer $current_page,
+        VO\StringVO $search = null,
+        VO\OrganisationID $organisation_id = null,
+        VO\ApprenticeshipID $apprenticeship_id = null,
+        VO\MemberID $assessor_id = null,
+        VO\MemberID $verifier_id = null,
+	    VO\OccupationID $occupation_id = null,
+		/**
+		 * @internal Added params to customize the number of students and sort orders
+		 */
+		VO\Integer $per_page = null,
+		VO\StringVO $order_by_field = null,
+		VO\StringVO $order_by_direction = null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/list/members'),
+            new VO\HTTP\Method('POST')
+        );
+
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search'            => $search ? $search->__toString() : '',
+            'current_page'      => $current_page->__toInteger(),
+            'organisation_id'   => $organisation_id ? $organisation_id->__toString() : '',
+            'apprenticeship_id' => $apprenticeship_id ? $apprenticeship_id->__toString() : ''
+        );
+
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id'] = $assessor_id->__toString();
+        }
+
+        if(!is_null($verifier_id)){
+            $request_parameters['verifier_id'] = $verifier_id->__toString();
+        }
+
+        if(!is_null($occupation_id)){
+        	$request_parameters['occupation_id'] = $occupation_id->__toString();
+        }
+
+		/**
+		 * @internal Added params to customize the number of students and sort orders
+		 */
+		if(!is_null($per_page)){
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+
+		if(!is_null($order_by_field)){
+			$request_parameters['order_by_field'] = $order_by_field->__toString();
+		}
+
+		if(!is_null($order_by_direction)){
+			$request_parameters['order_by_direction'] = $order_by_direction->__toString();
+		}
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
 }
