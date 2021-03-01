@@ -438,6 +438,7 @@ class ThirdPartyRepository extends BaseRepository
     }
 
 	/**
+	 * @param VO\OrganisationID $organisation_id
 	 * @param VO\Integer       $current_page
 	 * @param VO\Integer       $per_page
 	 * @param VO\StringVO|null $direction
@@ -448,6 +449,7 @@ class ThirdPartyRepository extends BaseRepository
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function listResellingPrograms(
+		VO\OrganisationID $organisation_id,
 	    VO\Integer $current_page,
 	    VO\Integer $per_page,
 	    VO\StringVO $direction = null,
@@ -462,8 +464,9 @@ class ThirdPartyRepository extends BaseRepository
 	    );
 
 	    $request_parameters = array(
-		    'current_page'  => $current_page->__toInteger(),
-		    'per_page'      => $per_page->__toInteger(),
+	    	'organisation_id'   => $organisation_id->__toString(),
+		    'current_page'      => $current_page->__toInteger(),
+		    'per_page'          => $per_page->__toInteger(),
 	    );
 
 	    if ($direction) {
