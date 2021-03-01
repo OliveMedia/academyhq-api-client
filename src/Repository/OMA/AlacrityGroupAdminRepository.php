@@ -432,7 +432,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Flag $editable = null,
 		VO\Integer $program_duration = null,
 		VO\Flag $lock_after_program_duration = null,
-		VO\StringVO $start_duration_after = null
+		VO\StringVO $start_duration_after = null,
+		VO\ProgramID $pre_program_id = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -565,6 +566,11 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($start_duration_after)){
 			$request_parameters['start_duration_after'] = $start_duration_after->__toString();
 		}
+
+		if(!is_null($pre_program_id)){
+			$request_parameters['pre_program_id'] = $pre_program_id->__toString();
+		}
+
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
