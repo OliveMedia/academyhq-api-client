@@ -75,7 +75,8 @@ class MSTeamRepository extends BaseRepository
         VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\Integer $is_published = null,
-        VO\OrganisationID $organisation_id = null
+        VO\OrganisationID $organisation_id = null,
+        VO\Integer $per_page = null,
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -98,7 +99,9 @@ class MSTeamRepository extends BaseRepository
         if (!is_null($organisation_id)) {
             $request_parameters['organisation_id']=$organisation_id->__toString();
         }
-
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
         $response = $request->send($request_parameters, $header_parameters);
 
         $data = $response->get_data();
