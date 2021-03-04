@@ -76,7 +76,7 @@ class MSTeamRepository extends BaseRepository
         VO\StringVO $search = null,
         VO\Integer $is_published = null,
         VO\OrganisationID $organisation_id = null,
-        VO\Integer $per_page = null,
+        VO\Integer $per_page = null
     ) {
         $request = new Request(
             new GuzzleClient,
