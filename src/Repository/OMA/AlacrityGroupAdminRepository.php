@@ -1447,7 +1447,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
     	VO\StringVO $price,
 		VO\Integer $vat,
 		VO\StringVO $currency,
-		VO\Flag $publish = null 
+		VO\Flag $publish = null,
+		VO\Flag $can_edit_email = null,
+		VO\Flag $disable_import = null
     ){
     	$request = new Request(
             new GuzzleClient,
@@ -1465,6 +1467,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
         );
         if(!is_null($publish)){
             $request_parameters['publish'] = $publish->__toBool();
+        }
+
+        if(!is_null($can_edit_email)){
+            $request_parameters['can_edit_email'] = $can_edit_email->__toBool();
+        }
+
+        if(!is_null($disable_import)){
+            $request_parameters['disable_import'] = $disable_import->__toBool();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
