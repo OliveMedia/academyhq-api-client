@@ -1483,6 +1483,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
         return $data;
     }
 
+	/**
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\CourseIDArray  $courses_ids
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
    	public function licenseCheckOrMake(
         VO\Token $token,
         VO\OrganisationID $organisation_id,
