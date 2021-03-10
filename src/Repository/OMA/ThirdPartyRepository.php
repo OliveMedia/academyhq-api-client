@@ -438,21 +438,25 @@ class ThirdPartyRepository extends BaseRepository
     }
 
 	/**
-	 * @param VO\Integer       $current_page
-	 * @param VO\Integer       $per_page
-	 * @param VO\StringVO|null $direction
-	 * @param VO\StringVO|null $sort_by
-	 * @param VO\StringVO|null $search
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer        $per_page
+	 * @param VO\StringVO|null  $direction
+	 * @param VO\StringVO|null  $sort_by
+	 * @param VO\StringVO|null  $search
+	 * @param VO\StringVO|null  $revenue_model
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function listResellingPrograms(
+		VO\OrganisationID $organisation_id,
 	    VO\Integer $current_page,
 	    VO\Integer $per_page,
 	    VO\StringVO $direction = null,
 	    VO\StringVO $sort_by = null,
-	    VO\StringVO $search = null
+	    VO\StringVO $search = null,
+	    VO\StringVO $revenue_model = null
     ) {
 	    $request = new Request(
 		    new GuzzleClient,
@@ -462,8 +466,9 @@ class ThirdPartyRepository extends BaseRepository
 	    );
 
 	    $request_parameters = array(
-		    'current_page'  => $current_page->__toInteger(),
-		    'per_page'      => $per_page->__toInteger(),
+	    	'organisation_id'   => $organisation_id->__toString(),
+		    'current_page'      => $current_page->__toInteger(),
+		    'per_page'          => $per_page->__toInteger(),
 	    );
 
 	    if ($direction) {
@@ -477,6 +482,10 @@ class ThirdPartyRepository extends BaseRepository
 	    if ($search) {
 		    $request_parameters['search'] = $search->__toString();
 	    }
+
+		if ($revenue_model) {
+			$request_parameters['revenue_model'] = $revenue_model->__toString();
+		}
 
 	    $response = $request->send($request_parameters);
 
