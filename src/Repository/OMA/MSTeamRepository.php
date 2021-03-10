@@ -116,8 +116,8 @@ class MSTeamRepository extends BaseRepository
         VO\OrganisationID $organisation_id = null,
         VO\ApprenticeshipID $apprenticeship_id = null,
         VO\MemberID $assessor_id = null,
-        VO\MemberID $verifier_id = null,
         VO\MemberID $member_id = null,
+        VO\MemberID $verifier_id = null,
 	    VO\OccupationID $occupation_id = null,
 		/**
 		 * @internal Added params to customize the number of students and sort orders
