@@ -191,7 +191,7 @@ class MSTeamRepository extends BaseRepository
         /**
          * @internal Added params to customize the number of students and sort orders
          */
-        VO\Integer $per_page = null,
+        VO\Integer $per_page = null
     ) {
         $request = new Request(
             new GuzzleClient,
