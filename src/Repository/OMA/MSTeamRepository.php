@@ -117,6 +117,7 @@ class MSTeamRepository extends BaseRepository
         VO\ApprenticeshipID $apprenticeship_id = null,
         VO\MemberID $assessor_id = null,
         VO\MemberID $verifier_id = null,
+        VO\MemberID $member_id = null,
 	    VO\OccupationID $occupation_id = null,
 		/**
 		 * @internal Added params to customize the number of students and sort orders
@@ -144,6 +145,9 @@ class MSTeamRepository extends BaseRepository
 
         if(!is_null($assessor_id)){
             $request_parameters['assessor_id'] = $assessor_id->__toString();
+        }
+         if(!is_null($member_id)){
+            $request_parameters['member_id'] = $member_id->__toString();
         }
 
         if(!is_null($verifier_id)){
