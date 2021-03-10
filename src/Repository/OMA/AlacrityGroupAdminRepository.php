@@ -215,7 +215,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			$request_parameters['tax_number'] = $tax_number->__toString();
 		}
 		if(!is_null($image_url)) {
-			$request_parameters['image_url'] = $image_url->__toString(); 
+			$request_parameters['image_url'] = $image_url->__toString();
 		}
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
@@ -433,7 +433,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Integer $program_duration = null,
 		VO\Flag $lock_after_program_duration = null,
 		VO\StringVO $start_duration_after = null,
-		VO\ProgramID $pre_program_id = null
+		VO\Integer $pre_program_id = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -443,10 +443,15 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 		$request_parameters = array(
-			'name'              => $name->__toString(),
-			'should_start_by'   => !is_null($should_start_by) ? $should_start_by->__toString() : '',
-			'should_end_by'     => !is_null($should_end_by) ? $should_end_by->__toString() : ''
+			'name'              => $name->__toString()
 		);
+		if(!is_null($should_start_by)) {
+			$request_parameters['should_start_by'] = $should_start_by->__toString();
+		}
+
+		if(!is_null($should_end_by)) {
+			$request_parameters['should_end_by'] = $should_end_by->__toString();
+		}
 
 		if(!is_null($description)){
 			$request_parameters['description'] = $description->__toString();
@@ -556,7 +561,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($editable)){
 			$request_parameters['editable'] = $editable->__toBool();
 		}
-		if(!is_null($program_duration)){
+		if(!is_null($program_duration)) {
 			$request_parameters['program_duration'] = $program_duration->__toInteger();
 		}
 		if(!is_null($lock_after_program_duration)){
@@ -568,7 +573,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		}
 
 		if(!is_null($pre_program_id)){
-			$request_parameters['pre_program_id'] = $pre_program_id->__toString();
+			$request_parameters['pre_program_id'] = $pre_program_id->__toInteger();
 		}
 
 		$response = $request->send($request_parameters, $header_parameters);
@@ -1255,7 +1260,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		$response = $request->send($request_parameters, $header_parameters);
 		$data     = $response->get_data();
 		return $data;
-		
+
 	}
 
 	/**
@@ -1371,7 +1376,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
             VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/add/consultant'),
             new VO\HTTP\Method('POST')
         );
-        
+
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
@@ -1440,7 +1445,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
         $data = $response->get_data();
         return $data;
     }
-    
+
     public function occupation_publish_for_public(
     	VO\Token $token,
     	VO\OccupationID $occupation_id,
