@@ -187,7 +187,11 @@ class MSTeamRepository extends BaseRepository
     public function ListConsultiva(
         VO\Token $token,
         VO\StringVO $search = null,
-        VO\Integer $current_page
+        VO\Integer $current_page,
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        VO\Integer $per_page = null,
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -202,6 +206,14 @@ class MSTeamRepository extends BaseRepository
             'search'        => $search ? $search->__toString() : '',
             'current_page'  => $current_page->__toInteger()
         );
+
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+
         $response = $request->send($request_parameters, $header_parameters);
 
         $data = $response->get_data();
