@@ -184,7 +184,7 @@ class MSTeamRepository extends BaseRepository
      * @throws VO\Exception\MethodNotAllowedException
      * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
      */
-    public function ListConsultiva(
+    public function ListEmployers(
         VO\Token $token,
         VO\StringVO $search = null,
         VO\Integer $current_page,
