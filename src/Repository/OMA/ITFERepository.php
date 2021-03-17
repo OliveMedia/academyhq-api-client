@@ -164,7 +164,8 @@ class ITFERepository extends BaseRepository
     */
     public function jrEnrolmentUpdate(
         VO\StringVO $itfe_employer_ids =null,
-        VO\StringVO $summative_asessment_ids =null
+        VO\StringVO $summative_asessment_ids =null,
+        VO\StringVO $days =null
     ){
         $request = new Request(
                 new GuzzleClient,
@@ -182,8 +183,8 @@ class ITFERepository extends BaseRepository
             $request_parameters['summative_asessment_ids'] = $summative_asessment_ids->__toString();
         }
 
-        if(isset($all)) {
-            $request_parameters['all'] = $all->__toString();
+        if(isset($days)) {
+            $request_parameters['days'] = $days->__toString();
         }
 
 
