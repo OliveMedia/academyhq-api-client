@@ -92,7 +92,99 @@ class ITFERepository extends BaseRepository
         $request_parameters = array();
 
         if(isset($program_id)) {
-            $request_parameters['program_id'] = $program_id->__toEncodedString();
+            $request_parameters['program_id'] = $program_id->__toString();
+        }
+
+
+        $response = $request->send($request_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    /*
+        Pass bulk members from itfe to ahq and check validation in ahq itself
+    */
+    public function addItfeLearner(
+        VO\StringVO $memberData =null
+    ){
+        $request = new Request(
+                new GuzzleClient,
+                $this->credentials,
+                VO\HTTP\Url::fromNative($this->base_url . '/itfe/add/bulk/learner'),
+                new VO\HTTP\Method('POST')
+            );
+        $request_parameters = array();
+
+        if(isset($memberData)) {
+            $request_parameters['memberData'] = $memberData->__toString();
+        }
+
+
+        $response = $request->send($request_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    /*
+        Enroll itfe learners to associated program
+    */
+    public function enrollItfeLearner(
+        VO\Integer $member_id =null,
+        VO\Integer $occupation_id =null,
+        VO\Integer $organisation_id =null
+    ){
+        $request = new Request(
+                new GuzzleClient,
+                $this->credentials,
+                VO\HTTP\Url::fromNative($this->base_url . '/itfe/learner/enroll'),
+                new VO\HTTP\Method('POST')
+            );
+        $request_parameters = array();
+
+        if(isset($member_id)) {
+            $request_parameters['member_id'] = $member_id->__toInteger();
+        }
+
+        if(isset($occupation_id)) {
+            $request_parameters['occupation_id'] = $occupation_id->__toInteger();
+        }
+
+        if(isset($organisation_id)) {
+            $request_parameters['organisation_id'] = $organisation_id->__toInteger();
+        }
+
+
+        $response = $request->send($request_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    /*
+        Get enrolments completed in ahq
+    */
+    public function jrEnrolmentUpdate(
+        VO\StringVO $itfe_employer_ids =null,
+        VO\StringVO $summative_asessment_ids =null,
+        VO\StringVO $days =null
+    ){
+        $request = new Request(
+                new GuzzleClient,
+                $this->credentials,
+                VO\HTTP\Url::fromNative($this->base_url . '/itfe/get/completed/enrolments'),
+                new VO\HTTP\Method('POST')
+            );
+        $request_parameters = array();
+
+        if(isset($itfe_employer_ids)) {
+            $request_parameters['itfe_employer_ids'] = $itfe_employer_ids->__toString();
+        }
+
+        if(isset($summative_asessment_ids)) {
+            $request_parameters['summative_asessment_ids'] = $summative_asessment_ids->__toString();
+        }
+
+        if(isset($days)) {
+            $request_parameters['days'] = $days->__toString();
         }
 
 

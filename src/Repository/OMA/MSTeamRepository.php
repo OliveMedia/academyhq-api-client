@@ -70,7 +70,45 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
-    
+    public function listOccupation(
+        VO\Token $token,
+        VO\Integer $current_page,
+        VO\StringVO $search = null,
+        VO\Integer $is_published = null,
+        VO\OrganisationID $organisation_id = null,
+        VO\Integer $per_page = null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/list/occupation'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search'        => $search ? $search->__toString() : '',
+            'current_page'  => $current_page->__toInteger(),
+        );
+
+        if (!is_null($is_published)) {
+            $request_parameters['is_published']=$is_published->__toInteger();
+        }
+
+        if (!is_null($organisation_id)) {
+            $request_parameters['organisation_id']=$organisation_id->__toString();
+        }
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
     public function list_student(
         VO\Token $token,
         VO\Integer $current_page,
@@ -78,6 +116,7 @@ class MSTeamRepository extends BaseRepository
         VO\OrganisationID $organisation_id = null,
         VO\ApprenticeshipID $apprenticeship_id = null,
         VO\MemberID $assessor_id = null,
+        VO\MemberID $member_id = null,
         VO\MemberID $verifier_id = null,
 	    VO\OccupationID $occupation_id = null,
 		/**
@@ -106,6 +145,9 @@ class MSTeamRepository extends BaseRepository
 
         if(!is_null($assessor_id)){
             $request_parameters['assessor_id'] = $assessor_id->__toString();
+        }
+         if(!is_null($member_id)){
+            $request_parameters['member_id'] = $member_id->__toString();
         }
 
         if(!is_null($verifier_id)){
@@ -136,5 +178,78 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
+    /**
+     * List Employer
+     * @param VO\Token         $token
+     * @param VO\StringVO|null $search
+     * @param VO\Integer       $current_page
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function ListEmployers(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $current_page,
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        VO\Integer $per_page = null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/list/employees'),
+            new VO\HTTP\Method('POST')
+        );
 
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search'        => $search ? $search->__toString() : '',
+            'current_page'  => $current_page->__toInteger()
+        );
+
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+    
+    /**
+	 * Get Program Phase Details
+	 * @param VO\Token   $token
+	 * @param VO\Integer $occupation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function occupation_program_details(
+        VO\Token $token,
+        VO\Integer $occupation_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/get/occupation/programs/details'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'occupation_id' => $occupation_id->__toInteger(),
+       );
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
 }
