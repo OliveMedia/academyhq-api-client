@@ -2,24 +2,38 @@
 
 namespace AcademyHQ\API\Repository;
 
-use AcademyHQ\API\ValueObjects as VO;
-use AcademyHQ\API\HTTP\Request\Request as Request;
 use Faker\Provider\Base;
-use Guzzle\Http\Client as GuzzleClient;
+use AcademyHQ\API\ValueObjects as VO;
 use AcademyHQ\API\Common\Credentials;
+use Guzzle\Http\Client as GuzzleClient;
+use AcademyHQ\API\HTTP\Request\Request as Request;
 
+/**
+ * Class EnrolmentRepository
+ *
+ * @package AcademyHQ\API\Repository
+ */
 class EnrolmentRepository extends BaseRepository
 {
-
+	/**
+	 * EnrolmentRepository constructor.
+	 *
+	 * @param Credentials $credentials
+	 */
     public function __construct(Credentials $credentials)
     {
         parent::__construct();
         $this->credentials = $credentials;
     }
 
-    /**
-     * @return enrolment_id
-     */
+	/**
+	 * @param VO\MemberID  $member_id
+	 * @param VO\LicenseID $license_id
+	 * @param VO\Flag|null $send_email
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function create(VO\MemberID $member_id, VO\LicenseID $license_id, VO\Flag $send_email = null)
     {
         $request = new Request(
@@ -44,7 +58,13 @@ class EnrolmentRepository extends BaseRepository
         return $data->enrolment_id;
     }
 
-    public function create_for_organisation(VO\MemberID $member_id)
+	/**
+	 * @param VO\MemberID $member_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function create_for_organisation(VO\MemberID $member_id)
     {
         $request = new Request(
             new GuzzleClient,
@@ -63,7 +83,15 @@ class EnrolmentRepository extends BaseRepository
         return $data->enrolment_ids;
     }
 
-    public function create_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array, VO\Flag $send_email = null) {
+	/**
+	 * @param VO\MemberID       $member_id
+	 * @param VO\LicenseIDArray $license_id_array
+	 * @param VO\Flag|null      $send_email
+	 *
+	 * @return array
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function create_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array, VO\Flag $send_email = null) {
 
         $request = new Request(
             new GuzzleClient,
@@ -94,7 +122,21 @@ class EnrolmentRepository extends BaseRepository
         return $enrolment_ids;
     }
 
-    public function create_offline_enrolment(VO\MemberID $member_id, VO\CourseId $course_id, VO\StringVO $file_name, VO\Integer $hrs, VO\Integer $mins, VO\Integer $sec, VO\StringVO $issued_at, VO\StringVO $expire_at, VO\Flag $send_email = null)
+	/**
+	 * @param VO\MemberID  $member_id
+	 * @param VO\CourseId  $course_id
+	 * @param VO\StringVO  $file_name
+	 * @param VO\Integer   $hrs
+	 * @param VO\Integer   $mins
+	 * @param VO\Integer   $sec
+	 * @param VO\StringVO  $issued_at
+	 * @param VO\StringVO  $expire_at
+	 * @param VO\Flag|null $send_email
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function create_offline_enrolment(VO\MemberID $member_id, VO\CourseId $course_id, VO\StringVO $file_name, VO\Integer $hrs, VO\Integer $mins, VO\Integer $sec, VO\StringVO $issued_at, VO\StringVO $expire_at, VO\Flag $send_email = null)
     {
         $request = new Request(
             new GuzzleClient,
@@ -124,10 +166,13 @@ class EnrolmentRepository extends BaseRepository
         return $data->enrolment_id;
     }
 
-    /**
-     * @return array of enrolment std objects
-     */
 
+	/**
+	 * @param VO\MemberID $member_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function get_all_for_member(VO\MemberID $member_id)
     {
         $member_id = $member_id->__toString();
@@ -144,10 +189,13 @@ class EnrolmentRepository extends BaseRepository
         return $data->enrolments;
     }
 
-    /**
-     * @return enrolment std object
-     */
 
+	/**
+	 * @param VO\EnrolmentID $enrolment_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function get(VO\EnrolmentID $enrolment_id)
     {
         $enrolment_id = $enrolment_id->__toString();
@@ -164,10 +212,13 @@ class EnrolmentRepository extends BaseRepository
         return $data->enrolment;
     }
 
-    /**
-     * @return success message
-     */
 
+	/**
+	 * @param VO\EnrolmentID $enrolment_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function delete(VO\EnrolmentID $enrolment_id)
     {
         $enrolment_id = $enrolment_id->__toString();
@@ -184,10 +235,14 @@ class EnrolmentRepository extends BaseRepository
         return $data->message;
     }
 
-    /**
-     * @return launch url
-     */
 
+	/**
+	 * @param VO\EnrolmentID $enrolment_id
+	 * @param VO\HTTP\Url    $callback_url
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function get_launch_url(VO\EnrolmentID $enrolment_id, VO\HTTP\Url $callback_url)
     {
         $enrolment_id = $enrolment_id->__toString();
@@ -206,6 +261,12 @@ class EnrolmentRepository extends BaseRepository
         return $data->launch_url;
     }
 
+	/**
+	 * @param VO\EnrolmentID $enrolment_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function sync_result(VO\EnrolmentID $enrolment_id)
     {
         $enrolment_id = $enrolment_id->__toString();
@@ -225,16 +286,13 @@ class EnrolmentRepository extends BaseRepository
 
 	/**
 	 * Sync Result from OMA Enrollment
-	 * @param VO\Token           $token
 	 * @param VO\EnrolmentID     $enrolment_id
 	 * @param VO\MemberProgramID $member_program_id
 	 *
 	 * @return mixed
-	 * @throws VO\Exception\MethodNotAllowedException
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
     public function sync_oma_enrollment_result(
-    	VO\Token $token,
 	    VO\EnrolmentID $enrolment_id,
 		VO\MemberProgramID $member_program_id
 	)
@@ -247,14 +305,19 @@ class EnrolmentRepository extends BaseRepository
             VO\HTTP\Url::fromNative($this->base_url.'/oma/student/enrolment/'.$enrolment_id.'/' . $member_program_id . '/sync_result'),
             new VO\HTTP\Method('GET')
         );
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
-        $response = $request->send(array(), $header_parameters);
+        $response = $request->send();
         $data = $response->get_data();
 
         return $data->enrolment;
     }
 
+	/**
+	 * @param VO\MemberCertificateID $member_certificate_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function get_certificate(VO\MemberCertificateID $member_certificate_id) {
 
         $member_certificate_id = $member_certificate_id->__toString();
@@ -271,6 +334,12 @@ class EnrolmentRepository extends BaseRepository
         return $data->certificate;
     }
 
+	/**
+	 * @param VO\MemberCertificateID $member_certificate_id
+	 *
+	 * @return mixed
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function get_certificate_url(VO\MemberCertificateID $member_certificate_id) {
 
         $member_certificate_id = $member_certificate_id->__toString();
@@ -287,6 +356,14 @@ class EnrolmentRepository extends BaseRepository
         return $data->certificate_url;
     }
 
+	/**
+	 * @param VO\MemberID            $member_id
+	 * @param VO\LicenseIDArray|null $license_id_array
+	 * @param VO\CourseIDArray|null  $course_id_array
+	 *
+	 * @return array
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function create_bulK_enrolments(VO\MemberID $member_id, VO\LicenseIDArray $license_id_array = null, VO\CourseIDArray $course_id_array = null) {
 
         $request = new Request(
