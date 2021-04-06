@@ -1519,4 +1519,26 @@ class AlacrityGroupAdminRepository extends BaseRepository
         return $data;
     }
 
+	public function listEmployer(
+        VO\Token $token,
+        VO\OrganisationID $organisation_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/tutors'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'organization_id'      => $organisation_id->__toString()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+        return $data;
+    }
+
 }
