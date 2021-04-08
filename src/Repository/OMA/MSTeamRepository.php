@@ -281,6 +281,35 @@ class MSTeamRepository extends BaseRepository
 
         $response = $request->send($request_parameters, $header_parameters);
         return $response->get_data();
+    }  /**
+     * Create Member Program For Events
+     * @param VO\Token        $token
+     * @param VO\IDArray      $memberIds
+     * @param VO\ID           $programId
+     */
+    public function checkMemberProgramsForEvents(
+        VO\Token $token,
+        VO\IDArray $memberIds,
+        VO\ID $programId
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/program/check'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array(
+            'Authorization' => $token->__toEncodedString()
+        );
+
+        $request_parameters = array(
+            'member_ids'        => $memberIds->__toArray(),
+            'program_id'        => $programId->__toString()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
     }
 
 }
