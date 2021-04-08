@@ -1559,4 +1559,40 @@ class ConsultivaAdminRepository extends BaseRepository
 		return $data;
 	}
 
+	/**
+	 * @param VO\Token         $token
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $search
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listConsultivaForAssessor(
+		VO\Token $token,
+		VO\Integer $current_page,
+		VO\Integer $per_page,
+		VO\StringVO $search = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/consultiva'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'search'        => $search ? $search->__toString() : '',
+			'current_page'  => $current_page->__toInteger(),
+			'per_page'      => $per_page->__toInteger()
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
+
 }
