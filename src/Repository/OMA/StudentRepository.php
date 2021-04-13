@@ -83,6 +83,30 @@ class StudentRepository extends BaseRepository
 
         return $data;
     }
+
+    public function get_task_list(
+        VO\Token $token,
+        VO\Integer $member_apprenticeship_id,
+        VO\Integer $is_completed,
+        VO\Integer $current_page
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/student/fetch/all/programs'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'member_apprenticeship_id' => $member_apprenticeship_id->__toInteger(),
+            'is_completed' => $is_completed->__toInteger(),
+            'current_page' => $current_page->__toInteger()
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
     public function program_units_list(
         VO\Token $token,
         VO\Integer $program_id

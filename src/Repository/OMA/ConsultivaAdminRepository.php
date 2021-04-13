@@ -1130,14 +1130,13 @@ class ConsultivaAdminRepository extends BaseRepository
 
     }
 
-    /**
-     * @param VO\Token          $token
-     * @param VO\apprenticeshipId $apprenticeshipId
-     *
-     * @return \AcademyHQ\API\HTTP\Response\json
-     * @throws VO\Exception\MethodNotAllowedException
-     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
-     */
+	/**
+	 * @param VO\Token $token
+	 * @param VO\ID    $apprenticeshipId
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function deleteMemberApprenticeship(
         VO\Token $token,
         VO\ID $apprenticeshipId
@@ -1156,6 +1155,17 @@ class ConsultivaAdminRepository extends BaseRepository
 
     }
 
+	/**
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 * @param VO\Name           $name
+	 * @param VO\Email          $email
+	 * @param VO\Flag           $is_internal
+	 * @param VO\StringVO|null  $profile_picture
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function addQualityAssessor(
         VO\Token $token,
         VO\OrganisationID $organisation_id,
@@ -1187,6 +1197,14 @@ class ConsultivaAdminRepository extends BaseRepository
         return $response->get_data();
     }
 
+	/**
+	 * @param VO\Token           $token
+	 * @param VO\MemberProgramID $member_program_id
+	 * @param VO\StringVO        $deadline
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function updateMemberProgramDeadline(
         VO\Token $token,
         VO\MemberProgramID $member_program_id,
@@ -1209,6 +1227,14 @@ class ConsultivaAdminRepository extends BaseRepository
 
     }
 
+	/**
+	 * @param VO\Token    $token
+	 * @param VO\ID       $member_apprenticeship_id
+	 * @param VO\StringVO $deadline
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function updateMemberapprenticeshipDeadline(
         VO\Token $token,
         VO\ID $member_apprenticeship_id,
@@ -1230,5 +1256,343 @@ class ConsultivaAdminRepository extends BaseRepository
         return $response->get_data();
 
     }
+
+	/**
+	 * @param VO\Token $token
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function getActiveOccupationForAssessorVisualisation(
+	    VO\Token $token
+    ) {
+	    $request = new Request(
+		    new GuzzleClient,
+		    $this->credentials,
+		    VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/occupation_viz'),
+		    new VO\HTTP\Method('POST')
+	    );
+	    $header_parameters = array('Authorization' => $token->__toEncodedString());
+	    $request_parameters = array();
+	    $response = $request->send($request_parameters, $header_parameters);
+	    $data = $response->get_data();
+	    return $data;
+    }
+
+	/**
+	 * @param VO\Token $token
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function getActiveStudentForAssessorVisualisation(
+	    VO\Token $token
+    ) {
+	    $request = new Request(
+		    new GuzzleClient,
+		    $this->credentials,
+		    VO\HTTP\Url::fromNative($this->base_url . '/assessor/list/students_viz'),
+		    new VO\HTTP\Method('POST')
+	    );
+	    $header_parameters = array('Authorization' => $token->__toEncodedString());
+	    $request_parameters = array();
+	    $response = $request->send($request_parameters, $header_parameters);
+	    $data = $response->get_data();
+	    return $data;
+    }
+
+	/**
+	 * @param VO\Token        $token
+	 * @param VO\Integer|null $limit
+	 * @param VO\Integer|null $per_page
+	 * @param VO\Integer|null $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function getProgrammeProgressStatusForAssessorVisualisation(
+	    VO\Token $token,
+	    VO\Integer $limit = null,
+	    VO\Integer $per_page = null,
+	    VO\Integer $current_page = null
+    ) {
+	    $request = new Request(
+		    new GuzzleClient,
+		    $this->credentials,
+		    VO\HTTP\Url::fromNative($this->base_url . '/assessor/list/students_program_progress_viz'),
+		    new VO\HTTP\Method('POST')
+	    );
+	    $header_parameters = array('Authorization' => $token->__toEncodedString());
+	    $request_parameters = array();
+	    if (!is_null($limit)) {
+		    $request_parameters['limit'] = $limit->__toInteger();
+	    }
+	    if (!is_null($per_page)) {
+		    $request_parameters['per_page'] = $per_page->__toInteger();
+	    }
+	    if (!is_null($current_page)) {
+		    $request_parameters['current_page'] = $current_page->__toInteger();
+	    }
+	    $response = $request->send($request_parameters, $header_parameters);
+	    $data = $response->get_data();
+	    return $data;
+    }
+
+	/**
+	 * Get the Learner Weekly Login Details for Assessor Visualisation
+	 * @param VO\Token          $token
+	 * @param VO\StringVO|null  $to_date
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerWeeklyLoginForAssessorVisualisation(
+		VO\Token $token,
+		VO\StringVO $to_date = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/students_weekly_login_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		if (!is_null($to_date)) {
+			$request_parameters['to_date'] = $to_date->__toString();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Learner Programmer Progress Details
+	 *
+	 * @param VO\Token                  $token
+	 * @param VO\OrganisationID|null    $organisation_ID
+	 * @param VO\Integer|null           $apprenticeship
+	 * @param VO\Integer|null           $phase
+	 * @param VO\StringVO|null          $phase_status
+	 * @param VO\StringVO|null          $search
+	 * @param VO\Integer                $current_page
+	 * @param VO\Integer|null           $is_export
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerProgrammeProgressDetailsForAssessorVisualisation(
+		VO\Token $token,
+		VO\OrganisationID $organisation_id = null,
+		VO\Integer $apprenticeship = null,
+		VO\Integer $phase = null,
+		VO\StringVO $phase_status = null,
+		VO\StringVO $search = null,
+		VO\Integer $per_page = null,
+		VO\Integer $current_page,
+		VO\Integer $is_export = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/students_programme_progress_details_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		if (!is_null($organisation_id)) {
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
+		if (!is_null($apprenticeship)) {
+			$request_parameters['apprenticeship'] = $apprenticeship->__toInteger();
+		}
+		if (!is_null($phase)) {
+			$request_parameters['phase'] = $phase->__toInteger();
+			if (!is_null($phase_status)) {
+				$request_parameters['phase_status'] = $phase_status->__toString();
+			}
+		}
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+
+		if(!is_null($is_export)){
+			$request_parameters['is_export'] = $is_export->__toInteger();
+		}
+
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Learner Login Details for Visualisation for Assessor
+	 * @param VO\Token         $token
+	 * @param VO\Integer|null  $assessor
+	 * @param VO\Integer|null  $verifier
+	 * @param VO\StringVO|null $from_date
+	 * @param VO\StringVO|null $to_date
+	 * @param VO\StringVO|null $search
+	 * @param VO\Integer|null  $per_page
+	 * @param VO\Integer       $current_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerLoginDetailsForAssessorVisualisation(
+		VO\Token $token,
+		VO\Integer $assessor = null,
+		VO\Integer $verifier = null,
+		VO\StringVO $from_date = null,
+		VO\StringVO $to_date = null,
+		VO\StringVO $search = null,
+		VO\Integer $per_page = null,
+		VO\Integer $current_page
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url . '/assessor/list/students_login_details_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		if (!is_null($assessor)) {
+			$request_parameters['assessor'] = $assessor->__toInteger();
+		}
+		if (!is_null($verifier)) {
+			$request_parameters['verifier'] = $verifier->__toInteger();
+		}
+		if (!is_null($from_date)) {
+			$request_parameters['from_date'] = $from_date->__toString();
+		}
+		if (!is_null($to_date)) {
+			$request_parameters['to_date'] = $to_date->__toString();
+		}
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get login logs of Learner and get assessor and verifier details
+	 * @param VO\Token         $token
+	 * @param VO\Integer       $member
+	 * @param VO\Integer       $current_page
+	 * @param VO\StringVO|null $search
+	 * @param VO\Integer|null  $per_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getLearnerLoginLogsForAssessorVisualisation(
+		VO\Token $token,
+		VO\Integer $member,
+		VO\Integer $current_page,
+		VO\StringVO $search = null,
+		VO\Integer $per_page = null
+	){
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/students_login_logs_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['member'] = $member->__toInteger();
+		if (!is_null($search)) {
+			$request_parameters['search'] = $search->__toString();
+		}
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * Get Programme Detail
+	 * @param VO\Token          $token
+	 * @param VO\Integer        $current_page
+	 * @param VO\Integer|null   $per_page
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function getActiveProgramProgressDetailsForAssessorVisualization(
+		VO\Token $token,
+		VO\Integer $current_page,
+		VO\Integer $per_page = null
+	)
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/occupation_progress_viz'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+		$request_parameters = array();
+		$request_parameters['current_page'] = $current_page->__toInteger();
+		if (!is_null($per_page)) {
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
+		$response = $request->send($request_parameters, $header_parameters);
+		$data     = $response->get_data();
+		return $data;
+	}
+
+	/**
+	 * @param VO\Token         $token
+	 * @param VO\Integer       $current_page
+	 * @param VO\Integer       $per_page
+	 * @param VO\StringVO|null $search
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function listConsultivaForAssessor(
+		VO\Token $token,
+		VO\Integer $current_page,
+		VO\Integer $per_page,
+		VO\StringVO $search = null
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/consultiva'),
+			new VO\HTTP\Method('POST')
+		);
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+			'search'        => $search ? $search->__toString() : '',
+			'current_page'  => $current_page->__toInteger(),
+			'per_page'      => $per_page->__toInteger()
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+
+	}
 
 }
