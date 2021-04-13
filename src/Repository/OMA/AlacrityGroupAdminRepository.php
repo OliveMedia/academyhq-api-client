@@ -65,10 +65,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 
 	/**
-	 * List Employer
+	 * List sub organization
 	 * @param VO\Token         $token
-	 * @param VO\StringVO|null $search
-	 * @param VO\Integer       $current_page
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws VO\Exception\MethodNotAllowedException
