@@ -311,6 +311,59 @@ class MSTeamRepository extends BaseRepository
 
         $response = $request->send($request_parameters, $header_parameters);
         return $response->get_data();
+    }/**
+     * get Member Details
+     * @param VO\Token        $token
+     * @param VO\IDArray      $memberIds
+     * @param VO\ID           $programId
+     */
+    public function getMemberDetailsByID(
+        VO\Token $token,
+        VO\IDArray $memberIds
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/members/details'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array(
+            'Authorization' => $token->__toEncodedString()
+        );
+
+        $request_parameters = array(
+            'member_ids'        => $memberIds->__toArray()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+    }
+     /**
+     * @param VO\Token   $token
+     * @param VO\Integer $member_apprenticeship_id
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function getProgramProgress(
+        VO\Token $token,
+        VO\Integer $memberid
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/program/progressdetails'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'memberid'  => $memberid->__toInteger()
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
     }
 
 }

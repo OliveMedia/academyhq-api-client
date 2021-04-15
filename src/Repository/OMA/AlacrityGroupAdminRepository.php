@@ -63,6 +63,36 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		return $data;
 	}
 
+
+	/**
+	 * List sub organization
+	 * @param VO\Token         $token
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws VO\Exception\MethodNotAllowedException
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+	public function ListSubOrganization(
+		VO\Token $token
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/list/sub-organization'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$request_parameters = array(
+		);
+		$response = $request->send($request_parameters, $header_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	/**
 	 * List Occupation
 	 * @param VO\Token               $token
