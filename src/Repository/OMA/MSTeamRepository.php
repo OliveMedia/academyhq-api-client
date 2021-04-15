@@ -400,6 +400,11 @@ class MSTeamRepository extends BaseRepository
      */
     public function getlastAssessedAtWithMemberID(
         VO\Token $token,
+        VO\Integer $current_page,
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        VO\Integer $per_page = null,
         VO\Integer $member_id
     ) {
         $request = new Request(
@@ -409,8 +414,16 @@ class MSTeamRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            'member_id'  => $member_id->__toInteger()
+            'member_id'  => $member_id->__toInteger(),
+             'current_page'  => $current_page->__toInteger()
         );
+
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
