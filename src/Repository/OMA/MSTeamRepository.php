@@ -364,6 +364,31 @@ class MSTeamRepository extends BaseRepository
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
         return $data;
+    }/**
+     * @param VO\Token   $token
+     * @param VO\Integer $member_apprenticeship_id
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function updatelastAssessedAt(
+        VO\Token $token,
+        VO\Integer $member_apprentiship_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/updatelastAssessedAt'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'member_apprentiship_id'  => $member_apprentiship_id->__toInteger()
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
     }
 
 }
