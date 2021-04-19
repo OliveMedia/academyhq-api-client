@@ -349,7 +349,9 @@ class MSTeamRepository extends BaseRepository
      */
     public function getProgramProgress(
         VO\Token $token,
-        VO\Integer $memberid
+        VO\Integer $memberid,
+         VO\Integer $current_page,
+        VO\Integer $per_page
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -358,8 +360,15 @@ class MSTeamRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            'memberid'  => $memberid->__toInteger()
+            'memberid'  => $memberid->__toInteger(),
+             'current_page'  => $current_page->__toInteger()
         );
+         /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
