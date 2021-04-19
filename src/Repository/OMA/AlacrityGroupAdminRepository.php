@@ -375,6 +375,9 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($no_of_seats)){
 			$request_parameters['no_of_seats'] = $no_of_seats->__toInteger();
 		}
+		if(!is_null($weekly_delivery_taxonomy)){
+			$request_parameters['weekly_delivery_taxonomy'] = $weekly_delivery_taxonomy->__toString();
+		}
 		if(!is_null($duration)){
 			$request_parameters['duration'] = $duration->__toInteger();
 		}
