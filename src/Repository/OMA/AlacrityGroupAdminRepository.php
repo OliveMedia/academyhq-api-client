@@ -320,6 +320,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		VO\Flag $is_unlimited = null,
 		VO\OccupationID $parent_occupation_id = null,
 		VO\Integer $no_of_seats = null,
+		VO\StringVO $weekly_delivery_taxonomy = null,
 		VO\Integer $duration = null,
 		VO\Flag $lock_after_duration = null,
 		VO\StringVO $start_duration_after = null
