@@ -472,6 +472,33 @@ class MSTeamRepository extends BaseRepository
         $data = $response->get_data();
 
         return $data;
+    }/**
+     *  Member Password Change
+     * @param VO\Token $token
+     * @param VO\Password $old_password
+     * @param VO\Password $new_password
+     * @param VO\Password $confirm_password
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function getmemberDetails(
+        VO\Token $token
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/member/details'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array();
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
     }
     /**
      * Edit Profile Details
