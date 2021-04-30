@@ -1404,7 +1404,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 * Get Learner Programmer Progress Details
 	 *
 	 * @param VO\Token                  $token
-	 * @param VO\OrganisationID|null    $organisation_ID
+	 * @param VO\Integer|null           $employer
 	 * @param VO\Integer|null           $apprenticeship
 	 * @param VO\Integer|null           $phase
 	 * @param VO\StringVO|null          $phase_status
@@ -1418,7 +1418,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 */
 	public function getLearnerProgrammeProgressDetailsForAssessorVisualisation(
 		VO\Token $token,
-		VO\OrganisationID $organisation_id = null,
+		VO\Integer $employer = null,
 		VO\Integer $apprenticeship = null,
 		VO\Integer $phase = null,
 		VO\StringVO $phase_status = null,
@@ -1434,9 +1434,8 @@ class ConsultivaAdminRepository extends BaseRepository
 			new VO\HTTP\Method('POST')
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
-		$request_parameters = array();
-		if (!is_null($organisation_id)) {
-			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		if (!is_null($employer)) {
+			$request_parameters['employer'] = $employer->__toInteger();
 		}
 		if (!is_null($apprenticeship)) {
 			$request_parameters['apprenticeship'] = $apprenticeship->__toInteger();
@@ -1467,6 +1466,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	/**
 	 * Get Learner Login Details for Visualisation for Assessor
 	 * @param VO\Token         $token
+	 * @param VO\Integer|null  $employer
 	 * @param VO\Integer|null  $assessor
 	 * @param VO\Integer|null  $verifier
 	 * @param VO\StringVO|null $from_date
@@ -1480,6 +1480,7 @@ class ConsultivaAdminRepository extends BaseRepository
 	 */
 	public function getLearnerLoginDetailsForAssessorVisualisation(
 		VO\Token $token,
+		VO\Integer $employer = null,
 		VO\Integer $assessor = null,
 		VO\Integer $verifier = null,
 		VO\StringVO $from_date = null,
@@ -1495,7 +1496,9 @@ class ConsultivaAdminRepository extends BaseRepository
 			new VO\HTTP\Method('POST')
 		);
 		$header_parameters = array('Authorization' => $token->__toEncodedString());
-		$request_parameters = array();
+		if (!is_null($employer)) {
+			$request_parameters['employer'] = $employer->__toInteger();
+		}
 		if (!is_null($assessor)) {
 			$request_parameters['assessor'] = $assessor->__toInteger();
 		}

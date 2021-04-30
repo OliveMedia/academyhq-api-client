@@ -349,7 +349,9 @@ class MSTeamRepository extends BaseRepository
      */
     public function getProgramProgress(
         VO\Token $token,
-        VO\Integer $memberid
+        VO\Integer $memberid,
+         VO\Integer $current_page,
+        VO\Integer $per_page
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -358,11 +360,117 @@ class MSTeamRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            'memberid'  => $memberid->__toInteger()
+            'memberid'  => $memberid->__toInteger(),
+             'current_page'  => $current_page->__toInteger()
+        );
+         /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }/**
+     * @param VO\Token   $token
+     * @param VO\Integer $member_apprenticeship_id
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function updatelastAssessedAt(
+        VO\Token $token,
+        VO\Integer $member_apprentiship_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/updatelastAssessedAt'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'member_apprentiship_id'  => $member_apprentiship_id->__toInteger()
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
+        return $data;
+    }
+/**
+     * @param VO\Token   $token
+     * @param VO\Integer $member_apprenticeship_id
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function getlastAssessedAtWithMemberID(
+        VO\Token $token,
+        VO\Integer $current_page,
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        VO\Integer $per_page = null,
+        VO\Integer $member_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/getlastassessedatwithmemberID'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'member_id'  => $member_id->__toInteger(),
+             'current_page'  => $current_page->__toInteger()
+        );
+
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+    /**
+     *  Member Password Change
+     * @param VO\Token $token
+     * @param VO\Password $old_password
+     * @param VO\Password $new_password
+     * @param VO\Password $confirm_password
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function change_password(
+        VO\Token $token,
+        VO\Password $old_password,
+        VO\Password $new_password,
+        VO\Password $confirm_password
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/password/change'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'password_old' => $old_password->__toEncodedString(),
+            'password_new' => $new_password->__toEncodedString(),
+            'password_new_confirm' => $confirm_password->__toEncodedString()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
         return $data;
     }
 
