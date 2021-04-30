@@ -483,12 +483,7 @@ class MSTeamRepository extends BaseRepository
      * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
      */
     public function getmemberDetails(
-        VO\Token $token,
-        VO\Integer $current_page,
-        /**
-         * @internal Added params to customize the number of students and sort orders
-         */
-        VO\Integer $per_page = null
+        VO\Token $token
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -498,12 +493,7 @@ class MSTeamRepository extends BaseRepository
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
-         $request_parameters = array(
-             'current_page'  => $current_page->__toInteger()
-        );
-        if(!is_null($per_page)){
-            $request_parameters['per_page'] = $per_page->__toInteger();
-        }
+        $request_parameters = array();
 
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
