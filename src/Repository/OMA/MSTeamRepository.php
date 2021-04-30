@@ -450,6 +450,7 @@ class MSTeamRepository extends BaseRepository
      */
     public function change_password(
         VO\Token $token,
+        VO\Password $old_password,
         VO\Password $new_password,
         VO\Password $confirm_password
     ) {
@@ -462,6 +463,7 @@ class MSTeamRepository extends BaseRepository
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $request_parameters = array(
+            'password_old' => $old_password->__toEncodedString(),
             'password_new' => $new_password->__toEncodedString(),
             'password_new_confirm' => $confirm_password->__toEncodedString()
         );
