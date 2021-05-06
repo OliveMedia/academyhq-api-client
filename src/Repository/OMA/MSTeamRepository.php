@@ -351,7 +351,9 @@ class MSTeamRepository extends BaseRepository
         VO\Token $token,
         VO\Integer $memberid,
          VO\Integer $current_page,
-        VO\Integer $per_page
+        VO\Integer $per_page,
+        VO\StringVO $direction = null,
+        VO\StringVO $sort_by = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -368,6 +370,13 @@ class MSTeamRepository extends BaseRepository
          */
         if(!is_null($per_page)){
             $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+         if ($direction) {
+            $request_parameters['direction'] = $direction->__toString();
+        }
+
+        if ($sort_by) {
+            $request_parameters['sort_by'] = $sort_by->__toString();
         }
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $response = $request->send($request_parameters, $header_parameters);
