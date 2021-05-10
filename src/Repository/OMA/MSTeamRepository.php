@@ -694,6 +694,34 @@ class MSTeamRepository extends BaseRepository
             $data = $response->get_data();
             return $data;
     }
-    
+    /**
+     *  plan  Change
+     * @param VO\Token $token
+     * @param VO\Password $plan
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function planidUpdateInOrganization(
+        VO\Token $token,
+        VO\StringVO $plan
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/organisation/update/plan'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'plan' => $plan->__toString()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
 
 }
