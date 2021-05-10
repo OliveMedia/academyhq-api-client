@@ -248,6 +248,24 @@ class OffSessionRepository extends BaseRepository
 		return $data;
 
 	}
+	public function checkOrganizationPlan(
+        VO\Integer $organization_id
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/out_session/check/check_organization_plan'),
+            new VO\HTTP\Method('POST')
+        );
+        $request_parameters = array(
+            'organization_id' => $organization_id->__toInteger()
+        );
+
+        $response = $request->send($request_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
 
 	/**
 	 * Create Member Apprenticeships
