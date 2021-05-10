@@ -636,6 +636,7 @@ class MSTeamRepository extends BaseRepository
     **/
 
     public function createThirdPartyClient(
+        VO\Token $token,
         VO\StringVO $name,
         VO\StringVO $email,
         VO\StringVO $password,
@@ -654,7 +655,7 @@ class MSTeamRepository extends BaseRepository
                 VO\HTTP\Url::fromNative($this->base_url . '/create-third-party-client'),
                 new VO\HTTP\Method('POST')
             );
-
+            $header_parameters = array('Authorization' => $token->__toEncodedString());
             if(!is_null($name)){
                 $request_parameters['name'] = $name->__toString();
             }
