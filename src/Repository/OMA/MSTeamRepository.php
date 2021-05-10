@@ -707,7 +707,7 @@ class MSTeamRepository extends BaseRepository
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $request_parameters = array(
-            'organization_id' => $organization_id->__toEncodedString()
+            'organization_id' => $organization_id->__toInteger()
         );
 
         $response = $request->send($request_parameters, $header_parameters);
