@@ -690,7 +690,7 @@ class MSTeamRepository extends BaseRepository
                 $request_parameters['plan'] = $plan->__toString();
             }
 
-            $response = $request->send($request_parameters,$header_parameters);
+            $response = $request->send($request_parameters, $header_parameters);
             $data = $response->get_data();
             return $data;
     }
