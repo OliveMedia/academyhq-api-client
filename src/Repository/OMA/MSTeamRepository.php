@@ -690,30 +690,10 @@ class MSTeamRepository extends BaseRepository
                 $request_parameters['plan'] = $plan->__toString();
             }
 
-            $response = $request->send($request_parameters);
+            $response = $request->send($request_parameters,$header_parameters);
             $data = $response->get_data();
             return $data;
     }
-    public function check_organization_plan(
-        VO\Token $token,
-        VO\Integer $organization_id
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/check_organization_plan'),
-            new VO\HTTP\Method('POST')
-        );
-
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-        $request_parameters = array(
-            'organization_id' => $organization_id->__toInteger()
-        );
-
-        $response = $request->send($request_parameters, $header_parameters);
-        $data = $response->get_data();
-
-        return $data;
-    }
+    
 
 }
