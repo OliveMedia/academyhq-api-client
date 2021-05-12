@@ -25,6 +25,7 @@ class ITFERepository extends BaseRepository
 	{
 		parent::__construct();
 		$this->credentials = $credentials;
+        $this->app_url = isset($_SERVER['APP_URL']) ? $_SERVER['APP_URL'] : null;
 		$this->base_url .= '/oma';
 	}
 
@@ -153,6 +154,9 @@ class ITFERepository extends BaseRepository
             $request_parameters['organisation_id'] = $organisation_id->__toInteger();
         }
 
+        if($this->app_url){
+            $request_parameters['app_url'] = $this->app_url;
+        }
 
         $response = $request->send($request_parameters);
         $data = $response->get_data();
