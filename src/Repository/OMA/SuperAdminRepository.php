@@ -172,7 +172,7 @@ class SuperAdminRepository extends BaseRepository
         VO\StringVO $background_url,
         VO\StringVO $branding_hex,
         VO\StringVO $domain,
-        VO\StringVO $plan = null
+        VO\StringVO $plan
         ){
             $request = new Request(
                 new GuzzleClient,
