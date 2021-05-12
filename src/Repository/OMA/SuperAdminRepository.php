@@ -158,11 +158,9 @@ class SuperAdminRepository extends BaseRepository
             $data = $response->get_data();
             return $data;
     }
-
-     /**
+      /**
     * Create New Client from msteam
     **/
-
     public function createThirdPartyClientWithPlan(
         VO\StringVO $name,
         VO\StringVO $email,
@@ -179,10 +177,11 @@ class SuperAdminRepository extends BaseRepository
             $request = new Request(
                 new GuzzleClient,
                 $this->credentials,
-                VO\HTTP\Url::fromNative($this->base_url . '/oma/msteam/create-third-party-client'),
+                VO\HTTP\Url::fromNative($this->base_url . '/oma/create-third-party-client-with-plan'),
                 new VO\HTTP\Method('POST')
             );
-             if(!is_null($name)){
+
+            if(!is_null($name)){
                 $request_parameters['name'] = $name->__toString();
             }
             if(!is_null($email)){
@@ -212,7 +211,7 @@ class SuperAdminRepository extends BaseRepository
             if(!is_null($domain)){
                 $request_parameters['domain'] = $domain->__toString();
             }
-            if(!is_null($plan)){
+              if(!is_null($plan)){
                 $request_parameters['plan'] = $plan->__toString();
             }
 
@@ -220,4 +219,7 @@ class SuperAdminRepository extends BaseRepository
             $data = $response->get_data();
             return $data;
     }
+
+   
+
 }
