@@ -548,7 +548,8 @@ class MSTeamRepository extends BaseRepository
         VO\StringVO $city = null,
         VO\StringVO $state = null,
         VO\StringVO $country = null,
-        VO\StringVO $postal_code = null,
+        VO\StringVO $postal_code = null,        
+        VO\StringVO $image = null,
         VO\StringVO $employment = null,
         VO\StringVO $further_notes = null,
         VO\StringVO $disability_text = null,
@@ -602,7 +603,9 @@ class MSTeamRepository extends BaseRepository
         if(!is_null($postal_code)){
             $request_parameters['postal_code'] = $postal_code->__toString();
         }
-
+        if(!is_null($image)){
+            $request_parameters['image'] = $image->__toString();
+        }
 
         if(!is_null($employment)){
             $request_parameters['employment'] = $employment->__toString();
