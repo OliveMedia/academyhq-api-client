@@ -249,7 +249,7 @@ class OffSessionRepository extends BaseRepository
 
 	}
 	public function checkOrganizationPlan(
-        VO\Integer $organization_id
+        VO\OrganisationID $organization_id
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -258,9 +258,8 @@ class OffSessionRepository extends BaseRepository
             new VO\HTTP\Method('POST')
         );
         $request_parameters = array(
-            'organization_id' => $organization_id->__toInteger()
+            'organization_id' => $organization_id->__toString()
         );
-
         $response = $request->send($request_parameters);
         $data = $response->get_data();
 
