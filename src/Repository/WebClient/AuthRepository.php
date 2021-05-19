@@ -184,8 +184,8 @@ class AuthRepository extends BaseRepository {
 	}
 
 	public function fetch_members_with_email(
-		VO\Email $email,
-		VO\Integer $current_page
+		VO\StringVO $email,
+		VO\Integer $current_page = null
 	) 
 	{
 		$request = new Request(
@@ -197,15 +197,18 @@ class AuthRepository extends BaseRepository {
 
 		$request_parameters = array(
 			'email' => $email->__toEncodedString(),
-			'current_page' => $current_page->__toInteger(),
 		);
-
+		if(!is_null($current_page)){
+			$request_parameters['current_page'] = $current_page->__toInteger();
+		}
 		$response = $request->send($request_parameters);
 
 		$data = $response->get_data();
 
 		return $data;
 	}
+
+
 	public function login_member_with_id_and_password (
 		VO\MemberID $member_id,
 		VO\Password $password
