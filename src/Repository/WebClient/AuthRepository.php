@@ -182,4 +182,49 @@ class AuthRepository extends BaseRepository {
 
 		return $data;
 	}
+
+	public function fetch_members_with_email(
+		VO\Email $email
+	) 
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/fetch-members-with-email'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toEncodedString(),
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+	public function login_member_with_id_and_password(
+		VO\MemberID $member_id,
+		VO\Password $password
+	) 
+	{
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/auth/login-member-with-id-and-password'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'member_id' => $member_id->__toString(),
+			'password' => $member_id->__toEncodedString(),
+		);
+
+		$response = $request->send($request_parameters);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 }
