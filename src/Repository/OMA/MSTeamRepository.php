@@ -663,34 +663,6 @@ class MSTeamRepository extends BaseRepository
         $data = $response->get_data();
 
         return $data;
-    } /**
-     *  plan  Change
-     * @param VO\Token $token
-     * @param VO\String $plan
-     * @return \AcademyHQ\API\HTTP\Response\json
-     * @throws VO\Exception\MethodNotAllowedException
-     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
-     */
-    public function checkDomainExist(
-        VO\Token $token,
-        VO\StringVO $domain
-    ) {
-        $request = new Request(
-            new GuzzleClient,
-            $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/organisation/check/domain'),
-            new VO\HTTP\Method('POST')
-        );
-
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
-        $request_parameters = array(
-            'domain' => $domain->__toString()
-        );
-
-        $response = $request->send($request_parameters, $header_parameters);
-        $data = $response->get_data();
-
-        return $data;
-    }
+    } 
 
 }
