@@ -41,7 +41,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	public function ListConsultiva(
 		VO\Token $token,
 		VO\StringVO $search = null,
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		VO\Integer $all_organisation = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -56,13 +57,18 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			'search'        => $search ? $search->__toString() : '',
 			'current_page'  => $current_page->__toInteger()
 		);
+
+		if(!is_null($all_organisation)){
+			$request_parameters['all_organisation'] = 1;
+		}else{
+			$request_parameters['all_organisation'] = 0;
+		}
 		$response = $request->send($request_parameters, $header_parameters);
 
 		$data = $response->get_data();
 
 		return $data;
 	}
-
 
 	/**
 	 * List sub organization
