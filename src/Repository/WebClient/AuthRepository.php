@@ -223,7 +223,7 @@ class AuthRepository extends BaseRepository {
 
 		$request_parameters = array(
 			'member_id' => $member_id->__toString(),
-			'password' => $member_id->__toEncodedString(),
+			'password' => $password->__toEncodedString(),
 		);
 
 		$response = $request->send($request_parameters);
