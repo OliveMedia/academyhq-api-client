@@ -384,9 +384,7 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($weekly_delivery_taxonomy)){
 			$request_parameters['weekly_delivery_taxonomy'] = $weekly_delivery_taxonomy->__toString();
 		}
-		if(!is_null($duration)){
-			$request_parameters['duration'] = $duration->__toInteger();
-		}
+		$request_parameters['duration'] = !empty($duration) ? $duration->__toInteger() : $duration;
 		if(!is_null($lock_after_duration)){
 			$request_parameters['lock_after_duration'] = $lock_after_duration->__toBool();
 		}
