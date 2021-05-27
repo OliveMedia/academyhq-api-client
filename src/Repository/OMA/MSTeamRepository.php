@@ -690,7 +690,7 @@ class MSTeamRepository extends BaseRepository
         }
 
         if (!is_null($organisation_id)) {
-            $request_parameters['organisation_id']=$organisation_id->__toString();
+            $request_parameters['organisation_id']=$organisation_id->__toInteger();
         }
         if(!is_null($per_page)){
             $request_parameters['per_page'] = $per_page->__toInteger();
