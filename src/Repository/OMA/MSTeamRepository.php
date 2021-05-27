@@ -707,7 +707,7 @@ class MSTeamRepository extends BaseRepository
         VO\Token $token,
         VO\Name $name,
         VO\Email $email,
-        VO\Password $password,
+        VO\StringVO $password,
         VO\Integer $is_assessor = null,
         VO\Integer $is_verifier = null
     ){
@@ -723,10 +723,11 @@ class MSTeamRepository extends BaseRepository
 
             'first_name' => $name->get_first_name()->__toString(),
             'last_name' => $name->get_last_name()->__toString(),
-            'email' => $email->__toString(),
-            'password' => $password->__toEncodedString()
+            'email' => $email->__toString()
         );
-
+         if(!is_null($password)){
+                $request_parameters['password'] = $password->__toString();
+            }
         if(!is_null($is_assessor)){
             $request_parameters['is_assessor']=$is_assessor->__toInteger();
         }
