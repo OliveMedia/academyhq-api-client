@@ -669,7 +669,7 @@ class MSTeamRepository extends BaseRepository
         VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\Integer $member_id = null,
-        VO\OrganisationID $organisation_id = null,
+        VO\Integer $organisation_id = null,
         VO\Integer $per_page = null
     ){
         $request = new Request(
@@ -708,8 +708,7 @@ class MSTeamRepository extends BaseRepository
         VO\Name $name,
         VO\Email $email,
         VO\Integer $is_assessor = null,
-        VO\Integer $is_verifier = null,
-        VO\Integer $is_mentor = null
+        VO\Integer $is_verifier = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -734,9 +733,7 @@ class MSTeamRepository extends BaseRepository
             $request_parameters['is_verifier']=$is_verifier->__toInteger();
         }
 
-        if(!is_null($is_mentor)){
-            $request_parameters['is_mentor']=$is_mentor->__toInteger();
-        }
+        
 
         $response = $request->send($request_parameters, $header_parameters);
 
