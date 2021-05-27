@@ -664,5 +664,51 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     } 
+     public function list_member(
+        VO\Token $token,
+         VO\Integer $current_page,
+        VO\Integer $per_page,
+        VO\StringVO $search = null,
+        VO\Integer $memberid = null,
+        VO\Integer $organisationid = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/list/members'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+             'current_page'  => $current_page->__toInteger()
+        );
+
+        /**
+         * @internal Added params to customize the number of students and sort orders
+         */
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+
+        if(!is_null($search)){
+            $request_parameters['search']=$search->__toString();
+        }
+
+        if(!is_null($memberid)){
+            $request_parameters['memberid']=$memberid->__toInteger();
+        }
+
+        if(!is_null($organisationid)){
+            $request_parameters['organisationid']=$organisationid->__toInteger();
+        }
+
+        
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 
 }
