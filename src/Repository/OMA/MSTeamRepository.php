@@ -812,10 +812,8 @@ class MSTeamRepository extends BaseRepository
         if (!is_null($organisation_id)) {
             $request_parameters['organisation_id']=$organisation_id->__toInteger();
         }
-        if(!is_null($gender)){
-            $request_parameters['gender'] = $gender->__toString();
-        }
         
+
         if(!is_null($country_code)){
             $request_parameters['country_code'] = $country_code->__toString();
         }
