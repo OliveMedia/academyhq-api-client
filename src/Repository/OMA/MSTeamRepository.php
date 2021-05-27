@@ -669,8 +669,8 @@ class MSTeamRepository extends BaseRepository
          VO\Integer $current_page,
         VO\Integer $per_page,
         VO\StringVO $search = null,
-        VO\Integer $memberid = null,
-        VO\Integer $organisationid = null
+        VO\MemberID $memberid = null,
+        VO\OrganisationID $organisationid = null
     ){
         $request = new Request(
             new GuzzleClient,
