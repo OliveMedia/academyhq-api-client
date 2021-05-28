@@ -879,4 +879,42 @@ class MSTeamRepository extends BaseRepository
         return $response->get_data();
     }
    
+    public function create_apprentiship(
+        VO\Token $token,
+        VO\Integer $member_id,
+        VO\Integer $program_id,
+        VO\Integer $assessor_id = null,
+        VO\Integer $verifier_id = null,
+        VO\Integer $working_hours=null,
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/create/member_apprentiship'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+
+            'member_id' => $member_id->__toInteger(),
+            'program_id' => $program_id->__toInteger()
+        );
+        if(!is_null($assessor_id)){
+            $request_parameters['assessor_id']=$assessor_id->__toInteger();
+        }
+
+        if(!is_null($verifier_id)){
+            $request_parameters['verifier_id']=$verifier_id->__toInteger();
+        }
+        if(!is_null($working_hours)){
+            $request_parameters['working_hours']=$working_hours->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
