@@ -220,8 +220,8 @@ class EmployerRepository extends BaseRepository{
 			'member_id' => $member_id->__toString(),
 			'first_name' => $name->get_first_name()->__toString(),
 			'last_name' => $name->get_last_name()->__toString(),
-			'password' => $password->__toString(),
-			'password_confirmation' => $password_confirmation->__toString()
+			'password' => $password->__toEncodedString(),
+			'password_confirmation' => $password_confirmation->__toEncodedString()
 		);
 
 		$response = $request->send($request_parameters);
@@ -263,8 +263,8 @@ class EmployerRepository extends BaseRepository{
 			'member_id' => $member_id->__toString(),
 			'first_name' => $name->get_first_name()->__toString(),
 			'last_name' => $name->get_last_name()->__toString(),
-			'password' => $password->__toString(),
-			'password_confirmation' => $password_confirmation->__toString()
+			'password' => $password->__toEncodedString(),
+			'password_confirmation' => $password_confirmation->__toEncodedString()
 		);
 
 		$response = $request->send($request_parameters);
