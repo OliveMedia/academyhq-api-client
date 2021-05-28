@@ -885,7 +885,7 @@ class MSTeamRepository extends BaseRepository
         VO\Integer $program_id,
         VO\Integer $assessor_id = null,
         VO\Integer $verifier_id = null,
-        VO\Integer $working_hours=null,
+        VO\Integer $working_hours=null
     ){
         $request = new Request(
             new GuzzleClient,
