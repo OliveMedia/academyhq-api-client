@@ -713,7 +713,7 @@ class MSTeamRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/student/create/member'),
+            VO\HTTP\Url::fromNative($this->base_url.'/create/member'),
             new VO\HTTP\Method('POST')
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
@@ -797,7 +797,7 @@ class MSTeamRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url . '/learner/create'),
+            VO\HTTP\Url::fromNative($this->base_url . '/create/learner'),
             new VO\HTTP\Method('POST')
         );
 
@@ -910,6 +910,44 @@ class MSTeamRepository extends BaseRepository
         if(!is_null($working_hours)){
             $request_parameters['working_hours']=$working_hours->__toInteger();
         }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    } 
+    public function list_assessor_or_verifier(
+        VO\Token $token,
+        VO\Integer $current_page,
+        VO\StringVO $search = null,
+        VO\Integer $is_assessor = null,
+        VO\Integer $is_verifier = null,
+        VO\Integer $per_page = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/list/assessor_or_verifier'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'search'        => $search ? $search->__toString() : '',
+            'current_page'  => $current_page->__toInteger(),
+        );
+
+         if (!is_null($is_assessor)) {
+            $request_parameters['is_assessor']=$is_assessor->__toInteger();
+        }
+
+        if (!is_null($is_verifier)) {
+            $request_parameters['is_verifier']=$is_verifier->__toInteger();
+        }
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+        
 
         $response = $request->send($request_parameters, $header_parameters);
 
