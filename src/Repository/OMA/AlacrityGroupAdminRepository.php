@@ -384,13 +384,13 @@ class AlacrityGroupAdminRepository extends BaseRepository
 		if(!is_null($weekly_delivery_taxonomy)){
 			$request_parameters['weekly_delivery_taxonomy'] = $weekly_delivery_taxonomy->__toString();
 		}
-		$request_parameters['duration'] = !empty($duration) ? $duration->__toInteger() : $duration;
-		if(!is_null($lock_after_duration)){
-			$request_parameters['lock_after_duration'] = $lock_after_duration->__toBool();
-		}
-		if(!is_null($start_duration_after)){
-			$request_parameters['start_duration_after'] = $start_duration_after->__toString();
-		}
+		// $request_parameters['duration'] = !empty($duration) ? $duration->__toInteger() : $duration;
+		// if(!is_null($lock_after_duration)){
+		// 	$request_parameters['lock_after_duration'] = $lock_after_duration->__toBool();
+		// }
+		// if(!is_null($start_duration_after)){
+		// 	$request_parameters['start_duration_after'] = $start_duration_after->__toString();
+		// }
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
 		return $data;
