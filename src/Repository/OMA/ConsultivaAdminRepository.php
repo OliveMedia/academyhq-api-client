@@ -66,6 +66,39 @@ class ConsultivaAdminRepository extends BaseRepository
         return $data;
     }
 
+    /**
+     * @param VO\Token               $token
+     * @param VO\StringVO|null       $search
+     * @param VO\Integer             $current_page
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function listAssessorApprenticeship(
+        VO\Token $token,
+        VO\StringVO $search = null,
+        VO\Integer $current_page
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/assessor/list/apprenticeship'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'search' => $search ? $search->__toString() : '',
+            'current_page' => $current_page->__toInteger(),
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+    
 		/**
 	 * @param VO\Token               $token
 	 * @param VO\StringVO|null       $search
