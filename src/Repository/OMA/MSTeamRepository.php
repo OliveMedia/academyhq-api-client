@@ -955,4 +955,121 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
+    /**
+     * Edit Profile Details
+     * @param VO\Token         $token
+     * @param VO\Name          $name
+     * @param VO\StringVO|null $gender
+     * @param VO\StringVO      $country_code
+     * @param VO\StringVO      $mobile_number
+     * @param VO\Email         $email
+     * @param VO\StringVO|null $nationality
+     * @param VO\Integer       $disability
+     * @param VO\StringVO|null $street
+     * @param VO\StringVO|null $city
+     * @param VO\StringVO|null $state
+     * @param VO\StringVO|null $country
+     * @param VO\StringVO|null $postal_code
+     * @param VO\StringVO|null $image
+     * @param VO\StringVO|null $employment
+     * @param VO\StringVO|null $further_notes
+     * @param VO\StringVO|null $disability_text
+     * @param VO\StringVO|null $date_of_birth
+     * @param VO\Integer|null  $weekly_learning_hours
+     * @param VO\StringVO|null $custom_fields_data
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function edit_member_details(
+        VO\Token $token,
+        VO\Integer $member_id,
+        VO\Name $name,
+        VO\StringVO $gender=null,
+        VO\StringVO $country_code,
+        VO\StringVO $mobile_number,
+        VO\StringVO $nationality=null,
+        VO\Integer $disability,
+        VO\StringVO $street = null,
+        VO\StringVO $city = null,
+        VO\StringVO $state = null,
+        VO\StringVO $country = null,
+        VO\StringVO $postal_code = null,        
+        VO\StringVO $image = null,
+        VO\StringVO $employment = null,
+        VO\StringVO $further_notes = null,
+        VO\StringVO $disability_text = null,
+        VO\StringVO $custom_fields_data = null
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/edit/member'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'member_id'     => $member_id->__toInteger(),
+            'first_name'    => $name->get_first_name()->__toString(),
+            'last_name'     => $name->get_last_name()->__toString(),
+            'country_code'  => $country_code->__toString(),
+            'mobile_number' => $mobile_number->__toString(),
+            'email'         => $email->__toString(),
+            'disability'    => $disability->__toInteger()
+        );
+
+        if(!is_null($gender)){
+            $request_parameters['gender'] = $gender->__toString();
+        }
+
+        if(!is_null($nationality)){
+            $request_parameters['nationality'] = $nationality->__toString();
+        }
+
+        if(!is_null($street)){
+            $request_parameters['street'] = $street->__toString();
+        }
+
+        if(!is_null($city)){
+            $request_parameters['city'] = $city->__toString();
+        }
+
+        if(!is_null($state)){
+            $request_parameters['state'] = $state->__toString();
+        }
+
+        if(!is_null($country)){
+            $request_parameters['country'] = $country->__toString();
+        }
+
+        if(!is_null($postal_code)){
+            $request_parameters['postal_code'] = $postal_code->__toString();
+        }
+        if(!is_null($image)){
+            $request_parameters['image'] = $image->__toString();
+        }
+
+        if(!is_null($employment)){
+            $request_parameters['employment'] = $employment->__toString();
+        }
+
+        if(!is_null($further_notes)){
+            $request_parameters['further_notes'] = $further_notes->__toString();
+        }
+
+
+        if(!is_null($disability_text)){
+            $request_parameters['disability_text'] = $disability_text->__toString();
+        }
+
+        if(!is_null($custom_fields_data)) {
+            $request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+        return $response->get_data();
+    }
 }
