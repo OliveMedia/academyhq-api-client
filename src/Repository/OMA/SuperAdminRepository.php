@@ -251,8 +251,8 @@ class SuperAdminRepository extends BaseRepository
     public function list_organisation_based_on_domain(
         VO\Integer $current_page,
         VO\StringVO $search = null,
-        VO\StringVO $subdomain,
-        VO\StringVO $email,
+        VO\StringVO $subdomain = null,
+        VO\StringVO $email = null,
         VO\Integer $per_page = null
     ) {
        
@@ -265,14 +265,15 @@ class SuperAdminRepository extends BaseRepository
 
         $request_parameters = array(
             'search'        => $search ? $search->__toString() : '',
-            'current_page'  => $current_page->__toInteger(),
-            'subdomain'    => $subdomain->__toString()
+            'current_page'  => $current_page->__toInteger()
         );
 
         if (!is_null($email)) {
             $request_parameters['email']=$email->__toString();
         }
-
+        if (!is_null($subdomain)) {
+            $request_parameters['subdomain']=$subdomain->__toString();
+        }
         $response = $request->send($request_parameters);
 
         $data = $response->get_data();
