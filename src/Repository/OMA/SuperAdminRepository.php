@@ -251,7 +251,7 @@ class SuperAdminRepository extends BaseRepository
     public function list_organisation_based_on_domain(
         VO\Integer $current_page,
         VO\StringVO $search = null,
-        VO\StringVO $domain = null,
+        VO\StringVO $domain,
         VO\Email $email,
         VO\Integer $per_page = null
     ) {
