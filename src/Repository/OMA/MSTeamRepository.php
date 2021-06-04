@@ -1015,10 +1015,10 @@ class MSTeamRepository extends BaseRepository
             'member_id'     => $member_id->__toString()
         );
 
-        if(!is_null($first_name)){
+        if(!is_null($name)){
             $request_parameters['first_name'] = $name->get_first_name()->__toString();
         }
-        if(!is_null($last_name)){
+        if(!is_null($name)){
             $request_parameters['last_name'] = $name->get_last_name()->__toString();
         }
         if(!is_null($country_code)){
