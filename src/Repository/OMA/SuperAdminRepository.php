@@ -255,14 +255,13 @@ class SuperAdminRepository extends BaseRepository
         VO\StringVO $email,
         VO\Integer $per_page = null
     ) {
-        $request = new Request(
+       
+         $request = new Request(
             new GuzzleClient,
             $this->credentials,
             VO\HTTP\Url::fromNative($this->base_url.'/list/organisation'),
             new VO\HTTP\Method('POST')
         );
-
-        $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
             'search'        => $search ? $search->__toString() : '',
@@ -274,7 +273,7 @@ class SuperAdminRepository extends BaseRepository
             $request_parameters['email']=$email->__toString();
         }
 
-        $response = $request->send($request_parameters, $header_parameters);
+        $response = $request->send($request_parameters);
 
         $data = $response->get_data();
 
