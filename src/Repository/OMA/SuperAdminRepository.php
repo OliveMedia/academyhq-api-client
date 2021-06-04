@@ -264,15 +264,19 @@ class SuperAdminRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'search'        => $search ? $search->__toString() : '',
             'current_page'  => $current_page->__toInteger()
         );
-
-        if (!is_null($email)) {
-            $request_parameters['email']=$email->__toString();
+         if ($search) {
+            $request_parameters['search'] = $search->__toString();
         }
         if (!is_null($domain)) {
             $request_parameters['domain']=$domain->__toString();
+        }
+        if (!is_null($email)) {
+            $request_parameters['email']=$email->__toString();
+        }
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
         }
         $response = $request->send($request_parameters);
 
