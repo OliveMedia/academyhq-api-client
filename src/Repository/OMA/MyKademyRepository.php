@@ -231,17 +231,16 @@ class MyKademyRepository extends BaseRepository
         VO\StringVO $gender=null,
         VO\StringVO $country_code=null,
         VO\StringVO $mobile_number=null,
-        VO\Email $email=null,
+        VO\StringVO $email=null,
         VO\StringVO $nationality=null,
         VO\StringVO $street = null,
         VO\StringVO $city = null,
         VO\StringVO $state = null,
         VO\StringVO $country = null,
         VO\StringVO $postal_code = null,        
-        VO\StringVO $image = null,
+        VO\StringVO $profile_picture = null,
         VO\StringVO $employment = null,
         VO\StringVO $further_notes = null,
-        VO\StringVO $disability_text = null,
         VO\StringVO $date_of_birth = null,
         VO\Integer $weekly_learning_hours=null,
         VO\StringVO $custom_fields_data = null
@@ -250,13 +249,13 @@ class MyKademyRepository extends BaseRepository
         $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url . '/mykademy/update/profile'),
+            VO\HTTP\Url::fromNative($this->base_url . '/update/profile'),
             new VO\HTTP\Method('POST')
         );
 
         $request_parameters = array(
-            'auth_code'  => $auth_code->__toString(),
-            'mykademy_member_id'    => $mykademy_member_id->__toInteger()
+            'mykademy_member_id'    => $mykademy_member_id->__toInteger(),
+            'auth_code'  => $auth_code->__toString()
         );
 
         if(!is_null($first_name)){
@@ -322,10 +321,6 @@ class MyKademyRepository extends BaseRepository
             $request_parameters['date_of_birth'] = $date_of_birth->__toString();
         }
 
-        if(!is_null($disability_text)){
-            $request_parameters['disability_text'] = $disability_text->__toString();
-        }
-
         if(!is_null($weekly_learning_hours)){
             $request_parameters['weekly_learning_hours'] = $weekly_learning_hours->__toInteger();
         }
@@ -334,7 +329,7 @@ class MyKademyRepository extends BaseRepository
             $request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
         }
 
-        $response = $request->send($request_parameters, $header_parameters);
+        $response = $request->send($request_parameters);
         return $response->get_data();
     }
 
