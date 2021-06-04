@@ -267,7 +267,7 @@ class SuperAdminRepository extends BaseRepository
         $request_parameters = array(
             'search'        => $search ? $search->__toString() : '',
             'current_page'  => $current_page->__toInteger(),
-             'subdomain' => $domain->__toString()
+            'subdomain'    => $subdomain->__toString()
         );
 
         if (!is_null($email)) {
