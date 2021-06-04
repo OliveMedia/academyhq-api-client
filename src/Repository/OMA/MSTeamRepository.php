@@ -1012,7 +1012,7 @@ class MSTeamRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            'member_id'     => $member_id->__toInteger()
+            'member_id'     => $member_id->__toString()
         );
 
         if(!is_null($first_name)){
