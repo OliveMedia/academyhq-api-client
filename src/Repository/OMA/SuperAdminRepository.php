@@ -252,7 +252,7 @@ class SuperAdminRepository extends BaseRepository
         VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\StringVO $subdomain = null,
-        VO\StringVO $email = null,
+        VO\Email $email,
         VO\Integer $per_page = null
     ) {
        
