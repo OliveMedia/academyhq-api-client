@@ -252,7 +252,7 @@ class SuperAdminRepository extends BaseRepository
         VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\StringVO $domain,
-        VO\Email $email,
+        VO\StringVO $email,
         VO\Integer $per_page = null
     ) {
        
@@ -264,17 +264,13 @@ class SuperAdminRepository extends BaseRepository
         );
 
         $request_parameters = array(
-            'current_page'  => $current_page->__toInteger()
+            'current_page'  => $current_page->__toInteger(),
+            'search'        => $search ? $search->__toString() : '',
+            'domain' => $domain->__toString(),
+            'email' => $email->__toString()
+
         );
-         if ($search) {
-            $request_parameters['search'] = $search->__toString();
-        }
-        if (!is_null($domain)) {
-            $request_parameters['domain']=$domain->__toString();
-        }
-        if (!is_null($email)) {
-            $request_parameters['email']=$email->__toString();
-        }
+        
         if(!is_null($per_page)){
             $request_parameters['per_page'] = $per_page->__toInteger();
         }
