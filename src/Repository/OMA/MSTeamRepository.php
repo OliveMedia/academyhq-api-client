@@ -983,7 +983,7 @@ class MSTeamRepository extends BaseRepository
      */
     public function edit_member_details(
         VO\Token $token,
-        VO\Integer $member_id,
+        VO\MemberID $member_id,
         VO\Name $name =null, 
         VO\StringVO $gender=null,
         VO\StringVO $country_code =null,
