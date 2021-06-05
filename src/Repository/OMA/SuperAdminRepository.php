@@ -259,7 +259,7 @@ class SuperAdminRepository extends BaseRepository
          $request = new Request(
             new GuzzleClient,
             $this->credentials,
-            VO\HTTP\Url::fromNative($this->base_url.'/list/organisation'),
+            VO\HTTP\Url::fromNative($this->base_url.'/oma/list/organisation'),
             new VO\HTTP\Method('POST')
         );
 
