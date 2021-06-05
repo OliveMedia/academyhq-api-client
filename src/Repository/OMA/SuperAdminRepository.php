@@ -283,7 +283,7 @@ class SuperAdminRepository extends BaseRepository
 /*
     * Get list of all Apprenticeship Client across which the Learner is registered in
     */
-    public function list_organisation_based_on_email(
+    public function list_main_organisation(
         VO\Integer $current_page,
         VO\StringVO $search = null,
         VO\StringVO $email,
