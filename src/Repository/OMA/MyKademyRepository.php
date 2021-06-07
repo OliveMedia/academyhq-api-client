@@ -333,4 +333,46 @@ class MyKademyRepository extends BaseRepository
         return $response->get_data();
     }
 
+
+    /**
+     * Edit Profile Details
+     * @param VO\mykademy_member_id $mykademy_member_id
+     * @param VO\auth_code     $auth_code
+     * @param VO\password    $password
+     * @param VO\confirm_password     $confirm_password
+     *
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+    public function updatePassword(
+        VO\Integer $mykademy_member_id,
+        VO\StringVO $auth_code,
+        VO\StringVO $password=null,
+        VO\StringVO $confirm_password=null
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/update/password'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'mykademy_member_id'    => $mykademy_member_id->__toInteger(),
+            'auth_code'  => $auth_code->__toString()
+        );
+
+        if(!is_null($password)){
+            $request_parameters['password'] = $password->__toString();
+        }
+
+        if(!is_null($confirm_password)){
+            $request_parameters['confirm_password'] = $confirm_password->__toString();
+        }
+
+        $response = $request->send($request_parameters);
+        return $response->get_data();
+    }
+
 }
