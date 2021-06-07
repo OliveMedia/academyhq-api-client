@@ -984,7 +984,8 @@ class MSTeamRepository extends BaseRepository
     public function edit_member_details(
         VO\Token $token,
         VO\MemberID $member_id,
-        VO\Name $name =null, 
+        VO\StringVO $first_name =null, 
+        VO\StringVO $last_name =null, 
         VO\StringVO $gender=null,
         VO\StringVO $country_code =null,
         VO\StringVO $mobile_number =null,
@@ -1012,14 +1013,14 @@ class MSTeamRepository extends BaseRepository
         $header_parameters = array('Authorization' => $token->__toEncodedString());
 
         $request_parameters = array(
-            'member_id'     => $member_id->__toInteger()
+            'member_id'     => $member_id->__toString()
         );
 
         if(!is_null($first_name)){
-            $request_parameters['first_name'] = $name->get_first_name()->__toString();
+            $request_parameters['first_name'] = $first_name->__toString();
         }
         if(!is_null($last_name)){
-            $request_parameters['last_name'] = $name->get_last_name()->__toString();
+            $request_parameters['last_name'] = $last_name->__toString();
         }
         if(!is_null($country_code)){
             $request_parameters['country_code'] =$country_code->__toString();
