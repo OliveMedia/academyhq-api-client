@@ -1557,6 +1557,14 @@ class AlacrityGroupAdminRepository extends BaseRepository
         return $data;
     }
 
+	/**
+	 * List employer
+	 * @param VO\Token          $token
+	 * @param VO\OrganisationID $organisation_id
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
 	public function listEmployer(
         VO\Token $token,
         VO\OrganisationID $organisation_id
@@ -1577,6 +1585,42 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
         $data = $response->get_data();
         return $data;
+    }
+
+	/**
+	 * Patch status for member apprenticeship
+	 * @param VO\Token $token
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
+    public function patchStatusForMemberApprenticeship(
+	    VO\Token $token,
+	    VO\Integer $per_page = null,
+	    VO\Integer $current_page = null
+    ) {
+	    $request = new Request(
+		    new GuzzleClient,
+		    $this->credentials,
+		    VO\HTTP\Url::fromNative($this->base_url.'/alacrity/group/admin/member-apprenticeship/patch/status'),
+		    new VO\HTTP\Method('POST')
+	    );
+	    $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+	    $request_parameters = array();
+
+	    if(!is_null($per_page)){
+		    $request_parameters['per_page'] = $per_page->__toInteger();
+	    }
+
+	    if(!is_null($current_page)){
+		    $request_parameters['current_page'] = $current_page->__toInteger();
+	    }
+
+	    $response = $request->send($request_parameters, $header_parameters);
+
+	    $data = $response->get_data();
+	    return $data;
     }
 
 }
