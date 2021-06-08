@@ -370,7 +370,8 @@ class StudentRepository extends BaseRepository
         VO\Integer $is_assessor = null,
         VO\Integer $is_verifier = null,
         VO\Integer $is_mentor = null,
-        VO\Integer $is_student = null
+        VO\Integer $is_student = null,
+        VO\OrganisationID $organisation_id = null
     ){
         $request = new Request(
             new GuzzleClient,
@@ -400,6 +401,10 @@ class StudentRepository extends BaseRepository
 
         if(!is_null($is_student)){
             $request_parameters['is_student']=$is_student->__toInteger();
+        }
+        
+        if(!is_null($organisation_id)){
+            $request_parameters['organisation_id']=$organisation_id->__toString();
         }
 
         $response = $request->send($request_parameters, $header_parameters);

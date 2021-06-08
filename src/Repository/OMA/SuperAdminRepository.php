@@ -247,6 +247,71 @@ class SuperAdminRepository extends BaseRepository
 
         return $data;
     }
-   
+   /* Get list of all Organization/s across which the Learner is registered in */
+    public function list_organisation_based_on_domain(
+        VO\Integer $current_page,
+        VO\StringVO $search = null,
+        VO\StringVO $domain,
+        VO\StringVO $email,
+        VO\Integer $per_page = null
+    ) {
+       
+         $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/oma/list/organisation'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'current_page'  => $current_page->__toInteger(),
+            'search'        => $search ? $search->__toString() : '',
+            'domain' => $domain->__toString(),
+            'email' => $email->__toString()
+
+        );
+        
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+/*
+    * Get list of all Apprenticeship Client across which the Learner is registered in
+    */
+    public function list_organisation_based_on_email(
+        VO\Integer $current_page,
+        VO\StringVO $search = null,
+        VO\StringVO $email,
+        VO\Integer $per_page = null
+    ) {
+       
+         $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/oma/list/mainorganisation'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'current_page'  => $current_page->__toInteger(),
+            'search'        => $search ? $search->__toString() : '',
+            'email' => $email->__toString()
+
+        );
+        
+        if(!is_null($per_page)){
+            $request_parameters['per_page'] = $per_page->__toInteger();
+        }
+        $response = $request->send($request_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 
 }
