@@ -18,7 +18,23 @@ class MyKademyRepository extends BaseRepository
     }
 
     /**
-    * Create New Client with completely registered admin
+    *    @name          : createMyKademyClient
+    *    @param         : $name
+    *    @param         : $email
+    *    @param         : $password
+    *    @param         : $mobile_number
+    *    @param         : $profile_picture Base64 data or Valid link
+    *    @param         : $company_name
+    *    @param         : $branding_logo_url Base64 data or valid link
+    *    @param         : $background_url Base64 data or valid link
+    *    @param         : $branding_hex
+    *    @param         : $domain
+    *    @param         : $mykademy_member_id
+    *    @param         : $mykademy_platform_id
+    *    @param         : $mykademy_platform_url
+    *    @param         : VO\profile_picture     $profile_picture Base64 Data or Valid Link
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
     **/
 
     public function createMyKademyClient(
@@ -89,9 +105,17 @@ class MyKademyRepository extends BaseRepository
     }
 
     /**
-    * Create New Admin
+    *    @name          : createMyKademyAdmin
+    *    @param         : VO\first_name $first_name
+    *    @param         : VO\last_name     $last_name
+    *    @param         : VO\email     $email
+    *    @param         : VO\password     $password
+    *    @param         : VO\mobile_number     $mobile_number
+    *    @param         : VO\mykademy_member_id     $mykademy_member_id
+    *    @param         : VO\profile_picture     $profile_picture Base64 Data or Valid Link
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
     **/
-
     public function createMyKademyAdmin(
         VO\StringVO $first_name=null,
         VO\StringVO $last_name=null,
@@ -134,7 +158,14 @@ class MyKademyRepository extends BaseRepository
     }
 
     /**
-    * loginViaToken
+    *    @name          : loginViaToken
+    *    @param         : VO\id $id
+    *    @param         : VO\client_id     $client_id
+    *    @param         : VO\organisation_id     $organisation_id
+    *    @param         : VO\token     $token
+    *    @param         : VO\expires_on     $expires_on
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
     **/
 
     public function loginViaToken(
@@ -170,9 +201,12 @@ class MyKademyRepository extends BaseRepository
             return $data;
     }
 
-
     /**
-    * loginViaMyKademyAuthCodeAndMemberId
+    *    @name          : loginViaMyKademyAuthCodeAndMemberId
+    *    @param         : VO\mykademy_member_id $mykademy_member_id
+    *    @param         : VO\auth_code     $auth_code
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
     **/
 
     public function loginViaMyKademyAuthCodeAndMemberId(
@@ -197,7 +231,7 @@ class MyKademyRepository extends BaseRepository
     }
 
     /**
-     * Edit Profile Details
+    *    @name         : updateProfile
      * @param VO\mykademy_member_id $mykademy_member_id
      * @param VO\auth_code     $auth_code
      * @param VO\first_name    $first_name
@@ -219,10 +253,9 @@ class MyKademyRepository extends BaseRepository
      * @param VO\StringVO|null $date_of_birth
      * @param VO\Integer|null  $weekly_learning_hours
      * @param VO\StringVO|null $custom_fields_data
-     *
-     * @return \AcademyHQ\API\HTTP\Response\json
-     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
-     */
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
+    **/
     public function updateProfile(
         VO\Integer $mykademy_member_id,
         VO\StringVO $auth_code,
@@ -333,17 +366,15 @@ class MyKademyRepository extends BaseRepository
         return $response->get_data();
     }
 
-
     /**
-     * Edit Profile Details
-     * @param VO\mykademy_member_id $mykademy_member_id
-     * @param VO\auth_code     $auth_code
-     * @param VO\password    $password
-     * @param VO\confirm_password     $confirm_password
-     *
-     * @return \AcademyHQ\API\HTTP\Response\json
-     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
-     */
+    *    @name         : updatePassword
+    *    @params       : VO\mykademy_member_id $mykademy_member_id,
+    *    @params       : VO\auth_code     $auth_code,
+    *    @params       : VO\password    $password,
+    *    @params       : VO\confirm_password     $confirm_password
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
+    **/
     public function updatePassword(
         VO\Integer $mykademy_member_id,
         VO\StringVO $auth_code,
@@ -371,6 +402,33 @@ class MyKademyRepository extends BaseRepository
             $request_parameters['confirm_password'] = $confirm_password->__toString();
         }
 
+        $response = $request->send($request_parameters);
+        return $response->get_data();
+    }
+
+    /**
+    *    @name         : logout
+    *    @params       : VO\mykademy_member_id $mykademy_member_id, 
+    *    @params       : VO\auth_code     $auth_code
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
+    **/
+    public function logout(
+        VO\Integer $mykademy_member_id,
+        VO\StringVO $auth_code
+    )
+    {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url . '/logout'),
+            new VO\HTTP\Method('POST')
+        );
+
+        $request_parameters = array(
+            'mykademy_member_id'    => $mykademy_member_id->__toInteger(),
+            'auth_code'  => $auth_code->__toString()
+        );
         $response = $request->send($request_parameters);
         return $response->get_data();
     }
