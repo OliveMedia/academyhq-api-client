@@ -1075,22 +1075,23 @@ class StudentRepository extends BaseRepository
     }
 
 	/**
-     * Update Member Apprenticeship Progress
-     * @param VO\Token        $token
-     * @param VO\Integer      $member_apprenticeship_id
-     * @param VO\Integer|null $progress
-     * @param VO\StringVO|null $score
-     * @param VO\Integer      $started_programs_count
-     *
-     * @return \AcademyHQ\API\HTTP\Response\json
-     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
-     */
+	 * @param VO\Token         $token
+	 * @param VO\ID            $member_apprenticeship_id
+	 * @param VO\Integer|null  $progress
+	 * @param VO\StringVO|null $score
+	 * @param VO\Integer       $started_programs_count
+	 * @param VO\StringVO|null $status
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException§
+	 */
     public function updateMemberApprenticeProgress(
         VO\Token $token,
         VO\ID $member_apprenticeship_id,
         VO\Integer $progress=null,
         VO\StringVO $score = null,
-        VO\Integer $started_programs_count
+        VO\Integer $started_programs_count,
+	    VO\StringVO $status = null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -1108,6 +1109,9 @@ class StudentRepository extends BaseRepository
         if(!is_null($score)){
             $request_parameters['score'] = $score->__toString();
         }
+	    if(!is_null($status)){
+		    $request_parameters['status'] = $status->__toString();
+	    }
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $response = $request->send($request_parameters, $header_parameters);
