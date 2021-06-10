@@ -553,7 +553,6 @@ class OffSessionRepository extends BaseRepository
 	 * @param VO\Integer|null   $program_duration
 	 * @param VO\Flag|null      $lock_after_program_duration
 	 * @param VO\StringVO|null  $start_duration_after
-	 * @param VO\Flag|null      $editable
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
@@ -593,8 +592,7 @@ class OffSessionRepository extends BaseRepository
 		VO\Flag $editable = null,
 		VO\Integer $program_duration = null,
 		VO\Flag $lock_after_program_duration = null,
-		VO\StringVO $start_duration_after = null,
-		VO\Flag $editable = null
+		VO\StringVO $start_duration_after = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
