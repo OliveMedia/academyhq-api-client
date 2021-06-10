@@ -227,12 +227,14 @@ class OffSessionRepository extends BaseRepository
 	/**
 	 * Check if email address exists in AHQ database
 	 * @param VO\Email $email
+	 * @param VO\OrganisationID $organisation = null
 	 *
 	 * @return \AcademyHQ\API\HTTP\Response\json
 	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
 	 */
 	public function checkIfEmailExistsInAHQ(
-		VO\Email $email
+		VO\Email $email,
+		VO\OrganisationID $organisation_id = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -243,6 +245,10 @@ class OffSessionRepository extends BaseRepository
 		$request_parameters = array(
 			'email' => $email->__toString()
 		);
+
+		if(!is_null($organisation_id)){
+			$request_parameters['organisation_id'] = $organisation_id->__toString();
+		}
 		$response = $request->send($request_parameters);
 		$data = $response->get_data();
 		return $data;
