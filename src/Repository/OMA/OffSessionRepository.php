@@ -725,6 +725,10 @@ class OffSessionRepository extends BaseRepository
 		if(!is_null($start_duration_after)){
 			$request_parameters['start_duration_after'] = $start_duration_after->__toString();
 		}
+		if(!is_null($editable)){
+			$request_parameters['editable'] = $editable->__toBool();
+		}
+
 		$response = $request->send($request_parameters, null);
 		$data = $response->get_data();
 		return $data;
