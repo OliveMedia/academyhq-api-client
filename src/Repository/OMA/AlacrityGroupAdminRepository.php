@@ -160,7 +160,8 @@ class AlacrityGroupAdminRepository extends BaseRepository
 	public function listLicence(
 		VO\Token $token,
 		VO\StringVO $search = null,
-		VO\Integer $current_page
+		VO\Integer $current_page,
+		VO\Integer $per_page = null
 	) {
 		$request = new Request(
 			new GuzzleClient,
@@ -173,6 +174,10 @@ class AlacrityGroupAdminRepository extends BaseRepository
 			'search'        => $search ? $search->__toString() : '',
 			'current_page'  => $current_page->__toInteger(),
 		);
+
+		if(!is_null($per_page)){
+			$request_parameters['per_page'] = $per_page->__toInteger();
+		}
 
 		$response = $request->send($request_parameters, $header_parameters);
 		$data = $response->get_data();
@@ -1621,6 +1626,70 @@ class AlacrityGroupAdminRepository extends BaseRepository
 
 	    $data = $response->get_data();
 	    return $data;
+    }
+
+    public function createCourseStandard(
+        VO\Token $token,
+        VO\StringVO $course_name,
+        VO\StringVO $description = null,
+        VO\StringVO $thumbnail_url = null,
+        VO\StringVO $image_url = null
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/create/course_standard'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'name'        => $course_name->__toString(),
+        );
+
+        if(!is_null($description)){
+            $request_parameters['description'] = $description->__toString();
+        }
+        if(!is_null($thumbnail_url)){
+            $request_parameters['thumbnail_url'] = $thumbnail_url->__toString();
+        }
+        if(!is_null($image_url)){
+            $request_parameters['image_url'] = $image_url->__toString();
+        }
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+
+    }
+
+    public function createCourseScormModule(
+        VO\Token $token,
+        VO\CourseID $course_id,
+        VO\StringVO $module_name,
+        VO\StringVO $scorm_module_key
+    ) {
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/create/course_standard'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'course_id'        => $course_id->__toString(),
+            'module_name'      => $module_name->__toString(),
+            'scorm_module_key' => $scorm_module_key->__toString()
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+
     }
 
 }
