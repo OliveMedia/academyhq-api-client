@@ -1094,7 +1094,7 @@ class MSTeamRepository extends BaseRepository
         );
         $header_parameters = array('Authorization' => $token->__toEncodedString());
         $request_parameters = array(
-            'files'        => $files ? $files->__toString() : ''
+            'files'        => $files->__toString() 
         );
 
       
