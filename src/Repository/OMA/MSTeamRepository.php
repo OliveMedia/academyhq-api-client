@@ -954,7 +954,8 @@ class MSTeamRepository extends BaseRepository
         $data = $response->get_data();
 
         return $data;
-    }
+    } 
+    
     /**
      * Edit Profile Details
      * @param VO\Token         $token
@@ -1080,5 +1081,28 @@ class MSTeamRepository extends BaseRepository
 
         $response = $request->send($request_parameters, $header_parameters);
         return $response->get_data();
+    }
+    public function importMember(
+        VO\Token $token,
+        VO\StringVO $files = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/import/member'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'files'        => $files->__toString() 
+        );
+
+      
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
     }
 }
