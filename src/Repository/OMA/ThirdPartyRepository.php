@@ -506,6 +506,7 @@ class ThirdPartyRepository extends BaseRepository
      * @param VO\StringVO|null $created_from
      * @param VO\StringVO|null $created_to
      * @param VO\Integer|null $organisation_id
+     * @param VO\StringVO|null $last_login_at
      *
      * @return \AcademyHQ\API\HTTP\Response\json
      * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
@@ -520,7 +521,8 @@ class ThirdPartyRepository extends BaseRepository
         VO\StringVO $is_deleted = null,
         VO\StringVO $created_from = null,
         VO\StringVO $created_to = null,
-        VO\Integer $organisation_id = null
+        VO\Integer $organisation_id = null,
+        VO\StringVO $last_login_at = null
     ) {
 
         $request = new Request(
@@ -565,6 +567,10 @@ class ThirdPartyRepository extends BaseRepository
 
         if ($created_to) {
             $request_parameters['created_to'] = $created_to->__toString();
+        }
+
+        if ($last_login_at) {
+            $request_parameters['last_login_at'] = $last_login_at->__toString();
         }
 
         $response = $request->send($request_parameters);
