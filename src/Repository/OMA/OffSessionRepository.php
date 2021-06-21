@@ -1059,4 +1059,24 @@ class OffSessionRepository extends BaseRepository
 		return $data;
 	}
 
+
+	public function updatePreProgramId(
+		VO\StringVO $program_pre_program_map
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative( $this->base_url . '/out_session/update/pre_program_id' ),
+			new VO\HTTP\Method( 'POST' )
+		);
+
+		$request_parameters = array(
+			'program_pre_program_map' => $program_pre_program_map->__toString()
+		);
+
+		$response = $request->send( $request_parameters, null );
+		$data     = $response->get_data();
+		return $data;
+	}
+
 }
