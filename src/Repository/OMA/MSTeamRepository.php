@@ -956,6 +956,7 @@ class MSTeamRepository extends BaseRepository
         return $data;
     } 
     
+    
     /**
      * Edit Profile Details
      * @param VO\Token         $token
@@ -1105,4 +1106,27 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
+    public function deleteMemberApprenticeship(
+        VO\Token $token,
+        VO\Integer $member_apprenticeships_id = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/delete/memberapprentiship'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'member_apprenticeships_id'  => $member_apprenticeships_id->__toInteger(),
+        );
+
+         
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    } 
 }
