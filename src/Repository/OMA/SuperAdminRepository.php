@@ -54,7 +54,6 @@ class SuperAdminRepository extends BaseRepository
         VO\StringVO $email,
         VO\StringVO $mobile_number,
         VO\StringVO $profile_picture,
-        VO\StringVO $icon,
         VO\StringVO $company_name,
         VO\StringVO $branding_logo_url,
         VO\StringVO $background_url,
@@ -79,9 +78,6 @@ class SuperAdminRepository extends BaseRepository
             }
             if(!is_null($profile_picture)){
                 $request_parameters['profile_picture'] = $profile_picture->__toString();
-            }
-            if(!is_null($icon)){
-                $request_parameters['icon'] = $icon->__toString();
             }
             if(!is_null($company_name)){
                 $request_parameters['company_name'] = $company_name->__toString();
@@ -114,7 +110,6 @@ class SuperAdminRepository extends BaseRepository
         VO\StringVO $password,
         VO\StringVO $mobile_number,
         VO\StringVO $profile_picture,
-        VO\StringVO $icon,
         VO\StringVO $company_name,
         VO\StringVO $branding_logo_url,
         VO\StringVO $background_url,
@@ -142,9 +137,6 @@ class SuperAdminRepository extends BaseRepository
             }
             if(!is_null($profile_picture)){
                 $request_parameters['profile_picture'] = $profile_picture->__toString();
-            }
-            if(!is_null($icon)){
-                $request_parameters['icon'] = $icon->__toString();
             }
             if(!is_null($company_name)){
                 $request_parameters['company_name'] = $company_name->__toString();
@@ -175,6 +167,7 @@ class SuperAdminRepository extends BaseRepository
         VO\StringVO $password,
         VO\StringVO $mobile_number,
         VO\StringVO $profile_picture,
+        VO\StringVO $icon,
         VO\StringVO $company_name,
         VO\StringVO $branding_logo_url,
         VO\StringVO $background_url,
@@ -203,6 +196,9 @@ class SuperAdminRepository extends BaseRepository
             }
             if(!is_null($profile_picture)){
                 $request_parameters['profile_picture'] = $profile_picture->__toString();
+            }
+            if(!is_null($icon)){
+                $request_parameters['icon'] = $icon->__toString();
             }
             if(!is_null($company_name)){
                 $request_parameters['company_name'] = $company_name->__toString();
