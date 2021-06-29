@@ -158,16 +158,31 @@ class SuperAdminRepository extends BaseRepository
             $data = $response->get_data();
             return $data;
     }
-      /**
-    * Create New Client from msteam
-    **/
+
+	/**
+	 * @param VO\StringVO      $name
+	 * @param VO\StringVO      $email
+	 * @param VO\StringVO      $password
+	 * @param VO\StringVO      $mobile_number
+	 * @param VO\StringVO      $profile_picture
+	 * @param VO\StringVO|null $icon
+	 * @param VO\StringVO      $company_name
+	 * @param VO\StringVO      $branding_logo_url
+	 * @param VO\StringVO      $background_url
+	 * @param VO\StringVO      $branding_hex
+	 * @param VO\StringVO      $domain
+	 * @param VO\StringVO      $plan
+	 *
+	 * @return \AcademyHQ\API\HTTP\Response\json
+	 * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+	 */
     public function createThirdPartyClientWithPlan(
         VO\StringVO $name,
         VO\StringVO $email,
         VO\StringVO $password,
         VO\StringVO $mobile_number,
         VO\StringVO $profile_picture,
-        VO\StringVO $icon,
+        VO\StringVO $icon=null,
         VO\StringVO $company_name,
         VO\StringVO $branding_logo_url,
         VO\StringVO $background_url,
