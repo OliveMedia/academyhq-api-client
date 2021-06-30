@@ -1128,5 +1128,60 @@ class MSTeamRepository extends BaseRepository
         $data = $response->get_data();
 
         return $data;
-    } 
+    }
+
+    /**
+    *    @name          : editApprenticeshipClient
+    *    @param         : $company_name
+    *    @param         : $plan
+    *    @param         : $branding_logo_url Base64 data or valid link
+    *    @param         : $background_url Base64 data or valid link
+    *    @param         : $branding_hex
+    *    @param         : $icon
+    *    @response     : \AcademyHQ\API\HTTP\Response\json
+    *    @IPR 2021 Hiup Solutions
+    **/
+
+    public function editApprenticeshipClient(
+        VO\Token $token,
+        VO\StringVO $company_name=null,
+        VO\StringVO $plan=null,
+        VO\StringVO $branding_logo_url=null,
+        VO\StringVO $background_url=null,
+        VO\StringVO $branding_hex=null,
+        VO\StringVO $icon=null
+        ){
+            $request = new Request(
+                new GuzzleClient,
+                $this->credentials,
+                VO\HTTP\Url::fromNative($this->base_url . '/edit/apprenticeship/client'),
+                new VO\HTTP\Method('POST')
+            );
+            $header_parameters = array('Authorization' => $token->__toEncodedString());
+            $request_parameters = array();
+
+            if(!is_null($company_name)){
+                $request_parameters['company_name'] = $company_name->__toString();
+            }
+            if(!is_null($plan)){
+                $request_parameters['plan'] = $plan->__toString();
+            }
+            if(!is_null($branding_logo_url)){
+                $request_parameters['branding_logo_url'] = $branding_logo_url->__toString();
+            }
+            if(!is_null($background_url)){
+                $request_parameters['background_url'] = $background_url->__toString();
+            }
+            if(!is_null($branding_hex)){
+                $request_parameters['branding_hex'] = $branding_hex->__toString();
+            }
+            if(!is_null($icon)){
+                $request_parameters['icon'] = $icon->__toString();
+            }
+
+
+            $response = $request->send($request_parameters, $header_parameters);
+            $data = $response->get_data();
+            return $data;
+    }
 }
