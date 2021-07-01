@@ -67,6 +67,29 @@ class MemberRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function reset_member_by_email_and_organisation(
+		VO\Email $email,
+		VO\OrganisationID $organisation_id
+	) {
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url.'/reset/member/by/email/and/organisation'),
+			new VO\HTTP\Method('POST')
+		);
+
+		$request_parameters = array(
+			'email' => $email->__toEncodedString(),
+			'organisation_id' => $organisation_id->__toString()
+		);
+
+		$response = $request->send($request_parameters, null);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
+
 	public function reset_password_by_hash_key_and_password(
 		VO\Token $hash_key = null,
 		VO\Password $password = null,
