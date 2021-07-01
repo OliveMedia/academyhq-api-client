@@ -1184,4 +1184,141 @@ class MSTeamRepository extends BaseRepository
             $data = $response->get_data();
             return $data;
     }
+
+    /**
+     * create employer
+     * @param VO\Token $token
+     * @param VO\String $first_name
+     * @param VO\String $last_name
+     * @param VO\String $password
+     * @param VO\String $employer_name
+     * @param VO\String $email
+     * @param VO\String $tax_number
+     * @param VO\String $image
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+
+     public function createEmployer(
+        VO\Token $token,
+        VO\StringVO $first_name,
+        VO\StringVO $last_name,
+        VO\StringVO $password,
+        VO\StringVO $employer_name,
+        VO\StringVO $email,
+        VO\StringVO $tax_number=null,
+        VO\StringVO $image=null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/create/employer'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+
+            'first_name'    => $first_name->__toString(),
+            'last_name'     => $last_name->__toString(),
+            'password'      =>$password->__toString(),
+            'employer_name' => $employer_name->__toString(),
+            'email'         => $email->__toString(),
+
+
+        );
+        if(!is_null($tax_number)){
+            $request_parameters['tax_number']=$tax_number->__toString();
+        }
+
+        if(!is_null($image)){
+            $request_parameters['image']=$image->__toString();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    /**
+     * Delete employer
+     * @param VO\Token $token
+     * @param VO\String $sub_org_id
+     */
+
+     public function deleteEmployer(
+        VO\Token $token,
+        VO\StringVO $sub_org_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/delete/employer'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'sub_org_id'    => $sub_org_id->__toString(),
+        );
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+
+    /**
+     * create trainer
+     * @param VO\Token $token
+     * @param VO\String $first_name
+     * @param VO\String $last_name
+     * @param VO\String $email
+     * @param VO\String $password
+     * @param VO\String $image
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+
+     public function createTrainer(
+        VO\Token $token,
+        VO\StringVO $first_name,
+        VO\StringVO $last_name,
+        VO\StringVO $email,
+        VO\StringVO $password,
+        VO\StringVO $image = null
+
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/create/trainer'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+
+            'first_name'    => $first_name->__toString(),
+            'last_name'     => $last_name->__toString(),
+            'email'         => $email->__toString(),
+            'password'      =>$password->__toString(),
+        );
+
+        if(!is_null($image)){
+            $request_parameters['image']=$image->__toString();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
