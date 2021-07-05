@@ -1292,6 +1292,7 @@ class MSTeamRepository extends BaseRepository
         VO\StringVO $last_name,
         VO\StringVO $email,
         VO\StringVO $password,
+        VO\Integer $is_admin=null,
         VO\StringVO $image = null
 
     ){
@@ -1313,6 +1314,75 @@ class MSTeamRepository extends BaseRepository
 
         if(!is_null($image)){
             $request_parameters['image']=$image->__toString();
+        }
+
+        if(!is_null($is_admin)){
+            $request_parameters['is_admin']=$is_admin->__toInteger();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    /**
+     * listTrainer
+     * @param VO\Token $token
+     * @param VO\Integer $current_page
+     * @param VO\Integer $per_page
+     * @param VO\StringVO $sort_by
+     * @param VO\StringVO $direction
+     * @param VO\StringVO $search
+     * @param VO\Integer $is_active
+     * @param VO\Integer $is_deleted
+     * @param VO\Integer $is_admin
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+
+     public function listTrainer(
+        VO\Token $token,
+        VO\Integer $current_page,
+        VO\Integer $per_page,
+        VO\StringVO $sort_by,
+        VO\StringVO $direction,
+        VO\StringVO $search = null,
+        VO\Integer $is_active=null,
+        VO\Integer $is_deleted=null,
+        VO\Integer $is_admin=null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/list/trainer'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+        $request_parameters = array(
+            'current_page'    => $current_page->__toInteger(),
+            'per_page'    => $per_page->__toInteger(),
+            'sort_by'     => $sort_by->__toString(),
+            'direction'         => $direction->__toString()
+        );
+
+        if(!is_null($search)){
+            $request_parameters['search']=$search->__toString();
+        }
+
+        if(!is_null($is_active)){
+            $request_parameters['is_active']=$is_active->__toInteger();
+        }
+
+        if(!is_null($is_deleted)){
+            $request_parameters['is_deleted']=$is_deleted->__toInteger();
+        }
+
+        if(!is_null($is_admin)){
+            $request_parameters['is_admin']=$is_admin->__toInteger();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
