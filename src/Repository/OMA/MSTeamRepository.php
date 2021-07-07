@@ -1281,6 +1281,8 @@ class MSTeamRepository extends BaseRepository
      * @param VO\String $email
      * @param VO\String $password
      * @param VO\String $image
+     * @param VO\String $country_code
+     * @param VO\String $mobile_number
      * @return \AcademyHQ\API\HTTP\Response\json
      * @throws VO\Exception\MethodNotAllowedException
      * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
@@ -1293,7 +1295,9 @@ class MSTeamRepository extends BaseRepository
         VO\StringVO $email,
         VO\StringVO $password,
         VO\Integer $is_admin=null,
-        VO\StringVO $image = null
+        VO\StringVO $image = null,
+        VO\StringVO $country_code = null,
+        VO\StringVO $mobile_number = null
 
     ){
         $request = new Request(
@@ -1318,6 +1322,14 @@ class MSTeamRepository extends BaseRepository
 
         if(!is_null($is_admin)){
             $request_parameters['is_admin']=$is_admin->__toInteger();
+        }
+
+        if(!is_null($country_code)){
+            $request_parameters['country_code']=$country_code->__toString();
+        }
+
+        if(!is_null($mobile_number)){
+            $request_parameters['mobile_number']=$mobile_number->__toString();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
