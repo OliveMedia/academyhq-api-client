@@ -1403,4 +1403,89 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
+
+    /**
+     * osChangePassword
+     * @param VO\StringVO $domain
+     * @param VO\StringVO $email
+     * @param VO\Integer $member_id
+     * @param VO\StringVO $password
+     * @param VO\StringVO $confirm_password
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+
+     public function osChangePassword(
+        VO\StringVO $domain=null,
+        VO\StringVO $email=null,
+        VO\Integer $member_id=null,
+        VO\StringVO $password=null,
+        VO\StringVO $confirm_password=null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/os/change-password'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array();
+
+        $request_parameters = array(
+            'password'    => $password->__toString()
+        );
+
+        if(!is_null($domain)){
+            $request_parameters['domain']=$domain->__toString();
+        }
+
+        if(!is_null($email)){
+            $request_parameters['email']=$email->__toString();
+        }
+
+        if(!is_null($member_id)){
+            $request_parameters['member_id']=$member_id->__toInteger();
+        }
+
+        if(!is_null($confirm_password)){
+            $request_parameters['confirm_password']=$confirm_password->__toString();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
+
+    /**
+     * listDuplicateMembers
+     * @param VO\StringVO $domain
+     * @param VO\StringVO $email
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     * @description Get list of member_ids with provided email_id under requesting domain (client's domain).
+     */
+
+     public function listDuplicateMembers(
+        VO\StringVO $domain=null,
+        VO\StringVO $email=null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/os/list/duplicate-members'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array();
+
+        $request_parameters = array(
+            'domain'    => $domain->__toString(),
+            'email'    => $email->__toString()
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+
+        return $data;
+    }
 }
