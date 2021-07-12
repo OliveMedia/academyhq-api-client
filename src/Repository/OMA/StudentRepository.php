@@ -731,7 +731,8 @@ class StudentRepository extends BaseRepository
         VO\Token $token,
         VO\Password $old_password,
         VO\Password $new_password,
-        VO\Password $confirm_password
+        VO\Password $confirm_password,
+        VO\Token $mykademy_token=null
     ) {
         $request = new Request(
             new GuzzleClient,
@@ -741,12 +742,16 @@ class StudentRepository extends BaseRepository
         );
 
         $header_parameters = array('Authorization' => $token->__toEncodedString());
+
         $request_parameters = array(
             'password_old' => $old_password->__toEncodedString(),
             'password_new' => $new_password->__toEncodedString(),
             'password_new_confirm' => $confirm_password->__toEncodedString()
         );
 
+        if(!is_null($mykademy_token)) {
+            $request_parameters['mykademy_token'] = $mykademy_token->__toString();
+        }
         $response = $request->send($request_parameters, $header_parameters);
         $data = $response->get_data();
 
@@ -834,7 +839,8 @@ class StudentRepository extends BaseRepository
 	    VO\StringVO $disability_text = null,
 	    VO\StringVO $date_of_birth = null,
 	    VO\Integer $weekly_learning_hours=null,
-	    VO\StringVO $custom_fields_data = null
+	    VO\StringVO $custom_fields_data = null,
+        VO\Token $mykademy_token=null
     )
     {
 	    $request = new Request(
@@ -910,6 +916,10 @@ class StudentRepository extends BaseRepository
 	    if(!is_null($custom_fields_data)) {
 		    $request_parameters['custom_fields_data'] = $custom_fields_data->__toString();
 	    }
+
+        if(!is_null($mykademy_token)) {
+            $request_parameters['mykademy_token'] = $mykademy_token->__toString();
+        }
 
 	    $response = $request->send($request_parameters, $header_parameters);
 	    return $response->get_data();
