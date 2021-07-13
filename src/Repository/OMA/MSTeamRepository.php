@@ -1283,6 +1283,11 @@ class MSTeamRepository extends BaseRepository
      * @param VO\String $image
      * @param VO\String $country_code
      * @param VO\String $mobile_number
+     * @param VO\String $country
+     * @param VO\String $state
+     * @param VO\String $city
+     * @param VO\String $street
+     * @param VO\String $postal_code
      * @return \AcademyHQ\API\HTTP\Response\json
      * @throws VO\Exception\MethodNotAllowedException
      * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
@@ -1297,7 +1302,12 @@ class MSTeamRepository extends BaseRepository
         VO\Integer $is_admin=null,
         VO\StringVO $image = null,
         VO\StringVO $country_code = null,
-        VO\StringVO $mobile_number = null
+        VO\StringVO $mobile_number = null,
+        VO\StringVO $country = null,
+        VO\StringVO $state = null,
+        VO\StringVO $city = null,
+        VO\StringVO $street = null,
+        VO\StringVO $postal_code = null
 
     ){
         $request = new Request(
@@ -1330,6 +1340,26 @@ class MSTeamRepository extends BaseRepository
 
         if(!is_null($mobile_number)){
             $request_parameters['mobile_number']=$mobile_number->__toString();
+        }
+
+        if(!is_null($country)){
+            $request_parameters['country']=$country->__toString();
+        }
+
+        if(!is_null($state)){
+            $request_parameters['state']=$state->__toString();
+        }
+
+        if(!is_null($city)){
+            $request_parameters['city']=$city->__toString();
+        }
+
+        if(!is_null($street)){
+            $request_parameters['street']=$street->__toString();
+        }
+
+        if(!is_null($postal_code)){
+            $request_parameters['postal_code']=$postal_code->__toString();
         }
 
         $response = $request->send($request_parameters, $header_parameters);
