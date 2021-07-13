@@ -1059,6 +1059,48 @@ class OffSessionRepository extends BaseRepository
 		return $data;
 	}
 
+	public function create_notification_without_token(
+		VO\MemberIDArray $member_id_array,
+		VO\StringVO $notification_message,
+		VO\NotificationTypeArray $notification_type_array,
+		VO\MemberID $sender_id
+	) {
+
+
+		$request = new Request(
+			new GuzzleClient,
+			$this->credentials,
+			VO\HTTP\Url::fromNative($this->base_url . '/out_session/notification/create/notification'),
+			new VO\HTTP\Method('POST')
+		);
+
+		// $header_parameters = array('Authorization' => $token->__toEncodedString());
+
+		$member_ids = $member_id_array->__toArray();
+
+		$notification_types = $notification_type_array->__toArray();
+
+		$request_parameters = array(
+			'members' => $member_ids,
+			'notification_message' => $notification_message->__toString(),
+			'notification_types' => $notification_types
+		);
+
+
+		if ($sender_id) {
+			$request_parameters['sender_id'] = $sender_id->__toString();
+		}
+
+		// if ($attachment_id_array) {
+		// 	$attachment_ids = $attachment_id_array->__toArray();
+		// 	$request_parameters['attachments'] = $attachment_ids;
+		// }
+		$response = $request->send($request_parameters, null);
+
+		$data = $response->get_data();
+
+		return $data;
+	}
 
 	public function updatePreProgramId(
 		VO\StringVO $program_pre_program_map
