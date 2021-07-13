@@ -1518,4 +1518,114 @@ class MSTeamRepository extends BaseRepository
 
         return $data;
     }
+
+    /**
+     * create apprenticeship trainer
+     * @param VO\Token $token
+     * @param VO\Integer $member_id
+     * @param VO\Integer $occupation_id
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+     public function assignApprenticeshipTrainer(
+        VO\Token $token,
+        VO\Integer $member_id,
+        VO\Integer $occupation_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/assign-apprenticeship-trainer'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'member_id'         => $member_id->__toInteger(),
+            'occupation_id'     => $occupation_id->__toInteger(),
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+
+    /**
+     * remove apprenticeship trainer
+     * @param VO\Token $token
+     * @param VO\Integer $member_id
+     * @param VO\Integer $occupation_id
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+     public function removeApprenticeshipTrainer(
+        VO\Token $token,
+        VO\Integer $member_id,
+        VO\Integer $occupation_id
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/remove-apprenticeship-trainer'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'member_id'         => $member_id->__toInteger(),
+            'occupation_id'     => $occupation_id->__toInteger(),
+        );
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
+
+    /**
+     * list apprenticeship trainers
+     * @param VO\Token $token
+     * @param VO\Integer $current_page
+     * @param VO\Integer $per_page
+     * @param VO\StringVO $sort_by
+     * @param VO\Integer $direction
+     * @param VO\Integer $occupation_id
+     * @param VO\Integer $search
+     * @return \AcademyHQ\API\HTTP\Response\json
+     * @throws VO\Exception\MethodNotAllowedException
+     * @throws \AcademyHQ\API\HTTP\Response\Exception\ResponseException
+     */
+     public function listApprenticeshipTrainers(
+        VO\Token    $token,
+        VO\Integer  $current_page,
+        VO\Integer  $per_page,
+        VO\StringVO $sort_by,
+        VO\StringVO $direction,
+        VO\Integer  $occupation_id = null,
+        VO\StringVO $search = null
+    ){
+        $request = new Request(
+            new GuzzleClient,
+            $this->credentials,
+            VO\HTTP\Url::fromNative($this->base_url.'/list-apprenticeship-trainers'),
+            new VO\HTTP\Method('POST')
+        );
+        $header_parameters = array('Authorization' => $token->__toEncodedString());
+        $request_parameters = array(
+            'current_page'      => $current_page->__toInteger(),
+            'per_page'          => $per_page->__toInteger(),
+            'sort_by'           => $sort_by->__toString(),
+            'direction'         => $direction->__toString(),
+        );
+
+        if(!is_null($occupation_id)){
+            $request_parameters['occupation_id'] = $occupation_id->__toInteger();
+        }
+
+        if(!is_null($search)){
+            $request_parameters['search'] = $search->__toString();
+        }
+
+        $response = $request->send($request_parameters, $header_parameters);
+        $data = $response->get_data();
+        return $data;
+    }
 }
